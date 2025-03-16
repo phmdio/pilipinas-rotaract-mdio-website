@@ -77,8 +77,8 @@ export default {
 				}
 			},
 			fontFamily: {
-				sans: ['Inter', 'sans-serif'],
-				display: ['Montserrat', 'sans-serif'],
+				sans: ['Nunito Sans', 'Inter', 'sans-serif'],
+				display: ['Nunito Sans', 'Montserrat', 'sans-serif'],
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
