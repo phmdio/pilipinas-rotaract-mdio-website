@@ -6,18 +6,14 @@ const Footer = () => {
     <footer id="contact" className="bg-[#0F3B7F] text-white">
       <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* Left Column: Logo, Organization Name, and Description */}
+          {/* Left Column: Logo and Description */}
           <div>
-            <div className="flex items-center mb-4">
+            <div className="mb-4">
               <img 
                 src="/lovable-uploads/6f1ba434-94b8-4f3a-8bdf-e3142edb0a71.png" 
                 alt="Rotaract Logo" 
                 className="w-12 h-12 object-contain" 
               />
-              <div className="ml-3">
-                <div className="text-lg font-bold">Rotaract</div>
-                <div className="text-sm">Pilipinas Multi-District<br />Information Organization</div>
-              </div>
             </div>
             <p className="text-sm text-white/80 mt-4">
               Hipster ipsum tattooed brunch I'm baby. Mumblecore pug man bun batch hello bitters batch offal pitchfork. Crucifix fanny dsa scenester mug skateboard brooklyn art. Williamsburg hoodie church-key letterpress tbh 3-moon whatever. Viral bun bruh bulb truffaut bun.
