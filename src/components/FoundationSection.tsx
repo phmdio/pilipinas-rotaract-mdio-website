@@ -29,7 +29,7 @@ const FoundationSection = () => {
       <div 
         className="bg-cover bg-center py-16 px-4 sm:px-6 lg:px-8 relative" 
         style={{ 
-          backgroundImage: "linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url('/lovable-uploads/d6ddc3b8-b794-40b9-9468-d72a8a044f32.png')",
+          backgroundImage: "linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url('/lovable-uploads/67e1c9e2-dc2a-4d31-b760-e3114e8c9516.png')",
           paddingTop: "5rem",
           paddingBottom: "5rem"
         }}
