@@ -1,5 +1,6 @@
 
 import { useEffect } from 'react';
+import { Helmet } from 'react-helmet-async';
 import Header from '@/components/Header';
 import Hero from '@/components/Hero';
 import AboutSection from '@/components/AboutSection';
@@ -34,17 +35,43 @@ const Index = () => {
     };
   }, []);
 
+  // JSON-LD structured data for SEO
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Pilipinas Rotaract",
+    "url": "https://pilipinasrotaract.org",
+    "logo": "https://pilipinasrotaract.org/logo.png",
+    "description": "Empowering young leaders to create positive change in communities across the Philippines.",
+    "sameAs": [
+      "https://facebook.com/pilipinasrotaract",
+      "https://instagram.com/pilipinasrotaract",
+      "https://twitter.com/pilipinasrotaract"
+    ]
+  };
+
   return (
-    <div className="min-h-screen bg-white">
-      <Header />
-      <Hero />
-      <AboutSection />
-      <InfoCenter />
-      <ProgramsSection />
-      <StatisticsSection />
-      <FoundationSection />
-      <Footer />
-    </div>
+    <>
+      <Helmet>
+        <title>Pilipinas Rotaract - Empowering Young Leaders</title>
+        <meta name="description" content="Pilipinas Rotaract empowers young leaders to create positive change in communities across the Philippines through service, leadership, and fellowship." />
+        <script type="application/ld+json">
+          {JSON.stringify(structuredData)}
+        </script>
+      </Helmet>
+      <div className="min-h-screen bg-white">
+        <Header />
+        <main id="main-content">
+          <Hero />
+          <AboutSection />
+          <InfoCenter />
+          <ProgramsSection />
+          <StatisticsSection />
+          <FoundationSection />
+        </main>
+        <Footer />
+      </div>
+    </>
   );
 };
 

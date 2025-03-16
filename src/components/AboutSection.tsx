@@ -1,5 +1,5 @@
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { cn } from '@/lib/utils';
 import { Separator } from '@/components/ui/separator';
@@ -13,23 +13,25 @@ const AboutSection = () => {
   });
 
   return (
-    <section id="about" className="py-16 overflow-hidden bg-white relative">
-      {/* Remove the top curved divider as it conflicts with Hero wave */}
-      
+    <section id="about" aria-labelledby="about-heading" className="py-16 overflow-hidden bg-white relative">
       <div className="max-w-7xl mx-auto px-4 md:px-8 pt-8" ref={ref}>
         {/* Section title with separator */}
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-rotaract-magenta mb-4">Discover Rotaract</h2>
+        <header className="text-center mb-12">
+          <h2 id="about-heading" className="text-3xl md:text-4xl font-bold text-rotaract-magenta mb-4">Discover Rotaract</h2>
           <div className="flex justify-center items-center gap-4 w-full max-w-xs mx-auto">
             <Separator className="bg-rotaract-magenta h-0.5" />
             <div className="bg-rotaract-magenta h-2 w-2 rounded-full"></div>
             <Separator className="bg-rotaract-magenta h-0.5" />
           </div>
-        </div>
+        </header>
         
         {/* Tabs */}
-        <div className="flex flex-col sm:flex-row sm:justify-center sm:space-x-8 mb-12">
+        <div role="tablist" aria-label="About Rotaract" className="flex flex-col sm:flex-row sm:justify-center sm:space-x-8 mb-12">
           <button
+            role="tab"
+            aria-selected={activeTab === 'about'}
+            aria-controls="about-panel"
+            id="about-tab"
             className={cn(
               "text-2xl md:text-3xl font-bold transition-all duration-300 pb-2 relative mb-4 sm:mb-0",
               activeTab === 'about' 
@@ -41,6 +43,10 @@ const AboutSection = () => {
             About Us
           </button>
           <button
+            role="tab"
+            aria-selected={activeTab === 'stories'}
+            aria-controls="stories-panel"
+            id="stories-tab"
             className={cn(
               "text-2xl md:text-3xl font-bold transition-all duration-300 pb-2 relative",
               activeTab === 'stories' 
@@ -54,7 +60,15 @@ const AboutSection = () => {
         </div>
         
         {/* Content based on active tab */}
-        {activeTab === 'about' && (
+        <div
+          role="tabpanel"
+          id="about-panel"
+          aria-labelledby="about-tab"
+          className={cn(
+            "transition-all duration-500",
+            activeTab === 'about' ? "block" : "hidden"
+          )}
+        >
           <div className={cn(
             "transition-all duration-500 opacity-0 translate-y-4",
             inView && "opacity-100 translate-y-0"
@@ -66,12 +80,12 @@ const AboutSection = () => {
             {/* Image Sections */}
             <div className="space-y-8 mt-12">
               {/* Our History Section */}
-              <div className="flex flex-col md:flex-row overflow-hidden rounded-lg shadow-lg">
+              <article className="flex flex-col md:flex-row overflow-hidden rounded-lg shadow-lg">
                 <div className="md:w-2/3">
                   <AspectRatio ratio={16/9} className="h-full">
                     <img 
                       src="https://images.unsplash.com/photo-1519389950473-47ba0277781c" 
-                      alt="Rotaract collaboration" 
+                      alt="Rotaract collaboration team working together" 
                       className="w-full h-full object-cover"
                     />
                   </AspectRatio>
@@ -81,38 +95,46 @@ const AboutSection = () => {
                   <p className="text-white mb-4">
                     Learn how Rotaract evolved over the years to become what it is today. Discover our rich heritage and the milestones that have shaped our organization.
                   </p>
-                  <button className="text-white font-medium underline underline-offset-2 self-start">
+                  <a href="/history" className="text-white font-medium underline underline-offset-2 self-start">
                     Read More
-                  </button>
+                  </a>
                 </div>
-              </div>
+              </article>
               
               {/* Leadership Team Section */}
-              <div className="flex flex-col md:flex-row overflow-hidden rounded-lg shadow-lg">
+              <article className="flex flex-col md:flex-row overflow-hidden rounded-lg shadow-lg">
                 <div className="md:w-1/3 bg-rotaract-magenta p-8 flex flex-col justify-center order-2 md:order-1">
                   <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">Our Leadership Team</h3>
                   <p className="text-white mb-4">
                     Meet the dedicated individuals who guide our organization and help implement our vision across Pilipinas Rotaract.
                   </p>
-                  <button className="text-white font-medium underline underline-offset-2 self-start">
+                  <a href="/leadership" className="text-white font-medium underline underline-offset-2 self-start">
                     View Team
-                  </button>
+                  </a>
                 </div>
                 <div className="md:w-2/3 order-1 md:order-2">
                   <AspectRatio ratio={16/9} className="h-full">
                     <img 
                       src="https://images.unsplash.com/photo-1721322800607-8c38375eef04" 
-                      alt="Rotaract Leadership Team" 
+                      alt="Rotaract Leadership Team gathering for a meeting" 
                       className="w-full h-full object-cover"
                     />
                   </AspectRatio>
                 </div>
-              </div>
+              </article>
             </div>
           </div>
-        )}
+        </div>
         
-        {activeTab === 'stories' && (
+        <div
+          role="tabpanel"
+          id="stories-panel"
+          aria-labelledby="stories-tab"
+          className={cn(
+            "transition-all duration-500",
+            activeTab === 'stories' ? "block" : "hidden"
+          )}
+        >
           <div className={cn(
             "transition-all duration-500 opacity-0 translate-y-4",
             inView && "opacity-100 translate-y-0"
@@ -122,11 +144,11 @@ const AboutSection = () => {
             </p>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
-              <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300">
+              <article className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300">
                 <AspectRatio ratio={16/9}>
                   <img 
                     src="https://images.unsplash.com/photo-1517486808906-6ca8b3f8e1c1" 
-                    alt="Community service project" 
+                    alt="Rotaract members working on a community service project" 
                     className="w-full h-full object-cover"
                   />
                 </AspectRatio>
@@ -136,13 +158,13 @@ const AboutSection = () => {
                     Stories of how our service projects have transformed communities and lives across the Philippines.
                   </p>
                 </div>
-              </div>
+              </article>
               
-              <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300">
+              <article className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300">
                 <AspectRatio ratio={16/9}>
                   <img 
                     src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f" 
-                    alt="Member growth" 
+                    alt="Rotaract members in a growth workshop" 
                     className="w-full h-full object-cover"
                   />
                 </AspectRatio>
@@ -152,10 +174,10 @@ const AboutSection = () => {
                     Personal stories from our members about how Rotaract has changed their lives and perspectives.
                   </p>
                 </div>
-              </div>
+              </article>
             </div>
           </div>
-        )}
+        </div>
       </div>
     </section>
   );
