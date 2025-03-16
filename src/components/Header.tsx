@@ -1,7 +1,16 @@
 
 import { useState } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, ChevronDown } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+} from "@/components/ui/navigation-menu";
+import { Button } from "@/components/ui/button";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -17,20 +26,97 @@ const Header = () => {
                 alt="Rotaract Logo" 
                 className="h-8 w-auto mr-3"
               />
-              <span className="text-white font-display font-bold text-xl">Pilipinas Rotaract</span>
+              <div className="flex flex-col text-white">
+                <span className="font-display font-bold text-xl leading-tight">Pilipinas Rotaract</span>
+                <span className="text-xs leading-tight">Multi-District Information Organization</span>
+              </div>
             </a>
           </div>
           
-          <nav className="hidden md:block">
-            <ul className="flex space-x-8">
-              <li><a href="#about" className="text-white hover:text-gray-200 transition-colors">About</a></li>
-              <li><a href="#info-center" className="text-white hover:text-gray-200 transition-colors">Districts</a></li>
-              <li><a href="#programs" className="text-white hover:text-gray-200 transition-colors">Programs</a></li>
-              <li><a href="#statistics" className="text-white hover:text-gray-200 transition-colors">Statistics</a></li>
-              <li><a href="#contact" className="text-white hover:text-gray-200 transition-colors">Contact</a></li>
-            </ul>
-          </nav>
+          {/* Desktop Navigation */}
+          <NavigationMenu className="hidden md:flex">
+            <NavigationMenuList className="space-x-1">
+              <NavigationMenuItem>
+                <NavigationMenuTrigger className="bg-transparent text-white hover:bg-white/10 focus:bg-white/10">
+                  About Us
+                </NavigationMenuTrigger>
+                <NavigationMenuContent className="bg-white">
+                  <ul className="grid gap-3 p-4 w-[200px]">
+                    <li>
+                      <NavigationMenuLink asChild>
+                        <a href="#about" className="block p-2 hover:bg-gray-100 rounded-md">
+                          Our History
+                        </a>
+                      </NavigationMenuLink>
+                    </li>
+                    <li>
+                      <NavigationMenuLink asChild>
+                        <a href="#leadership" className="block p-2 hover:bg-gray-100 rounded-md">
+                          Leadership Team
+                        </a>
+                      </NavigationMenuLink>
+                    </li>
+                  </ul>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
+
+              <NavigationMenuItem>
+                <NavigationMenuTrigger className="bg-transparent text-white hover:bg-white/10 focus:bg-white/10">
+                  Information Center
+                </NavigationMenuTrigger>
+                <NavigationMenuContent className="bg-white">
+                  <ul className="grid gap-3 p-4 w-[200px]">
+                    <li>
+                      <NavigationMenuLink asChild>
+                        <a href="#info-center" className="block p-2 hover:bg-gray-100 rounded-md">
+                          Districts
+                        </a>
+                      </NavigationMenuLink>
+                    </li>
+                    <li>
+                      <NavigationMenuLink asChild>
+                        <a href="#resources" className="block p-2 hover:bg-gray-100 rounded-md">
+                          Resources
+                        </a>
+                      </NavigationMenuLink>
+                    </li>
+                  </ul>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
+
+              <NavigationMenuItem>
+                <NavigationMenuTrigger className="bg-transparent text-white hover:bg-white/10 focus:bg-white/10">
+                  Our Programs and Activities
+                </NavigationMenuTrigger>
+                <NavigationMenuContent className="bg-white">
+                  <ul className="grid gap-3 p-4 w-[250px]">
+                    <li>
+                      <NavigationMenuLink asChild>
+                        <a href="#programs" className="block p-2 hover:bg-gray-100 rounded-md">
+                          Key Projects
+                        </a>
+                      </NavigationMenuLink>
+                    </li>
+                    <li>
+                      <NavigationMenuLink asChild>
+                        <a href="#events" className="block p-2 hover:bg-gray-100 rounded-md">
+                          Upcoming Events
+                        </a>
+                      </NavigationMenuLink>
+                    </li>
+                  </ul>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
+
+              <NavigationMenuItem>
+                <Button asChild variant="ghost" className="text-white hover:bg-white/10 focus:bg-white/10">
+                  <a href="#donate">Donate</a>
+                </Button>
+              </NavigationMenuItem>
+            </NavigationMenuList>
+          </NavigationMenu>
           
+          {/* Mobile menu button */}
           <div className="md:hidden">
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -46,11 +132,67 @@ const Header = () => {
       {isMenuOpen && (
         <div className="md:hidden bg-rotaract-magenta shadow-lg absolute w-full">
           <div className="px-4 pt-2 pb-4 space-y-1 sm:px-3">
-            <a href="#about" className="block py-2 text-white hover:text-gray-200" onClick={() => setIsMenuOpen(false)}>About</a>
-            <a href="#info-center" className="block py-2 text-white hover:text-gray-200" onClick={() => setIsMenuOpen(false)}>Districts</a>
-            <a href="#programs" className="block py-2 text-white hover:text-gray-200" onClick={() => setIsMenuOpen(false)}>Programs</a>
-            <a href="#statistics" className="block py-2 text-white hover:text-gray-200" onClick={() => setIsMenuOpen(false)}>Statistics</a>
-            <a href="#contact" className="block py-2 text-white hover:text-gray-200" onClick={() => setIsMenuOpen(false)}>Contact</a>
+            <div className="py-2">
+              <button
+                onClick={(e) => {
+                  e.preventDefault();
+                  const aboutSubmenu = document.getElementById('mobile-about-submenu');
+                  if (aboutSubmenu) {
+                    aboutSubmenu.classList.toggle('hidden');
+                  }
+                }}
+                className="flex justify-between items-center w-full text-white"
+              >
+                <span>About Us</span>
+                <ChevronDown size={16} />
+              </button>
+              <div id="mobile-about-submenu" className="hidden pl-4 mt-2 space-y-2">
+                <a href="#about" className="block py-2 text-white hover:text-gray-200" onClick={() => setIsMenuOpen(false)}>Our History</a>
+                <a href="#leadership" className="block py-2 text-white hover:text-gray-200" onClick={() => setIsMenuOpen(false)}>Leadership Team</a>
+              </div>
+            </div>
+            
+            <div className="py-2">
+              <button
+                onClick={(e) => {
+                  e.preventDefault();
+                  const infoSubmenu = document.getElementById('mobile-info-submenu');
+                  if (infoSubmenu) {
+                    infoSubmenu.classList.toggle('hidden');
+                  }
+                }}
+                className="flex justify-between items-center w-full text-white"
+              >
+                <span>Information Center</span>
+                <ChevronDown size={16} />
+              </button>
+              <div id="mobile-info-submenu" className="hidden pl-4 mt-2 space-y-2">
+                <a href="#info-center" className="block py-2 text-white hover:text-gray-200" onClick={() => setIsMenuOpen(false)}>Districts</a>
+                <a href="#resources" className="block py-2 text-white hover:text-gray-200" onClick={() => setIsMenuOpen(false)}>Resources</a>
+              </div>
+            </div>
+            
+            <div className="py-2">
+              <button
+                onClick={(e) => {
+                  e.preventDefault();
+                  const programsSubmenu = document.getElementById('mobile-programs-submenu');
+                  if (programsSubmenu) {
+                    programsSubmenu.classList.toggle('hidden');
+                  }
+                }}
+                className="flex justify-between items-center w-full text-white"
+              >
+                <span>Our Programs and Activities</span>
+                <ChevronDown size={16} />
+              </button>
+              <div id="mobile-programs-submenu" className="hidden pl-4 mt-2 space-y-2">
+                <a href="#programs" className="block py-2 text-white hover:text-gray-200" onClick={() => setIsMenuOpen(false)}>Key Projects</a>
+                <a href="#events" className="block py-2 text-white hover:text-gray-200" onClick={() => setIsMenuOpen(false)}>Upcoming Events</a>
+              </div>
+            </div>
+            
+            <a href="#donate" className="block py-2 text-white hover:text-gray-200" onClick={() => setIsMenuOpen(false)}>Donate</a>
           </div>
         </div>
       )}
