@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { cn } from '@/lib/utils';
 import { Separator } from '@/components/ui/separator';
+import { AspectRatio } from '@/components/ui/aspect-ratio';
 
 const AboutSection = () => {
   const [activeTab, setActiveTab] = useState('about');
@@ -67,11 +68,13 @@ const AboutSection = () => {
               {/* Our History Section */}
               <div className="flex flex-col md:flex-row overflow-hidden rounded-lg shadow-lg">
                 <div className="md:w-2/3">
-                  <img 
-                    src="https://images.unsplash.com/photo-1519389950473-47ba0277781c" 
-                    alt="Rotaract collaboration" 
-                    className="w-full h-full object-cover"
-                  />
+                  <AspectRatio ratio={16/9} className="h-full">
+                    <img 
+                      src="https://images.unsplash.com/photo-1519389950473-47ba0277781c" 
+                      alt="Rotaract collaboration" 
+                      className="w-full h-full object-cover"
+                    />
+                  </AspectRatio>
                 </div>
                 <div className="md:w-1/3 bg-rotaract-blue p-8 flex flex-col justify-center">
                   <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">Our History</h3>
@@ -86,14 +89,7 @@ const AboutSection = () => {
               
               {/* Leadership Team Section */}
               <div className="flex flex-col md:flex-row overflow-hidden rounded-lg shadow-lg">
-                <div className="md:w-2/3 order-1 md:order-1">
-                  <img 
-                    src="https://images.unsplash.com/photo-1721322800607-8c38375eef04" 
-                    alt="Rotaract Leadership Team" 
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div className="md:w-1/3 bg-rotaract-magenta p-8 flex flex-col justify-center order-2 md:order-2">
+                <div className="md:w-1/3 bg-rotaract-magenta p-8 flex flex-col justify-center order-2 md:order-1">
                   <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">Our Leadership Team</h3>
                   <p className="text-white mb-4">
                     Meet the dedicated individuals who guide our organization and help implement our vision across Pilipinas Rotaract.
@@ -101,6 +97,15 @@ const AboutSection = () => {
                   <button className="text-white font-medium underline underline-offset-2 self-start">
                     View Team
                   </button>
+                </div>
+                <div className="md:w-2/3 order-1 md:order-2">
+                  <AspectRatio ratio={16/9} className="h-full">
+                    <img 
+                      src="https://images.unsplash.com/photo-1721322800607-8c38375eef04" 
+                      alt="Rotaract Leadership Team" 
+                      className="w-full h-full object-cover"
+                    />
+                  </AspectRatio>
                 </div>
               </div>
             </div>
@@ -118,11 +123,13 @@ const AboutSection = () => {
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
               <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300">
-                <img 
-                  src="https://images.unsplash.com/photo-1517486808906-6ca8b3f8e1c1" 
-                  alt="Community service project" 
-                  className="w-full h-48 object-cover"
-                />
+                <AspectRatio ratio={16/9}>
+                  <img 
+                    src="https://images.unsplash.com/photo-1517486808906-6ca8b3f8e1c1" 
+                    alt="Community service project" 
+                    className="w-full h-full object-cover"
+                  />
+                </AspectRatio>
                 <div className="p-6">
                   <h3 className="text-xl font-bold mb-2">Community Impact</h3>
                   <p className="text-gray-700">
@@ -132,11 +139,13 @@ const AboutSection = () => {
               </div>
               
               <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300">
-                <img 
-                  src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f" 
-                  alt="Member growth" 
-                  className="w-full h-48 object-cover"
-                />
+                <AspectRatio ratio={16/9}>
+                  <img 
+                    src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f" 
+                    alt="Member growth" 
+                    className="w-full h-full object-cover"
+                  />
+                </AspectRatio>
                 <div className="p-6">
                   <h3 className="text-xl font-bold mb-2">Member Journeys</h3>
                   <p className="text-gray-700">
