@@ -29,7 +29,7 @@ const FoundationSection = () => {
       <div 
         className="bg-cover bg-center py-16 px-4 sm:px-6 lg:px-8 relative" 
         style={{ 
-          backgroundImage: "url('/lovable-uploads/49a6e9dc-9a65-42dc-b275-7dd42eb4ece4.png')",
+          backgroundImage: "url('/lovable-uploads/5b1a1aa1-1d56-4a98-a666-b6d10b8d936f.png')",
           paddingTop: "5rem",
           paddingBottom: "5rem"
         }}
