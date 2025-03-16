@@ -10,7 +10,7 @@ const Footer = () => {
           <div>
             <div className="flex items-center mb-4">
               <img 
-                src="/lovable-uploads/4d407556-f1ec-478f-80b6-cf416352465f.png" 
+                src="/lovable-uploads/6f1ba434-94b8-4f3a-8bdf-e3142edb0a71.png" 
                 alt="Rotaract Logo" 
                 className="w-16 h-16" 
               />
