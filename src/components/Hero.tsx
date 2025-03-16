@@ -27,14 +27,14 @@ const Hero = () => {
             "w-full md:w-1/2 text-white transition-all duration-700 opacity-0 translate-y-4",
             isLoaded && "opacity-100 translate-y-0"
           )}>
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight mb-6">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-light leading-tight mb-1">
               Welcome to
-              <br />
-              <span className="text-white">Pilipinas Rotaract</span>
             </h1>
-            <p className="text-xl mb-8 max-w-lg">
-              Empowering young leaders to create positive change in communities across the Philippines.
-            </p>
+            <h2 className="text-5xl sm:text-6xl md:text-7xl font-bold mb-8 text-white">
+              Pilipinas
+              <br />
+              Rotaract
+            </h2>
           </div>
           
           <div className={cn(
