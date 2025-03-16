@@ -43,7 +43,7 @@ const Hero = () => {
           )}>
             <div className="relative mx-auto max-w-md">
               <img 
-                src="/lovable-uploads/6d8d0de1-a332-4cb7-a5ba-0f50b8abbc30.png" 
+                src="/lovable-uploads/8124ea27-b99c-4f37-8cdf-559344457e8f.png" 
                 alt="Rotaract members" 
                 className="relative z-10 rounded-lg shadow-xl"
               />
