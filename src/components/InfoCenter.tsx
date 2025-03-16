@@ -3,18 +3,69 @@ import { useState, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { ChevronRight, ChevronLeft } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { Button } from '@/components/ui/button';
 
 const districtData = [
-  { id: '3770', color: '#F39C12' }, // Orange
-  { id: '3780', color: '#3498DB' }, // Blue
-  { id: '3790', color: '#2ECC71' }, // Green
-  { id: '3800', color: '#9B59B6' }, // Purple
-  { id: '3810', color: '#E74C3C' }, // Red
-  { id: '3820', color: '#8E44AD' }, // Dark Purple
-  { id: '3830', color: '#16A085' }, // Teal
-  { id: '3850', color: '#E67E22' }, // Dark Orange
-  { id: '3860', color: '#27AE60' }, // Dark Green
-  { id: '3870', color: '#2980B9' }, // Dark Blue
+  { 
+    id: '3770', 
+    color: '#F39C12',
+    image: '/lovable-uploads/da3eab74-3776-4624-9054-81bdf47e8d38.png',
+    description: 'Rotaract Clubs of Rotary International District #'
+  },
+  { 
+    id: '3780', 
+    color: '#3498DB',
+    image: '/lovable-uploads/da3eab74-3776-4624-9054-81bdf47e8d38.png',
+    description: 'Rotaract Clubs of Rotary International District #'
+  },
+  { 
+    id: '3790', 
+    color: '#2ECC71',
+    image: '/lovable-uploads/da3eab74-3776-4624-9054-81bdf47e8d38.png',
+    description: 'Rotaract Clubs of Rotary International District #'
+  },
+  { 
+    id: '3800', 
+    color: '#9B59B6',
+    image: '/lovable-uploads/da3eab74-3776-4624-9054-81bdf47e8d38.png',
+    description: 'Rotaract Clubs of Rotary International District #'
+  },
+  { 
+    id: '3810', 
+    color: '#E74C3C',
+    image: '/lovable-uploads/da3eab74-3776-4624-9054-81bdf47e8d38.png',
+    description: 'Rotaract Clubs of Rotary International District #'
+  },
+  { 
+    id: '3820', 
+    color: '#8E44AD',
+    image: '/lovable-uploads/da3eab74-3776-4624-9054-81bdf47e8d38.png',
+    description: 'Rotaract Clubs of Rotary International District #'
+  },
+  { 
+    id: '3830', 
+    color: '#16A085',
+    image: '/lovable-uploads/da3eab74-3776-4624-9054-81bdf47e8d38.png',
+    description: 'Rotaract Clubs of Rotary International District #'
+  },
+  { 
+    id: '3850', 
+    color: '#E67E22',
+    image: '/lovable-uploads/da3eab74-3776-4624-9054-81bdf47e8d38.png',
+    description: 'Rotaract Clubs of Rotary International District #'
+  },
+  { 
+    id: '3860', 
+    color: '#27AE60',
+    image: '/lovable-uploads/da3eab74-3776-4624-9054-81bdf47e8d38.png',
+    description: 'Rotaract Clubs of Rotary International District #'
+  },
+  { 
+    id: '3870', 
+    color: '#2980B9',
+    image: '/lovable-uploads/da3eab74-3776-4624-9054-81bdf47e8d38.png',
+    description: 'Rotaract Clubs of Rotary International District #'
+  },
 ];
 
 const InfoCenter = () => {
@@ -26,7 +77,7 @@ const InfoCenter = () => {
   const [activeSlide, setActiveSlide] = useState(0);
   const slidesPerView = {
     mobile: 2,
-    tablet: 3,
+    tablet: 5,
     desktop: 5,
   };
   
@@ -72,9 +123,9 @@ const InfoCenter = () => {
   };
 
   return (
-    <section id="info-center" className="relative py-16 bg-gray-100 overflow-hidden">
+    <section id="info-center" className="relative py-0 bg-rotaract-magenta overflow-hidden">
       {/* Wave top divider */}
-      <div className="absolute top-0 left-0 w-full overflow-hidden">
+      <div className="absolute top-0 left-0 w-full overflow-hidden rotate-180">
         <svg
           className="relative block w-full h-[70px]"
           viewBox="0 0 1200 120"
@@ -83,19 +134,20 @@ const InfoCenter = () => {
         >
           <path
             d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V95.8C59.44,118.92,130.61,111.31,191.85,100.88,259.92,89.23,290.81,67.68,321.39,56.44Z"
-            fill="#f3f4f6"
+            fill="#E30B5C"
           ></path>
         </svg>
       </div>
       
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12" ref={ref}>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-32" ref={ref}>
         <div className={cn(
-          "text-center mb-12 transition-all duration-500 opacity-0 translate-y-4",
+          "text-white mb-12 transition-all duration-500 opacity-0 translate-y-4",
           inView && "opacity-100 translate-y-0"
         )}>
-          <h2 className="text-3xl font-bold mb-4">Our Information Center</h2>
-          <p className="text-gray-600 max-w-3xl mx-auto">
-            Multiple Philippine Districts collaborate to make Rotaract a vibrant and impactful organization across the country.
+          <h2 className="text-4xl font-bold mb-2">Our Information Center</h2>
+          <h3 className="text-2xl font-medium mb-6">Member Philippine Districts</h3>
+          <p className="text-white/90 max-w-3xl mb-8">
+            Hipster ipsum tattooed brunch I'm baby. Mumblecore pug man batch hella bitters batch offal pitchfork. Crucifix fanny dsa scenester mug skateboard brooklyn art. Williamsburg hoodie church-key letterpress tbh 3-moon whatever. Viral bun bruh bulb truffaut bun.
           </p>
         </div>
         
@@ -103,49 +155,42 @@ const InfoCenter = () => {
           "relative transition-all duration-500 delay-100 opacity-0 translate-y-4",
           inView && "opacity-100 translate-y-0"
         )}>
-          <div className="flex justify-between items-center mb-6">
-            <h3 className="text-xl font-semibold">Member Philippine Districts</h3>
-            <div className="flex space-x-2">
-              <button
-                onClick={prevSlide}
-                className="p-2 rounded-full bg-white shadow-md hover:bg-gray-50 transition-colors"
-                aria-label="Previous slide"
-              >
-                <ChevronLeft size={20} />
-              </button>
-              <button
-                onClick={nextSlide}
-                className="p-2 rounded-full bg-white shadow-md hover:bg-gray-50 transition-colors"
-                aria-label="Next slide"
-              >
-                <ChevronRight size={20} />
-              </button>
-            </div>
-          </div>
-          
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
-            {getVisibleCards().map((district, index) => (
-              <div 
-                key={district.id} 
-                className="district-card" 
-                style={{ 
-                  backgroundColor: district.color,
-                  animationDelay: `${index * 0.1}s`
-                }}
-              >
-                <div className="absolute inset-0 bg-gradient-to-br from-transparent to-black/30"></div>
-                <div className="relative z-10">
-                  <p className="text-sm font-medium mb-1">District</p>
-                  <h4 className="text-3xl font-bold">{district.id}</h4>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 mb-8">
+            {windowSize === 'mobile' ? (
+              <>
+                <div className="flex justify-between items-center col-span-2 mb-4">
+                  <button
+                    onClick={prevSlide}
+                    className="p-2 rounded-full bg-white/20 text-white hover:bg-white/30 transition-colors"
+                    aria-label="Previous slide"
+                  >
+                    <ChevronLeft size={20} />
+                  </button>
+                  <button
+                    onClick={nextSlide}
+                    className="p-2 rounded-full bg-white/20 text-white hover:bg-white/30 transition-colors"
+                    aria-label="Next slide"
+                  >
+                    <ChevronRight size={20} />
+                  </button>
                 </div>
-              </div>
-            ))}
+                {getVisibleCards().map((district, index) => (
+                  <DistrictCard key={district.id} district={district} index={index} />
+                ))}
+              </>
+            ) : (
+              districtData.map((district, index) => (
+                <DistrictCard key={district.id} district={district} index={index} />
+              ))
+            )}
           </div>
           
-          <div className="mt-6 text-center">
-            <button className="btn-rotaract text-sm">
+          <div className="flex justify-center mt-10">
+            <Button 
+              className="bg-[#003366] hover:bg-[#002244] text-white rounded-full px-8 py-6 h-auto font-medium tracking-wider text-base uppercase"
+            >
               Learn More
-            </button>
+            </Button>
           </div>
         </div>
       </div>
@@ -160,11 +205,37 @@ const InfoCenter = () => {
         >
           <path
             d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V95.8C59.44,118.92,130.61,111.31,191.85,100.88,259.92,89.23,290.81,67.68,321.39,56.44Z"
-            fill="#ffffff"
+            fill="#E30B5C"
           ></path>
         </svg>
       </div>
     </section>
+  );
+};
+
+// District Card component
+const DistrictCard = ({ district, index }: { district: any, index: number }) => {
+  return (
+    <div 
+      className="group relative overflow-hidden rounded-lg aspect-square"
+      style={{ 
+        animationDelay: `${index * 0.1}s`
+      }}
+    >
+      {/* Background Image with Overlay */}
+      <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${district.image})` }}>
+        <div className="absolute inset-0" style={{ backgroundColor: `${district.color}88` }}></div>
+      </div>
+      
+      {/* Content */}
+      <div className="absolute inset-0 flex flex-col justify-end p-4 text-white">
+        <p className="text-sm font-medium mb-1 opacity-90">{district.description}</p>
+        <h4 className="text-5xl font-bold">{district.id}</h4>
+      </div>
+      
+      {/* Hover Effect */}
+      <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+    </div>
   );
 };
 
