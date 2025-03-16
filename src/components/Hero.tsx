@@ -10,7 +10,16 @@ const Hero = () => {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center bg-rotaract-magenta pt-16">
+    <section className="relative min-h-screen flex items-center pt-16">
+      {/* Background Image */}
+      <div className="absolute inset-0 z-0">
+        <img 
+          src="/lovable-uploads/34013148-4140-4618-9d1a-adad2f192367.png"
+          alt="Rotaract community silhouettes"
+          className="w-full h-full object-cover"
+        />
+      </div>
+      
       {/* Content */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="flex flex-col md:flex-row items-center">
