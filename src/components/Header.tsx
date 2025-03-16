@@ -22,14 +22,10 @@ const Header = () => {
           <div className="flex items-center">
             <a href="/" className="flex items-center">
               <img 
-                src="/lovable-uploads/6d8d0de1-a332-4cb7-a5ba-0f50b8abbc30.png" 
+                src="/lovable-uploads/b0829b94-1fd3-453f-be41-c4bee8820588.png" 
                 alt="Rotaract Logo" 
-                className="h-8 w-auto mr-3"
+                className="h-10 w-auto"
               />
-              <div className="flex flex-col text-white">
-                <span className="font-display font-bold text-xl leading-tight">Pilipinas Rotaract</span>
-                <span className="text-xs leading-tight">Multi-District Information Organization</span>
-              </div>
             </a>
           </div>
           
