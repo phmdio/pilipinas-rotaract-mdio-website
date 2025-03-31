@@ -1,23 +1,16 @@
-import { useState, useEffect } from 'react';
+
+import React, { useState, useEffect } from 'react';
 import { Menu, X, ChevronDown } from 'lucide-react';
-import { cn } from '@/lib/utils';
-import {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-} from "@/components/ui/navigation-menu";
-import { Button } from "@/components/ui/button";
+import { Button } from './ui/button';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 50) {
+      if (window.scrollY > 10) {
         setIsScrolled(true);
       } else {
         setIsScrolled(false);
@@ -30,181 +23,188 @@ const Header = () => {
     };
   }, []);
 
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const closeMenu = () => {
+    setIsOpen(false);
+  };
+
   return (
-    <header className={cn(
-      "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-      isScrolled ? "bg-rotaract-magenta shadow-md" : "bg-transparent"
-    )}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 md:h-20">
-          <div className="flex items-center">
-            <a href="/" className="flex items-center">
-              <img 
-                src="/lovable-uploads/b0829b94-1fd3-453f-be41-c4bee8820588.png" 
-                alt="Rotaract Logo" 
-                className="h-10 w-auto"
-              />
-            </a>
-          </div>
-          
-          <NavigationMenu className="hidden md:flex">
-            <NavigationMenuList className="space-x-1">
-              <NavigationMenuItem>
-                <NavigationMenuTrigger className="bg-transparent text-white hover:bg-white/10 focus:bg-white/10">
-                  About Us
-                </NavigationMenuTrigger>
-                <NavigationMenuContent className="bg-white">
-                  <ul className="grid gap-3 p-4 w-[200px]">
-                    <li>
-                      <NavigationMenuLink asChild>
-                        <a href="#about" className="block p-2 hover:bg-gray-100 rounded-md">
-                          Our History
-                        </a>
-                      </NavigationMenuLink>
-                    </li>
-                    <li>
-                      <NavigationMenuLink asChild>
-                        <a href="#leadership" className="block p-2 hover:bg-gray-100 rounded-md">
-                          Leadership Team
-                        </a>
-                      </NavigationMenuLink>
-                    </li>
-                  </ul>
-                </NavigationMenuContent>
-              </NavigationMenuItem>
-
-              <NavigationMenuItem>
-                <NavigationMenuTrigger className="bg-transparent text-white hover:bg-white/10 focus:bg-white/10">
-                  Information Center
-                </NavigationMenuTrigger>
-                <NavigationMenuContent className="bg-white">
-                  <ul className="grid gap-3 p-4 w-[200px]">
-                    <li>
-                      <NavigationMenuLink asChild>
-                        <a href="#info-center" className="block p-2 hover:bg-gray-100 rounded-md">
-                          Districts
-                        </a>
-                      </NavigationMenuLink>
-                    </li>
-                    <li>
-                      <NavigationMenuLink asChild>
-                        <a href="#resources" className="block p-2 hover:bg-gray-100 rounded-md">
-                          Resources
-                        </a>
-                      </NavigationMenuLink>
-                    </li>
-                  </ul>
-                </NavigationMenuContent>
-              </NavigationMenuItem>
-
-              <NavigationMenuItem>
-                <NavigationMenuTrigger className="bg-transparent text-white hover:bg-white/10 focus:bg-white/10">
-                  Our Programs and Activities
-                </NavigationMenuTrigger>
-                <NavigationMenuContent className="bg-white">
-                  <ul className="grid gap-3 p-4 w-[250px]">
-                    <li>
-                      <NavigationMenuLink asChild>
-                        <a href="#programs" className="block p-2 hover:bg-gray-100 rounded-md">
-                          Key Projects
-                        </a>
-                      </NavigationMenuLink>
-                    </li>
-                    <li>
-                      <NavigationMenuLink asChild>
-                        <a href="#events" className="block p-2 hover:bg-gray-100 rounded-md">
-                          Upcoming Events
-                        </a>
-                      </NavigationMenuLink>
-                    </li>
-                  </ul>
-                </NavigationMenuContent>
-              </NavigationMenuItem>
-
-              <NavigationMenuItem>
-                <Button asChild variant="ghost" className="text-white hover:bg-white/10 focus:bg-white/10">
-                  <a href="#donate">Donate</a>
-                </Button>
-              </NavigationMenuItem>
-            </NavigationMenuList>
-          </NavigationMenu>
-          
-          <div className="md:hidden">
-            <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="inline-flex items-center justify-center p-2 rounded-md text-white hover:text-gray-200 focus:outline-none"
+    <header
+      className={`fixed top-0 left-0 right-0 z-50 py-4 transition-all duration-300 ${
+        isScrolled ? 'bg-white shadow-md py-2' : 'bg-transparent'
+      }`}
+    >
+      <div className="container mx-auto px-4 md:px-6">
+        <div className="flex items-center justify-between">
+          <Link to="/" className="flex items-center space-x-2">
+            <img
+              src="/lovable-uploads/8124ea27-b99c-4f37-8cdf-559344457e8f.png"
+              alt="Pilipinas Rotaract Logo"
+              className="h-12 w-auto"
+            />
+            <span
+              className={`font-bold text-xl ${
+                isScrolled ? 'text-rotaract-blue' : 'text-white'
+              }`}
             >
-              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
+              Pilipinas Rotaract
+            </span>
+          </Link>
+
+          <div className="hidden lg:flex items-center space-x-8">
+            <nav>
+              <ul className="flex space-x-8">
+                <li>
+                  <a
+                    href="#about"
+                    className={`text-sm font-medium hover:text-rotaract-magenta transition ${
+                      isScrolled ? 'text-gray-700' : 'text-white'
+                    }`}
+                  >
+                    About
+                  </a>
+                </li>
+                <li className="relative group">
+                  <button
+                    className={`flex items-center text-sm font-medium group-hover:text-rotaract-magenta transition ${
+                      isScrolled ? 'text-gray-700' : 'text-white'
+                    }`}
+                  >
+                    Programs <ChevronDown className="ml-1 h-4 w-4" />
+                  </button>
+                  <div className="absolute left-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                    <div className="py-1">
+                      <a
+                        href="#programs"
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      >
+                        Service Projects
+                      </a>
+                      <a
+                        href="#programs"
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      >
+                        Leadership Development
+                      </a>
+                      <a
+                        href="#programs"
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      >
+                        International Service
+                      </a>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <a
+                    href="#info-center"
+                    className={`text-sm font-medium hover:text-rotaract-magenta transition ${
+                      isScrolled ? 'text-gray-700' : 'text-white'
+                    }`}
+                  >
+                    Resources
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#foundation"
+                    className={`text-sm font-medium hover:text-rotaract-magenta transition ${
+                      isScrolled ? 'text-gray-700' : 'text-white'
+                    }`}
+                  >
+                    Foundation
+                  </a>
+                </li>
+                <li>
+                  <Link
+                    to="/coming-soon"
+                    className={`text-sm font-medium hover:text-rotaract-magenta transition ${
+                      isScrolled ? 'text-gray-700' : 'text-white'
+                    }`}
+                  >
+                    Coming Soon
+                  </Link>
+                </li>
+              </ul>
+            </nav>
+            <Button className="bg-rotaract-magenta hover:bg-rotaract-magenta/90">
+              Join Us
+            </Button>
           </div>
+
+          <button
+            className="lg:hidden text-rotaract-blue"
+            onClick={toggleMenu}
+            aria-label="Toggle menu"
+          >
+            {isOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
         </div>
       </div>
-      
-      {isMenuOpen && (
-        <div className="md:hidden bg-rotaract-magenta shadow-lg absolute w-full">
-          <div className="px-4 pt-2 pb-4 space-y-1 sm:px-3">
-            <div className="py-2">
-              <button
-                onClick={(e) => {
-                  e.preventDefault();
-                  const aboutSubmenu = document.getElementById('mobile-about-submenu');
-                  if (aboutSubmenu) {
-                    aboutSubmenu.classList.toggle('hidden');
-                  }
-                }}
-                className="flex justify-between items-center w-full text-white"
-              >
-                <span>About Us</span>
-                <ChevronDown size={16} />
-              </button>
-              <div id="mobile-about-submenu" className="hidden pl-4 mt-2 space-y-2">
-                <a href="#about" className="block py-2 text-white hover:text-gray-200" onClick={() => setIsMenuOpen(false)}>Our History</a>
-                <a href="#leadership" className="block py-2 text-white hover:text-gray-200" onClick={() => setIsMenuOpen(false)}>Leadership Team</a>
-              </div>
-            </div>
-            
-            <div className="py-2">
-              <button
-                onClick={(e) => {
-                  e.preventDefault();
-                  const infoSubmenu = document.getElementById('mobile-info-submenu');
-                  if (infoSubmenu) {
-                    infoSubmenu.classList.toggle('hidden');
-                  }
-                }}
-                className="flex justify-between items-center w-full text-white"
-              >
-                <span>Information Center</span>
-                <ChevronDown size={16} />
-              </button>
-              <div id="mobile-info-submenu" className="hidden pl-4 mt-2 space-y-2">
-                <a href="#info-center" className="block py-2 text-white hover:text-gray-200" onClick={() => setIsMenuOpen(false)}>Districts</a>
-                <a href="#resources" className="block py-2 text-white hover:text-gray-200" onClick={() => setIsMenuOpen(false)}>Resources</a>
-              </div>
-            </div>
-            
-            <div className="py-2">
-              <button
-                onClick={(e) => {
-                  e.preventDefault();
-                  const programsSubmenu = document.getElementById('mobile-programs-submenu');
-                  if (programsSubmenu) {
-                    programsSubmenu.classList.toggle('hidden');
-                  }
-                }}
-                className="flex justify-between items-center w-full text-white"
-              >
-                <span>Our Programs and Activities</span>
-                <ChevronDown size={16} />
-              </button>
-              <div id="mobile-programs-submenu" className="hidden pl-4 mt-2 space-y-2">
-                <a href="#programs" className="block py-2 text-white hover:text-gray-200" onClick={() => setIsMenuOpen(false)}>Key Projects</a>
-                <a href="#events" className="block py-2 text-white hover:text-gray-200" onClick={() => setIsMenuOpen(false)}>Upcoming Events</a>
-              </div>
-            </div>
-            
-            <a href="#donate" className="block py-2 text-white hover:text-gray-200" onClick={() => setIsMenuOpen(false)}>Donate</a>
-          </div>
+
+      {/* Mobile menu */}
+      {isOpen && (
+        <div className="lg:hidden bg-white shadow-lg absolute top-full left-0 right-0">
+          <nav className="container mx-auto px-4 py-4">
+            <ul className="space-y-4">
+              <li>
+                <a
+                  href="#about"
+                  className="text-gray-700 block"
+                  onClick={closeMenu}
+                >
+                  About
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#programs"
+                  className="text-gray-700 block"
+                  onClick={closeMenu}
+                >
+                  Programs
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#info-center"
+                  className="text-gray-700 block"
+                  onClick={closeMenu}
+                >
+                  Resources
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#foundation"
+                  className="text-gray-700 block"
+                  onClick={closeMenu}
+                >
+                  Foundation
+                </a>
+              </li>
+              <li>
+                <Link
+                  to="/coming-soon"
+                  className="text-gray-700 block"
+                  onClick={closeMenu}
+                >
+                  Coming Soon
+                </Link>
+              </li>
+              <li>
+                <Button
+                  className="bg-rotaract-magenta hover:bg-rotaract-magenta/90 w-full"
+                  onClick={closeMenu}
+                >
+                  Join Us
+                </Button>
+              </li>
+            </ul>
+          </nav>
         </div>
       )}
     </header>
