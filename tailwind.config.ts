@@ -64,16 +64,19 @@ export default {
 					ring: 'hsl(var(--sidebar-ring))'
 				},
 				rotaract: {
-					magenta: '#E30B5C',
-					blue: '#0F4C81',
-					darkblue: '#003366',
-					gold: '#FFD700',
-					yellow: '#FFCC00',
-					purple: '#8A2BE2',
-					green: '#00A651',
-					red: '#FF3B30',
-					orange: '#FF9500',
-					cyan: '#00BFFF',
+					magenta: '#D41A69',  // Updated to match image
+					blue: '#16478E',     // Updated to match image
+					darkblue: '#0F3B7F', // Slightly darker variation
+					gold: '#F6A81C',     // Updated to match image
+					yellow: '#F6A81C',   // Same as gold from image
+					purple: '#8E288F',   // Updated to match image
+					green: '#0D9648',    // Updated to match image
+					red: '#E22626',      // Updated to match image
+					orange: '#F47621',   // Updated to match image
+					cyan: '#00A2E1',     // Updated to match image
+					gray: '#66819A',     // Added gray from image
+					black: '#000000',    // Added for completeness
+					white: '#FFFFFF',    // Added for completeness
 				}
 			},
 			fontFamily: {

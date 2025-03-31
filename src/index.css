@@ -16,10 +16,10 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
-    --primary: 340 85% 46%;  /* Rotaract magenta */
+    --primary: 337 84% 55%; /* Updated to #D41A69 magenta */
     --primary-foreground: 210 40% 98%;
 
-    --secondary: 210 74% 28%; /* Rotaract blue */
+    --secondary: 213 70% 32%; /* Updated to #16478E blue */
     --secondary-foreground: 210 40% 98%;
 
     --muted: 210 40% 96.1%;
