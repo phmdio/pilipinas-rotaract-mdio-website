@@ -4,4 +4,8 @@ Host: pilipinasrotaract.org
 Host: www.pilipinasrotaract.org
 /* /coming-soon 302
 
+Host: mdio-pilipinas.netlify.app
+/* /index.html 200
+
+Host: www.mdio-pilipinas.netlify.app
 /* /index.html 200
