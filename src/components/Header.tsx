@@ -42,8 +42,8 @@ const Header = () => {
           <div className="flex items-center">
             <a href="/" className="flex items-center">
               <img 
-                src="/lovable-uploads/b0829b94-1fd3-453f-be41-c4bee8820588.png" 
-                alt="Rotaract Logo" 
+                src="/assets/logo.png" 
+                alt="Rotaract MDIO Logo" 
                 className="h-10 w-auto"
               />
             </a>

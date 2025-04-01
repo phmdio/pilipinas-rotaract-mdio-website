@@ -10,9 +10,9 @@ const Footer = () => {
           <div>
             <div className="mb-4">
               <img 
-                src="/lovable-uploads/6f1ba434-94b8-4f3a-8bdf-e3142edb0a71.png" 
-                alt="Rotaract Logo" 
-                className="w-24 h-24 object-contain" 
+                src="/assets/logo.png" 
+                alt="Rotaract MDIO Logo" 
+                className="w-full object-cover" 
               />
             </div>
             <p className="text-sm text-white/80 mt-4">
