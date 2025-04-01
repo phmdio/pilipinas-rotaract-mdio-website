@@ -84,7 +84,7 @@ const AboutSection = () => {
                   <p className="text-white mb-4">
                     Learn how Rotaract evolved over the years to become what it is today. Discover our rich heritage and the milestones that have shaped our organization.
                   </p>
-                  <a href="/history" className="text-white font-medium underline underline-offset-2 self-start">
+                  <a href="/under-construction" className="text-white font-medium underline underline-offset-2 self-start">
                     Read More
                   </a>
                 </div>
@@ -106,7 +106,7 @@ const AboutSection = () => {
                   <p className="text-white mb-4">
                     Meet the dedicated individuals who guide our organization and help implement our vision across Pilipinas Rotaract.
                   </p>
-                  <a href="/leadership" className="text-white font-medium underline underline-offset-2 self-start">
+                  <a href="/under-construction" className="text-white font-medium underline underline-offset-2 self-start">
                     View Team
                   </a>
                 </div>
