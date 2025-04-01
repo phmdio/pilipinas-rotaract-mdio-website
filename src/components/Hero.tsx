@@ -14,10 +14,9 @@ const Hero = () => {
 
   // Images for the right side carousel
   const rightSideImages = [
-    "/lovable-uploads/8124ea27-b99c-4f37-8cdf-559344457e8f.png",
-    "/lovable-uploads/6d8d0de1-a332-4cb7-a5ba-0f50b8abbc30.png",
-    "/lovable-uploads/4d407556-f1ec-478f-80b6-cf416352465f.png",
-    "/lovable-uploads/6f1ba434-94b8-4f3a-8bdf-e3142edb0a71.png",
+    "/assets/carousel.png",
+    "/assets/carousel.png",
+    "/assets/carousel.png",
   ];
 
   useEffect(() => {
