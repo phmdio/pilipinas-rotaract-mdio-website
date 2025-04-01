@@ -1,35 +1,9 @@
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Helmet } from "react-helmet-async";
-import { Progress } from "@/components/ui/progress";
 import { AlertTriangle } from "lucide-react";
 
 const UnderConstruction = () => {
-  const [progress, setProgress] = useState(15);
-  
-  useEffect(() => {
-    // Start with a lower progress to show animation
-    setProgress(15);
-    
-    // Set up a timer to gradually increase progress
-    const timer = setInterval(() => {
-      setProgress((prevProgress) => {
-        // Increase progress slowly, max at 95 (never fully complete)
-        const newProgress = Math.min(prevProgress + 0.5, 95);
-        
-        // Once we reach 95%, clear the interval
-        if (newProgress >= 95) {
-          clearInterval(timer);
-        }
-        
-        return newProgress;
-      });
-    }, 1000);
-
-    // Clear the interval when the component unmounts
-    return () => clearInterval(timer);
-  }, []);
-
   return (
     <>
       <Helmet>
@@ -53,16 +27,10 @@ const UnderConstruction = () => {
           <div className="mb-6 flex justify-center">
             <div className="text-center">
               <img 
-                src="/lovable-uploads/b0829b94-1fd3-453f-be41-c4bee8820588.png" 
-                alt="Rotaract Logo" 
+                src="/assets/logo.png" 
+                alt="Rotaract MDIO Logo" 
                 className="h-20 w-auto mb-2"
               />
-              <h2 className="text-2xl font-bold text-white mb-1">Rotaract</h2>
-              <p className="text-white/90 text-sm">
-                Pilipinas Multi-District
-                <br />
-                Information Organization
-              </p>
             </div>
           </div>
 
@@ -82,12 +50,6 @@ const UnderConstruction = () => {
               <br />
               Please check back soon!
             </p>
-
-            {/* Progress bar */}
-            <div className="mt-10 max-w-lg mx-auto w-full px-4">
-              <Progress value={progress} className="h-2 md:h-3 bg-gray-400/30" />
-              <p className="text-white/80 text-sm mt-2">Page construction {Math.round(progress)}% complete</p>
-            </div>
             
             {/* Return to homepage */}
             <div className="mt-8">
