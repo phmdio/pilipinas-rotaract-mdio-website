@@ -63,7 +63,7 @@ const AboutSection = () => {
             "transition-all duration-500 opacity-0 translate-y-4",
             inView && "opacity-100 translate-y-0"
           )}>
-            <p className="text-gray-700 mb-8 text-justify max-w-3xl mx-auto">
+            <p className="text-gray-700 mb-8 text-justify">
               Rotaract clubs bring together people ages 18 and older to exchange ideas with leaders in the community, develop leadership and professional skills, and have fun through service. In communities worldwide, Rotary and Rotaract members work side by side to take action through service.
             </p>
             
