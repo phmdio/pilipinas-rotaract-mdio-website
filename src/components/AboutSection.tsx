@@ -14,17 +14,7 @@ const AboutSection = () => {
 
   return (
     <section id="about" aria-labelledby="about-heading" className="py-16 overflow-hidden bg-white relative">
-      <div className="max-w-7xl mx-auto px-4 md:px-8 pt-8" ref={ref}>
-        {/* Section title with separator */}
-        <header className="text-center mb-12">
-          <h2 id="about-heading" className="text-3xl md:text-4xl font-bold text-rotaract-magenta mb-4">Discover Rotaract</h2>
-          <div className="flex justify-center items-center gap-4 w-full max-w-xs mx-auto">
-            <Separator className="bg-rotaract-magenta h-0.5" />
-            <div className="bg-rotaract-magenta h-2 w-2 rounded-full"></div>
-            <Separator className="bg-rotaract-magenta h-0.5" />
-          </div>
-        </header>
-        
+      <div className="max-w-7xl mx-auto px-4 md:px-8 pt-8" ref={ref}>       
         {/* Tabs */}
         <div role="tablist" aria-label="About Rotaract" className="flex flex-col sm:flex-row sm:justify-center sm:space-x-8 mb-12">
           <button
