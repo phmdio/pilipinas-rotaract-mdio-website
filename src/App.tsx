@@ -9,6 +9,7 @@ import { HelmetProvider } from "react-helmet-async";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import LaunchingSoon from "./pages/LaunchingSoon";
+import UnderConstruction from "./pages/UnderConstruction";
 
 // Create a client
 const queryClient = new QueryClient();
@@ -28,6 +29,7 @@ const App = () => {
           <BrowserRouter>
             <Routes>
               <Route path="/" element={<LaunchingSoon />} />
+              <Route path="/under-construction" element={<UnderConstruction />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>
@@ -47,6 +49,7 @@ const App = () => {
             <Routes>
               <Route path="/" element={<Index />} />
               <Route path="/launching-soon" element={<LaunchingSoon />} />
+              <Route path="/under-construction" element={<UnderConstruction />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>
