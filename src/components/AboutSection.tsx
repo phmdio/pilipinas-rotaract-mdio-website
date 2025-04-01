@@ -154,7 +154,7 @@ const AboutSection = () => {
               
               {/* Ang Balangay */}
               <article className="flex flex-col md:flex-row overflow-hidden rounded-lg shadow-lg">
-                <div className="md:w-2/3 order-1 md:order-2">
+                <div className="md:w-2/3">
                   <AspectRatio ratio={16/9} className="h-full">
                     <img 
                       src="/assets/masquerade.png" 
