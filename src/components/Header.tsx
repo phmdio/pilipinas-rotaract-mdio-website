@@ -11,6 +11,7 @@ import {
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
 import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -54,19 +55,36 @@ const Header = () => {
                 <NavigationMenuTrigger className="bg-transparent text-white hover:bg-white/10 focus:bg-white/10">
                   About Us
                 </NavigationMenuTrigger>
-                <NavigationMenuContent className="bg-white">
-                  <ul className="grid gap-3 p-4 w-[200px]">
+                <NavigationMenuContent className="bg-[#1a237e] text-white">
+                  <ul className="w-[240px]">
                     <li>
                       <NavigationMenuLink asChild>
-                        <a href="#about" className="block p-2 hover:bg-gray-100 rounded-md">
+                        <a href="#about" className="block p-4 hover:bg-white/10 rounded-none">
                           Our History
                         </a>
                       </NavigationMenuLink>
+                      <Separator className="bg-white/20" />
                     </li>
                     <li>
                       <NavigationMenuLink asChild>
-                        <a href="#leadership" className="block p-2 hover:bg-gray-100 rounded-md">
-                          Leadership Team
+                        <a href="#leadership" className="block p-4 hover:bg-white/10 rounded-none">
+                          Our Leadership Team
+                        </a>
+                      </NavigationMenuLink>
+                      <Separator className="bg-white/20" />
+                    </li>
+                    <li>
+                      <NavigationMenuLink asChild>
+                        <a href="#magazine" className="block p-4 hover:bg-white/10 rounded-none">
+                          Philippine Rotaract Magazine
+                        </a>
+                      </NavigationMenuLink>
+                      <Separator className="bg-white/20" />
+                    </li>
+                    <li>
+                      <NavigationMenuLink asChild>
+                        <a href="#balangay" className="block p-4 hover:bg-white/10 rounded-none">
+                          Ang Balangay
                         </a>
                       </NavigationMenuLink>
                     </li>
@@ -78,18 +96,19 @@ const Header = () => {
                 <NavigationMenuTrigger className="bg-transparent text-white hover:bg-white/10 focus:bg-white/10">
                   Information Center
                 </NavigationMenuTrigger>
-                <NavigationMenuContent className="bg-white">
-                  <ul className="grid gap-3 p-4 w-[200px]">
+                <NavigationMenuContent className="bg-[#1a237e] text-white">
+                  <ul className="w-[240px]">
                     <li>
                       <NavigationMenuLink asChild>
-                        <a href="#info-center" className="block p-2 hover:bg-gray-100 rounded-md">
+                        <a href="#info-center" className="block p-4 hover:bg-white/10 rounded-none">
                           Districts
                         </a>
                       </NavigationMenuLink>
+                      <Separator className="bg-white/20" />
                     </li>
                     <li>
                       <NavigationMenuLink asChild>
-                        <a href="#resources" className="block p-2 hover:bg-gray-100 rounded-md">
+                        <a href="#resources" className="block p-4 hover:bg-white/10 rounded-none">
                           Resources
                         </a>
                       </NavigationMenuLink>
@@ -102,18 +121,19 @@ const Header = () => {
                 <NavigationMenuTrigger className="bg-transparent text-white hover:bg-white/10 focus:bg-white/10">
                   Our Programs and Activities
                 </NavigationMenuTrigger>
-                <NavigationMenuContent className="bg-white">
-                  <ul className="grid gap-3 p-4 w-[250px]">
+                <NavigationMenuContent className="bg-[#1a237e] text-white">
+                  <ul className="w-[250px]">
                     <li>
                       <NavigationMenuLink asChild>
-                        <a href="#programs" className="block p-2 hover:bg-gray-100 rounded-md">
+                        <a href="#programs" className="block p-4 hover:bg-white/10 rounded-none">
                           Key Projects
                         </a>
                       </NavigationMenuLink>
+                      <Separator className="bg-white/20" />
                     </li>
                     <li>
                       <NavigationMenuLink asChild>
-                        <a href="#events" className="block p-2 hover:bg-gray-100 rounded-md">
+                        <a href="#events" className="block p-4 hover:bg-white/10 rounded-none">
                           Upcoming Events
                         </a>
                       </NavigationMenuLink>
@@ -158,9 +178,14 @@ const Header = () => {
                 <span>About Us</span>
                 <ChevronDown size={16} />
               </button>
-              <div id="mobile-about-submenu" className="hidden pl-4 mt-2 space-y-2">
-                <a href="#about" className="block py-2 text-white hover:text-gray-200" onClick={() => setIsMenuOpen(false)}>Our History</a>
-                <a href="#leadership" className="block py-2 text-white hover:text-gray-200" onClick={() => setIsMenuOpen(false)}>Leadership Team</a>
+              <div id="mobile-about-submenu" className="hidden pl-4 mt-2 space-y-2 bg-[#1a237e] rounded">
+                <a href="#about" className="block py-3 px-4 text-white hover:bg-white/10" onClick={() => setIsMenuOpen(false)}>Our History</a>
+                <Separator className="bg-white/20" />
+                <a href="#leadership" className="block py-3 px-4 text-white hover:bg-white/10" onClick={() => setIsMenuOpen(false)}>Our Leadership Team</a>
+                <Separator className="bg-white/20" />
+                <a href="#magazine" className="block py-3 px-4 text-white hover:bg-white/10" onClick={() => setIsMenuOpen(false)}>Philippine Rotaract Magazine</a>
+                <Separator className="bg-white/20" />
+                <a href="#balangay" className="block py-3 px-4 text-white hover:bg-white/10" onClick={() => setIsMenuOpen(false)}>Ang Balangay</a>
               </div>
             </div>
             
@@ -178,9 +203,10 @@ const Header = () => {
                 <span>Information Center</span>
                 <ChevronDown size={16} />
               </button>
-              <div id="mobile-info-submenu" className="hidden pl-4 mt-2 space-y-2">
-                <a href="#info-center" className="block py-2 text-white hover:text-gray-200" onClick={() => setIsMenuOpen(false)}>Districts</a>
-                <a href="#resources" className="block py-2 text-white hover:text-gray-200" onClick={() => setIsMenuOpen(false)}>Resources</a>
+              <div id="mobile-info-submenu" className="hidden pl-4 mt-2 space-y-2 bg-[#1a237e] rounded">
+                <a href="#info-center" className="block py-3 px-4 text-white hover:bg-white/10" onClick={() => setIsMenuOpen(false)}>Districts</a>
+                <Separator className="bg-white/20" />
+                <a href="#resources" className="block py-3 px-4 text-white hover:bg-white/10" onClick={() => setIsMenuOpen(false)}>Resources</a>
               </div>
             </div>
             
@@ -198,9 +224,10 @@ const Header = () => {
                 <span>Our Programs and Activities</span>
                 <ChevronDown size={16} />
               </button>
-              <div id="mobile-programs-submenu" className="hidden pl-4 mt-2 space-y-2">
-                <a href="#programs" className="block py-2 text-white hover:text-gray-200" onClick={() => setIsMenuOpen(false)}>Key Projects</a>
-                <a href="#events" className="block py-2 text-white hover:text-gray-200" onClick={() => setIsMenuOpen(false)}>Upcoming Events</a>
+              <div id="mobile-programs-submenu" className="hidden pl-4 mt-2 space-y-2 bg-[#1a237e] rounded">
+                <a href="#programs" className="block py-3 px-4 text-white hover:bg-white/10" onClick={() => setIsMenuOpen(false)}>Key Projects</a>
+                <Separator className="bg-white/20" />
+                <a href="#events" className="block py-3 px-4 text-white hover:bg-white/10" onClick={() => setIsMenuOpen(false)}>Upcoming Events</a>
               </div>
             </div>
             
