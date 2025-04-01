@@ -92,11 +92,13 @@ const Hero = () => {
                 <CarouselContent>
                   {rightSideImages.map((image, index) => (
                     <CarouselItem key={index}>
-                      <img 
-                        src={image} 
-                        alt={`Rotaract members ${index + 1}`} 
-                        className="relative z-10 rounded-lg shadow-xl w-full h-full object-cover"
-                      />
+                      <div className="aspect-square w-full relative">
+                        <img 
+                          src={image} 
+                          alt={`Rotaract members ${index + 1}`} 
+                          className="relative z-10 rounded-lg shadow-xl w-full h-full object-cover"
+                        />
+                      </div>
                     </CarouselItem>
                   ))}
                 </CarouselContent>
