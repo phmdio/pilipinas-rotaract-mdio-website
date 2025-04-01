@@ -37,12 +37,12 @@ const LaunchingSoon = () => {
           name="description"
           content="The new Pilipinas Rotaract website is launching soon. Stay tuned for updates, events, and information about Rotaract clubs in the Philippines."
         />
-        <meta name="keywords" content="Rotaract, Philippines, MDIO, Coming Soon, Launch, Pilipinas, Youth Service" />
-        <meta property="og:title" content="Coming Soon - Pilipinas Rotaract" />
+        <meta name="keywords" content="Rotaract, Philippines, MDIO, Launching Soon, Launch, Pilipinas, Youth Service" />
+        <meta property="og:title" content="Launching Soon - Pilipinas Rotaract" />
         <meta property="og:description" content="The new Pilipinas Rotaract website is launching soon. Stay tuned for updates, events, and information about Rotaract clubs in the Philippines." />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Coming Soon - Pilipinas Rotaract" />
+        <meta name="twitter:title" content="Launching Soon - Pilipinas Rotaract" />
         <meta name="twitter:description" content="The new Pilipinas Rotaract website is launching soon. Stay tuned for updates, events, and information about Rotaract clubs in the Philippines." />
         <link rel="canonical" href="https://pilipinasrotaract.org/launching-soon" />
       </Helmet>
