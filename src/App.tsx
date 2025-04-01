@@ -14,8 +14,16 @@ import ComingSoon from "./pages/ComingSoon";
 const queryClient = new QueryClient();
 
 const App = () => {
-  return (
-    <QueryClientProvider client={queryClient}>
+  const currentHostname = window.location.hostname;
+  const customDomain = 'www.pilipinasrotaract.org';
+  const customDomainWithoutWWW = 'pilipinasrotaract.org';
+  const netlifySubdomain = 'mdio-pilipinas.netlify.app';
+
+  if (currentHostname === customDomain || currentHostname === customDomainWithoutWWW) {
+    return <ComingSoon />;
+  } else if (currentHostname === netlifySubdomain) {
+    return (
+      <QueryClientProvider client={queryClient}>
       <HelmetProvider>
         <TooltipProvider>
           <Toaster />
@@ -31,7 +39,10 @@ const App = () => {
         </TooltipProvider>
       </HelmetProvider>
     </QueryClientProvider>
-  );
+    );
+  } else {
+    return <NotFound />;
+  }
 };
 
 export default App;
