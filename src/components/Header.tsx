@@ -127,12 +127,6 @@ const Header = () => {
                   <a href="#donate">Donate</a>
                 </Button>
               </NavigationMenuItem>
-              
-              <NavigationMenuItem>
-                <Button asChild variant="ghost" className="text-white hover:bg-white/10 focus:bg-white/10">
-                  <a href="/coming-soon">Coming Soon</a>
-                </Button>
-              </NavigationMenuItem>
             </NavigationMenuList>
           </NavigationMenu>
           
@@ -211,7 +205,6 @@ const Header = () => {
             </div>
             
             <a href="#donate" className="block py-2 text-white hover:text-gray-200" onClick={() => setIsMenuOpen(false)}>Donate</a>
-            <a href="/coming-soon" className="block py-2 text-white hover:text-gray-200" onClick={() => setIsMenuOpen(false)}>Coming Soon</a>
           </div>
         </div>
       )}
