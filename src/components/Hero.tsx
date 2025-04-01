@@ -12,8 +12,10 @@ const Hero = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [api, setApi] = useState<any>(null);
   const [current, setCurrent] = useState(0);
+  const [rightSideApi, setRightSideApi] = useState<any>(null);
+  const [rightSideCurrent, setRightSideCurrent] = useState(0);
 
-  // Images for the carousel
+  // Images for the background carousel
   const carouselImages = [
     "/lovable-uploads/34013148-4140-4618-9d1a-adad2f192367.png",
     "https://images.unsplash.com/photo-1649972904349-6e44c42644a7?auto=format&fit=crop&q=80&w=1920",
@@ -21,11 +23,19 @@ const Hero = () => {
     "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=1920",
   ];
 
+  // Images for the right side carousel
+  const rightSideImages = [
+    "/lovable-uploads/8124ea27-b99c-4f37-8cdf-559344457e8f.png",
+    "/lovable-uploads/6d8d0de1-a332-4cb7-a5ba-0f50b8abbc30.png",
+    "/lovable-uploads/4d407556-f1ec-478f-80b6-cf416352465f.png",
+    "/lovable-uploads/6f1ba434-94b8-4f3a-8bdf-e3142edb0a71.png",
+  ];
+
   useEffect(() => {
     setIsLoaded(true);
   }, []);
 
-  // Auto-scroll functionality
+  // Auto-scroll functionality for background carousel
   useEffect(() => {
     if (!api) return;
 
@@ -38,13 +48,32 @@ const Hero = () => {
     return () => clearInterval(interval);
   }, [api]);
 
-  // Update current slide index when carousel changes
+  // Auto-scroll functionality for right side carousel
+  useEffect(() => {
+    if (!rightSideApi) return;
+
+    // Set up interval for auto-scrolling with different timing
+    const interval = setInterval(() => {
+      rightSideApi.scrollNext();
+    }, 4000); // Different timing for visual interest
+
+    // Clean up interval on unmount
+    return () => clearInterval(interval);
+  }, [rightSideApi]);
+
+  // Update current slide index when background carousel changes
   const handleSelect = useCallback(() => {
     if (!api) return;
     setCurrent(api.selectedScrollSnap());
   }, [api]);
 
-  // Set up event listeners for the carousel
+  // Update current slide index when right side carousel changes
+  const handleRightSideSelect = useCallback(() => {
+    if (!rightSideApi) return;
+    setRightSideCurrent(rightSideApi.selectedScrollSnap());
+  }, [rightSideApi]);
+
+  // Set up event listeners for the background carousel
   useEffect(() => {
     if (!api) return;
     
@@ -56,6 +85,19 @@ const Hero = () => {
       api.off("reInit", handleSelect);
     };
   }, [api, handleSelect]);
+
+  // Set up event listeners for the right side carousel
+  useEffect(() => {
+    if (!rightSideApi) return;
+    
+    rightSideApi.on("select", handleRightSideSelect);
+    rightSideApi.on("reInit", handleRightSideSelect);
+    
+    return () => {
+      rightSideApi.off("select", handleRightSideSelect);
+      rightSideApi.off("reInit", handleRightSideSelect);
+    };
+  }, [rightSideApi, handleRightSideSelect]);
 
   return (
     <section className="relative min-h-screen flex items-center pt-16">
@@ -115,16 +157,47 @@ const Hero = () => {
             </h2>
           </div>
           
+          {/* Right side carousel */}
           <div className={cn(
             "w-full md:w-1/2 mt-12 md:mt-0 transition-all duration-700 delay-300 opacity-0 translate-y-4",
             isLoaded && "opacity-100 translate-y-0"
           )}>
             <div className="relative mx-auto max-w-md">
-              <img 
-                src="/lovable-uploads/8124ea27-b99c-4f37-8cdf-559344457e8f.png" 
-                alt="Rotaract members" 
-                className="relative z-10 rounded-lg shadow-xl"
-              />
+              <Carousel
+                setApi={setRightSideApi}
+                opts={{
+                  loop: true,
+                  skipSnaps: false,
+                }}
+                className="w-full"
+              >
+                <CarouselContent>
+                  {rightSideImages.map((image, index) => (
+                    <CarouselItem key={index}>
+                      <img 
+                        src={image} 
+                        alt={`Rotaract members ${index + 1}`} 
+                        className="relative z-10 rounded-lg shadow-xl w-full h-full object-cover"
+                      />
+                    </CarouselItem>
+                  ))}
+                </CarouselContent>
+                
+                {/* Right side carousel indicators */}
+                <div className="absolute -bottom-6 left-0 right-0 flex justify-center gap-2 z-10">
+                  {rightSideImages.map((_, index) => (
+                    <button
+                      key={index}
+                      onClick={() => rightSideApi?.scrollTo(index)}
+                      className={cn(
+                        "w-2 h-2 rounded-full transition-all bg-white bg-opacity-70",
+                        rightSideCurrent === index ? "w-6" : ""
+                      )}
+                      aria-label={`Go to image ${index + 1}`}
+                    />
+                  ))}
+                </div>
+              </Carousel>
             </div>
           </div>
         </div>
