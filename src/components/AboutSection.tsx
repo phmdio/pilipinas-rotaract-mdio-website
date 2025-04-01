@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { cn } from '@/lib/utils';
@@ -74,7 +73,7 @@ const AboutSection = () => {
                 <div className="md:w-2/3">
                   <AspectRatio ratio={16/9} className="h-full">
                     <img 
-                      src="https://images.unsplash.com/photo-1519389950473-47ba0277781c" 
+                      src="/assets/our-history.png"
                       alt="Rotaract collaboration team working together" 
                       className="w-full h-full object-cover"
                     />
@@ -93,6 +92,15 @@ const AboutSection = () => {
               
               {/* Leadership Team Section */}
               <article className="flex flex-col md:flex-row overflow-hidden rounded-lg shadow-lg">
+                <div className="md:w-2/3">
+                  <AspectRatio ratio={16/9} className="h-full">
+                    <img 
+                      src="/assets/our-leadership.jpeg" 
+                      alt="Rotaract collaboration team working together" 
+                      className="w-full h-full object-cover"
+                    />
+                  </AspectRatio>
+                </div>
                 <div className="md:w-1/3 bg-rotaract-magenta p-8 flex flex-col justify-center order-2 md:order-1">
                   <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">Our Leadership Team</h3>
                   <p className="text-white mb-4">
@@ -101,15 +109,6 @@ const AboutSection = () => {
                   <a href="/leadership" className="text-white font-medium underline underline-offset-2 self-start">
                     View Team
                   </a>
-                </div>
-                <div className="md:w-2/3 order-1 md:order-2">
-                  <AspectRatio ratio={16/9} className="h-full">
-                    <img 
-                      src="https://images.unsplash.com/photo-1721322800607-8c38375eef04" 
-                      alt="Rotaract Leadership Team gathering for a meeting" 
-                      className="w-full h-full object-cover"
-                    />
-                  </AspectRatio>
                 </div>
               </article>
             </div>
@@ -129,39 +128,45 @@ const AboutSection = () => {
             "transition-all duration-500 opacity-0 translate-y-4",
             inView && "opacity-100 translate-y-0"
           )}>
-            <p className="text-gray-700 mb-8 text-center max-w-3xl mx-auto">
-              From big cities to rural villages, Rotaract is changing communities like yours. Explore the stories of our members and the impact they're making across the Philippines.
+            <p className="text-gray-700 mb-8">
+              Hipster ipsum tattooed brunch I'm baby. Mumblecore pug man batch hella bitters batch offal pitchfork. Crucifix fanny dsa scenester mug skateboard brooklyn art. Williamsburg hoodie church-key letterpress tbh 3-moon whatever. Viral bun bruh bulb truffaut bun.
             </p>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
-              <article className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300">
-                <AspectRatio ratio={16/9}>
-                  <img 
-                    src="https://images.unsplash.com/photo-1517486808906-6ca8b3f8e1c1" 
-                    alt="Rotaract members working on a community service project" 
-                    className="w-full h-full object-cover"
-                  />
-                </AspectRatio>
-                <div className="p-6">
-                  <h3 className="text-xl font-bold mb-2">Community Impact</h3>
-                  <p className="text-gray-700">
-                    Stories of how our service projects have transformed communities and lives across the Philippines.
+            <div className="space-y-8 mt-12">
+              {/* Philippine Rotaract Magazine */}
+              <article className="flex flex-col md:flex-row overflow-hidden rounded-lg shadow-lg">
+                <div className="md:w-2/3">
+                  <AspectRatio ratio={16/9} className="h-full">
+                    <img 
+                      src="/assets/concert.png" 
+                      alt="Rotaract event with concert lights" 
+                      className="w-full h-full object-cover"
+                    />
+                  </AspectRatio>
+                </div>
+                <div className="md:w-1/3 bg-green-600 p-8 flex flex-col justify-center text-right">
+                  <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">Philippine Rotaract Magazine</h3>
+                  <p className="text-white mb-4">
+                    Hipster ipsum tattooed brunch I'm baby. Distillery bulb green whatever etsy godard vhs tumeric.
                   </p>
                 </div>
               </article>
               
-              <article className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300">
-                <AspectRatio ratio={16/9}>
-                  <img 
-                    src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f" 
-                    alt="Rotaract members in a growth workshop" 
-                    className="w-full h-full object-cover"
-                  />
-                </AspectRatio>
-                <div className="p-6">
-                  <h3 className="text-xl font-bold mb-2">Member Journeys</h3>
-                  <p className="text-gray-700">
-                    Personal stories from our members about how Rotaract has changed their lives and perspectives.
+              {/* Ang Balangay */}
+              <article className="flex flex-col md:flex-row overflow-hidden rounded-lg shadow-lg">
+                <div className="md:w-2/3 order-1 md:order-2">
+                  <AspectRatio ratio={16/9} className="h-full">
+                    <img 
+                      src="/assets/masquerade.png" 
+                      alt="Rotaract members at masquerade event" 
+                      className="w-full h-full object-cover"
+                    />
+                  </AspectRatio>
+                </div>
+                <div className="md:w-1/3 bg-red-600 p-8 flex flex-col justify-center text-right order-2 md:order-1">
+                  <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">Ang Balangay</h3>
+                  <p className="text-white mb-4">
+                    Hipster ipsum tattooed brunch I'm baby. Distillery bulb green whatever etsy godard vhs tumeric.
                   </p>
                 </div>
               </article>
