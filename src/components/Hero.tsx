@@ -57,7 +57,14 @@ const Hero = () => {
   }, [rightSideApi, handleRightSideSelect]);
 
   return (
-    <section className="relative min-h-screen flex items-center pt-16 bg-rotaract-blue">
+    <section 
+      className="relative min-h-screen flex items-center pt-16 bg-rotaract-blue"
+      style={{
+        backgroundImage: `url('/lovable-uploads/34013148-4140-4618-9d1a-adad2f192367.png')`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+      }}
+    >
       {/* Content */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="flex flex-col md:flex-row items-center">
@@ -142,3 +149,4 @@ const Hero = () => {
 };
 
 export default Hero;
+
