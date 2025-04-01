@@ -7,62 +7,62 @@ import { Button } from '@/components/ui/button';
 const districtData = [
   { 
     id: '3770', 
-    color: '#F39C12',
-    image: '/lovable-uploads/da3eab74-3776-4624-9054-81bdf47e8d38.png',
+    color: '#F6A81C',
+    image: '/assets/district/3770.jpeg',
     description: 'Rotaract Clubs of Rotary International District #'
   },
   { 
     id: '3780', 
-    color: '#3498DB',
-    image: '/lovable-uploads/da3eab74-3776-4624-9054-81bdf47e8d38.png',
+    color: '#16478E',
+    image: '/assets/district/3780.jpeg',
     description: 'Rotaract Clubs of Rotary International District #'
   },
   { 
     id: '3790', 
-    color: '#2ECC71',
-    image: '/lovable-uploads/da3eab74-3776-4624-9054-81bdf47e8d38.png',
+    color: '#00A2E1',
+    image: '/assets/district/3790.jpeg',
     description: 'Rotaract Clubs of Rotary International District #'
   },
   { 
     id: '3800', 
-    color: '#9B59B6',
-    image: '/lovable-uploads/da3eab74-3776-4624-9054-81bdf47e8d38.png',
+    color: '#003366',
+    image: '/assets/district/3800.jpeg',
     description: 'Rotaract Clubs of Rotary International District #'
   },
   { 
     id: '3810', 
-    color: '#E74C3C',
-    image: '/lovable-uploads/da3eab74-3776-4624-9054-81bdf47e8d38.png',
+    color: '#F47621',
+    image: '/assets/district/3810.jpeg',
     description: 'Rotaract Clubs of Rotary International District #'
   },
   { 
     id: '3820', 
-    color: '#8E44AD',
-    image: '/lovable-uploads/da3eab74-3776-4624-9054-81bdf47e8d38.png',
+    color: '#8E288F',
+    image: '/assets/district/3820.jpeg',
     description: 'Rotaract Clubs of Rotary International District #'
   },
   { 
     id: '3830', 
-    color: '#16A085',
-    image: '/lovable-uploads/da3eab74-3776-4624-9054-81bdf47e8d38.png',
+    color: '#0D9648',
+    image: '/assets/district/3830.jpeg',
     description: 'Rotaract Clubs of Rotary International District #'
   },
   { 
     id: '3850', 
-    color: '#E67E22',
-    image: '/lovable-uploads/da3eab74-3776-4624-9054-81bdf47e8d38.png',
+    color: '#E22626',
+    image: '/assets/district/3850.jpeg',
     description: 'Rotaract Clubs of Rotary International District #'
   },
   { 
     id: '3860', 
-    color: '#27AE60',
-    image: '/lovable-uploads/da3eab74-3776-4624-9054-81bdf47e8d38.png',
+    color: '#66819A',
+    image: '/assets/district/3860.jpeg',
     description: 'Rotaract Clubs of Rotary International District #'
   },
   { 
     id: '3870', 
-    color: '#2980B9',
-    image: '/lovable-uploads/da3eab74-3776-4624-9054-81bdf47e8d38.png',
+    color: '#00ACBB',
+    image: '/assets/district/3870.jpeg',
     description: 'Rotaract Clubs of Rotary International District #'
   },
 ];
@@ -169,7 +169,7 @@ const InfoCenter = () => {
             )}
           </div>
           
-          <div className="flex justify-center mt-10">
+          <div className="flex justify-start mt-10">
             <Button 
               className="bg-[#003366] hover:bg-[#002244] text-white rounded-full px-8 py-6 h-auto font-medium tracking-wider text-base uppercase"
             >
@@ -193,7 +193,7 @@ const DistrictCard = ({ district, index }: { district: any, index: number }) => 
     >
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${district.image})` }}>
-        <div className="absolute inset-0" style={{ backgroundColor: `${district.color}88` }}></div>
+        <div className="absolute inset-0 opacity-75" style={{ backgroundColor: `${district.color}` }}></div>
       </div>
       
       {/* Content */}
