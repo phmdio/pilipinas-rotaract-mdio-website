@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useCallback } from 'react';
 import { cn } from '@/lib/utils';
 import { 
@@ -116,8 +115,10 @@ const Hero = () => {
                       key={index}
                       onClick={() => rightSideApi?.scrollTo(index)}
                       className={cn(
-                        "w-2 h-2 rounded-full transition-all bg-white bg-opacity-70",
-                        rightSideCurrent === index ? "w-6" : ""
+                        "h-2 rounded-full transition-all duration-300",
+                        rightSideCurrent === index 
+                          ? "w-8 bg-white" 
+                          : "w-2 bg-white/50 hover:bg-white/70"
                       )}
                       aria-label={`Go to image ${index + 1}`}
                     />
