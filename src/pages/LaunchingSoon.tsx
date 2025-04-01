@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Progress } from "@/components/ui/progress";
 
-const ComingSoon = () => {
+const LaunchingSoon = () => {
   const [progress, setProgress] = useState(15);
   
   useEffect(() => {
@@ -32,7 +32,7 @@ const ComingSoon = () => {
   return (
     <>
       <Helmet>
-        <title>Coming Soon - Pilipinas Rotaract</title>
+        <title>Launching Soon - Pilipinas Rotaract</title>
         <meta
           name="description"
           content="The new Pilipinas Rotaract website is launching soon. Stay tuned for updates, events, and information about Rotaract clubs in the Philippines."
@@ -44,7 +44,7 @@ const ComingSoon = () => {
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Coming Soon - Pilipinas Rotaract" />
         <meta name="twitter:description" content="The new Pilipinas Rotaract website is launching soon. Stay tuned for updates, events, and information about Rotaract clubs in the Philippines." />
-        <link rel="canonical" href="https://pilipinasrotaract.org/coming-soon" />
+        <link rel="canonical" href="https://pilipinasrotaract.org/launching-soon" />
       </Helmet>
       <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-rotaract-magenta to-rotaract-purple p-4">
         <div className="max-w-3xl w-full text-center">
@@ -84,4 +84,4 @@ const ComingSoon = () => {
   );
 };
 
-export default ComingSoon;
+export default LaunchingSoon;
