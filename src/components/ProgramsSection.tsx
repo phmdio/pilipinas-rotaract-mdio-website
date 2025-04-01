@@ -33,8 +33,6 @@ const programs = [
     description: 'Hipster ipsum tattooed brunch I\'m baby. Mumblecore pug man batch hella bitters batch offal pitchfork.',
     date: 'JANUARY 01, 2025',
     image: '/lovable-uploads/f9aafe95-7dc7-4718-82dc-afd6f69cbfb7.png',
-    overlayColor: 'rgba(212, 26, 105, 0.8)',
-    textColor: 'white'
   },
   {
     id: 4,
@@ -53,6 +51,7 @@ const ProgramsSection = () => {
 
   const [currentPage, setCurrentPage] = useState(0);
   const totalPages = Math.ceil(programs.length / 3);
+  const [hoveredId, setHoveredId] = useState<number | null>(null);
   
   const handlePrevPage = () => {
     setCurrentPage((prev) => (prev === 0 ? totalPages - 1 : prev - 1));
@@ -98,37 +97,35 @@ const ProgramsSection = () => {
           inView && "opacity-100 translate-y-0"
         )}>
           {programs.slice(currentPage * 3, (currentPage * 3) + 3).map((program) => (
-            <div key={program.id} className="flex flex-col h-full">
-              <p className="text-gray-600 font-medium mb-4">{program.date}</p>
-              <div className="relative h-[300px] mb-4 overflow-hidden">
+            <div key={program.id} className="flex flex-col h-full bg-[#f0f8ff] rounded-md overflow-hidden">
+              <p className="text-gray-600 font-medium p-4">{program.date}</p>
+              <div 
+                className="relative h-[300px] overflow-hidden cursor-pointer"
+                onMouseEnter={() => setHoveredId(program.id)}
+                onMouseLeave={() => setHoveredId(null)}
+              >
                 <img
                   src={program.image}
                   alt={program.title}
                   className="w-full h-full object-cover"
                 />
-                {program.overlayColor && (
-                  <div className="absolute inset-0 flex flex-col justify-center p-6" style={{ backgroundColor: program.overlayColor }}>
-                    <h3 className={`text-3xl font-bold mb-4 ${program.textColor || 'text-white'}`}>{program.title}</h3>
-                    <p className={`text-base ${program.textColor || 'text-white'} mb-2`}>{program.description}</p>
-                  </div>
-                )}
+                <div 
+                  className={cn(
+                    "absolute inset-0 flex flex-col justify-center p-6 bg-[#D41A69]/80 transition-opacity duration-300",
+                    hoveredId === program.id ? "opacity-100" : "opacity-0"
+                  )}
+                >
+                  <h3 className="text-3xl font-bold mb-4 text-white">{program.title}</h3>
+                  <p className="text-base text-white mb-2">{program.description}</p>
+                </div>
               </div>
-              {!program.overlayColor && (
-                <>
-                  <Button 
-                    className="w-full mb-4 bg-[#f0f8ff] text-[#16478E] hover:bg-blue-50 border border-blue-100 rounded-full"
-                  >
-                    VIEW EVENT
-                  </Button>
-                </>
-              )}
-              {program.overlayColor && (
+              <div className="p-4">
                 <Button 
-                  className="w-full mb-4 bg-[#16478E] text-white hover:bg-blue-800 rounded-full"
+                  className="w-full bg-[#16478E] text-white hover:bg-blue-800 rounded-full"
                 >
                   VIEW EVENT
                 </Button>
-              )}
+              </div>
             </div>
           ))}
         </div>
