@@ -18,28 +18,28 @@ const programs = [
     title: 'Fellowship Dinner',
     description: 'Join us for our monthly fellowship dinner with Rotarians.',
     date: 'JANUARY 01, 2025',
-    image: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c',
+    image: '/assets/our-history.png',
   },
   {
     id: 2,
     title: 'Professional Development Workshop',
     description: 'Workshops and seminars to build career skills and networks.',
     date: 'JANUARY 01, 2025',
-    image: 'https://images.unsplash.com/photo-1605810230434-7631ac76ec81',
+    image: '/assets/our-leadership.jpeg',
   },
   {
     id: 3,
     title: 'District Rotaract Representative Election Training Seminar',
     description: 'Hipster ipsum tattooed brunch I\'m baby. Mumblecore pug man batch hella bitters batch offal pitchfork.',
     date: 'JANUARY 01, 2025',
-    image: '/lovable-uploads/f9aafe95-7dc7-4718-82dc-afd6f69cbfb7.png',
+    image: '/assets/our-history.png',
   },
   {
     id: 4,
     title: 'Community Service Project',
     description: 'Projects focused on improving local communities through direct action.',
     date: 'JANUARY 01, 2025',
-    image: 'https://images.unsplash.com/photo-1721322800607-8c38375eef04',
+    image: '/assets/our-history.png',
   },
 ];
 
@@ -131,7 +131,7 @@ const ProgramsSection = () => {
         </div>
         
         <div className={cn(
-          "mt-12 flex justify-center transition-all duration-500 delay-300 opacity-0 translate-y-4",
+          "mt-12 flex justify-start transition-all duration-500 delay-300 opacity-0 translate-y-4",
           inView && "opacity-100 translate-y-0"
         )}>
           <Button 
