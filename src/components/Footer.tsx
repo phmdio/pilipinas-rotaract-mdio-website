@@ -1,4 +1,3 @@
-
 import { Facebook, Instagram, Youtube, Twitter } from 'lucide-react';
 
 const Footer = () => {
@@ -42,16 +41,21 @@ const Footer = () => {
             <div>
               <h3 className="text-base font-bold mb-4">Follow us</h3>
               <div className="flex space-x-4">
-                <a href="#" className="hover:text-white/80 transition-colors">
+                <a href="https://www.facebook.com/PilipinasRotaractMDIO" className="hover:text-white/80 transition-colors">
                   <Facebook size={24} />
                 </a>
-                <a href="#" className="hover:text-white/80 transition-colors">
+                <a href="https://www.instagram.com/phrotaractmdio" className="hover:text-white/80 transition-colors">
                   <Instagram size={24} />
                 </a>
-                <a href="#" className="hover:text-white/80 transition-colors">
+                <a href="https://www.youtube.com/@PilipinasRotaractMDIO" className="hover:text-white/80 transition-colors">
                   <Youtube size={24} />
                 </a>
-                <a href="#" className="hover:text-white/80 transition-colors">
+                <a href="https://www.tiktok.com/@phrotaractmdio" className="hover:text-white/80 transition-colors">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+                    <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/>
+                  </svg>
+                </a>
+                <a href="https://x.com/PHRotaractMDIO" className="hover:text-white/80 transition-colors">
                   <Twitter size={24} />
                 </a>
               </div>
