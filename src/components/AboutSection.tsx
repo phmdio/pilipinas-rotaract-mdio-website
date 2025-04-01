@@ -16,7 +16,7 @@ const AboutSection = () => {
     <section id="about" aria-labelledby="about-heading" className="py-16 overflow-hidden bg-white relative">
       <div className="max-w-7xl mx-auto px-4 md:px-8 pt-8" ref={ref}>       
         {/* Tabs */}
-        <div role="tablist" aria-label="About Rotaract" className="flex flex-col sm:flex-row sm:justify-center sm:space-x-8 mb-12">
+        <div role="tablist" aria-label="About Rotaract" className="flex flex-col sm:flex-row sm:justify-start sm:space-x-8 mb-12">
           <button
             role="tab"
             aria-selected={activeTab === 'about'}
