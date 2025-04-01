@@ -17,8 +17,6 @@ const App = () => {
   const currentHostname = window.location.hostname;
   const customDomain = 'www.pilipinasrotaract.org';
   const customDomainWithoutWWW = 'pilipinasrotaract.org';
-  const netlifySubdomain = 'mdio-pilipinas.netlify.app';
-  const lovableSubdomain = 'preview--pilipinas-rotaract-mdio-53.lovable.app';
 
   if (currentHostname === customDomain || currentHostname === customDomainWithoutWWW) {
     return (
@@ -38,7 +36,7 @@ const App = () => {
       </HelmetProvider>
     </QueryClientProvider>
     );
-  } else if (currentHostname === netlifySubdomain || currentHostname === lovableSubdomain) {
+  } else {
     return (
       <QueryClientProvider client={queryClient}>
       <HelmetProvider>
@@ -50,22 +48,6 @@ const App = () => {
               <Route path="/" element={<Index />} />
               <Route path="/launching-soon" element={<LaunchingSoon />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </BrowserRouter>
-        </TooltipProvider>
-      </HelmetProvider>
-    </QueryClientProvider>
-    );
-  } else {
-    return (
-      <QueryClientProvider client={queryClient}>
-      <HelmetProvider>
-        <TooltipProvider>
-          <Toaster />
-          <Sonner />
-          <BrowserRouter>
-            <Routes>
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>
