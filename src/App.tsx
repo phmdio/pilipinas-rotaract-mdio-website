@@ -20,7 +20,23 @@ const App = () => {
   const netlifySubdomain = 'mdio-pilipinas.netlify.app';
 
   if (currentHostname === customDomain || currentHostname === customDomainWithoutWWW) {
-    return <ComingSoon />;
+    return (
+      <QueryClientProvider client={queryClient}>
+      <HelmetProvider>
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<ComingSoon />} />
+              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </BrowserRouter>
+        </TooltipProvider>
+      </HelmetProvider>
+    </QueryClientProvider>
+    );
   } else if (currentHostname === netlifySubdomain) {
     return (
       <QueryClientProvider client={queryClient}>
@@ -41,7 +57,21 @@ const App = () => {
     </QueryClientProvider>
     );
   } else {
-    return <NotFound />;
+    return (
+      <QueryClientProvider client={queryClient}>
+      <HelmetProvider>
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
+            <Routes>
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </BrowserRouter>
+        </TooltipProvider>
+      </HelmetProvider>
+    </QueryClientProvider>
+    );
   }
 };
 
