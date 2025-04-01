@@ -1,4 +1,4 @@
-import { Facebook, Instagram, Youtube, Twitter } from 'lucide-react';
+import { FacebookIcon, InstagramIcon, YoutubeIcon, TwitterIcon } from 'lucide-react';
 
 const Footer = () => {
   return (
@@ -42,13 +42,13 @@ const Footer = () => {
               <h3 className="text-base font-bold mb-4">Follow us</h3>
               <div className="flex space-x-4">
                 <a href="https://www.facebook.com/PilipinasRotaractMDIO" target="_blank" className="hover:text-white/80 transition-colors">
-                  <Facebook size={24} />
+                  <FacebookIcon size={24} />
                 </a>
                 <a href="https://www.instagram.com/phrotaractmdio" target="_blank" className="hover:text-white/80 transition-colors">
-                  <Instagram size={24} />
+                  <InstagramIcon size={24} />
                 </a>
                 <a href="https://www.youtube.com/@PilipinasRotaractMDIO" target="_blank" className="hover:text-white/80 transition-colors">
-                  <Youtube size={24} />
+                  <YoutubeIcon size={24} />
                 </a>
                 <a href="https://www.tiktok.com/@phrotaractmdio" target="_blank" className="hover:text-white/80 transition-colors">
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
@@ -56,7 +56,7 @@ const Footer = () => {
                   </svg>
                 </a>
                 <a href="https://x.com/PHRotaractMDIO" target="_blank" className="hover:text-white/80 transition-colors">
-                  <Twitter size={24} />
+                  <TwitterIcon size={24} />
                 </a>
               </div>
             </div>

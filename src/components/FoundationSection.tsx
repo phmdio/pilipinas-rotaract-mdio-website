@@ -1,6 +1,5 @@
-
 import { useInView } from 'react-intersection-observer';
-import { Facebook, Instagram, Youtube, Twitter } from 'lucide-react';
+import { FacebookIcon, InstagramIcon, YoutubeIcon, TwitterIcon } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const FoundationSection = () => {
@@ -37,13 +36,13 @@ const FoundationSection = () => {
               <h3 className="text-xl font-medium text-[#E30B5C] mb-4">Follow us:</h3>
               <div className="flex space-x-6">
                 <a href="https://www.facebook.com/PilipinasRotaractMDIO" target="_blank" className="text-[#1877F2] hover:opacity-90 transition-all">
-                  <Facebook size={24} />
+                  <FacebookIcon size={24} />
                 </a>
                 <a href="https://www.instagram.com/phrotaractmdio" target="_blank" className="text-[#E4405F] hover:opacity-90 transition-all">
-                  <Instagram size={24} />
+                  <InstagramIcon size={24} />
                 </a>
                 <a href="https://www.youtube.com/@PilipinasRotaractMDIO" target="_blank" className="text-[#FF0000] hover:opacity-90 transition-all">
-                  <Youtube size={24} />
+                  <YoutubeIcon size={24} />
                 </a>
                 <a href="https://www.tiktok.com/@phrotaractmdio" target="_blank" className="text-black hover:opacity-90 transition-all">
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="none">
@@ -51,7 +50,7 @@ const FoundationSection = () => {
                   </svg>
                 </a>
                 <a href="https://x.com/PHRotaractMDIO" target="_blank" className="text-[#1DA1F2] hover:opacity-90 transition-all">
-                  <Twitter size={24} />
+                  <TwitterIcon size={24} />
                 </a>
               </div>
             </div>
