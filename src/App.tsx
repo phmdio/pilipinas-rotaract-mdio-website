@@ -18,6 +18,7 @@ const App = () => {
   const customDomain = 'www.pilipinasrotaract.org';
   const customDomainWithoutWWW = 'pilipinasrotaract.org';
   const netlifySubdomain = 'mdio-pilipinas.netlify.app';
+  const lovableSubdomain = 'preview--pilipinas-rotaract-mdio-53.lovable.app';
 
   if (currentHostname === customDomain || currentHostname === customDomainWithoutWWW) {
     return (
@@ -37,7 +38,7 @@ const App = () => {
       </HelmetProvider>
     </QueryClientProvider>
     );
-  } else if (currentHostname === netlifySubdomain) {
+  } else if (currentHostname === netlifySubdomain || currentHostname === lovableSubdomain) {
     return (
       <QueryClientProvider client={queryClient}>
       <HelmetProvider>
