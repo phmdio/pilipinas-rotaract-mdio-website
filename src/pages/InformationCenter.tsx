@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { Button } from '@/components/ui/button';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { Progress } from '@/components/ui/progress';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { districtData } from '@/data/districtData';
@@ -28,14 +28,8 @@ const InformationCenter = () => {
     return () => clearInterval(interval);
   }, [carouselImages.length]);
   
-  // Navigation functions
-  const goToNextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % carouselImages.length);
-  };
-  
-  const goToPrevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + carouselImages.length) % carouselImages.length);
-  };
+  // Calculate progress percentage
+  const progressPercentage = ((currentSlide + 1) / carouselImages.length) * 100;
   
   return (
     <>
@@ -64,36 +58,12 @@ const InformationCenter = () => {
             {/* Dark overlay */}
             <div className="absolute inset-0 bg-black/40"></div>
             
-            {/* Carousel navigation */}
-            <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 flex justify-between items-center px-4">
-              <button 
-                onClick={goToPrevSlide}
-                className="p-2 rounded-full bg-black/30 text-white hover:bg-black/50 transition-colors"
-                aria-label="Previous slide"
-              >
-                <ChevronLeft size={24} />
-              </button>
-              <button 
-                onClick={goToNextSlide}
-                className="p-2 rounded-full bg-black/30 text-white hover:bg-black/50 transition-colors"
-                aria-label="Next slide"
-              >
-                <ChevronRight size={24} />
-              </button>
-            </div>
-            
-            {/* Indicators */}
-            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex space-x-2">
-              {carouselImages.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setCurrentSlide(index)}
-                  className={`w-2.5 h-2.5 rounded-full transition-colors ${
-                    index === currentSlide ? 'bg-white' : 'bg-white/50'
-                  }`}
-                  aria-label={`Go to slide ${index + 1}`}
-                />
-              ))}
+            {/* Progress indicator */}
+            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 w-1/4 min-w-[200px]">
+              <Progress value={progressPercentage} className="h-1 bg-white/30" />
+              <div className="mt-2 text-white text-xs text-center">
+                {currentSlide + 1} of {carouselImages.length}
+              </div>
             </div>
           </div>
           
