@@ -55,10 +55,10 @@ const InformationCenter = () => {
           </div>
           
           {/* Content overlaid on carousel */}
-          <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-8 text-white">
-            <h1 className="text-4xl sm:text-5xl font-bold">Our Members District</h1>
+          <div className="relative w-full mx-auto px-auto sm:px-6 lg:px-8 py-8 text-white">
+            <h1 className="text-4xl sm:text-5xl font-bold text-start text-white">Our Members District</h1>
             {/* Dark overlay */}
-            <div className="absolute w-full inset-0 bg-black/40"></div>
+            <div className="absolute w-full inset-0 bg-black/20"></div>
           </div>
         </section>
         
@@ -66,7 +66,7 @@ const InformationCenter = () => {
         <section className="py-10 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-4xl">
-              <h2 className="text-2xl font-bold text-rotaract-magenta mb-3">Hipster ipsum tattooed brunch I'm baby.</h2>
+              <h2 className="text-4xl font-bold text-rotaract-magenta mb-3">Hipster ipsum tattooed brunch I'm baby.</h2>
               <p className="text-gray-700">
                 Hipster ipsum tattooed brunch I'm baby. Mumblecore pug man bun batch hella bitters batch offal pitchfork. Crucifix fanny dsa scenester mug skateboard brooklyn art. Williamsburg hoodie church-key letterpress tbh 3-moon whatever. Viral bun bruh bulb truffaut bun. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
               </p>
