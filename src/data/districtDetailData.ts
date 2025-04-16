@@ -15,6 +15,8 @@ interface DistrictDetail {
   highlights: string;
   gallery: string[];
   representatives: DistrictRepresentative[];
+  headerImage?: string;
+  mainClub?: string;
 }
 
 const districtDetails: Record<string, DistrictDetail> = {
@@ -42,7 +44,9 @@ const districtDetails: Record<string, DistrictDetail> = {
       { rotaryYear: "Rotary Year 2019-2020 | Term of Office", name: "Mike Tan", dates: "July 1, 2019 - June 30, 2020" },
       { rotaryYear: "Rotary Year 2018-2019 | Term of Office", name: "Sarah Lim", dates: "July 1, 2018 - June 30, 2019" },
       { rotaryYear: "Rotary Year 2017-2018 | Term of Office", name: "James Co", dates: "July 1, 2017 - June 30, 2018" }
-    ]
+    ],
+    headerImage: "/public/lovable-uploads/8dde7e86-fd9e-4713-9917-b37609e31f4b.png",
+    mainClub: "Biringan City"
   },
   "3780": {
     title: "Rotaract Clubs in Manila and surrounding areas",
@@ -66,7 +70,9 @@ const districtDetails: Record<string, DistrictDetail> = {
       { rotaryYear: "Rotary Year 2021-2022 | Term of Office", name: "Rachel Castro", dates: "July 1, 2021 - June 30, 2022" },
       { rotaryYear: "Rotary Year 2020-2021 | Term of Office", name: "David Santos", dates: "July 1, 2020 - June 30, 2021" },
       { rotaryYear: "Rotary Year 2019-2020 | Term of Office", name: "Michelle Tan", dates: "July 1, 2019 - June 30, 2020" }
-    ]
+    ],
+    headerImage: "/public/lovable-uploads/8dde7e86-fd9e-4713-9917-b37609e31f4b.png",
+    mainClub: "Makati Central"
   }
 };
 
@@ -92,7 +98,9 @@ const districtDetails: Record<string, DistrictDetail> = {
         { rotaryYear: "Rotary Year 2023-2024 | Term of Office", name: "District Representative", dates: "July 1, 2023 - June 30, 2024" },
         { rotaryYear: "Rotary Year 2022-2023 | Term of Office", name: "District Representative", dates: "July 1, 2022 - June 30, 2023" },
         { rotaryYear: "Rotary Year 2021-2022 | Term of Office", name: "District Representative", dates: "July 1, 2021 - June 30, 2022" }
-      ]
+      ],
+      headerImage: "/public/lovable-uploads/8dde7e86-fd9e-4713-9917-b37609e31f4b.png",
+      mainClub: "Local City"
     };
   }
 });
@@ -104,6 +112,8 @@ export const getDistrictDetail = (districtId: string): DistrictDetail => {
     composition: ["Information not available"],
     highlights: "Information not available",
     gallery: ["/assets/placeholder.svg"],
-    representatives: []
+    representatives: [],
+    headerImage: "/public/lovable-uploads/8dde7e86-fd9e-4713-9917-b37609e31f4b.png",
+    mainClub: "Main Club"
   };
 };

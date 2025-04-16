@@ -14,6 +14,7 @@ const DistrictDetail = () => {
   const { districtId } = useParams<{ districtId: string }>();
   const [district, setDistrict] = useState<any>(null);
   const [districtDetail, setDistrictDetail] = useState<any>(null);
+  const [currentDRR, setCurrentDRR] = useState<string>("");
   
   useEffect(() => {
     if (districtId) {
@@ -21,6 +22,11 @@ const DistrictDetail = () => {
       const foundDistrictDetail = getDistrictDetail(districtId);
       setDistrict(foundDistrict);
       setDistrictDetail(foundDistrictDetail);
+      
+      // Get current DRR (first one in the list)
+      if (foundDistrictDetail && foundDistrictDetail.representatives && foundDistrictDetail.representatives.length > 0) {
+        setCurrentDRR(foundDistrictDetail.representatives[0].name);
+      }
     }
   }, [districtId]);
 
@@ -38,11 +44,13 @@ const DistrictDetail = () => {
       <Header />
       
       <main className="pb-16">
-        {/* Hero Image with Overlay */}
-        <section className="relative h-80 bg-cover bg-center" style={{ backgroundImage: `url(${districtDetail.headerImage})` }}>
-          <div className="absolute inset-0 bg-black/30"></div>
-          <div className="absolute bottom-0 left-0 bg-[#F6A81C] p-6 text-white">
-            <h1 className="text-6xl font-bold">{district.id}</h1>
+        {/* Hero Image with Orange Overlay - Updated to match design */}
+        <section className="relative h-[500px] bg-cover bg-center" style={{ backgroundImage: `url(${districtDetail.headerImage || "/public/lovable-uploads/8dde7e86-fd9e-4713-9917-b37609e31f4b.png"})` }}>
+          <div className="absolute inset-0 bg-black/20"></div>
+          <div className="absolute left-0 bottom-0 w-[500px] max-w-[40%] bg-[#F6A81C] p-6 text-white">
+            <p className="text-xl font-medium mb-2">Rotaract Clubs of Rotary International District #</p>
+            <h1 className="text-8xl font-bold mb-4">{district.id}</h1>
+            <p className="text-lg">DRR {currentDRR || "John Doe"}, Rotaract Club of {districtDetail.mainClub || "Biringan City"}</p>
           </div>
         </section>
         
