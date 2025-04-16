@@ -12,6 +12,7 @@ import LaunchingSoon from "./pages/LaunchingSoon";
 import UnderConstruction from "./pages/UnderConstruction";
 import InformationCenter from "./pages/InformationCenter";
 import DistrictDetail from "./pages/DistrictDetail";
+import OurHistory from "./pages/OurHistory";
 
 // Create a client
 const queryClient = new QueryClient();
@@ -34,6 +35,7 @@ const App = () => {
               <Route path="/under-construction" element={<UnderConstruction />} />
               <Route path="/information-center" element={<InformationCenter />} />
               <Route path="/district/:districtId" element={<DistrictDetail />} />
+              <Route path="/our-history" element={<OurHistory />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>
@@ -56,6 +58,7 @@ const App = () => {
               <Route path="/under-construction" element={<UnderConstruction />} />
               <Route path="/information-center" element={<InformationCenter />} />
               <Route path="/district/:districtId" element={<DistrictDetail />} />
+              <Route path="/our-history" element={<OurHistory />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>
