@@ -9,14 +9,15 @@ const HeroSection = () => {
         <div 
           className="absolute inset-0 bg-cover bg-center" 
           style={{ backgroundImage: `url("/assets/our-history.png")` }}
-        ></div>
+        >
+          {/* Dark overlay */}
+          <div className="absolute inset-0 bg-black/50"></div>
+        </div>
       </div>
       
       {/* Content overlaid on carousel */}
-      <div className="relative w-full mx-auto px-auto sm:px-6 lg:px-8 py-8 text-white">
-        <h1 className="text-6xl sm:text-5xl font-bold text-start text-white">Our History</h1>
-        {/* Dark overlay */}
-        <div className="absolute w-full inset-0 bg-black/20"></div>
+      <div className="relative w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 text-white z-10">
+        <h1 className="text-5xl sm:text-6xl font-bold text-start text-white">Our History</h1>
       </div>
     </section>
   );
