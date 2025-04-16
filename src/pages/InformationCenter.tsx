@@ -116,7 +116,7 @@ const InformationCenter = () => {
                     <p className="mb-5">
                       Hipster ipsum tattooed brunch I'm baby. Schlitz seitan listicle mixtape boys trust vice. Occupy tbh street brunch keffiyeh. Bicycle diy blog banjo fingerstache tote on locavore coffee pabst.
                     </p>
-                    <div className="mt-auto flex justify-center">
+                    <div className="mt-auto flex flex-col justify-center">
                       <Link to={`/district/${district.id}`}>
                         <Button 
                           variant="outline" 
