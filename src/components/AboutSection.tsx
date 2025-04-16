@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useInView } from 'react-intersection-observer';
 import { cn } from '@/lib/utils';
 import { Separator } from '@/components/ui/separator';
@@ -84,9 +85,9 @@ const AboutSection = () => {
                   <p className="text-white mb-4">
                     Learn how Rotaract evolved over the years to become what it is today. Discover our rich heritage and the milestones that have shaped our organization.
                   </p>
-                  <a href="/under-construction" className="text-white font-medium underline underline-offset-2 self-start">
+                  <Link to="/our-history" className="text-white font-medium underline underline-offset-2 self-start">
                     Read More
-                  </a>
+                  </Link>
                 </div>
               </article>
               
