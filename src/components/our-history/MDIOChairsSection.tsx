@@ -10,31 +10,31 @@ const MDIOChairsSection = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
           {/* Row 1 */}
           <div className="text-center">
-            <img src="/lovable-uploads/cc6b0efa-c8ab-45cc-b769-33c0b63b4c82.png" alt="Chair 1" className="w-32 h-32 object-cover rounded-full mx-auto mb-4" />
+            <img src="https://i.pravatar.cc/100" alt="Chair 1" className="w-32 h-32 object-cover rounded-full mx-auto mb-4" />
             <h3 className="font-bold">John Doe</h3>
             <p className="text-sm">2020-2021</p>
             <p className="text-sm">District 3810</p>
           </div>
           <div className="text-center">
-            <img src="/lovable-uploads/cc6b0efa-c8ab-45cc-b769-33c0b63b4c82.png" alt="Chair 2" className="w-32 h-32 object-cover rounded-full mx-auto mb-4" />
+            <img src="https://i.pravatar.cc/200" alt="Chair 2" className="w-32 h-32 object-cover rounded-full mx-auto mb-4" />
             <h3 className="font-bold">Jane Smith</h3>
             <p className="text-sm">2019-2020</p>
             <p className="text-sm">District 3800</p>
           </div>
           <div className="text-center">
-            <img src="/lovable-uploads/cc6b0efa-c8ab-45cc-b769-33c0b63b4c82.png" alt="Chair 3" className="w-32 h-32 object-cover rounded-full mx-auto mb-4" />
+            <img src="https://i.pravatar.cc/300" alt="Chair 3" className="w-32 h-32 object-cover rounded-full mx-auto mb-4" />
             <h3 className="font-bold">Robert Johnson</h3>
             <p className="text-sm">2018-2019</p>
             <p className="text-sm">District 3780</p>
           </div>
           <div className="text-center">
-            <img src="/lovable-uploads/cc6b0efa-c8ab-45cc-b769-33c0b63b4c82.png" alt="Chair 4" className="w-32 h-32 object-cover rounded-full mx-auto mb-4" />
+            <img src="https://i.pravatar.cc/400" alt="Chair 4" className="w-32 h-32 object-cover rounded-full mx-auto mb-4" />
             <h3 className="font-bold">Maria Garcia</h3>
             <p className="text-sm">2017-2018</p>
             <p className="text-sm">District 3820</p>
           </div>
           <div className="text-center">
-            <img src="/lovable-uploads/cc6b0efa-c8ab-45cc-b769-33c0b63b4c82.png" alt="Chair 5" className="w-32 h-32 object-cover rounded-full mx-auto mb-4" />
+            <img src="https://i.pravatar.cc/500" alt="Chair 5" className="w-32 h-32 object-cover rounded-full mx-auto mb-4" />
             <h3 className="font-bold">Michael Brown</h3>
             <p className="text-sm">2016-2017</p>
             <p className="text-sm">District 3830</p>
@@ -42,31 +42,31 @@ const MDIOChairsSection = () => {
           
           {/* Row 2 */}
           <div className="text-center">
-            <img src="/lovable-uploads/cc6b0efa-c8ab-45cc-b769-33c0b63b4c82.png" alt="Chair 6" className="w-32 h-32 object-cover rounded-full mx-auto mb-4" />
+            <img src="https://i.pravatar.cc/600" alt="Chair 6" className="w-32 h-32 object-cover rounded-full mx-auto mb-4" />
             <h3 className="font-bold">Sarah Wilson</h3>
             <p className="text-sm">2015-2016</p>
             <p className="text-sm">District 3850</p>
           </div>
           <div className="text-center">
-            <img src="/lovable-uploads/cc6b0efa-c8ab-45cc-b769-33c0b63b4c82.png" alt="Chair 7" className="w-32 h-32 object-cover rounded-full mx-auto mb-4" />
+            <img src="https://i.pravatar.cc/700" alt="Chair 7" className="w-32 h-32 object-cover rounded-full mx-auto mb-4" />
             <h3 className="font-bold">David Taylor</h3>
             <p className="text-sm">2014-2015</p>
             <p className="text-sm">District 3860</p>
           </div>
           <div className="text-center">
-            <img src="/lovable-uploads/cc6b0efa-c8ab-45cc-b769-33c0b63b4c82.png" alt="Chair 8" className="w-32 h-32 object-cover rounded-full mx-auto mb-4" />
+            <img src="https://i.pravatar.cc/800" alt="Chair 8" className="w-32 h-32 object-cover rounded-full mx-auto mb-4" />
             <h3 className="font-bold">Lisa Martinez</h3>
             <p className="text-sm">2013-2014</p>
             <p className="text-sm">District 3870</p>
           </div>
           <div className="text-center">
-            <img src="/lovable-uploads/cc6b0efa-c8ab-45cc-b769-33c0b63b4c82.png" alt="Chair 9" className="w-32 h-32 object-cover rounded-full mx-auto mb-4" />
+            <img src="https://i.pravatar.cc/900" alt="Chair 9" className="w-32 h-32 object-cover rounded-full mx-auto mb-4" />
             <h3 className="font-bold">James Anderson</h3>
             <p className="text-sm">2012-2013</p>
             <p className="text-sm">District 3790</p>
           </div>
           <div className="text-center">
-            <img src="/lovable-uploads/cc6b0efa-c8ab-45cc-b769-33c0b63b4c82.png" alt="Chair 10" className="w-32 h-32 object-cover rounded-full mx-auto mb-4" />
+            <img src="https://i.pravatar.cc/1000" alt="Chair 10" className="w-32 h-32 object-cover rounded-full mx-auto mb-4" />
             <h3 className="font-bold">Emily White</h3>
             <p className="text-sm">2011-2012</p>
             <p className="text-sm">District 3770</p>
@@ -74,31 +74,31 @@ const MDIOChairsSection = () => {
           
           {/* Row 3 */}
           <div className="text-center">
-            <img src="/lovable-uploads/cc6b0efa-c8ab-45cc-b769-33c0b63b4c82.png" alt="Chair 11" className="w-32 h-32 object-cover rounded-full mx-auto mb-4" />
+            <img src="https://i.pravatar.cc/1100" alt="Chair 11" className="w-32 h-32 object-cover rounded-full mx-auto mb-4" />
             <h3 className="font-bold">Thomas Clark</h3>
             <p className="text-sm">2010-2011</p>
             <p className="text-sm">District 3800</p>
           </div>
           <div className="text-center">
-            <img src="/lovable-uploads/cc6b0efa-c8ab-45cc-b769-33c0b63b4c82.png" alt="Chair 12" className="w-32 h-32 object-cover rounded-full mx-auto mb-4" />
+            <img src="https://i.pravatar.cc/1200" alt="Chair 12" className="w-32 h-32 object-cover rounded-full mx-auto mb-4" />
             <h3 className="font-bold">Sophia Lee</h3>
             <p className="text-sm">2009-2010</p>
             <p className="text-sm">District 3810</p>
           </div>
           <div className="text-center">
-            <img src="/lovable-uploads/cc6b0efa-c8ab-45cc-b769-33c0b63b4c82.png" alt="Chair 13" className="w-32 h-32 object-cover rounded-full mx-auto mb-4" />
+            <img src="https://i.pravatar.cc/1300" alt="Chair 13" className="w-32 h-32 object-cover rounded-full mx-auto mb-4" />
             <h3 className="font-bold">William Turner</h3>
             <p className="text-sm">2008-2009</p>
             <p className="text-sm">District 3820</p>
           </div>
           <div className="text-center">
-            <img src="/lovable-uploads/cc6b0efa-c8ab-45cc-b769-33c0b63b4c82.png" alt="Chair 14" className="w-32 h-32 object-cover rounded-full mx-auto mb-4" />
+            <img src="https://i.pravatar.cc/1400" alt="Chair 14" className="w-32 h-32 object-cover rounded-full mx-auto mb-4" />
             <h3 className="font-bold">Olivia Martin</h3>
             <p className="text-sm">2007-2008</p>
             <p className="text-sm">District 3830</p>
           </div>
           <div className="text-center">
-            <img src="/lovable-uploads/cc6b0efa-c8ab-45cc-b769-33c0b63b4c82.png" alt="Chair 15" className="w-32 h-32 object-cover rounded-full mx-auto mb-4" />
+            <img src="https://i.pravatar.cc/1500" alt="Chair 15" className="w-32 h-32 object-cover rounded-full mx-auto mb-4" />
             <h3 className="font-bold">Daniel Hall</h3>
             <p className="text-sm">2006-2007</p>
             <p className="text-sm">District 3850</p>
