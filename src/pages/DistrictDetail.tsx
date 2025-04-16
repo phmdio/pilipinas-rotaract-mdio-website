@@ -54,21 +54,33 @@ const DistrictDetail = () => {
           </div>
         </section>
         
-        {/* District Description */}
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="bg-[#D41A69] text-white p-8 rounded-md">
-            <h2 className="text-2xl font-bold mb-4">{districtDetail.title}</h2>
-            <p className="mb-6">{districtDetail.description}</p>
+        {/* District Description - Updated to match new design */}
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <h2 className="text-[#D41A69] text-3xl font-bold mb-6">{districtDetail.title}</h2>
+          
+          <div className="border-t border-gray-300 my-6"></div>
+          
+          <div className="space-y-6">
+            <p className="text-gray-800 leading-relaxed">{districtDetail.description}</p>
             
-            <h3 className="text-xl font-bold mb-3">Our district composition includes the following:</h3>
-            <ul className="list-disc pl-6 mb-6 space-y-1">
-              {districtDetail.composition.map((item: string, index: number) => (
-                <li key={index}>{item}</li>
-              ))}
-            </ul>
+            {districtDetail.activities && (
+              <div>
+                <h3 className="text-gray-800 font-bold mb-2">Usual District Rotaract activities include the following:</h3>
+                <ul className="list-disc pl-8 space-y-1">
+                  {districtDetail.activities.map((activity: string, index: number) => (
+                    <li key={index} className="text-gray-800">{activity}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
             
-            <h3 className="text-xl font-bold mb-3">District {district.id} highlights:</h3>
-            <p className="mb-4">{districtDetail.highlights}</p>
+            {districtDetail.mission && (
+              <p className="text-gray-800 leading-relaxed">{districtDetail.mission}</p>
+            )}
+            
+            {districtDetail.vision && (
+              <p className="text-gray-800 leading-relaxed">{districtDetail.vision}</p>
+            )}
           </div>
         </section>
         

@@ -1,4 +1,3 @@
-
 // Sample data structure for district details
 // This would be populated with real data for each district
 
@@ -17,12 +16,24 @@ interface DistrictDetail {
   representatives: DistrictRepresentative[];
   headerImage?: string;
   mainClub?: string;
+  activities?: string[];
+  mission?: string;
+  vision?: string;
 }
 
 const districtDetails: Record<string, DistrictDetail> = {
   "3770": {
     title: "Rotaract Clubs in Eastern Northern Luzon which include the Philippine provinces of Apayao, Aurora, Batanes, Bulacan, Cagayan, Ifugao, Isabela, Kalinga, Nueva Ecija, Nueva Vizcaya, and Quirino",
-    description: "District 3770 has shown exemplary commitment to service and growth in the Rotaract community. The district has expanded its reach across the Eastern Northern Luzon, bringing together diverse groups of young leaders with a common interest in uplifting their communities and engaging in meaningful change.",
+    description: "District 3770 is the first Rotary International district in the Philippines in terms of numerical sequence. It may be small in numbers but through the years, it has been able to build a strong base of sturdy, passionate and competent Rotaract clubs that develop effective leaders and promote responsible citizenship.",
+    activities: [
+      "Club Officers Seminar and Training",
+      "Rotary Youth Conference",
+      "District Assembly and District Conference",
+      "World Rotaract Week",
+      "Sportsfest"
+    ],
+    mission: "District 3770 has been steadfast in pursuing vigorously the object and mission of Rotary in this side of the world. It is backed by Rotaractors who are committed to fellowship and service. Its strength is sustained by well-planned programs and activities advanced by every District Governor and District Rotaract Representative that adhere strictly to the tenets and prescriptions of Rotary International.",
+    vision: "Rotaractors of the district will never stop providing quality service projects to respective communities, making positive change in the nation and creating life changing experiences to young professionals. District 3770 is willing to take a stand for world peace and understanding. It will not stop making a difference to individuals - Filipinos and Rotaractors.",
     composition: [
       "12 Community-Based Clubs",
       "8 University-Based Clubs",
