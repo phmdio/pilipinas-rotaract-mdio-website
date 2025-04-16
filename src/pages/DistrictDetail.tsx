@@ -9,6 +9,13 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { districtData } from '@/data/districtData';
 import { getDistrictDetail } from '@/data/districtDetailData';
+import { 
+  Carousel, 
+  CarouselContent, 
+  CarouselItem, 
+  CarouselNext, 
+  CarouselPrevious 
+} from "@/components/ui/carousel";
 
 const DistrictDetail = () => {
   const { districtId } = useParams<{ districtId: string }>();
@@ -84,13 +91,30 @@ const DistrictDetail = () => {
           </div>
         </section>
         
-        {/* Explore District Gallery */}
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <h2 className="text-2xl font-bold text-[#D41A69] mb-6">Explore {district.id}</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {districtDetail.gallery.map((image: string, index: number) => (
-              <div key={index} className="aspect-video bg-cover bg-center rounded-md overflow-hidden" style={{ backgroundImage: `url(${image})` }}></div>
-            ))}
+        {/* Explore District Gallery - Updated to match new design */}
+        <section className="w-full bg-rotaract-blue py-12">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 className="text-2xl font-bold text-white mb-8">Explore {district.id}</h2>
+            
+            <Carousel className="w-full">
+              <CarouselContent>
+                {districtDetail.gallery.map((image: string, index: number) => (
+                  <CarouselItem key={index} className="md:basis-1/3 lg:basis-1/3">
+                    <div className="h-[200px] overflow-hidden rounded-md border-2 border-white">
+                      <img 
+                        src={image} 
+                        alt={`District ${district.id} gallery image ${index + 1}`} 
+                        className="w-full h-full object-cover" 
+                      />
+                    </div>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <div className="flex justify-end mt-4">
+                <CarouselPrevious className="relative static mr-2 bg-white" />
+                <CarouselNext className="relative static bg-white" />
+              </div>
+            </Carousel>
           </div>
         </section>
         
