@@ -67,7 +67,7 @@ const districtDetails: Record<string, DistrictDetail> = {
       { rotaryYear: "Rotary Year 2012-2013 | Term of Office", name: "Mannie Mambie", club: "Rotaract Club of San Jose Del Monte", year: "RY 2020-2021", dates: "July 1, 2012 - June 30, 2013" },
       { rotaryYear: "Rotary Year 2011-2012 | Term of Office", name: "Daniel Balubal", club: "Rotaract Club of Santiago", year: "RY 2021-2022", dates: "July 1, 2011 - June 30, 2012" }
     ],
-    headerImage: "/public/lovable-uploads/8dde7e86-fd9e-4713-9917-b37609e31f4b.png",
+    headerImage: "/assets/district/3770.jpeg",
     mainClub: "Biringan City"
   },
   "3780": {
@@ -93,7 +93,7 @@ const districtDetails: Record<string, DistrictDetail> = {
       { rotaryYear: "Rotary Year 2020-2021 | Term of Office", name: "David Santos", dates: "July 1, 2020 - June 30, 2021" },
       { rotaryYear: "Rotary Year 2019-2020 | Term of Office", name: "Michelle Tan", dates: "July 1, 2019 - June 30, 2020" }
     ],
-    headerImage: "/public/lovable-uploads/8dde7e86-fd9e-4713-9917-b37609e31f4b.png",
+    headerImage: "/assets/district/3780.jpeg",  
     mainClub: "Makati Central"
   }
 };
@@ -121,7 +121,7 @@ const districtDetails: Record<string, DistrictDetail> = {
         { rotaryYear: "Rotary Year 2022-2023 | Term of Office", name: "District Representative", club: "Rotaract Club of Example", year: "RY 2022-2023", dates: "July 1, 2022 - June 30, 2023" },
         { rotaryYear: "Rotary Year 2021-2022 | Term of Office", name: "District Representative", club: "Rotaract Club of Example", year: "RY 2021-2022", dates: "July 1, 2021 - June 30, 2022" }
       ],
-      headerImage: "/public/lovable-uploads/8dde7e86-fd9e-4713-9917-b37609e31f4b.png",
+      headerImage: `/assets/district/${id}.jpeg`,
       mainClub: "Local City"
     };
   }
@@ -135,7 +135,7 @@ export const getDistrictDetail = (districtId: string): DistrictDetail => {
     highlights: "Information not available",
     gallery: ["/assets/placeholder.svg"],
     representatives: [],
-    headerImage: "/public/lovable-uploads/8dde7e86-fd9e-4713-9917-b37609e31f4b.png",
+    headerImage: "/assets/district/3770.jpeg",
     mainClub: "Main Club"
   };
 };

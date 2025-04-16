@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import SectionHeading from './districts/SectionHeading';
 import DistrictGrid from './districts/DistrictGrid';
 import { districtData } from '../data/districtData';
+import { Link } from 'react-router-dom';
 
 const InfoCenter = () => {
   const { ref, inView } = useInView({
@@ -53,11 +54,13 @@ const InfoCenter = () => {
           />
           
           <div className="flex justify-start mt-10">
-            <Button 
-              className="bg-[#003366] hover:bg-[#002244] text-white rounded-full px-8 py-6 h-auto font-medium tracking-wider text-base uppercase"
-            >
+            <Link to="/information-center">
+              <Button 
+                className="bg-[#003366] hover:bg-[#002244] text-white rounded-full px-8 py-6 h-auto font-medium tracking-wider text-base uppercase"
+              >
               Learn More
-            </Button>
+              </Button>
+            </Link>
           </div>
         </div>
       </div>

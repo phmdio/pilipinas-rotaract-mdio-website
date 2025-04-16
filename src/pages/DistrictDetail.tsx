@@ -61,7 +61,7 @@ const DistrictDetail = () => {
         {/* Hero Image with Orange Overlay - Updated to match design */}
         <section className="relative h-[500px] bg-cover bg-center" style={{ backgroundImage: `url(${districtDetail.headerImage || "/public/lovable-uploads/8dde7e86-fd9e-4713-9917-b37609e31f4b.png"})` }}>
           <div className="absolute inset-0 bg-black/20"></div>
-          <div className="absolute left-0 bottom-0 w-[500px] max-w-[40%] bg-[#F6A81C] p-6 text-white">
+          <div className="absolute left-0 top-1/2 -translate-y-1/2 w-[500px] max-w-[40%] bg-[#F6A81C] p-6 text-white">
             <p className="text-xl font-medium mb-2">Rotaract Clubs of Rotary International District #</p>
             <h1 className="text-8xl font-bold mb-4">{district.id}</h1>
             <p className="text-lg">DRR {currentDRR || "John Doe"}, Rotaract Club of {districtDetail.mainClub || "Biringan City"}</p>
@@ -127,7 +127,7 @@ const DistrictDetail = () => {
         
         {/* District Representatives - Updated to match new design */}
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <h2 className="text-[#D41A69] text-xl font-bold mb-2">
+          <h2 className="text-[#D41A69] text-4xl font-bold mb-2">
             Below is the roster of District Rotaract Representatives of Rotary International District {district.id}:
           </h2>
           <Separator className="mb-6 border-gray-300" />
@@ -137,10 +137,10 @@ const DistrictDetail = () => {
               <TableBody>
                 {districtDetail.representatives.map((rep: any, index: number) => (
                   <TableRow key={index} className="border-0">
-                    <TableCell className="py-1 pl-0 text-sm w-6">{index + 1}.</TableCell>
-                    <TableCell className="py-1 font-medium text-sm">{rep.name}</TableCell>
-                    <TableCell className="py-1 text-sm">{rep.club || `Rotaract Club of ${rep.clubName || 'Majayjay'}`}</TableCell>
-                    <TableCell className="py-1 text-sm">{rep.year || rep.rotaryYear.replace('Rotary Year ', '').split(' | ')[0]}</TableCell>
+                    <TableCell className="py-1 pl-0 text-lg w-6">{index + 1}.</TableCell>
+                    <TableCell className="py-1 font-medium text-lg">{rep.name}</TableCell>
+                    <TableCell className="py-1 text-lg">{rep.club || `Rotaract Club of ${rep.clubName || 'Majayjay'}`}</TableCell>
+                    <TableCell className="py-1 text-lg">{rep.year || rep.rotaryYear.replace('Rotary Year ', '').split(' | ')[0]}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>
