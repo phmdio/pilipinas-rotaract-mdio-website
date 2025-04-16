@@ -1,4 +1,3 @@
-
 // Sample data structure for district details
 // This would be populated with real data for each district
 
@@ -6,6 +5,9 @@ interface DistrictRepresentative {
   rotaryYear: string;
   name: string;
   dates: string;
+  club?: string;
+  clubName?: string;
+  year?: string;
 }
 
 interface DistrictDetail {
@@ -51,13 +53,19 @@ const districtDetails: Record<string, DistrictDetail> = {
       "/public/lovable-uploads/4d99be47-042e-4607-a857-b9192a721d26.png",
     ],
     representatives: [
-      { rotaryYear: "Rotary Year 2023-2024 | Term of Office", name: "John Dela Cruz", dates: "July 1, 2023 - June 30, 2024" },
-      { rotaryYear: "Rotary Year 2022-2023 | Term of Office", name: "Maria Santos", dates: "July 1, 2022 - June 30, 2023" },
-      { rotaryYear: "Rotary Year 2021-2022 | Term of Office", name: "Peter Reyes", dates: "July 1, 2021 - June 30, 2022" },
-      { rotaryYear: "Rotary Year 2020-2021 | Term of Office", name: "Anna Garcia", dates: "July 1, 2020 - June 30, 2021" },
-      { rotaryYear: "Rotary Year 2019-2020 | Term of Office", name: "Mike Tan", dates: "July 1, 2019 - June 30, 2020" },
-      { rotaryYear: "Rotary Year 2018-2019 | Term of Office", name: "Sarah Lim", dates: "July 1, 2018 - June 30, 2019" },
-      { rotaryYear: "Rotary Year 2017-2018 | Term of Office", name: "James Co", dates: "July 1, 2017 - June 30, 2018" }
+      { rotaryYear: "Rotary Year 2023-2024 | Term of Office", name: "Betsy Roanne Carmel De Silva", club: "Rotaract Club of Santa Maria", year: "RY 2005-2010", dates: "July 1, 2023 - June 30, 2024" },
+      { rotaryYear: "Rotary Year 2022-2023 | Term of Office", name: "Rommel Brylle Atenza", club: "Rotaract Club of Malolos", year: "RY 2010-2011", dates: "July 1, 2022 - June 30, 2023" },
+      { rotaryYear: "Rotary Year 2021-2022 | Term of Office", name: "Cherrie Rose Gallardo", club: "Rotaract Club of Santa Maria", year: "RY 2011-2012", dates: "July 1, 2021 - June 30, 2022" },
+      { rotaryYear: "Rotary Year 2020-2021 | Term of Office", name: "Maria Katrina Martinez", club: "Rotaract Club of Santa Maria", year: "RY 2012-2013", dates: "July 1, 2020 - June 30, 2021" },
+      { rotaryYear: "Rotary Year 2019-2020 | Term of Office", name: "Vincent Paul Perez", club: "Rotaract Club of Santa Maria", year: "RY 2013-2014", dates: "July 1, 2019 - June 30, 2020" },
+      { rotaryYear: "Rotary Year 2018-2019 | Term of Office", name: "Ma. Lerrie Sy-Alvarado", club: "Rotaract Club of Malolos", year: "RY 2014-2015", dates: "July 1, 2018 - June 30, 2019" },
+      { rotaryYear: "Rotary Year 2017-2018 | Term of Office", name: "Reynier Adriano", club: "Rotaract Club of Malolos", year: "RY 2015-2016", dates: "July 1, 2017 - June 30, 2018" },
+      { rotaryYear: "Rotary Year 2016-2017 | Term of Office", name: "Romwel Joseph Zamora", club: "Rotaract Club of San Jose Del Monte", year: "RY 2016-2017", dates: "July 1, 2016 - June 30, 2017" },
+      { rotaryYear: "Rotary Year 2015-2016 | Term of Office", name: "Neriza Glorioso", club: "Rotaract Club of Santa Maria", year: "RY 2017-2018", dates: "July 1, 2015 - June 30, 2016" },
+      { rotaryYear: "Rotary Year 2014-2015 | Term of Office", name: "Manuel Joseph Franco", club: "Rotaract Club of Calumpit", year: "RY 2018-2019", dates: "July 1, 2014 - June 30, 2015" },
+      { rotaryYear: "Rotary Year 2013-2014 | Term of Office", name: "Jhun Eric Baria", club: "Rotaract Club of San Jose Del Monte", year: "RY 2019-2020", dates: "July 1, 2013 - June 30, 2014" },
+      { rotaryYear: "Rotary Year 2012-2013 | Term of Office", name: "Mannie Mambie", club: "Rotaract Club of San Jose Del Monte", year: "RY 2020-2021", dates: "July 1, 2012 - June 30, 2013" },
+      { rotaryYear: "Rotary Year 2011-2012 | Term of Office", name: "Daniel Balubal", club: "Rotaract Club of Santiago", year: "RY 2021-2022", dates: "July 1, 2011 - June 30, 2012" }
     ],
     headerImage: "/public/lovable-uploads/8dde7e86-fd9e-4713-9917-b37609e31f4b.png",
     mainClub: "Biringan City"
@@ -109,9 +117,9 @@ const districtDetails: Record<string, DistrictDetail> = {
         `/assets/district/${id}.jpeg`
       ],
       representatives: [
-        { rotaryYear: "Rotary Year 2023-2024 | Term of Office", name: "District Representative", dates: "July 1, 2023 - June 30, 2024" },
-        { rotaryYear: "Rotary Year 2022-2023 | Term of Office", name: "District Representative", dates: "July 1, 2022 - June 30, 2023" },
-        { rotaryYear: "Rotary Year 2021-2022 | Term of Office", name: "District Representative", dates: "July 1, 2021 - June 30, 2022" }
+        { rotaryYear: "Rotary Year 2023-2024 | Term of Office", name: "District Representative", club: "Rotaract Club of Example", year: "RY 2023-2024", dates: "July 1, 2023 - June 30, 2024" },
+        { rotaryYear: "Rotary Year 2022-2023 | Term of Office", name: "District Representative", club: "Rotaract Club of Example", year: "RY 2022-2023", dates: "July 1, 2022 - June 30, 2023" },
+        { rotaryYear: "Rotary Year 2021-2022 | Term of Office", name: "District Representative", club: "Rotaract Club of Example", year: "RY 2021-2022", dates: "July 1, 2021 - June 30, 2022" }
       ],
       headerImage: "/public/lovable-uploads/8dde7e86-fd9e-4713-9917-b37609e31f4b.png",
       mainClub: "Local City"

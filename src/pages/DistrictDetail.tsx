@@ -16,6 +16,13 @@ import {
   CarouselNext, 
   CarouselPrevious 
 } from "@/components/ui/carousel";
+import { Separator } from "@/components/ui/separator";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableRow,
+} from "@/components/ui/table";
 
 const DistrictDetail = () => {
   const { districtId } = useParams<{ districtId: string }>();
@@ -118,21 +125,40 @@ const DistrictDetail = () => {
           </div>
         </section>
         
-        {/* District Representatives */}
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 bg-[#16478E] text-white">
-          <h2 className="text-2xl font-bold mb-6">Below is the roster of District Rotaract Representative of Rotary International District {district.id}</h2>
-          <div className="space-y-2">
-            {districtDetail.representatives.map((rep: any, index: number) => (
-              <div key={index} className="flex items-center py-2 border-b border-white/20">
-                <div className="w-8/12 flex">
-                  <span className="text-white/70">{rep.rotaryYear}:</span>
-                  <span className="ml-2 font-medium">{rep.name}</span>
-                </div>
-                <div className="w-4/12 text-right text-white/70">
-                  {rep.dates}
-                </div>
-              </div>
-            ))}
+        {/* District Representatives - Updated to match new design */}
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <h2 className="text-[#D41A69] text-xl font-bold mb-2">
+            Below is the roster of District Rotaract Representatives of Rotary International District {district.id}:
+          </h2>
+          <Separator className="mb-6 border-gray-300" />
+          
+          <div className="space-y-0">
+            <Table>
+              <TableBody>
+                {districtDetail.representatives.map((rep: any, index: number) => (
+                  <TableRow key={index} className="border-0">
+                    <TableCell className="py-1 pl-0 text-sm w-6">{index + 1}.</TableCell>
+                    <TableCell className="py-1 font-medium text-sm">{rep.name}</TableCell>
+                    <TableCell className="py-1 text-sm">| {rep.club || `Rotaract Club of ${rep.clubName || 'Majayjay'}`}</TableCell>
+                    <TableCell className="py-1 text-sm">| {rep.year || rep.rotaryYear.replace('Rotary Year ', '').split(' | ')[0]}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </div>
+          
+          <div className="flex flex-col sm:flex-row gap-4 mt-8">
+            <Button 
+              className="bg-[#16478E] hover:bg-[#0E3068] text-white rounded-full px-8"
+              onClick={() => window.open(`https://www.facebook.com/district${district.id}rotaract`, '_blank')}
+            >
+              VISIT DISTRICT {district.id} FACEBOOK PAGE
+            </Button>
+            <Link to="/districts">
+              <Button className="bg-[#F6A81C] hover:bg-[#E59A0C] text-white rounded-full px-8">
+                VIEW ALL DISTRICTS
+              </Button>
+            </Link>
           </div>
         </section>
         
