@@ -4,7 +4,7 @@ import React from 'react';
 const MDIOChairsSection = () => {
   return (
     <section className="py-12 bg-rotaract-magenta text-white">
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
         <h2 className="text-3xl font-bold mb-8">MDIO Chairs Through the Years</h2>
         
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">

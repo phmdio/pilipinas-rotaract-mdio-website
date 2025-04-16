@@ -5,7 +5,7 @@ import { Separator } from '@/components/ui/separator';
 const SigningDRRsSection = () => {
   return (
     <section className="py-4 bg-white">
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
         {/* Updated Blue Box - Signing DRRs and DGs */}
         <div className="mt-10 mb-10 bg-rotaract-blue text-white p-8 rounded-sm">
           <h3 className="text-2xl font-bold mb-6">Signing DRRs and DGs to the formation of Pilipinas Rotaract MDIO</h3>
