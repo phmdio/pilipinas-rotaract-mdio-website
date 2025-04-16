@@ -1,4 +1,6 @@
+
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { Button } from '@/components/ui/button';
 import Header from '@/components/Header';
@@ -70,12 +72,14 @@ const InformationCenter = () => {
                       Hipster ipsum tattooed brunch I'm baby. Schlitz seitan listicle mixtape boys trust vice. Occupy tbh street brunch keffiyeh. Bicycle diy blog banjo fingerstache tote on locavore coffee pabst.
                     </p>
                     <div className="mt-auto flex justify-center">
-                      <Button 
-                        variant="outline" 
-                        className="text-white border-white hover:bg-white/20 w-full py-2 rounded-full bg-transparent text-center"
-                      >
-                        LEARN MORE
-                      </Button>
+                      <Link to={`/district/${district.id}`}>
+                        <Button 
+                          variant="outline" 
+                          className="text-white border-white hover:bg-white/20 w-full py-2 rounded-full bg-transparent text-center"
+                        >
+                          LEARN MORE
+                        </Button>
+                      </Link>
                     </div>
                   </div>
                 </div>
