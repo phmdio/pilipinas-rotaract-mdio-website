@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Button } from '@/components/ui/button';
@@ -42,33 +41,42 @@ const InformationCenter = () => {
         {/* Districts grid section */}
         <section className="py-10 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {districtData.map((district) => (
                 <div 
                   key={district.id}
-                  className="overflow-hidden rounded-lg shadow-md"
-                  onMouseEnter={() => setHoveredCard(district.id)}
-                  onMouseLeave={() => setHoveredCard(null)}
+                  className="overflow-hidden flex flex-col h-[500px]"
                 >
-                  <div className="relative h-56 bg-cover bg-center" style={{ backgroundImage: `url(${district.image})` }}>
-                    <div className="absolute top-0 left-0 bg-black/40 text-white p-2 rounded-br-lg">
-                      <span className="text-xs">Rotary District • District #{district.id}</span>
+                  <div 
+                    className="relative h-[350px] bg-cover bg-center" 
+                    style={{ backgroundImage: `url(${district.image})` }}
+                  >
+                    <div className="absolute inset-x-0 bottom-0 h-16 bg-black/50 flex items-center justify-between px-5">
+                      <div className="text-white">
+                        <p className="font-medium">Rotaract Clubs of Rotary</p>
+                        <p className="font-medium">International District #</p>
+                      </div>
+                      <div className="text-white text-5xl font-bold">
+                        {district.id}
+                      </div>
                     </div>
                   </div>
-                  <div style={{ backgroundColor: district.color }} className="p-6 text-white">
-                    <h3 className="text-3xl font-bold mb-2">{district.id}</h3>
-                    <p className="mb-4 opacity-90">
-                      {district.description}{district.id}
+                  <div className="w-full h-[1px] bg-white/30"></div>
+                  <div 
+                    style={{ backgroundColor: district.color }}
+                    className="p-6 text-white flex-grow flex flex-col"
+                  >
+                    <p className="mb-5">
+                      Hipster ipsum tattooed brunch I'm baby. Schlitz seitan listicle mixtape boys trust vice. Occupy tbh street brunch keffiyeh. Bicycle diy blog banjo fingerstache tote on locavore coffee pabst.
                     </p>
-                    <p className="mb-4 text-sm opacity-80">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.
-                    </p>
-                    <Button 
-                      variant="outline" 
-                      className={`text-white border-white hover:bg-white/20 transition-colors`}
-                    >
-                      LEARN MORE
-                    </Button>
+                    <div className="mt-auto flex justify-center">
+                      <Button 
+                        variant="outline" 
+                        className="text-white border-white hover:bg-white/20 w-full py-2 rounded-full bg-transparent text-center"
+                      >
+                        LEARN MORE
+                      </Button>
+                    </div>
                   </div>
                 </div>
               ))}
