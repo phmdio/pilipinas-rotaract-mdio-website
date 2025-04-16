@@ -4,6 +4,7 @@ import { Helmet } from 'react-helmet-async';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Separator } from '@/components/ui/separator';
+import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from '@/components/ui/table';
 
 const OurHistory = () => {
   return (
@@ -49,24 +50,72 @@ const OurHistory = () => {
 
               There were five districts that tried to submit the MDIO requirements on June 24, 2007 to Rotary International (RI) for inclusion and recognition. However, only three districts complied with all the requirements. It was on November 26, 2007 when RI responded that the General Secretary, on behalf of the RI Board, has approved the request from Districts 3780, 3810 and 3820 to form MDIO.
 
-              However, to keep within current RI naming guidelines, the approval is contingent upon MDIO’s acceptance of the revised name “Pilipinas Rotaract MDIO representing Districts 3780, 3810 and 3820” and providing guidelines and bylaws to RI which reflect the changed name. Past RI Committee Director Tom Panis and PDG Sonny Coloma (Zone Coordinator for Youth Resources Group of RI) were the two Filipino RI officers who eagerly helped follow-up the MDIO application status.
+              However, to keep within current RI naming guidelines, the approval is contingent upon MDIO's acceptance of the revised name "Pilipinas Rotaract MDIO representing Districts 3780, 3810 and 3820" and providing guidelines and bylaws to RI which reflect the changed name. Past RI Committee Director Tom Panis and PDG Sonny Coloma (Zone Coordinator for Youth Resources Group of RI) were the two Filipino RI officers who eagerly helped follow-up the MDIO application status.
 
-              On Rotary Year 2008-09, Districts 3790 and 3830 were able to complete the requirements and were included as members. Then, Districts 3800 and 3860 pursue their membership applications in Rotary Year 2009-10 and were immediately recognized by RI. Only in Rotary Year 2012-13 when the remaining three districts (Districts 3770, 3850 and 3870) were approved and recognized by RI to join the MDIO. Thus, the time to use the name “Pilipinas Rotaract MDIO”.
+              On Rotary Year 2008-09, Districts 3790 and 3830 were able to complete the requirements and were included as members. Then, Districts 3800 and 3860 pursue their membership applications in Rotary Year 2009-10 and were immediately recognized by RI. Only in Rotary Year 2012-13 when the remaining three districts (Districts 3770, 3850 and 3870) were approved and recognized by RI to join the MDIO. Thus, the time to use the name "Pilipinas Rotaract MDIO".
               </p>
             </div>
             
-            {/* Blue Box */}
-            <div className="mt-10 mb-10 bg-rotaract-blue text-white p-6 rounded-sm">
-              <h3 className="text-xl font-bold mb-4">Signing DRRs and DGs to the formation of Pilipinas Rotaract MDIO</h3>
-              <ol className="pl-6 space-y-2">
-                <li>Established the first coordinating body for Rotaract clubs in the Philippines</li>
-                <li>Organized annual national conferences and assemblies</li>
-                <li>Created platforms for inter-district collaboration and projects</li>
-                <li>Developed leadership training programs for Rotaractors</li>
-                <li>Facilitated communication between Rotaract districts</li>
-                <li>Promoted Rotaract's role within Rotary International</li>
-                <li>Provided support and resources to strengthen local clubs</li>
-              </ol>
+            {/* Updated Blue Box - Signing DRRs and DGs */}
+            <div className="mt-10 mb-10 bg-rotaract-blue text-white p-8 rounded-sm">
+              <h3 className="text-2xl font-bold mb-6">Signing DRRs and DGs to the formation of Pilipinas Rotaract MDIO</h3>
+              <Separator className="bg-white/30 mb-6" />
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="space-y-4">
+                  <div className="flex gap-3">
+                    <span className="text-white">1.</span> 
+                    <p><span className="font-semibold">3770</span> - PDRR Cherrie Rose Gallardo and PDG Corina Tengco Bautista (Signed 2011, RI Approved 2012)</p>
+                  </div>
+                  
+                  <div className="flex gap-3">
+                    <span className="text-white">2.</span>
+                    <p><span className="font-semibold">3780</span> - PDRR Devie Ontolan - Patricio and PDG Danilo Espinosa (Signed 2007, RI Approved 2008)</p>
+                  </div>
+                  
+                  <div className="flex gap-3">
+                    <span className="text-white">3.</span>
+                    <p><span className="font-semibold">3790</span> - PDRR Florante Espiritu and PDG Lorenzo Torres (Signed and RI Approved 2008)</p>
+                  </div>
+                  
+                  <div className="flex gap-3">
+                    <span className="text-white">4.</span>
+                    <p><span className="font-semibold">3800</span> - PDRR Analiza Taan and PDG Ferdinand Fuentes (Signed and RI Approved 2009)</p>
+                  </div>
+                  
+                  <div className="flex gap-3">
+                    <span className="text-white">5.</span>
+                    <p><span className="font-semibold">3810</span> - PDRR Rhosenie Villanueva and PDG Lynie Abarilla (Signed 2007, RI Approved 2008)</p>
+                  </div>
+                </div>
+                
+                <div className="space-y-4">
+                  <div className="flex gap-3">
+                    <span className="text-white">6.</span>
+                    <p><span className="font-semibold">3820</span> - PDRR Felimon Brazas Jr. and PDG Teotimo Reyes, Jr. (Signed 2007, RI Approved 2008)</p>
+                  </div>
+                  
+                  <div className="flex gap-3">
+                    <span className="text-white">7.</span>
+                    <p><span className="font-semibold">3830</span> - PDRR Joannie Sitoy and PDG Renato Magadia (Signed and RI Approved 2008)</p>
+                  </div>
+                  
+                  <div className="flex gap-3">
+                    <span className="text-white">8.</span>
+                    <p><span className="font-semibold">3850</span> - PDRR Joshua Amado Elroy and PDG Melvin De La Serna (Signed 2011, RI Approved 2012)</p>
+                  </div>
+                  
+                  <div className="flex gap-3">
+                    <span className="text-white">9.</span>
+                    <p><span className="font-semibold">3860</span> - PDRR Mark Ryan Arquiza and PDG Pablito Parilla (Signed and RI Approved 2009)</p>
+                  </div>
+                  
+                  <div className="flex gap-3">
+                    <span className="text-white">10.</span>
+                    <p><span className="font-semibold">3870</span> - PDRR Senlie Christine Bacsarpa and PDG Samuel Fontanilla (Signed and RI Approved 2012)</p>
+                  </div>
+                </div>
+              </div>
             </div>
             
             <div className="space-y-4 text-gray-700">
