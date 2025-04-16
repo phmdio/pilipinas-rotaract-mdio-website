@@ -14,8 +14,6 @@ const InformationCenter = () => {
   
   // Carousel images
   const carouselImages = [
-    "/lovable-uploads/dae72bd7-14e1-4c07-a7e2-d723814e812f.png",
-    "/public/lovable-uploads/06821cba-1146-4d2a-bc05-1f319455c273.png",
     "/assets/district/3810.jpeg",
   ];
   
@@ -54,22 +52,13 @@ const InformationCenter = () => {
                 style={{ backgroundImage: `url("${image}")` }}
               />
             ))}
-            
-            {/* Dark overlay */}
-            <div className="absolute inset-0 bg-black/40"></div>
-            
-            {/* Progress indicator */}
-            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 w-1/4 min-w-[200px]">
-              <Progress value={progressPercentage} className="h-1 bg-white/30" />
-              <div className="mt-2 text-white text-xs text-center">
-                {currentSlide + 1} of {carouselImages.length}
-              </div>
-            </div>
           </div>
           
           {/* Content overlaid on carousel */}
-          <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 text-white">
+          <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-8 text-white">
             <h1 className="text-4xl sm:text-5xl font-bold">Our Members District</h1>
+            {/* Dark overlay */}
+            <div className="absolute w-full inset-0 bg-black/40"></div>
           </div>
         </section>
         
