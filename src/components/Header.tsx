@@ -59,7 +59,7 @@ const Header = () => {
                   <ul className="w-[240px]">
                     <li>
                       <NavigationMenuLink asChild>
-                        <a href="/under-construction" className="block p-4 hover:bg-white/10 rounded-none">
+                        <a href="/our-history" className="block p-4 hover:bg-white/10 rounded-none">
                           Our History
                         </a>
                       </NavigationMenuLink>
