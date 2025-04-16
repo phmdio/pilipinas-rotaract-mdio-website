@@ -10,6 +10,7 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import LaunchingSoon from "./pages/LaunchingSoon";
 import UnderConstruction from "./pages/UnderConstruction";
+import InformationCenter from "./pages/InformationCenter";
 
 // Create a client
 const queryClient = new QueryClient();
@@ -30,6 +31,7 @@ const App = () => {
             <Routes>
               <Route path="/" element={<LaunchingSoon />} />
               <Route path="/under-construction" element={<UnderConstruction />} />
+              <Route path="/information-center" element={<InformationCenter />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>
@@ -50,6 +52,7 @@ const App = () => {
               <Route path="/" element={<Index />} />
               <Route path="/launching-soon" element={<LaunchingSoon />} />
               <Route path="/under-construction" element={<UnderConstruction />} />
+              <Route path="/information-center" element={<InformationCenter />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>
