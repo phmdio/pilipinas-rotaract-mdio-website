@@ -139,8 +139,8 @@ const DistrictDetail = () => {
                   <TableRow key={index} className="border-0">
                     <TableCell className="py-1 pl-0 text-sm w-6">{index + 1}.</TableCell>
                     <TableCell className="py-1 font-medium text-sm">{rep.name}</TableCell>
-                    <TableCell className="py-1 text-sm">| {rep.club || `Rotaract Club of ${rep.clubName || 'Majayjay'}`}</TableCell>
-                    <TableCell className="py-1 text-sm">| {rep.year || rep.rotaryYear.replace('Rotary Year ', '').split(' | ')[0]}</TableCell>
+                    <TableCell className="py-1 text-sm">{rep.club || `Rotaract Club of ${rep.clubName || 'Majayjay'}`}</TableCell>
+                    <TableCell className="py-1 text-sm">{rep.year || rep.rotaryYear.replace('Rotary Year ', '').split(' | ')[0]}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>
@@ -154,22 +154,12 @@ const DistrictDetail = () => {
             >
               VISIT DISTRICT {district.id} FACEBOOK PAGE
             </Button>
-            <Link to="/districts">
+            <Link to="/information-center">
               <Button className="bg-[#F6A81C] hover:bg-[#E59A0C] text-white rounded-full px-8">
                 VIEW ALL DISTRICTS
               </Button>
             </Link>
           </div>
-        </section>
-        
-        {/* Call to Action */}
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex justify-between items-center">
-          <Link to="mailto:district3770@rotaract.org.ph" className="text-[#16478E] underline">
-            district{district.id}@rotaract.org.ph
-          </Link>
-          <Button className="bg-[#F6A81C] hover:bg-[#E59A0C] text-white rounded-full px-8">
-            CONTACT US NOW
-          </Button>
         </section>
       </main>
       
