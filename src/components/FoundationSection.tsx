@@ -29,7 +29,16 @@ const FoundationSection = () => {
           images={carouselImages}
           interval={5000}
           fullHeight={true}
-          overlay={false} // Set overlay to false since Section has its own overlay
+          overlay={false} // Section already has overlay
+          renderItem={(image, index) => (
+            <div className="w-full h-full">
+              <img 
+                src={image} 
+                alt={`Foundation background ${index + 1}`} 
+                className="w-full h-full object-cover"
+              />
+            </div>
+          )}
         />
       </div>
       
