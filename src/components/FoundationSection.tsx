@@ -1,3 +1,4 @@
+
 import { FacebookIcon, InstagramIcon, YoutubeIcon, TwitterIcon } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import AutoScrollCarousel from '@/components/shared/AutoScrollCarousel';
@@ -28,15 +29,7 @@ const FoundationSection = () => {
           images={carouselImages}
           interval={5000}
           fullHeight={true}
-          renderItem={(image, index) => (
-            <div className="w-full h-full">
-              <img 
-                src={image} 
-                alt={`Foundation background ${index + 1}`} 
-                className="w-full h-full object-cover"
-              />
-            </div>
-          )}
+          overlay={false} // Set overlay to false since Section has its own overlay
         />
       </div>
       

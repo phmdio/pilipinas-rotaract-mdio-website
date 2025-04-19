@@ -69,10 +69,11 @@ const AutoScrollCarousel: React.FC<AutoScrollCarouselProps> = ({
       opts={{
         loop: true,
         skipSnaps: false,
+        align: "start"
       }}
       className={cn("w-full", fullHeight && "h-full", className)}
     >
-      <CarouselContent className={fullHeight ? "h-full" : ""}>
+      <CarouselContent className={cn(fullHeight ? "h-full" : "")}>
         {images.map((image, index) => (
           <CarouselItem key={index} className={cn(fullHeight && "h-full", itemClassName)}>
             {renderItem ? (
