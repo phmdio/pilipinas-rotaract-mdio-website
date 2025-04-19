@@ -28,7 +28,7 @@ const Section = ({
     >
       {backgroundImage && (
         <div 
-          className="absolute inset-0 bg-cover bg-center"
+          className="absolute inset-0 bg-cover bg-center z-0"
           style={{ backgroundImage: `url(${backgroundImage})` }}
         />
       )}
@@ -40,7 +40,9 @@ const Section = ({
           overlayOpacity === "dark" && "bg-black/70"
         )} />
       )}
-      {children}
+      <div className="relative z-10">
+        {children}
+      </div>
     </section>
   );
 };
