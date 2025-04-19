@@ -10,15 +10,15 @@ const FoundationSection = () => {
   const { ref, isVisible } = useAnimation();
   
   const carouselImages = [
-    "/assets/concert.png",
     "/assets/masquerade.png",
+    "/assets/concert.png",
     "/assets/our-history.png",
   ];
 
   return (
     <Section 
       id="foundation" 
-      className="min-h-screen relative"
+      className="relative min-h-screen flex items-center justify-center"
       hasOverlay={true}
       overlayOpacity="dark"
     >
@@ -42,29 +42,33 @@ const FoundationSection = () => {
       </div>
       
       <div 
-        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-16" 
+        className="container relative z-10 px-4 sm:px-6 lg:px-8 py-16 max-w-5xl mx-auto text-center" 
         ref={ref}
       >
         <div className={cn(
-          "max-w-3xl transition-all duration-500 opacity-0 translate-y-4",
+          "transition-all duration-500 opacity-0 translate-y-4",
           isVisible && "opacity-100 translate-y-0"
         )}>
           <SectionTitle 
             title="The Rotary Foundation Giving"
             subtitle="Hipster ipsum tattooed brunch I'm baby. Mumblecore pug man batch hella bitters batch offal pitchfork. Crucifix fanny dsa scenester mug skateboard brooklyn art."
             color="light"
+            className="text-center"
           />
 
-          <p className="text-gray-200 mb-8">
+          <p className="text-gray-200 mb-8 text-center">
             Hipster ipsum tattooed brunch I'm baby. Mumblecore pug man batch hella bitters batch offal pitchfork. Crucifix fanny dsa scenester mug skateboard brooklyn art. Williamsburg hoodie church-key letterpress tbh 3-moon whatever. Viral bun bruh bulb truffaut bun.
           </p>
-          <a href="/under-construction" className="inline-block bg-[#FF9500] text-white font-medium uppercase tracking-wider px-8 py-3 rounded-full hover:bg-opacity-90 transition-all">
-            Donate to the Rotary Foundation
-          </a>
+          
+          <div className="text-center mb-16">
+            <a href="/under-construction" className="inline-block bg-[#FF9500] text-white font-medium uppercase tracking-wider px-8 py-3 rounded-full hover:bg-opacity-90 transition-all">
+              Donate to the Rotary Foundation
+            </a>
+          </div>
           
           <div className="mt-16">
-            <h3 className="text-xl font-medium text-white mb-4">Follow us:</h3>
-            <div className="flex space-x-6">
+            <h3 className="text-xl font-medium text-white mb-4 text-center">Follow us:</h3>
+            <div className="flex justify-center space-x-6">
               <a href="https://www.facebook.com/PilipinasRotaractMDIO" target="_blank" className="text-white hover:opacity-90 transition-all">
                 <FacebookIcon size={24} />
               </a>

@@ -7,7 +7,7 @@ interface SectionProps {
   backgroundImage?: string;
   hasOverlay?: boolean;
   overlayOpacity?: "light" | "medium" | "dark";
-  id?: string; // Added id prop
+  id?: string;
 }
 
 const Section = ({ 
@@ -16,13 +16,13 @@ const Section = ({
   backgroundImage,
   hasOverlay = false,
   overlayOpacity = "medium",
-  id // Added id destructuring
+  id
 }: SectionProps) => {
   return (
     <section 
-      id={id} // Added id attribute
+      id={id}
       className={cn(
-        "relative py-16",
+        "relative py-16 w-full",
         className
       )}
     >
@@ -34,7 +34,7 @@ const Section = ({
       )}
       {hasOverlay && (
         <div className={cn(
-          "absolute inset-0",
+          "absolute inset-0 z-0",
           overlayOpacity === "light" && "bg-black/20",
           overlayOpacity === "medium" && "bg-black/50",
           overlayOpacity === "dark" && "bg-black/70"
