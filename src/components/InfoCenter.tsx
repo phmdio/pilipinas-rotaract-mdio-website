@@ -3,10 +3,11 @@ import { useState, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
-import SectionHeading from './districts/SectionHeading';
 import DistrictGrid from './districts/DistrictGrid';
 import { districtData } from '../data/districtData';
 import { Link } from 'react-router-dom';
+import Section from './shared/Section';
+import SectionTitle from './shared/SectionTitle';
 
 const InfoCenter = () => {
   const { ref, inView } = useInView({
@@ -40,9 +41,22 @@ const InfoCenter = () => {
   }, []);
 
   return (
-    <section id="info-center" className="relative py-0 overflow-hidden bg-cover" style={{ backgroundImage: 'url("/assets/magenta-wave-background.png")' }}>
+    <Section 
+      id="info-center" 
+      className="py-0"
+      backgroundImage="/assets/magenta-wave-background.png"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-32" ref={ref}>
-        <SectionHeading inView={inView} />
+        <div className={cn(
+          "text-white mb-12 transition-all duration-500 opacity-0 translate-y-4",
+          inView && "opacity-100 translate-y-0"
+        )}>
+          <SectionTitle
+            title="Our Information Center"
+            subtitle="Hipster ipsum tattooed brunch I'm baby. Mumblecore pug man batch hella bitters batch offal pitchfork. Crucifix fanny dsa scenester mug skateboard brooklyn art."
+            color="light"
+          />
+        </div>
         
         <div className={cn(
           "relative transition-all duration-500 delay-100 opacity-0 translate-y-4",
@@ -64,7 +78,7 @@ const InfoCenter = () => {
           </div>
         </div>
       </div>
-    </section>
+    </Section>
   );
 };
 
