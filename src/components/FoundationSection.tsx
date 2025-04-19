@@ -1,20 +1,11 @@
-import { useInView } from 'react-intersection-observer';
+
 import { FacebookIcon, InstagramIcon, YoutubeIcon, TwitterIcon } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { useState, useEffect, useCallback } from 'react';
-import { 
-  Carousel, 
-  CarouselContent, 
-  CarouselItem,
-} from '@/components/ui/carousel';
+import AutoScrollCarousel from '@/components/shared/AutoScrollCarousel';
+import { useAnimation } from '@/hooks/use-animation';
 
 const FoundationSection = () => {
-  const { ref, inView } = useInView({
-    threshold: 0.1,
-    triggerOnce: true,
-  });
-  
-  const [carouselApi, setCarouselApi] = useState<any>(null);
+  const { ref, isVisible } = useAnimation();
   
   // Background carousel images
   const carouselImages = [
@@ -23,48 +14,27 @@ const FoundationSection = () => {
     "/assets/masquerade.png",
     "/assets/our-history.png",
   ];
-  
-  // Auto-scroll functionality
-  useEffect(() => {
-    if (!carouselApi) return;
-
-    // Set up interval for auto-scrolling
-    const interval = setInterval(() => {
-      carouselApi.scrollNext();
-    }, 5000); // Auto scroll every 5 seconds
-
-    // Clean up interval on unmount
-    return () => clearInterval(interval);
-  }, [carouselApi]);
 
   return (
     <section id="foundation" className="relative">
       {/* Background Carousel */}
       <div className="absolute inset-0 w-full h-full overflow-hidden">
-        <Carousel
-          setApi={setCarouselApi}
-          opts={{
-            loop: true,
-            skipSnaps: false,
-          }}
-          className="w-full h-full"
-        >
-          <CarouselContent className="h-full">
-            {carouselImages.map((image, index) => (
-              <CarouselItem key={index} className="h-full">
-                <div className="w-full h-full">
-                  <img 
-                    src={image} 
-                    alt={`Foundation background ${index + 1}`} 
-                    className="w-full h-full object-cover"
-                  />
-                  {/* Dark overlay */}
-                  <div className="absolute inset-0 bg-black bg-opacity-70"></div>
-                </div>
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-        </Carousel>
+        <AutoScrollCarousel
+          images={carouselImages}
+          interval={5000}
+          fullHeight={true}
+          renderItem={(image, index) => (
+            <div className="w-full h-full">
+              <img 
+                src={image} 
+                alt={`Foundation background ${index + 1}`} 
+                className="w-full h-full object-cover"
+              />
+              {/* Dark overlay */}
+              <div className="absolute inset-0 bg-black bg-opacity-70"></div>
+            </div>
+          )}
+        />
       </div>
       
       <div 
@@ -78,7 +48,7 @@ const FoundationSection = () => {
         <div className="max-w-7xl mx-auto">
           <div className={cn(
             "max-w-3xl transition-all duration-500 opacity-0 translate-y-4",
-            inView && "opacity-100 translate-y-0"
+            isVisible && "opacity-100 translate-y-0"
           )}>
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-2">The Rotary Foundation Giving</h2>
             <div className="w-full max-w-xl h-0.5 bg-white mb-6"></div>

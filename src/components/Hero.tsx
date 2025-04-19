@@ -1,15 +1,10 @@
-import { useState, useEffect, useCallback } from 'react';
+
+import { useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
-import { 
-  Carousel, 
-  CarouselContent, 
-  CarouselItem,
-} from '@/components/ui/carousel';
+import AutoScrollCarousel from '@/components/shared/AutoScrollCarousel';
 
 const Hero = () => {
   const [isLoaded, setIsLoaded] = useState(false);
-  const [rightSideApi, setRightSideApi] = useState<any>(null);
-  const [rightSideCurrent, setRightSideCurrent] = useState(0);
 
   // Images for the right side carousel
   const rightSideImages = [
@@ -21,38 +16,6 @@ const Hero = () => {
   useEffect(() => {
     setIsLoaded(true);
   }, []);
-
-  // Auto-scroll functionality for right side carousel
-  useEffect(() => {
-    if (!rightSideApi) return;
-
-    // Set up interval for auto-scrolling
-    const interval = setInterval(() => {
-      rightSideApi.scrollNext();
-    }, 4000); // Auto scroll every 4 seconds
-
-    // Clean up interval on unmount
-    return () => clearInterval(interval);
-  }, [rightSideApi]);
-
-  // Update current slide index when right side carousel changes
-  const handleRightSideSelect = useCallback(() => {
-    if (!rightSideApi) return;
-    setRightSideCurrent(rightSideApi.selectedScrollSnap());
-  }, [rightSideApi]);
-
-  // Set up event listeners for the right side carousel
-  useEffect(() => {
-    if (!rightSideApi) return;
-    
-    rightSideApi.on("select", handleRightSideSelect);
-    rightSideApi.on("reInit", handleRightSideSelect);
-    
-    return () => {
-      rightSideApi.off("select", handleRightSideSelect);
-      rightSideApi.off("reInit", handleRightSideSelect);
-    };
-  }, [rightSideApi, handleRightSideSelect]);
 
   return (
     <section 
@@ -86,45 +49,20 @@ const Hero = () => {
             isLoaded && "opacity-100 translate-y-0"
           )}>
             <div className="relative mx-auto max-w-md">
-              <Carousel
-                setApi={setRightSideApi}
-                opts={{
-                  loop: true,
-                  skipSnaps: false,
-                }}
-                className="w-full"
-              >
-                <CarouselContent>
-                  {rightSideImages.map((image, index) => (
-                    <CarouselItem key={index}>
-                      <div className="aspect-square w-full relative">
-                        <img 
-                          src={image} 
-                          alt={`Rotaract members ${index + 1}`} 
-                          className="relative z-10 rounded-lg shadow-xl w-full h-full object-cover"
-                        />
-                      </div>
-                    </CarouselItem>
-                  ))}
-                </CarouselContent>
-                
-                {/* Right side carousel indicators */}
-                <div className="absolute -bottom-6 left-0 right-0 flex justify-center gap-2 z-10">
-                  {rightSideImages.map((_, index) => (
-                    <button
-                      key={index}
-                      onClick={() => rightSideApi?.scrollTo(index)}
-                      className={cn(
-                        "h-2 rounded-full transition-all duration-300",
-                        rightSideCurrent === index 
-                          ? "w-8 bg-white" 
-                          : "w-2 bg-white/50 hover:bg-white/70"
-                      )}
-                      aria-label={`Go to image ${index + 1}`}
+              <AutoScrollCarousel 
+                images={rightSideImages}
+                interval={4000}
+                indicators={true}
+                renderItem={(image, index) => (
+                  <div className="aspect-square w-full relative">
+                    <img 
+                      src={image} 
+                      alt={`Rotaract members ${index + 1}`} 
+                      className="relative z-10 rounded-lg shadow-xl w-full h-full object-cover"
                     />
-                  ))}
-                </div>
-              </Carousel>
+                  </div>
+                )}
+              />
             </div>
           </div>
         </div>
@@ -134,4 +72,3 @@ const Hero = () => {
 };
 
 export default Hero;
-

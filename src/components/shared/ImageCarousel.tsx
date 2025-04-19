@@ -1,7 +1,7 @@
 
-import { useState, useEffect, useCallback } from 'react';
 import { Progress } from '@/components/ui/progress';
 import { cn } from '@/lib/utils';
+import AutoScrollCarousel from './AutoScrollCarousel';
 
 interface ImageCarouselProps {
   images: string[];
@@ -18,43 +18,29 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({
   className,
   overlay = true
 }) => {
-  const [currentSlide, setCurrentSlide] = useState(0);
-  
-  // Auto-advance carousel
-  useEffect(() => {
-    if (images.length <= 1) return;
-    
-    const timer = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % images.length);
-    }, interval);
-    
-    return () => clearInterval(timer);
-  }, [images.length, interval]);
-  
-  // Calculate progress percentage
-  const progressPercentage = ((currentSlide + 1) / images.length) * 100;
+  if (images.length <= 0) {
+    return null;
+  }
   
   return (
     <div className={cn("relative w-full h-full", className)}>
-      {/* Image slides */}
-      {images.map((image, index) => (
-        <div 
-          key={index}
-          className={cn(
-            "absolute inset-0 w-full h-full transition-opacity duration-1000 bg-cover bg-center",
-            index === currentSlide ? 'opacity-100' : 'opacity-0'
-          )}
-          style={{ backgroundImage: `url("${image}")` }}
-        />
-      ))}
-      
-      {/* Optional overlay */}
-      {overlay && <div className="absolute inset-0 bg-black/20" />}
+      <AutoScrollCarousel
+        images={images}
+        interval={interval}
+        fullHeight={true}
+        overlay={overlay}
+        renderItem={(image, index) => (
+          <div 
+            className="absolute inset-0 w-full h-full bg-cover bg-center"
+            style={{ backgroundImage: `url("${image}")` }}
+          />
+        )}
+      />
       
       {/* Optional progress bar */}
       {hasProgress && images.length > 1 && (
         <Progress 
-          value={progressPercentage} 
+          value={((1 / images.length) * 100)} 
           className="absolute bottom-0 left-0 right-0"
         />
       )}
