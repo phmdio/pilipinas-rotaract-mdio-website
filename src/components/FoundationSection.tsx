@@ -19,7 +19,7 @@ const FoundationSection = () => {
   return (
     <Section 
       id="foundation" 
-      className="min-h-screen"
+      className="min-h-screen relative"
       hasOverlay={true}
       overlayOpacity="dark"
     >
@@ -43,7 +43,7 @@ const FoundationSection = () => {
       </div>
       
       <div 
-        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10" 
+        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-16" 
         ref={ref}
       >
         <div className={cn(
