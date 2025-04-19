@@ -10,7 +10,6 @@ const FoundationSection = () => {
   const { ref, isVisible } = useAnimation();
   
   const carouselImages = [
-    "/assets/carousel.png",
     "/assets/concert.png",
     "/assets/masquerade.png",
     "/assets/our-history.png",
