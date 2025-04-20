@@ -39,7 +39,7 @@ const RotaryFoundationGiving = () => {
             {/* Single Column with Landscape Cards */}
             <div className="space-y-8 mb-16">
               {/* First Card */}
-              <div className="flex flex-col md:flex-row gap-8 items-center bg-rotaract-magenta/10 rounded-lg shadow-sm p-6">
+              <div className="flex flex-col md:flex-row gap-8 items-center bg-rotaract-magenta/5 rounded-lg shadow-sm p-6">
                 <div className="w-full md:w-1/2">
                   <img 
                     src="/assets/trf.png"
@@ -56,7 +56,7 @@ const RotaryFoundationGiving = () => {
               </div>
 
               {/* Second Card */}
-              <div className="flex flex-col md:flex-row-reverse gap-8 items-center bg-rotaract-magenta/10 rounded-lg shadow-sm p-6">
+              <div className="flex flex-col md:flex-row-reverse gap-8 items-center bg-rotaract-magenta/5 rounded-lg shadow-sm p-6">
                 <div className="w-full md:w-1/2">
                   <img 
                     src="/assets/trf.png"
@@ -73,7 +73,7 @@ const RotaryFoundationGiving = () => {
               </div>
 
               {/* Third Card */}
-              <div className="flex flex-col md:flex-row gap-8 items-center bg-rotaract-magenta/10 rounded-lg shadow-sm p-6">
+              <div className="flex flex-col md:flex-row gap-8 items-center bg-rotaract-magenta/5 rounded-lg shadow-sm p-6">
                 <div className="w-full md:w-1/2">
                   <img 
                     src="/assets/trf.png"
@@ -90,7 +90,7 @@ const RotaryFoundationGiving = () => {
               </div>
 
               {/* Fourth Card */}
-              <div className="flex flex-col md:flex-row-reverse gap-8 items-center bg-rotaract-magenta/10 rounded-lg shadow-sm p-6">    
+              <div className="flex flex-col md:flex-row-reverse gap-8 items-center bg-rotaract-magenta/5 rounded-lg shadow-sm p-6">    
                 <div className="w-full md:w-1/2">
                   <img 
                     src="/assets/trf.png"
