@@ -1,7 +1,6 @@
 
 import React from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Separator } from '@/components/ui/separator';
 
 interface Director {
   name: string;
@@ -84,27 +83,20 @@ const BoardOfDirectorsSection = () => {
           Meet our dedicated Board of Directors who provide strategic guidance and leadership to strengthen Rotaract across the Philippines.
         </p>
         
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-8 divide-y divide-white/20">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-8">
           {directors.map((director, index) => (
-            <React.Fragment key={index}>
-              <div className="flex flex-col items-start text-left py-4">
-                <Avatar className="w-full h-auto aspect-square mb-4 rounded-none">
-                  <AvatarImage src={director.image || "/placeholder.svg"} alt={director.name} className="object-cover" />
-                  <AvatarFallback className="text-2xl">
-                    {director.name.split(' ').map(n => n[0]).join('')}
-                  </AvatarFallback>
-                </Avatar>
-                <h3 className="font-semibold text-white text-lg mb-1">{director.name}</h3>
-                <p className="text-sm text-white/90 mb-1">{director.title}</p>
-                <p className="text-sm text-white/90 mb-1">{director.district}</p>
-                <p className="text-sm text-white/80">{director.club}</p>
-              </div>
-              {(index + 1) % 5 === 0 && index !== directors.length - 1 && (
-                <div className="col-span-full py-4">
-                  <Separator className="bg-white/20" />
-                </div>
-              )}
-            </React.Fragment>
+            <div key={index} className="flex flex-col items-start text-left">
+              <Avatar className="w-full h-auto aspect-square mb-4 rounded-none">
+                <AvatarImage src={director.image || "/placeholder.svg"} alt={director.name} className="object-cover" />
+                <AvatarFallback className="text-2xl">
+                  {director.name.split(' ').map(n => n[0]).join('')}
+                </AvatarFallback>
+              </Avatar>
+              <h3 className="font-semibold text-white text-lg mb-1">{director.name}</h3>
+              <p className="text-sm text-white/90 mb-1">{director.title}</p>
+              <p className="text-sm text-white/90 mb-1">{director.district}</p>
+              <p className="text-sm text-white/80">{director.club}</p>
+            </div>
           ))}
         </div>
       </div>
@@ -113,4 +105,3 @@ const BoardOfDirectorsSection = () => {
 };
 
 export default BoardOfDirectorsSection;
-
