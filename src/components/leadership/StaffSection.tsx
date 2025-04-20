@@ -34,12 +34,35 @@ const staffMembers = [
     district: "Rotary International District 3770",
     club: "Past President, Rotaract Club of San Jose Del Monte"
   },
-  // ... remaining staff members with similar structure
+  {
+    name: "Jerilyn Schieffer",
+    role: "District Rotaract Representative",
+    district: "Rotary International District 3770",
+    club: "Past President, Rotaract Club of San Jose Del Monte"
+  },
+  {
+    name: "Omar Herneltz",
+    role: "District Rotaract Representative",
+    district: "Rotary International District 3770",
+    club: "Past President, Rotaract Club of San Jose Del Monte"
+  },
+  {
+    name: "James Vaccaro",
+    role: "District Rotaract Representative",
+    district: "Rotary International District 3770",
+    club: "Past President, Rotaract Club of San Jose Del Monte"
+  },
+  {
+    name: "Jaylen Baptiste",
+    role: "District Rotaract Representative",
+    district: "Rotary International District 3770",
+    club: "Past President, Rotaract Club of San Jose Del Monte"
+  },
 ];
 
 const StaffSection = () => {
   return (
-    <section className="py-16 bg-white">
+    <section className="py-16 bg-[#FFF6FA]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-12">
           <h2 className="text-4xl font-bold text-rotaract-magenta mb-2">Our Staff</h2>
