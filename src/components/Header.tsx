@@ -121,15 +121,23 @@ const Header = ({ isTransparent = false }) => {
                     <li>
                       <NavigationMenuLink asChild>
                         <Link to="/information-center" className="block p-4 hover:bg-white/10 rounded-none">
-                          Districts
+                          Member Philippine Districts
                         </Link>
                       </NavigationMenuLink>
                       <Separator className="bg-white/20" />
                     </li>
                     <li>
                       <NavigationMenuLink asChild>
-                        <Link to="/under-construction" className="block p-4 hover:bg-white/10 rounded-none">
-                          Resources
+                        <Link to="/rotaract-statistics" className="block p-4 hover:bg-white/10 rounded-none">
+                          Rotaract Statistics
+                        </Link>
+                      </NavigationMenuLink>
+                      <Separator className="bg-white/20" />
+                    </li>
+                    <li>
+                      <NavigationMenuLink asChild>
+                        <Link to="/the-rotary-foundation-giving" className="block p-4 hover:bg-white/10 rounded-none">
+                          The Rotary Foundation Giving
                         </Link>
                       </NavigationMenuLink>
                     </li>
@@ -247,9 +255,11 @@ const Header = ({ isTransparent = false }) => {
                 <ChevronDown size={16} />
               </button>
               <div id="mobile-info-submenu" className="hidden pl-4 mt-2 space-y-2 bg-[#1a237e] rounded text-white">
-                <Link to="/information-center" className="block py-3 px-4 hover:bg-white/10" onClick={() => setIsMenuOpen(false)}>Districts</Link>
+                <Link to="/information-center" className="block py-3 px-4 hover:bg-white/10" onClick={() => setIsMenuOpen(false)}>Member Philippine Districts</Link>
                 <Separator className="bg-white/20" />
-                <Link to="/under-construction" className="block py-3 px-4 hover:bg-white/10" onClick={() => setIsMenuOpen(false)}>Resources</Link>
+                <Link to="/rotaract-statistics" className="block py-3 px-4 hover:bg-white/10" onClick={() => setIsMenuOpen(false)}>Rotaract Statistics</Link>
+                <Separator className="bg-white/20" />
+                <Link to="/the-rotary-foundation-giving" className="block py-3 px-4 hover:bg-white/10" onClick={() => setIsMenuOpen(false)}>The Rotary Foundation Giving</Link>
               </div>
             </div>
             
