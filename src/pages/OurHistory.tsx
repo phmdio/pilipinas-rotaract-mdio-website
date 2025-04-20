@@ -1,9 +1,8 @@
-
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import HeroSection from '@/components/our-history/HeroSection';
+import PageHero from '@/components/PageHero';
 import ContentSection from '@/components/our-history/ContentSection';
 import SigningDRRsSection from '@/components/our-history/SigningDRRsSection';
 import MDIOChairsSection from '@/components/our-history/MDIOChairsSection';
@@ -20,7 +19,10 @@ const OurHistory = () => {
       <Header />
       
       <main>
-        <HeroSection />
+        <PageHero 
+          title="Our History" 
+          backgroundImage="/assets/our-history.png" 
+        />
         <ContentSection />
         <SigningDRRsSection />
         <VisionMissionSection />

@@ -1,33 +1,19 @@
-
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { Button } from '@/components/ui/button';
-import { Progress } from '@/components/ui/progress';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import PageHero from '@/components/PageHero';
 import { districtData } from '@/data/districtData';
 
 const InformationCenter = () => {
   const [hoveredCard, setHoveredCard] = useState<string | null>(null);
-  const [currentSlide, setCurrentSlide] = useState(0);
   
   // Carousel images
   const carouselImages = [
     "/assets/district/3810.jpeg",
   ];
-  
-  // Auto-advance carousel
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % carouselImages.length);
-    }, 5000); // Change slide every 5 seconds
-    
-    return () => clearInterval(interval);
-  }, [carouselImages.length]);
-  
-  // Calculate progress percentage
-  const progressPercentage = ((currentSlide + 1) / carouselImages.length) * 100;
   
   return (
     <>
@@ -39,28 +25,12 @@ const InformationCenter = () => {
       <Header />
       
       <main>
-        {/* Hero section with carousel */}
-        <section className="relative h-96 flex items-end">
-          {/* Carousel container */}
-          <div className="absolute inset-0 w-full h-full">
-            {carouselImages.map((image, index) => (
-              <div 
-                key={index}
-                className={`absolute inset-0 w-full h-full transition-opacity duration-1000 bg-cover bg-center ${
-                  index === currentSlide ? 'opacity-100' : 'opacity-0'
-                }`}
-                style={{ backgroundImage: `url("${image}")` }}
-              />
-            ))}
-          </div>
-          
-          {/* Content overlaid on carousel */}
-          <div className="relative w-full mx-auto px-auto sm:px-6 lg:px-8 py-8 text-white">
-            <h1 className="text-4xl sm:text-5xl font-bold text-start text-white">Our Members District</h1>
-            {/* Dark overlay */}
-            <div className="absolute w-full inset-0 bg-black/20"></div>
-          </div>
-        </section>
+        <PageHero 
+          title="Our Members District" 
+          backgroundImage={carouselImages[0]}
+          carousel={carouselImages.length > 1}
+          carouselImages={carouselImages}
+        />
         
         {/* Description section */}
         <section className="py-10 bg-white">
