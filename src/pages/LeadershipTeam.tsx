@@ -5,8 +5,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import PageHero from '@/components/PageHero';
 import CoreTeamSection from '@/components/leadership/CoreTeamSection';
-import TeamSectionGrid from '@/components/leadership/TeamSectionGrid';
-import BoardOfAdviserSection from '@/components/leadership/BoardOfAdviserSection';
+import BoardOfDirectorsSection from '@/components/leadership/BoardOfDirectorsSection';
 import StaffSection from '@/components/leadership/StaffSection';
 
 const LeadershipTeam = () => {
@@ -14,7 +13,10 @@ const LeadershipTeam = () => {
     <>
       <Helmet>
         <title>Our Leadership Team | Pilipinas Rotaract MDIO</title>
-        <meta name="description" content="Meet the leadership team of Pilipinas Rotaract Multi-District Information Organization" />
+        <meta 
+          name="description" 
+          content="Meet the dedicated leadership team of Pilipinas Rotaract Multi-District Information Organization" 
+        />
       </Helmet>
       
       <Header />
@@ -25,8 +27,7 @@ const LeadershipTeam = () => {
           backgroundImage="/assets/our-leadership.jpeg"
         />
         <CoreTeamSection />
-        <TeamSectionGrid />
-        <BoardOfAdviserSection />
+        <BoardOfDirectorsSection />
         <StaffSection />
       </main>
       

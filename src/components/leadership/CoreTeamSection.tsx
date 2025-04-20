@@ -1,33 +1,34 @@
 
 import React from 'react';
-import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { Card, CardContent } from '@/components/ui/card';
 
 const CoreTeamSection = () => {
   return (
     <section className="py-16 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-4xl font-bold text-rotaract-magenta mb-8">Our Core Team</h2>
+        <h2 className="text-4xl font-bold mb-6">Our Chair</h2>
+        <p className="text-gray-600 mb-8 max-w-3xl">
+          Our Chair leads with vision and dedication, guiding our organization towards its goals while fostering collaboration and innovation across all districts.
+        </p>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {/* Example card - repeat and modify for each team member */}
-          <Card className="bg-white shadow-lg">
-            <CardContent className="p-6">
-              <div className="flex flex-col items-center text-center">
-                <Avatar className="w-32 h-32 mb-4">
-                  <AvatarImage src="/placeholder.svg" alt="Team member" />
-                  <AvatarFallback>TM</AvatarFallback>
-                </Avatar>
-                <h3 className="text-xl font-bold mb-1">John Doe</h3>
-                <p className="text-gray-600 mb-4">Chief Executive Officer</p>
-                <p className="text-sm text-gray-500">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                  Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                </p>
+        <Card className="max-w-2xl">
+          <CardContent className="p-6">
+            <div className="flex gap-6">
+              <img 
+                src="/lovable-uploads/72ccb478-ebdb-4e4f-8672-3bbfba7917f4.png"
+                alt="Lerwin Bazar"
+                className="w-32 h-32 object-cover rounded-lg"
+              />
+              <div>
+                <h3 className="text-2xl font-bold mb-1">Lerwin Bazar</h3>
+                <p className="text-gray-600 mb-4">Multi-District Information Organization Chair</p>
+                <button className="bg-rotaract-magenta text-white px-4 py-2 rounded-md hover:bg-opacity-90 transition-colors">
+                  Contact our Chair
+                </button>
               </div>
-            </CardContent>
-          </Card>
-        </div>
+            </div>
+          </CardContent>
+        </Card>
       </div>
     </section>
   );
