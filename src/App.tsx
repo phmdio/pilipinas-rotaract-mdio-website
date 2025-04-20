@@ -12,6 +12,7 @@ import UnderConstruction from "./pages/UnderConstruction";
 import InformationCenter from "./pages/InformationCenter";
 import DistrictDetail from "./pages/DistrictDetail";
 import OurHistory from "./pages/OurHistory";
+import RotaractStatistics from "./pages/RotaractStatistics";
 
 // ScrollToTop component to reset scroll position on route changes
 const ScrollToTop = () => {
@@ -35,49 +36,51 @@ const App = () => {
   if (currentHostname === customDomain || currentHostname === customDomainWithoutWWW) {
     return (
       <QueryClientProvider client={queryClient}>
-      <HelmetProvider>
-        <TooltipProvider>
-          <Toaster />
-          <Sonner />
-          <BrowserRouter>
-            <ScrollToTop />
-            <Routes>
-              <Route path="/" element={<LaunchingSoon />} />
-              <Route path="/under-construction" element={<UnderConstruction />} />
-              <Route path="/information-center" element={<InformationCenter />} />
-              <Route path="/district/:districtId" element={<DistrictDetail />} />
-              <Route path="/our-history" element={<OurHistory />} />
-              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </BrowserRouter>
-        </TooltipProvider>
-      </HelmetProvider>
-    </QueryClientProvider>
+        <HelmetProvider>
+          <TooltipProvider>
+            <Toaster />
+            <Sonner />
+            <BrowserRouter>
+              <ScrollToTop />
+              <Routes>
+                <Route path="/" element={<LaunchingSoon />} />
+                <Route path="/under-construction" element={<UnderConstruction />} />
+                <Route path="/information-center" element={<InformationCenter />} />
+                <Route path="/district/:districtId" element={<DistrictDetail />} />
+                <Route path="/our-history" element={<OurHistory />} />
+                <Route path="/rotaract-statistics" element={<RotaractStatistics />} />
+                {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </BrowserRouter>
+          </TooltipProvider>
+        </HelmetProvider>
+      </QueryClientProvider>
     );
   } else {
     return (
       <QueryClientProvider client={queryClient}>
-      <HelmetProvider>
-        <TooltipProvider>
-          <Toaster />
-          <Sonner />
-          <BrowserRouter>
-            <ScrollToTop />
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/launching-soon" element={<LaunchingSoon />} />
-              <Route path="/under-construction" element={<UnderConstruction />} />
-              <Route path="/information-center" element={<InformationCenter />} />
-              <Route path="/district/:districtId" element={<DistrictDetail />} />
-              <Route path="/our-history" element={<OurHistory />} />
-              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </BrowserRouter>
-        </TooltipProvider>
-      </HelmetProvider>
-    </QueryClientProvider>
+        <HelmetProvider>
+          <TooltipProvider>
+            <Toaster />
+            <Sonner />
+            <BrowserRouter>
+              <ScrollToTop />
+              <Routes>
+                <Route path="/" element={<Index />} />
+                <Route path="/launching-soon" element={<LaunchingSoon />} />
+                <Route path="/under-construction" element={<UnderConstruction />} />
+                <Route path="/information-center" element={<InformationCenter />} />
+                <Route path="/district/:districtId" element={<DistrictDetail />} />
+                <Route path="/our-history" element={<OurHistory />} />
+                <Route path="/rotaract-statistics" element={<RotaractStatistics />} />
+                {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </BrowserRouter>
+          </TooltipProvider>
+        </HelmetProvider>
+      </QueryClientProvider>
     );
   }
 };
