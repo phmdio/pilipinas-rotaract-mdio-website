@@ -19,9 +19,6 @@ const FoundationSection = () => {
   // Background carousel images
   const carouselImages = [
     "/assets/carousel.png",
-    "/assets/concert.png",
-    "/assets/masquerade.png",
-    "/assets/our-history.png",
   ];
   
   // Auto-scroll functionality
