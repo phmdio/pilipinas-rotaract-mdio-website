@@ -1,4 +1,5 @@
 import { FacebookIcon, InstagramIcon, YoutubeIcon, TwitterIcon } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
   return (
@@ -21,11 +22,11 @@ const Footer = () => {
           
           {/* Middle Column: Navigation Links */}
           <div className="space-y-1">
-            <a href="#" className="block py-2 border-b border-white/10 hover:text-white/80 transition-colors">Home</a>
-            <a href="#" className="block py-2 border-b border-white/10 hover:text-white/80 transition-colors">Our Leadership Team</a>
-            <a href="#" className="block py-2 border-b border-white/10 hover:text-white/80 transition-colors">Our Members District</a>
-            <a href="#" className="block py-2 border-b border-white/10 hover:text-white/80 transition-colors">Our Program and Activities</a>
-            <a href="#" className="block py-2 border-b border-white/10 hover:text-white/80 transition-colors">Rotaract Statistics</a>
+            <Link to="/" className="block py-2 border-b border-white/10 hover:text-white/80 transition-colors">Home</Link>
+            <Link to="/under-construction" className="block py-2 border-b border-white/10 hover:text-white/80 transition-colors">Our Leadership Team</Link>
+            <Link to="/information-center" className="block py-2 border-b border-white/10 hover:text-white/80 transition-colors">Our Members District</Link>
+            <Link to="/under-construction" className="block py-2 border-b border-white/10 hover:text-white/80 transition-colors">Our Program and Activities</Link>
+            <Link to="/#statistics" className="block py-2 border-b border-white/10 hover:text-white/80 transition-colors">Rotaract Statistics</Link>
           </div>
           
           {/* Right Column: Our Stories and Social Media */}
@@ -33,8 +34,8 @@ const Footer = () => {
             <div className="mb-6">
               <h3 className="text-base font-bold mb-4">Our Stories</h3>
               <ul className="space-y-2 text-sm">
-                <li><a href="#" className="hover:text-white/80 transition-colors">Philippine Rotaract Magazine</a></li>
-                <li><a href="#" className="hover:text-white/80 transition-colors">Ang Balangay</a></li>
+                <li><Link to="/under-construction" className="hover:text-white/80 transition-colors">Philippine Rotaract Magazine</Link></li>
+                <li><Link to="/under-construction" className="hover:text-white/80 transition-colors">Ang Balangay</Link></li>
               </ul>
             </div>
             

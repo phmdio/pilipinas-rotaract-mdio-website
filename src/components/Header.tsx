@@ -1,6 +1,6 @@
-
 import { useState, useEffect } from 'react';
 import { Menu, X, ChevronDown } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import {
   NavigationMenu,
@@ -40,13 +40,13 @@ const Header = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 md:h-20">
           <div className="flex items-center">
-            <a href="/" className="flex items-center">
+            <Link to="/" className="flex items-center">
               <img 
                 src="/assets/logo.png" 
                 alt="Rotaract MDIO Logo" 
                 className="h-10 w-auto"
               />
-            </a>
+            </Link>
           </div>
           
           <NavigationMenu className="hidden md:flex">
@@ -59,33 +59,33 @@ const Header = () => {
                   <ul className="w-[240px]">
                     <li>
                       <NavigationMenuLink asChild>
-                        <a href="/our-history" className="block p-4 hover:bg-white/10 rounded-none">
+                        <Link to="/our-history" className="block p-4 hover:bg-white/10 rounded-none">
                           Our History
-                        </a>
+                        </Link>
                       </NavigationMenuLink>
                       <Separator className="bg-white/20" />
                     </li>
                     <li>
                       <NavigationMenuLink asChild>
-                        <a href="/under-construction" className="block p-4 hover:bg-white/10 rounded-none">
+                        <Link to="/under-construction" className="block p-4 hover:bg-white/10 rounded-none">
                           Our Leadership Team
-                        </a>
+                        </Link>
                       </NavigationMenuLink>
                       <Separator className="bg-white/20" />
                     </li>
                     <li>
                       <NavigationMenuLink asChild>
-                        <a href="/under-construction" className="block p-4 hover:bg-white/10 rounded-none">
+                        <Link to="/under-construction" className="block p-4 hover:bg-white/10 rounded-none">
                           Philippine Rotaract Magazine
-                        </a>
+                        </Link>
                       </NavigationMenuLink>
                       <Separator className="bg-white/20" />
                     </li>
                     <li>
                       <NavigationMenuLink asChild>
-                        <a href="/under-construction" className="block p-4 hover:bg-white/10 rounded-none">
+                        <Link to="/under-construction" className="block p-4 hover:bg-white/10 rounded-none">
                           Ang Balangay
-                        </a>
+                        </Link>
                       </NavigationMenuLink>
                     </li>
                   </ul>
@@ -100,17 +100,17 @@ const Header = () => {
                   <ul className="w-[240px]">
                     <li>
                       <NavigationMenuLink asChild>
-                        <a href="/information-center" className="block p-4 hover:bg-white/10 rounded-none">
+                        <Link to="/information-center" className="block p-4 hover:bg-white/10 rounded-none">
                           Districts
-                        </a>
+                        </Link>
                       </NavigationMenuLink>
                       <Separator className="bg-white/20" />
                     </li>
                     <li>
                       <NavigationMenuLink asChild>
-                        <a href="/under-construction" className="block p-4 hover:bg-white/10 rounded-none">
+                        <Link to="/under-construction" className="block p-4 hover:bg-white/10 rounded-none">
                           Resources
-                        </a>
+                        </Link>
                       </NavigationMenuLink>
                     </li>
                   </ul>
@@ -125,17 +125,17 @@ const Header = () => {
                   <ul className="w-[250px]">
                     <li>
                       <NavigationMenuLink asChild>
-                        <a href="/under-construction" className="block p-4 hover:bg-white/10 rounded-none">
+                        <Link to="/under-construction" className="block p-4 hover:bg-white/10 rounded-none">
                           Key Projects
-                        </a>
+                        </Link>
                       </NavigationMenuLink>
                       <Separator className="bg-white/20" />
                     </li>
                     <li>
                       <NavigationMenuLink asChild>
-                        <a href="/under-construction" className="block p-4 hover:bg-white/10 rounded-none">
+                        <Link to="/under-construction" className="block p-4 hover:bg-white/10 rounded-none">
                           Upcoming Events
-                        </a>
+                        </Link>
                       </NavigationMenuLink>
                     </li>
                   </ul>
@@ -144,7 +144,7 @@ const Header = () => {
 
               <NavigationMenuItem>
                 <Button asChild variant="ghost" className="text-white hover:bg-white/10 focus:bg-white/10">
-                  <a href="/under-construction">Donate</a>
+                  <Link to="/under-construction">Donate</Link>
                 </Button>
               </NavigationMenuItem>
             </NavigationMenuList>
@@ -179,13 +179,13 @@ const Header = () => {
                 <ChevronDown size={16} />
               </button>
               <div id="mobile-about-submenu" className="hidden pl-4 mt-2 space-y-2 bg-[#1a237e] rounded">
-                <a href="/under-construction" className="block py-3 px-4 text-white hover:bg-white/10" onClick={() => setIsMenuOpen(false)}>Our History</a>
+                <Link to="/our-history" className="block py-3 px-4 text-white hover:bg-white/10" onClick={() => setIsMenuOpen(false)}>Our History</Link>
                 <Separator className="bg-white/20" />
-                <a href="/under-construction" className="block py-3 px-4 text-white hover:bg-white/10" onClick={() => setIsMenuOpen(false)}>Our Leadership Team</a>
+                <Link to="/under-construction" className="block py-3 px-4 text-white hover:bg-white/10" onClick={() => setIsMenuOpen(false)}>Our Leadership Team</Link>
                 <Separator className="bg-white/20" />
-                <a href="/under-construction" className="block py-3 px-4 text-white hover:bg-white/10" onClick={() => setIsMenuOpen(false)}>Philippine Rotaract Magazine</a>
+                <Link to="/under-construction" className="block py-3 px-4 text-white hover:bg-white/10" onClick={() => setIsMenuOpen(false)}>Philippine Rotaract Magazine</Link>
                 <Separator className="bg-white/20" />
-                <a href="/under-construction" className="block py-3 px-4 text-white hover:bg-white/10" onClick={() => setIsMenuOpen(false)}>Ang Balangay</a>
+                <Link to="/under-construction" className="block py-3 px-4 text-white hover:bg-white/10" onClick={() => setIsMenuOpen(false)}>Ang Balangay</Link>
               </div>
             </div>
             
@@ -204,9 +204,9 @@ const Header = () => {
                 <ChevronDown size={16} />
               </button>
               <div id="mobile-info-submenu" className="hidden pl-4 mt-2 space-y-2 bg-[#1a237e] rounded">
-                <a href="/under-construction" className="block py-3 px-4 text-white hover:bg-white/10" onClick={() => setIsMenuOpen(false)}>Districts</a>
+                <Link to="/information-center" className="block py-3 px-4 text-white hover:bg-white/10" onClick={() => setIsMenuOpen(false)}>Districts</Link>
                 <Separator className="bg-white/20" />
-                <a href="/under-construction" className="block py-3 px-4 text-white hover:bg-white/10" onClick={() => setIsMenuOpen(false)}>Resources</a>
+                <Link to="/under-construction" className="block py-3 px-4 text-white hover:bg-white/10" onClick={() => setIsMenuOpen(false)}>Resources</Link>
               </div>
             </div>
             
@@ -225,13 +225,13 @@ const Header = () => {
                 <ChevronDown size={16} />
               </button>
               <div id="mobile-programs-submenu" className="hidden pl-4 mt-2 space-y-2 bg-[#1a237e] rounded">
-                <a href="/under-construction" className="block py-3 px-4 text-white hover:bg-white/10" onClick={() => setIsMenuOpen(false)}>Key Projects</a>
+                <Link to="/under-construction" className="block py-3 px-4 text-white hover:bg-white/10" onClick={() => setIsMenuOpen(false)}>Key Projects</Link>
                 <Separator className="bg-white/20" />
-                <a href="/under-construction" className="block py-3 px-4 text-white hover:bg-white/10" onClick={() => setIsMenuOpen(false)}>Upcoming Events</a>
+                <Link to="/under-construction" className="block py-3 px-4 text-white hover:bg-white/10" onClick={() => setIsMenuOpen(false)}>Upcoming Events</Link>
               </div>
             </div>
             
-            <a href="/under-construction" className="block py-2 text-white hover:text-gray-200" onClick={() => setIsMenuOpen(false)}>Donate</a>
+            <Link to="/under-construction" className="block py-2 text-white hover:text-gray-200" onClick={() => setIsMenuOpen(false)}>Donate</Link>
           </div>
         </div>
       )}
