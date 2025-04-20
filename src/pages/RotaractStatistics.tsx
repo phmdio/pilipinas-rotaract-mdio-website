@@ -17,12 +17,12 @@ const StatCard = ({
   reverse?: boolean;
 }) => {
   return (
-    <div className={`md:flex items-center ${reverse ? 'md:flex-row-reverse' : ''} bg-white/5 rounded-lg overflow-hidden`}>
-      <div className="flex-1 p-4 md:p-8 bg-[#0F3B7F] text-white">
+    <div className={`md:flex items-stretch ${reverse ? 'md:flex-row-reverse' : ''} bg-white/5 rounded-lg overflow-hidden`}>
+      <div className="w-full md:w-1/2 p-4 md:p-8 bg-[#0F3B7F] text-white min-h-[250px] md:min-h-[300px] flex flex-col justify-center">
         <h3 className="text-xl md:text-2xl font-bold mb-4">{title}</h3>
         <p className="text-white/80 text-sm md:text-base">{description}</p>
       </div>
-      <div className={`w-full md:w-[400px] py-8 md:h-[300px] flex flex-col items-center justify-center bg-rotaract-magenta text-white`}>
+      <div className={`w-full md:w-1/2 py-8 md:py-8 min-h-[250px] md:min-h-[300px] flex flex-col items-center justify-center bg-rotaract-magenta text-white`}>
         <div className="mb-4">
           {icon}
         </div>
