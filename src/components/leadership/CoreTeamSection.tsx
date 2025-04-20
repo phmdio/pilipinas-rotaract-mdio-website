@@ -12,7 +12,7 @@ const CoreTeamSection = () => {
           <h2 className="text-rotaract-magenta text-3xl font-bold mb-2">Our Chair</h2>
           <p className="text-sm text-black mb-4">Rotary Year 2023-2024</p>
           <Separator className="my-4 bg-black" />
-          <p className="text-gray-600 mb-12">
+          <p className="text-black mb-12">
             The MDIO Chair leads with vision and dedication, working closely with District Rotaract Representatives to strengthen Rotaract across the Philippines while fostering collaboration and innovation across all districts.
           </p>
         </div>
@@ -32,9 +32,9 @@ const CoreTeamSection = () => {
               {/* Content Section */}
               <div className="w-full md:w-3/4 p-8 bg-white">
                 <h3 className="text-2xl font-bold mb-1">Lerwin Bazar</h3>
-                <p className="text-gray-600 mb-6">Pilipinas Multi-District Information Organization, Chair</p>
+                <p className="text-black mb-6">Pilipinas Multi-District Information Organization, Chair</p>
                 <Separator className="my-4 bg-black w-full" />
-                <p className="text-gray-600 mb-8">
+                <p className="text-black mb-8">
                   Leading with dedication and innovation, our Chair works tirelessly to strengthen Rotaract's presence and impact across the Philippines, fostering collaboration between districts and empowering the next generation of leaders.
                 </p>
                 <Button 
