@@ -13,8 +13,8 @@ import InformationCenter from "./pages/InformationCenter";
 import DistrictDetail from "./pages/DistrictDetail";
 import OurHistory from "./pages/OurHistory";
 import RotaractStatistics from "./pages/RotaractStatistics";
+import LeadershipTeam from "./pages/LeadershipTeam";
 
-// ScrollToTop component to reset scroll position on route changes
 const ScrollToTop = () => {
   const { pathname } = useLocation();
   
@@ -25,7 +25,6 @@ const ScrollToTop = () => {
   return null;
 };
 
-// Create a client
 const queryClient = new QueryClient();
 
 const App = () => {
@@ -48,8 +47,8 @@ const App = () => {
                 <Route path="/information-center" element={<InformationCenter />} />
                 <Route path="/district/:districtId" element={<DistrictDetail />} />
                 <Route path="/our-history" element={<OurHistory />} />
+                <Route path="/our-leadership-team" element={<LeadershipTeam />} />
                 <Route path="/rotaract-statistics" element={<RotaractStatistics />} />
-                {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </BrowserRouter>
@@ -73,8 +72,8 @@ const App = () => {
                 <Route path="/information-center" element={<InformationCenter />} />
                 <Route path="/district/:districtId" element={<DistrictDetail />} />
                 <Route path="/our-history" element={<OurHistory />} />
+                <Route path="/our-leadership-team" element={<LeadershipTeam />} />
                 <Route path="/rotaract-statistics" element={<RotaractStatistics />} />
-                {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </BrowserRouter>
