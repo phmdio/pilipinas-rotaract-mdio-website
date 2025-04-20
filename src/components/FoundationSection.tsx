@@ -59,7 +59,7 @@ const FoundationSection = () => {
                     className="w-full h-full object-cover"
                   />
                   {/* Dark overlay */}
-                  <div className="absolute inset-0 bg-black bg-opacity-70"></div>
+                  <div className="absolute inset-0 bg-black/20"></div>
                 </div>
               </CarouselItem>
             ))}
