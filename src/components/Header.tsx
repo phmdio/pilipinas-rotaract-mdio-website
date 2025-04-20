@@ -35,7 +35,9 @@ const Header = () => {
   return (
     <header className={cn(
       "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-      isScrolled ? "bg-rotaract-magenta shadow-md" : "bg-transparent"
+      isScrolled 
+        ? "bg-rotaract-magenta text-white shadow-md" 
+        : "bg-white text-black shadow-sm"
     )}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 md:h-20">
@@ -52,10 +54,18 @@ const Header = () => {
           <NavigationMenu className="hidden md:flex">
             <NavigationMenuList className="space-x-1">
               <NavigationMenuItem>
-                <NavigationMenuTrigger className="bg-transparent text-white hover:bg-white/10 focus:bg-white/10">
+                <NavigationMenuTrigger className={cn(
+                  "bg-transparent",
+                  isScrolled 
+                    ? "text-white hover:bg-white/10 focus:bg-white/10" 
+                    : "text-black hover:bg-black/10 focus:bg-black/10"
+                )}>
                   About Us
                 </NavigationMenuTrigger>
-                <NavigationMenuContent className="bg-[#1a237e] text-white">
+                <NavigationMenuContent className={cn(
+                  "bg-[#1a237e] text-white",
+                  isScrolled ? "" : "shadow-lg"
+                )}>
                   <ul className="w-[240px]">
                     <li>
                       <NavigationMenuLink asChild>
@@ -93,10 +103,18 @@ const Header = () => {
               </NavigationMenuItem>
 
               <NavigationMenuItem>
-                <NavigationMenuTrigger className="bg-transparent text-white hover:bg-white/10 focus:bg-white/10">
+                <NavigationMenuTrigger className={cn(
+                  "bg-transparent",
+                  isScrolled 
+                    ? "text-white hover:bg-white/10 focus:bg-white/10" 
+                    : "text-black hover:bg-black/10 focus:bg-black/10"
+                )}>
                   Information Center
                 </NavigationMenuTrigger>
-                <NavigationMenuContent className="bg-[#1a237e] text-white">
+                <NavigationMenuContent className={cn(
+                  "bg-[#1a237e] text-white",
+                  isScrolled ? "" : "shadow-lg"
+                )}>
                   <ul className="w-[240px]">
                     <li>
                       <NavigationMenuLink asChild>
@@ -118,10 +136,18 @@ const Header = () => {
               </NavigationMenuItem>
 
               <NavigationMenuItem>
-                <NavigationMenuTrigger className="bg-transparent text-white hover:bg-white/10 focus:bg-white/10">
+                <NavigationMenuTrigger className={cn(
+                  "bg-transparent",
+                  isScrolled 
+                    ? "text-white hover:bg-white/10 focus:bg-white/10" 
+                    : "text-black hover:bg-black/10 focus:bg-black/10"
+                )}>
                   Our Programs and Activities
                 </NavigationMenuTrigger>
-                <NavigationMenuContent className="bg-[#1a237e] text-white">
+                <NavigationMenuContent className={cn(
+                  "bg-[#1a237e] text-white",
+                  isScrolled ? "" : "shadow-lg"
+                )}>
                   <ul className="w-[250px]">
                     <li>
                       <NavigationMenuLink asChild>
@@ -153,7 +179,12 @@ const Header = () => {
           <div className="md:hidden">
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="inline-flex items-center justify-center p-2 rounded-md text-white hover:text-gray-200 focus:outline-none"
+              className={cn(
+                "inline-flex items-center justify-center p-2 rounded-md",
+                isScrolled 
+                  ? "text-white hover:text-gray-200" 
+                  : "text-black hover:text-gray-700"
+              )}
             >
               {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -162,7 +193,12 @@ const Header = () => {
       </div>
       
       {isMenuOpen && (
-        <div className="md:hidden bg-rotaract-magenta shadow-lg absolute w-full">
+        <div className={cn(
+          "md:hidden absolute w-full",
+          isScrolled 
+            ? "bg-rotaract-magenta shadow-lg" 
+            : "bg-white shadow-md"
+        )}>
           <div className="px-4 pt-2 pb-4 space-y-1 sm:px-3">
             <div className="py-2">
               <button
