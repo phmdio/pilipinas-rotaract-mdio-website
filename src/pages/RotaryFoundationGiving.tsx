@@ -21,7 +21,7 @@ const RotaryFoundationGiving = () => {
       <main>
         <PageHero 
           title="The Rotary Foundation Giving" 
-          backgroundImage="/lovable-uploads/14a90517-39de-4beb-9ce2-687dec8f136a.png"
+          backgroundImage="/assets/trf.png"
         />
         
         <section className="py-16">
@@ -39,10 +39,10 @@ const RotaryFoundationGiving = () => {
             {/* Single Column with Landscape Cards */}
             <div className="space-y-8 mb-16">
               {/* First Card */}
-              <div className="flex flex-col md:flex-row gap-8 items-center bg-white rounded-lg shadow-sm p-6">
+              <div className="flex flex-col md:flex-row gap-8 items-center bg-rotaract-magenta/10 rounded-lg shadow-sm p-6">
                 <div className="w-full md:w-1/2">
                   <img 
-                    src="/lovable-uploads/14a90517-39de-4beb-9ce2-687dec8f136a.png"
+                    src="/assets/trf.png"
                     alt="People celebrating"
                     className="rounded-lg w-full h-64 object-cover"
                   />
@@ -56,10 +56,10 @@ const RotaryFoundationGiving = () => {
               </div>
 
               {/* Second Card */}
-              <div className="flex flex-col md:flex-row gap-8 items-center bg-white rounded-lg shadow-sm p-6">
+              <div className="flex flex-col md:flex-row-reverse gap-8 items-center bg-rotaract-magenta/10 rounded-lg shadow-sm p-6">
                 <div className="w-full md:w-1/2">
                   <img 
-                    src="/lovable-uploads/14a90517-39de-4beb-9ce2-687dec8f136a.png"
+                    src="/assets/trf.png"
                     alt="Construction site volunteer"
                     className="rounded-lg w-full h-64 object-cover"
                   />
@@ -73,10 +73,10 @@ const RotaryFoundationGiving = () => {
               </div>
 
               {/* Third Card */}
-              <div className="flex flex-col md:flex-row gap-8 items-center bg-white rounded-lg shadow-sm p-6">
+              <div className="flex flex-col md:flex-row gap-8 items-center bg-rotaract-magenta/10 rounded-lg shadow-sm p-6">
                 <div className="w-full md:w-1/2">
                   <img 
-                    src="/lovable-uploads/14a90517-39de-4beb-9ce2-687dec8f136a.png"
+                    src="/assets/trf.png"
                     alt="Community service"
                     className="rounded-lg w-full h-64 object-cover"
                   />
@@ -90,10 +90,10 @@ const RotaryFoundationGiving = () => {
               </div>
 
               {/* Fourth Card */}
-              <div className="flex flex-col md:flex-row gap-8 items-center bg-white rounded-lg shadow-sm p-6">
+              <div className="flex flex-col md:flex-row-reverse gap-8 items-center bg-rotaract-magenta/10 rounded-lg shadow-sm p-6">    
                 <div className="w-full md:w-1/2">
                   <img 
-                    src="/lovable-uploads/14a90517-39de-4beb-9ce2-687dec8f136a.png"
+                    src="/assets/trf.png"
                     alt="Foundation work"
                     className="rounded-lg w-full h-64 object-cover"
                   />
@@ -110,8 +110,9 @@ const RotaryFoundationGiving = () => {
             {/* Donation Button */}
             <div className="text-center">
               <a 
-                href="/under-construction"
+                href="https://my.rotary.org/en/donate"
                 className="btn-rotaract inline-block uppercase font-bold"
+                target="_blank"
               >
                 Donate to the Rotary Foundation
               </a>
