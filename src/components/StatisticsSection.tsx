@@ -79,9 +79,9 @@ const StatisticsSection = () => {
         )}>
           <Link to="/rotaract-statistics">
             <Button
-              className="bg-[#16478E] hover:bg-[#0e3266] text-white px-8 py-6  rounded-full text-lg font-medium"
+              className="bg-[#003366] hover:bg-[#002244] text-white rounded-full px-8 py-6 h-auto font-medium tracking-wider text-base uppercase"
             >
-              LEARN MORE
+              Learn More
             </Button>
           </Link>
         </div>
