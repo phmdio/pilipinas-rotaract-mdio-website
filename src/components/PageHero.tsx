@@ -53,7 +53,7 @@ const PageHero: React.FC<PageHeroProps> = ({
         </div>
         
         {/* Content overlaid on background */}
-        <div className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 text-white z-10">
+        <div className="relative w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 text-white z-10">
           <h1 className="text-5xl sm:text-6xl font-bold text-start text-white">{title}</h1>
           {/* Dark overlay */}
           <div className="absolute inset-0 bg-black/20"></div>
