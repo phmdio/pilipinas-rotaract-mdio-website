@@ -36,58 +36,74 @@ const RotaryFoundationGiving = () => {
               </p>
             </div>
 
-            {/* Image Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-16">
-              {/* Left Column */}
-              <div>
-                <img 
-                  src="/lovable-uploads/14a90517-39de-4beb-9ce2-687dec8f136a.png"
-                  alt="People celebrating"
-                  className="rounded-lg w-full h-64 object-cover mb-6"
-                />
-                <h3 className="text-xl font-bold text-rotaract-magenta mb-3">Lorem Ipsum</h3>
-                <p className="text-gray-700">
-                  Hipster ipsum pinterest tattooed I'm baby. Single pabst kinfolk mixtape kickstarter hashtagccino vegan waistcoat cold-press. Affogato art party edison blue four loko high life locavore beard cliche selvage authentic pour-over keytar cardigan. Actually locavore next level.
-                </p>
+            {/* Single Column with Landscape Cards */}
+            <div className="space-y-8 mb-16">
+              {/* First Card */}
+              <div className="flex flex-col md:flex-row gap-8 items-center bg-white rounded-lg shadow-sm p-6">
+                <div className="w-full md:w-1/2">
+                  <img 
+                    src="/lovable-uploads/14a90517-39de-4beb-9ce2-687dec8f136a.png"
+                    alt="People celebrating"
+                    className="rounded-lg w-full h-64 object-cover"
+                  />
+                </div>
+                <div className="w-full md:w-1/2">
+                  <h3 className="text-xl font-bold text-rotaract-magenta mb-3">Lorem Ipsum</h3>
+                  <p className="text-gray-700">
+                    Hipster ipsum pinterest tattooed I'm baby. Single pabst kinfolk mixtape kickstarter hashtagccino vegan waistcoat cold-press. Affogato art party edison blue four loko high life locavore beard cliche selvage authentic pour-over keytar cardigan. Actually locavore next level.
+                  </p>
+                </div>
               </div>
 
-              {/* Right Column */}
-              <div>
-                <img 
-                  src="/lovable-uploads/14a90517-39de-4beb-9ce2-687dec8f136a.png"
-                  alt="Construction site volunteer"
-                  className="rounded-lg w-full h-64 object-cover mb-6"
-                />
-                <h3 className="text-xl font-bold text-rotaract-magenta mb-3">Lorem Ipsum</h3>
-                <p className="text-gray-700">
-                  Hipster ipsum pinterest tattooed I'm baby. Single pabst kinfolk mixtape kickstarter hashtagccino vegan waistcoat cold-press. Affogato art party edison blue four loko high life locavore beard cliche selvage authentic pour-over keytar cardigan.
-                </p>
+              {/* Second Card */}
+              <div className="flex flex-col md:flex-row gap-8 items-center bg-white rounded-lg shadow-sm p-6">
+                <div className="w-full md:w-1/2">
+                  <img 
+                    src="/lovable-uploads/14a90517-39de-4beb-9ce2-687dec8f136a.png"
+                    alt="Construction site volunteer"
+                    className="rounded-lg w-full h-64 object-cover"
+                  />
+                </div>
+                <div className="w-full md:w-1/2">
+                  <h3 className="text-xl font-bold text-rotaract-magenta mb-3">Lorem Ipsum</h3>
+                  <p className="text-gray-700">
+                    Hipster ipsum pinterest tattooed I'm baby. Single pabst kinfolk mixtape kickstarter hashtagccino vegan waistcoat cold-press. Affogato art party edison blue four loko high life locavore beard cliche selvage authentic pour-over keytar cardigan.
+                  </p>
+                </div>
               </div>
 
-              {/* Additional Content */}
-              <div>
-                <img 
-                  src="/lovable-uploads/14a90517-39de-4beb-9ce2-687dec8f136a.png"
-                  alt="Community service"
-                  className="rounded-lg w-full h-64 object-cover mb-6"
-                />
-                <h3 className="text-xl font-bold text-rotaract-magenta mb-3">Lorem Ipsum</h3>
-                <p className="text-gray-700">
-                  Hipster ipsum pinterest tattooed I'm baby. Single pabst kinfolk mixtape kickstarter hashtagccino vegan waistcoat cold-press. Affogato art party edison blue four loko high life locavore beard cliche selvage authentic pour-over keytar cardigan.
-                </p>
+              {/* Third Card */}
+              <div className="flex flex-col md:flex-row gap-8 items-center bg-white rounded-lg shadow-sm p-6">
+                <div className="w-full md:w-1/2">
+                  <img 
+                    src="/lovable-uploads/14a90517-39de-4beb-9ce2-687dec8f136a.png"
+                    alt="Community service"
+                    className="rounded-lg w-full h-64 object-cover"
+                  />
+                </div>
+                <div className="w-full md:w-1/2">
+                  <h3 className="text-xl font-bold text-rotaract-magenta mb-3">Lorem Ipsum</h3>
+                  <p className="text-gray-700">
+                    Hipster ipsum pinterest tattooed I'm baby. Single pabst kinfolk mixtape kickstarter hashtagccino vegan waistcoat cold-press. Affogato art party edison blue four loko high life locavore beard cliche selvage authentic pour-over keytar cardigan.
+                  </p>
+                </div>
               </div>
 
-              {/* Last Content Block */}
-              <div>
-                <img 
-                  src="/lovable-uploads/14a90517-39de-4beb-9ce2-687dec8f136a.png"
-                  alt="Foundation work"
-                  className="rounded-lg w-full h-64 object-cover mb-6"
-                />
-                <h3 className="text-xl font-bold text-rotaract-magenta mb-3">Lorem Ipsum</h3>
-                <p className="text-gray-700">
-                  Hipster ipsum pinterest tattooed I'm baby. Single pabst kinfolk mixtape kickstarter hashtagccino vegan waistcoat cold-press. Affogato art party edison blue four loko high life locavore beard cliche selvage authentic pour-over keytar cardigan.
-                </p>
+              {/* Fourth Card */}
+              <div className="flex flex-col md:flex-row gap-8 items-center bg-white rounded-lg shadow-sm p-6">
+                <div className="w-full md:w-1/2">
+                  <img 
+                    src="/lovable-uploads/14a90517-39de-4beb-9ce2-687dec8f136a.png"
+                    alt="Foundation work"
+                    className="rounded-lg w-full h-64 object-cover"
+                  />
+                </div>
+                <div className="w-full md:w-1/2">
+                  <h3 className="text-xl font-bold text-rotaract-magenta mb-3">Lorem Ipsum</h3>
+                  <p className="text-gray-700">
+                    Hipster ipsum pinterest tattooed I'm baby. Single pabst kinfolk mixtape kickstarter hashtagccino vegan waistcoat cold-press. Affogato art party edison blue four loko high life locavore beard cliche selvage authentic pour-over keytar cardigan.
+                  </p>
+                </div>
               </div>
             </div>
 
