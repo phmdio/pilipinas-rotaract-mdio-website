@@ -87,7 +87,7 @@ const Header = ({ isTransparent = false }) => {
                     </li>
                     <li>
                       <NavigationMenuLink asChild>
-                        <Link to="/under-construction" className="block p-4 hover:bg-white/10 rounded-none">
+                        <Link to="/philippine-rotaract-magazine" className="block p-4 hover:bg-white/10 rounded-none">
                           Philippine Rotaract Magazine
                         </Link>
                       </NavigationMenuLink>
@@ -95,7 +95,7 @@ const Header = ({ isTransparent = false }) => {
                     </li>
                     <li>
                       <NavigationMenuLink asChild>
-                        <Link to="/under-construction" className="block p-4 hover:bg-white/10 rounded-none">
+                        <Link to="/ang-balangay" className="block p-4 hover:bg-white/10 rounded-none">
                           Ang Balangay
                         </Link>
                       </NavigationMenuLink>
@@ -226,9 +226,9 @@ const Header = ({ isTransparent = false }) => {
                 <Separator className="bg-white/20" />
                 <Link to="/our-leadership-team" className="block py-3 px-4 hover:bg-white/10" onClick={() => setIsMenuOpen(false)}>Our Leadership Team</Link>
                 <Separator className="bg-white/20" />
-                <Link to="/under-construction" className="block py-3 px-4 hover:bg-white/10" onClick={() => setIsMenuOpen(false)}>Philippine Rotaract Magazine</Link>
+                <Link to="/philippine-rotaract-magazine" className="block py-3 px-4 hover:bg-white/10" onClick={() => setIsMenuOpen(false)}>Philippine Rotaract Magazine</Link>
                 <Separator className="bg-white/20" />
-                <Link to="/under-construction" className="block py-3 px-4 hover:bg-white/10" onClick={() => setIsMenuOpen(false)}>Ang Balangay</Link>
+                <Link to="/ang-balangay" className="block py-3 px-4 hover:bg-white/10" onClick={() => setIsMenuOpen(false)}>Ang Balangay</Link>
               </div>
             </div>
             
