@@ -21,7 +21,7 @@ const PhilippineRotaractMagazine = () => {
       <main>
         <PageHero 
           title="Philippine Rotaract Magazine" 
-          backgroundImage="/lovable-uploads/24f9a60c-1293-4f4b-9bea-10f4fd3a347d.png"
+          backgroundImage="/assets/concert.png"
         />
         
         <section className="py-16">
@@ -30,7 +30,7 @@ const PhilippineRotaractMagazine = () => {
               {/* Castle Image */}
               <div className="rounded-lg overflow-hidden">
                 <img 
-                  src="/assets/our-history.png"
+                  src="/assets/castle.png"
                   alt="Historical castle"
                   className="w-full h-auto object-cover"
                 />
