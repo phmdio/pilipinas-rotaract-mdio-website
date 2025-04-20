@@ -79,7 +79,7 @@ const Header = ({ isTransparent = false }) => {
                     </li>
                     <li>
                       <NavigationMenuLink asChild>
-                        <Link to="/under-construction" className="block p-4 hover:bg-white/10 rounded-none">
+                        <Link to="/our-leadership-team" className="block p-4 hover:bg-white/10 rounded-none">
                           Our Leadership Team
                         </Link>
                       </NavigationMenuLink>
@@ -224,7 +224,7 @@ const Header = ({ isTransparent = false }) => {
               <div id="mobile-about-submenu" className="hidden pl-4 mt-2 space-y-2 bg-[#1a237e] rounded text-white">
                 <Link to="/our-history" className="block py-3 px-4 hover:bg-white/10" onClick={() => setIsMenuOpen(false)}>Our History</Link>
                 <Separator className="bg-white/20" />
-                <Link to="/under-construction" className="block py-3 px-4 hover:bg-white/10" onClick={() => setIsMenuOpen(false)}>Our Leadership Team</Link>
+                <Link to="/our-leadership-team" className="block py-3 px-4 hover:bg-white/10" onClick={() => setIsMenuOpen(false)}>Our Leadership Team</Link>
                 <Separator className="bg-white/20" />
                 <Link to="/under-construction" className="block py-3 px-4 hover:bg-white/10" onClick={() => setIsMenuOpen(false)}>Philippine Rotaract Magazine</Link>
                 <Separator className="bg-white/20" />
