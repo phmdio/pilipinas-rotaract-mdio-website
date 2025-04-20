@@ -2,6 +2,8 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Users, Globe, Book } from 'lucide-react';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
 
 const StatCard = ({ 
   number, 
@@ -40,6 +42,8 @@ const RotaractStatistics = () => {
         <title>Rotaract Statistics | Pilipinas Rotaract MDIO</title>
       </Helmet>
 
+      <Header />
+      
       <div className="pt-20 pb-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h1 className="text-4xl md:text-5xl font-bold mb-6">Rotaract Statistics</h1>
@@ -72,6 +76,8 @@ const RotaractStatistics = () => {
           </div>
         </div>
       </div>
+      
+      <Footer />
     </>
   );
 };
