@@ -5,16 +5,16 @@ import { Users, Globe, Book } from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
-const StatCard = ({ 
-  number, 
-  title, 
-  description, 
+const StatCard = ({
+  number,
+  title,
+  description,
   icon,
-  reverse = false 
-}: { 
-  number: string; 
-  title: string; 
-  description: string; 
+  reverse = false
+}: {
+  number: string;
+  title: string;
+  description: string;
   icon: React.ReactNode;
   reverse?: boolean;
 }) => {
@@ -43,40 +43,42 @@ const RotaractStatistics = () => {
       </Helmet>
 
       <Header />
-      
-      <div className="pt-20 pb-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-4xl md:text-5xl font-bold mb-6">Rotaract Statistics</h1>
-          <p className="text-lg text-gray-600 mb-12 max-w-3xl">
-            It has always been a dream for the Philippine District Rotaract Representatives (DRRs) to establish a Multi-District Information Organization ever since. There were numerous generations of DRRs who tried to create such an organization. But that dream had just begun to realize when the Philippine Rotaract was given a chance to host the 3rd Asia Pacific Regional Rotaract Conference (APRRC) in 2006. During that time, the DRRs worked as one as they met various challenges while planning and preparing for the important event. The successful hosting of APRRC Pilipinas became the strongest force that made the Philippine MDIO into a reality.
-          </p>
-          
-          <div className="space-y-8">
-            <StatCard 
-              number="170K"
-              title="Rotaract Around the World"
-              description="Hipster ipsum tattooed brunch I'm baby. Schlitz seitan listicle mixtape boys trust vice. Occupy tbh street brunch keffiyeh bicycle diy blog banjo fingerstache tote on locavore coffee pabst. Vibecession plant scenester affogato yr pinterest cred. Mug freegan leggings chicken booth pabst direct biodiesel them. Mixtape organic cornhole selvage big a mumblecore. Crucifix lo-fi tbh pour-over goth aesthetic."
-              icon={<Globe className="w-16 h-16" />}
-            />
-            
-            <StatCard 
-              number="800"
-              title="Rotaract Clubs in the District"
-              description="Hipster ipsum tattooed brunch I'm baby. Schlitz seitan listicle mixtape boys trust vice. Occupy tbh street brunch keffiyeh. Bicycle diy blog banjo fingerstache tote on locavore coffee pabst. Vibecession plant scenester affogato yr pinterest cred. Mug freegan leggings chicken booth pabst direct biodiesel them. Mixtape organic cornhole selvage big a mumblecore. Crucifix lo-fi tbh pour-over goth aesthetic."
-              icon={<Book className="w-16 h-16" />}
-              reverse
-            />
-            
-            <StatCard 
-              number="15K"
-              title="Rotaract Members in the Philippines"
-              description="Hipster ipsum tattooed brunch I'm baby. Schlitz seitan listicle mixtape boys trust vice. Occupy tbh street brunch keffiyeh. Bicycle diy blog banjo fingerstache tote on locavore coffee pabst. Vibecession plant scenester affogato yr pinterest cred. Mug freegan leggings chicken booth pabst direct biodiesel them. Mixtape organic cornhole selvage big a mumblecore. Crucifix lo-fi tbh pour-over goth aesthetic."
-              icon={<Users className="w-16 h-16" />}
-            />
+
+      <main>
+        <div className="pt-36 pb-24">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h1 className="text-4xl md:text-5xl font-bold mb-6 text-rotaract-magenta">Rotaract Statistics</h1>
+            <p className="text-lg text-gray-600 mb-12 text-justify">
+              It has always been a dream for the Philippine District Rotaract Representatives (DRRs) to establish a Multi-District Information Organization ever since. There were numerous generations of DRRs who tried to create such an organization. But that dream had just begun to realize when the Philippine Rotaract was given a chance to host the 3rd Asia Pacific Regional Rotaract Conference (APRRC) in 2006. During that time, the DRRs worked as one as they met various challenges while planning and preparing for the important event. The successful hosting of APRRC Pilipinas became the strongest force that made the Philippine MDIO into a reality.
+            </p>
+
+            <div className="space-y-8">
+              <StatCard
+                number="170K"
+                title="Rotaract Around the World"
+                description="Hipster ipsum tattooed brunch I'm baby. Schlitz seitan listicle mixtape boys trust vice. Occupy tbh street brunch keffiyeh bicycle diy blog banjo fingerstache tote on locavore coffee pabst. Vibecession plant scenester affogato yr pinterest cred. Mug freegan leggings chicken booth pabst direct biodiesel them. Mixtape organic cornhole selvage big a mumblecore. Crucifix lo-fi tbh pour-over goth aesthetic."
+                icon={<img src="/assets/rotaract_around_the_world.svg" alt="Rotaract Around the World"  />}
+              />
+
+              <StatCard
+                number="800"
+                title="Rotaract Clubs in the District"
+                description="Hipster ipsum tattooed brunch I'm baby. Schlitz seitan listicle mixtape boys trust vice. Occupy tbh street brunch keffiyeh. Bicycle diy blog banjo fingerstache tote on locavore coffee pabst. Vibecession plant scenester affogato yr pinterest cred. Mug freegan leggings chicken booth pabst direct biodiesel them. Mixtape organic cornhole selvage big a mumblecore. Crucifix lo-fi tbh pour-over goth aesthetic."
+                icon={<img src="/assets/rotaract_clubs_in_the_district.svg" alt="Rotaract Clubs in the District"  />}
+                reverse
+              />
+
+              <StatCard
+                number="15K"
+                title="Rotaract Members in the Philippines"
+                description="Hipster ipsum tattooed brunch I'm baby. Schlitz seitan listicle mixtape boys trust vice. Occupy tbh street brunch keffiyeh. Bicycle diy blog banjo fingerstache tote on locavore coffee pabst. Vibecession plant scenester affogato yr pinterest cred. Mug freegan leggings chicken booth pabst direct biodiesel them. Mixtape organic cornhole selvage big a mumblecore. Crucifix lo-fi tbh pour-over goth aesthetic."
+                icon={<img src="/assets/rotaract_members_in_the_philippines.svg" alt="Rotaract Members in the Philippines"  />}
+              />
+            </div>
           </div>
         </div>
-      </div>
-      
+      </main>
+
       <Footer />
     </>
   );
