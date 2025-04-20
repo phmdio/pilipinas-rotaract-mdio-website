@@ -6,6 +6,7 @@ import Footer from '@/components/Footer';
 import PageHero from '@/components/PageHero';
 import CoreTeamSection from '@/components/leadership/CoreTeamSection';
 import BoardOfDirectorsSection from '@/components/leadership/BoardOfDirectorsSection';
+import ExecutiveCommitteeSection from '@/components/leadership/ExecutiveCommitteeSection';
 import StaffSection from '@/components/leadership/StaffSection';
 
 const LeadershipTeam = () => {
@@ -28,6 +29,7 @@ const LeadershipTeam = () => {
         />
         <CoreTeamSection />
         <BoardOfDirectorsSection />
+        <ExecutiveCommitteeSection />
         <StaffSection />
       </main>
       
