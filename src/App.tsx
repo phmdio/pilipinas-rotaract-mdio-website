@@ -14,8 +14,8 @@ import DistrictDetail from "./pages/DistrictDetail";
 import OurHistory from "./pages/OurHistory";
 import RotaractStatistics from "./pages/RotaractStatistics";
 import LeadershipTeam from "./pages/LeadershipTeam";
-// Import the new component
 import PhilippineRotaractMagazine from "./pages/PhilippineRotaractMagazine";
+import AngBalangay from "./pages/AngBalangay";
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -51,8 +51,8 @@ const App = () => {
                 <Route path="/our-history" element={<OurHistory />} />
                 <Route path="/our-leadership-team" element={<LeadershipTeam />} />
                 <Route path="/rotaract-statistics" element={<RotaractStatistics />} />
-                {/* Added route for PhilippineRotaractMagazine */}
                 <Route path="/philippine-rotaract-magazine" element={<PhilippineRotaractMagazine />} />
+                <Route path="/ang-balangay" element={<AngBalangay />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </BrowserRouter>
@@ -78,8 +78,8 @@ const App = () => {
                 <Route path="/our-history" element={<OurHistory />} />
                 <Route path="/our-leadership-team" element={<LeadershipTeam />} />
                 <Route path="/rotaract-statistics" element={<RotaractStatistics />} />
-                {/* Added route for PhilippineRotaractMagazine */}
                 <Route path="/philippine-rotaract-magazine" element={<PhilippineRotaractMagazine />} />
+                <Route path="/ang-balangay" element={<AngBalangay />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </BrowserRouter>
