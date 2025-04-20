@@ -13,7 +13,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 
-const Header = () => {
+const Header = ({ isTransparent = false }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -37,14 +37,16 @@ const Header = () => {
       "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
       isScrolled 
         ? "bg-rotaract-magenta text-white shadow-md" 
-        : "bg-white text-black shadow-sm"
+        : isTransparent 
+          ? "bg-transparent text-white shadow-md" 
+          : "bg-white text-black shadow-sm"
     )}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 md:h-20">
           <div className="flex items-center">
             <Link to="/" className="flex items-center">
               <img 
-                src="/assets/logo.png" 
+                src={`${isScrolled ? "/assets/logo.png" : isTransparent ? "/assets/logo.png" : "/assets/logo_pink.png"}`}
                 alt="Rotaract MDIO Logo" 
                 className="h-10 w-auto"
               />
@@ -56,7 +58,7 @@ const Header = () => {
               <NavigationMenuItem>
                 <NavigationMenuTrigger className={cn(
                   "bg-transparent",
-                  isScrolled 
+                  isScrolled || isTransparent
                     ? "text-white hover:bg-white/10 focus:bg-white/10" 
                     : "text-black hover:bg-black/10 focus:bg-black/10"
                 )}>
@@ -105,7 +107,7 @@ const Header = () => {
               <NavigationMenuItem>
                 <NavigationMenuTrigger className={cn(
                   "bg-transparent",
-                  isScrolled 
+                  isScrolled || isTransparent
                     ? "text-white hover:bg-white/10 focus:bg-white/10" 
                     : "text-black hover:bg-black/10 focus:bg-black/10"
                 )}>
@@ -113,7 +115,7 @@ const Header = () => {
                 </NavigationMenuTrigger>
                 <NavigationMenuContent className={cn(
                   "bg-[#1a237e] text-white",
-                  isScrolled ? "" : "shadow-lg"
+                  isScrolled || isTransparent ? "" : "shadow-lg"
                 )}>
                   <ul className="w-[240px]">
                     <li>
@@ -138,7 +140,7 @@ const Header = () => {
               <NavigationMenuItem>
                 <NavigationMenuTrigger className={cn(
                   "bg-transparent",
-                  isScrolled 
+                  isScrolled || isTransparent
                     ? "text-white hover:bg-white/10 focus:bg-white/10" 
                     : "text-black hover:bg-black/10 focus:bg-black/10"
                 )}>
@@ -146,7 +148,7 @@ const Header = () => {
                 </NavigationMenuTrigger>
                 <NavigationMenuContent className={cn(
                   "bg-[#1a237e] text-white",
-                  isScrolled ? "" : "shadow-lg"
+                  isScrolled || isTransparent ? "" : "shadow-lg"
                 )}>
                   <ul className="w-[250px]">
                     <li>
@@ -168,8 +170,13 @@ const Header = () => {
                 </NavigationMenuContent>
               </NavigationMenuItem>
 
-              <NavigationMenuItem>
-                <Button asChild variant="ghost" className="text-white hover:bg-white/10 focus:bg-white/10">
+              <NavigationMenuItem className={cn(
+                  "bg-transparent",
+                  isScrolled || isTransparent
+                    ? "text-white hover:bg-white/10 focus:bg-white/10" 
+                    : "text-black hover:bg-black/10 focus:bg-black/10"
+                )}>
+                <Button asChild variant="ghost">
                   <Link to="/under-construction">Donate</Link>
                 </Button>
               </NavigationMenuItem>
@@ -196,8 +203,8 @@ const Header = () => {
         <div className={cn(
           "md:hidden absolute w-full",
           isScrolled 
-            ? "bg-rotaract-magenta shadow-lg" 
-            : "bg-white shadow-md"
+            ? "bg-rotaract-magenta shadow-lg text-white" 
+            : "bg-white shadow-md text-black"
         )}>
           <div className="px-4 pt-2 pb-4 space-y-1 sm:px-3">
             <div className="py-2">
@@ -209,19 +216,19 @@ const Header = () => {
                     aboutSubmenu.classList.toggle('hidden');
                   }
                 }}
-                className="flex justify-between items-center w-full text-white"
+                className="flex justify-between items-center w-full"
               >
                 <span>About Us</span>
                 <ChevronDown size={16} />
               </button>
               <div id="mobile-about-submenu" className="hidden pl-4 mt-2 space-y-2 bg-[#1a237e] rounded">
-                <Link to="/our-history" className="block py-3 px-4 text-white hover:bg-white/10" onClick={() => setIsMenuOpen(false)}>Our History</Link>
+                <Link to="/our-history" className="block py-3 px-4 hover:bg-white/10" onClick={() => setIsMenuOpen(false)}>Our History</Link>
                 <Separator className="bg-white/20" />
-                <Link to="/under-construction" className="block py-3 px-4 text-white hover:bg-white/10" onClick={() => setIsMenuOpen(false)}>Our Leadership Team</Link>
+                <Link to="/under-construction" className="block py-3 px-4 hover:bg-white/10" onClick={() => setIsMenuOpen(false)}>Our Leadership Team</Link>
                 <Separator className="bg-white/20" />
-                <Link to="/under-construction" className="block py-3 px-4 text-white hover:bg-white/10" onClick={() => setIsMenuOpen(false)}>Philippine Rotaract Magazine</Link>
+                <Link to="/under-construction" className="block py-3 px-4 hover:bg-white/10" onClick={() => setIsMenuOpen(false)}>Philippine Rotaract Magazine</Link>
                 <Separator className="bg-white/20" />
-                <Link to="/under-construction" className="block py-3 px-4 text-white hover:bg-white/10" onClick={() => setIsMenuOpen(false)}>Ang Balangay</Link>
+                <Link to="/under-construction" className="block py-3 px-4 hover:bg-white/10" onClick={() => setIsMenuOpen(false)}>Ang Balangay</Link>
               </div>
             </div>
             
@@ -234,15 +241,15 @@ const Header = () => {
                     infoSubmenu.classList.toggle('hidden');
                   }
                 }}
-                className="flex justify-between items-center w-full text-white"
+                className="flex justify-between items-center w-full"
               >
                 <span>Information Center</span>
                 <ChevronDown size={16} />
               </button>
               <div id="mobile-info-submenu" className="hidden pl-4 mt-2 space-y-2 bg-[#1a237e] rounded">
-                <Link to="/information-center" className="block py-3 px-4 text-white hover:bg-white/10" onClick={() => setIsMenuOpen(false)}>Districts</Link>
+                <Link to="/information-center" className="block py-3 px-4 hover:bg-white/10" onClick={() => setIsMenuOpen(false)}>Districts</Link>
                 <Separator className="bg-white/20" />
-                <Link to="/under-construction" className="block py-3 px-4 text-white hover:bg-white/10" onClick={() => setIsMenuOpen(false)}>Resources</Link>
+                <Link to="/under-construction" className="block py-3 px-4 hover:bg-white/10" onClick={() => setIsMenuOpen(false)}>Resources</Link>
               </div>
             </div>
             
@@ -255,19 +262,19 @@ const Header = () => {
                     programsSubmenu.classList.toggle('hidden');
                   }
                 }}
-                className="flex justify-between items-center w-full text-white"
+                className="flex justify-between items-center w-full"
               >
                 <span>Our Programs and Activities</span>
                 <ChevronDown size={16} />
               </button>
               <div id="mobile-programs-submenu" className="hidden pl-4 mt-2 space-y-2 bg-[#1a237e] rounded">
-                <Link to="/under-construction" className="block py-3 px-4 text-white hover:bg-white/10" onClick={() => setIsMenuOpen(false)}>Key Projects</Link>
+                <Link to="/under-construction" className="block py-3 px-4 hover:bg-white/10" onClick={() => setIsMenuOpen(false)}>Key Projects</Link>
                 <Separator className="bg-white/20" />
-                <Link to="/under-construction" className="block py-3 px-4 text-white hover:bg-white/10" onClick={() => setIsMenuOpen(false)}>Upcoming Events</Link>
+                <Link to="/under-construction" className="block py-3 px-4 hover:bg-white/10" onClick={() => setIsMenuOpen(false)}>Upcoming Events</Link>
               </div>
             </div>
             
-            <Link to="/under-construction" className="block py-2 text-white hover:text-gray-200" onClick={() => setIsMenuOpen(false)}>Donate</Link>
+            <Link to="/under-construction" className="block py-2" onClick={() => setIsMenuOpen(false)}>Donate</Link>
           </div>
         </div>
       )}

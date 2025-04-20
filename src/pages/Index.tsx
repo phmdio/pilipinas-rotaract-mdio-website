@@ -60,7 +60,7 @@ const Index = () => {
         </script>
       </Helmet>
       <div className="min-h-screen bg-white">
-        <Header />
+        <Header isTransparent={true} />
         <main id="main-content">
           <Hero />
           <AboutSection />
