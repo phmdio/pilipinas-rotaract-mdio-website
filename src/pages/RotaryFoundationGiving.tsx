@@ -110,9 +110,10 @@ const RotaryFoundationGiving = () => {
             {/* Donation Button */}
             <div className="text-center">
               <Link 
-                to="https://www.rotary.org/en/get-involved/ways-to-give"
+                to="https://www.rotary.org/en/get-involved/ways-to-give?utm_source=pilipinas_rotaract_mdio&utm_medium=website&utm_campaign=foundation_giving"
                 className="btn-rotaract inline-block uppercase font-bold"
                 target="_blank"
+                rel="noopener noreferrer"
               >
                 Donate to the Rotary Foundation
               </Link>

@@ -185,7 +185,7 @@ const Header = ({ isTransparent = false }) => {
                     : "text-black hover:bg-black/10 focus:bg-black/10"
                 )}>
                 <Button asChild variant="ghost">
-                  <Link to="https://www.rotary.org/en/get-involved/ways-to-give" target="_blank">Donate</Link>
+                  <Link to="https://www.rotary.org/en/get-involved/ways-to-give?utm_source=pilipinas_rotaract_mdio&utm_medium=website&utm_campaign=foundation_giving" target="_blank" rel="noopener noreferrer">Donate</Link>
                 </Button>
               </NavigationMenuItem>
             </NavigationMenuList>
