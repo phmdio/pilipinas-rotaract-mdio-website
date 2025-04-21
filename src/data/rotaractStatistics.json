@@ -73,11 +73,6 @@
       "district": "3870",
       "members": 1240,
       "clubs": 67
-    },
-    {
-      "district": "4510",
-      "members": 1360,
-      "clubs": 74
     }
   ],
   "contributionsData": [
@@ -130,11 +125,6 @@
       "district": "3870",
       "annualFund": 750000,
       "polioPlus": 400000
-    },
-    {
-      "district": "4510",
-      "annualFund": 820000,
-      "polioPlus": 450000
     }
   ],
   "cardStats": [
