@@ -2,7 +2,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Label } from 'recharts';
 import statisticsData from '../data/rotaractStatistics.json';
 
 // Types for our statistics data
@@ -57,19 +57,75 @@ const StatCard = ({
   );
 };
 
-const LineChartCard = ({
-  title,
-  data,
-  dataKeys,
+const LineChartCard = ({ 
+  title, 
+  data, 
+  dataKeys, 
   colors,
   xAxisKey = "year"
-}: {
-  title: string;
-  data: DataPoint[];
+}: { 
+  title: string; 
+  data: DataPoint[]; 
   dataKeys: string[];
   colors: string[];
   xAxisKey?: string;
 }) => {
+  // Check if this is the contributions chart
+  const isContributionsChart = dataKeys.includes('annualFund') || dataKeys.includes('polioPlus');
+
+  // Get friendly display names for data keys
+  const getKeyDisplayName = (key: string): string => {
+    switch(key) {
+      case 'annualFund': return 'Annual Fund';
+      case 'polioPlus': return 'Polio Plus Fund';
+      case 'members': return 'Members';
+      case 'clubs': return 'Clubs';
+      default: return key;
+    }
+  };
+
+  // Format Y-axis ticks for currency if needed
+  const formatYAxis = (value: any): string => {
+    if (isContributionsChart) {
+      return `$${(value / 1000).toFixed(0)}K`;
+    }
+    return value.toLocaleString();
+  };
+
+  // Format tooltip values
+  const formatTooltip = (value: any, name: string) => {
+    if (name === 'Annual Fund' || name === 'Polio Plus Fund') {
+      return [`$${value.toLocaleString()}`, name];
+    }
+    return [value.toLocaleString(), name];
+  };
+
+  // Custom dot for the line chart that displays values
+  const CustomizedDot = (props: any) => {
+    const { cx, cy, value, dataKey } = props;
+    
+    // Format the display value based on the data type
+    const displayValue = (dataKey === 'annualFund' || dataKey === 'polioPlus')
+      ? `$${(value / 1000).toFixed(0)}K`
+      : value.toLocaleString();
+    
+    return (
+      <g>
+        <circle cx={cx} cy={cy} r={6} fill={props.stroke} />
+        <text 
+          x={cx} 
+          y={cy - 10} 
+          textAnchor="middle" 
+          fill={props.stroke}
+          fontSize={12}
+          fontWeight="bold"
+        >
+          {displayValue}
+        </text>
+      </g>
+    );
+  };
+
   return (
     <div className="bg-white rounded-lg shadow-md p-4 md:p-6">
       <h3 className="text-xl font-bold mb-4 text-[#0F3B7F]">{title}</h3>
@@ -77,13 +133,31 @@ const LineChartCard = ({
         <ResponsiveContainer width="100%" height="100%">
           <LineChart
             data={data}
-            margin={{ top: 10, right: 30, left: 20, bottom: 30 }}
+            margin={{ top: 30, right: 30, left: 20, bottom: 30 }}
           >
             <CartesianGrid strokeDasharray="3 3" stroke="#eee" />
-            <XAxis dataKey={xAxisKey} />
-            <YAxis />
-            <Tooltip
-              contentStyle={{
+            <XAxis 
+              dataKey={xAxisKey} 
+              angle={xAxisKey === 'district' ? -45 : 0} 
+              textAnchor={xAxisKey === 'district' ? "end" : "middle"}
+              height={xAxisKey === 'district' ? 60 : 30}
+            />
+            <YAxis 
+              tickFormatter={isContributionsChart ? formatYAxis : undefined}
+            >
+              {isContributionsChart && (
+                <Label 
+                  value="Thousands (USD)" 
+                  angle={-90} 
+                  position="insideLeft" 
+                  style={{ textAnchor: 'middle' }}
+                  offset={-10}
+                />
+              )}
+            </YAxis>
+            <Tooltip 
+              formatter={formatTooltip}
+              contentStyle={{ 
                 backgroundColor: '#fff',
                 border: '1px solid #ccc',
                 borderRadius: '4px'
@@ -91,13 +165,15 @@ const LineChartCard = ({
             />
             <Legend />
             {dataKeys.map((key, index) => (
-              <Line
+              <Line 
                 key={key}
-                type="monotone"
-                dataKey={key}
-                stroke={colors[index]}
-                strokeWidth={2}
-                activeDot={{ r: 8 }}
+                type="monotone" 
+                dataKey={key} 
+                name={getKeyDisplayName(key)}
+                stroke={colors[index]} 
+                strokeWidth={2} 
+                dot={<CustomizedDot />}
+                activeDot={{ r: 8 }} 
               />
             ))}
           </LineChart>
@@ -164,9 +240,9 @@ const RotaractStatistics = () => {
                 return (
                   <LineChartCard
                     key={index}
-                    title={config.title}
-                    data={data}
-                    dataKeys={config.dataKey}
+                    title={config.title} 
+                    data={data} 
+                    dataKeys={config.dataKey} 
                     colors={config.colors}
                     xAxisKey={config.xAxisKey || "year"}
                   />
