@@ -25,6 +25,7 @@ type ChartConfig = {
   colors: string[];
   dataSource: string;
   xAxisKey?: string;
+  asOfDate?: string;
 };
 
 const StatCard = ({
@@ -62,13 +63,15 @@ const LineChartCard = ({
   data, 
   dataKeys, 
   colors,
-  xAxisKey = "year"
+  xAxisKey = "year",
+  asOfDate
 }: { 
   title: string; 
   data: DataPoint[]; 
   dataKeys: string[];
   colors: string[];
   xAxisKey?: string;
+  asOfDate?: string;
 }) => {
   // Check if this is the contributions chart
   const isContributionsChart = dataKeys.includes('annualFund') || dataKeys.includes('polioPlus');
@@ -128,7 +131,14 @@ const LineChartCard = ({
 
   return (
     <div className="bg-white rounded-lg shadow-md p-4 md:p-6">
-      <h3 className="text-xl font-bold mb-4 text-[#0F3B7F]">{title}</h3>
+      <div className="flex justify-between items-center mb-4">
+        <h3 className="text-xl font-bold text-[#0F3B7F]">{title}</h3>
+        {asOfDate && (
+          <div className="text-sm text-gray-500 italic">
+            As of {asOfDate}
+          </div>
+        )}
+      </div>
       <div className="h-64 md:h-80">
         <ResponsiveContainer width="100%" height="100%">
           <LineChart
@@ -245,6 +255,7 @@ const RotaractStatistics = () => {
                     dataKeys={config.dataKey} 
                     colors={config.colors}
                     xAxisKey={config.xAxisKey || "year"}
+                    asOfDate={config.asOfDate}
                   />
                 );
               })}

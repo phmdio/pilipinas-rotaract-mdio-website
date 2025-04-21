@@ -159,7 +159,8 @@
         "#0F3B7F"
       ],
       "dataSource": "districtData",
-      "xAxisKey": "district"
+      "xAxisKey": "district",
+      "asOfDate": "April 2025"
     },
     {
       "title": "PH Rotaract Contributions (Per district in USD)",
@@ -172,7 +173,8 @@
         "#FFC000"
       ],
       "dataSource": "contributionsData",
-      "xAxisKey": "district"
+      "xAxisKey": "district",
+      "asOfDate": "April 2025"
     }
   ]
 }
