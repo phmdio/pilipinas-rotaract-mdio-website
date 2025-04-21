@@ -159,30 +159,6 @@
   ],
   "chartConfig": [
     {
-      "title": "Rotaract Statistics (Around the World)",
-      "dataKey": [
-        "members",
-        "clubs"
-      ],
-      "colors": [
-        "#C9175D",
-        "#0F3B7F"
-      ],
-      "dataSource": "worldData"
-    },
-    {
-      "title": "Rotaract Statistics (Philippines)",
-      "dataKey": [
-        "members",
-        "clubs"
-      ],
-      "colors": [
-        "#C9175D",
-        "#0F3B7F"
-      ],
-      "dataSource": "philippinesData"
-    },
-    {
       "title": "Rotaract Statistics (Philippines per member districts)",
       "dataKey": [
         "members",
