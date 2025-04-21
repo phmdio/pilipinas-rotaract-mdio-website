@@ -1,28 +1,4 @@
 {
-  "worldData": [
-    {
-      "year": "2024-25",
-      "members": 170000,
-      "clubs": 10500
-    },
-    {
-      "year": "2025-26",
-      "members": 185000,
-      "clubs": 11200
-    }
-  ],
-  "philippinesData": [
-    {
-      "year": "2024-25",
-      "members": 15000,
-      "clubs": 800
-    },
-    {
-      "year": "2025-26",
-      "members": 16500,
-      "clubs": 840
-    }
-  ],
   "districtData": [
     {
       "district": "3770",
