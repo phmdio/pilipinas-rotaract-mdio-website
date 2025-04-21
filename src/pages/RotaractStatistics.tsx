@@ -120,6 +120,55 @@ const BarChartCard = ({
   colors: string[];
   xAxisKey?: string;
 }) => {
+  // Check if this is the contributions chart
+  const isContributionsChart = dataKeys.includes('contributions');
+
+  // Format numbers based on the key
+  const formatYAxis = (value: any): string => {
+    if (isContributionsChart) {
+      // For large money values, format in millions
+      return `₱${(value / 1000000).toFixed(1)}M`;
+    }
+    return String(value);
+  };
+
+  // Format tooltip values
+  const formatTooltip = (value: any, name: string) => {
+    if (name === 'contributions' || name === 'Contributions (PHP)') {
+      return [`₱${value.toLocaleString()}`, 'Contributions'];
+    }
+    return [value, name];
+  };
+
+  // Custom bar with value label for all bars
+  const CustomBar = (props: any) => {
+    const { x, y, width, height, fill, value, dataKey } = props;
+    
+    // Format the display value based on the data type
+    const displayValue = dataKey === 'contributions' 
+      ? `₱${(value / 1000000).toFixed(1)}M`
+      : value.toLocaleString();
+    
+    return (
+      <g>
+        <rect x={x} y={y} width={width} height={height} fill={fill} rx={4} ry={4} />
+        {height > 15 && ( // Only show text if bar is tall enough
+          <text 
+            x={x + width / 2} 
+            y={y + height / 2} 
+            textAnchor="middle" 
+            dominantBaseline="middle"
+            fill="#fff"
+            fontSize={12}
+            fontWeight="bold"
+          >
+            {displayValue}
+          </text>
+        )}
+      </g>
+    );
+  };
+
   return (
     <div className="bg-white rounded-lg shadow-md p-4 md:p-6">
       <h3 className="text-xl font-bold mb-4 text-[#0F3B7F]">{title}</h3>
@@ -136,8 +185,15 @@ const BarChartCard = ({
               textAnchor="end" 
               height={60}
             />
-            <YAxis />
+            <YAxis 
+              tickFormatter={formatYAxis}
+              label={isContributionsChart ? 
+                { value: 'Millions (PHP)', angle: -90, position: 'insideLeft', offset: -5 } : 
+                undefined
+              }
+            />
             <Tooltip 
+              formatter={formatTooltip}
               contentStyle={{ 
                 backgroundColor: '#fff',
                 border: '1px solid #ccc',
@@ -149,8 +205,10 @@ const BarChartCard = ({
               <Bar 
                 key={key}
                 dataKey={key} 
+                name={key === 'contributions' ? 'Contributions (PHP)' : key === 'projects' ? 'Number of Projects' : key}
                 fill={colors[index]} 
                 radius={[4, 4, 0, 0]}
+                shape={<CustomBar />}
               />
             ))}
           </BarChart>
@@ -228,7 +286,7 @@ const RotaractStatistics = () => {
                   );
                 }
                 
-                // Use bar charts for district data (last two charts)
+                // Use bar charts for district data
                 return (
                   <BarChartCard 
                     key={index}

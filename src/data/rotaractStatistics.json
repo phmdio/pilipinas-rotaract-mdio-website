@@ -74,9 +74,16 @@
       "xAxisKey": "district"
     },
     {
-      "title": "PH Rotaract Contributions (Per member districts)",
-      "dataKey": ["contributions", "projects"],
-      "colors": ["#00A885", "#FFC000"],
+      "title": "PH Rotaract Contributions (Per district in PHP)",
+      "dataKey": ["contributions"],
+      "colors": ["#00A885"],
+      "dataSource": "contributionsData",
+      "xAxisKey": "district"
+    },
+    {
+      "title": "PH Rotaract Projects (Per district)",
+      "dataKey": ["projects"],
+      "colors": ["#FFC000"],
       "dataSource": "contributionsData",
       "xAxisKey": "district"
     }
