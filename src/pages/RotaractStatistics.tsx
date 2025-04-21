@@ -2,6 +2,27 @@ import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import statisticsData from '../data/rotaractStatistics.json';
+
+// Types for our statistics data
+type DataPoint = {
+  year: string;
+  [key: string]: string | number;
+};
+
+type CardStat = {
+  number: string;
+  title: string;
+  description: string;
+  iconPath: string;
+};
+
+type ChartConfig = {
+  title: string;
+  dataKey: string;
+  color: string;
+};
 
 const StatCard = ({
   number,
@@ -33,7 +54,49 @@ const StatCard = ({
   );
 };
 
+const ChartCard = ({ title, data, dataKey, color }: { title: string; data: DataPoint[]; dataKey: string; color: string }) => {
+  return (
+    <div className="bg-white rounded-lg shadow-md p-4 md:p-6">
+      <h3 className="text-xl font-bold mb-4 text-[#0F3B7F]">{title}</h3>
+      <div className="h-64 md:h-80">
+        <ResponsiveContainer width="100%" height="100%">
+          <LineChart
+            data={data}
+            margin={{ top: 10, right: 30, left: 20, bottom: 30 }}
+          >
+            <CartesianGrid strokeDasharray="3 3" stroke="#eee" />
+            <XAxis dataKey="year" />
+            <YAxis />
+            <Tooltip 
+              contentStyle={{ 
+                backgroundColor: '#fff',
+                border: '1px solid #ccc',
+                borderRadius: '4px'
+              }}
+            />
+            <Legend />
+            <Line 
+              type="monotone" 
+              dataKey={dataKey} 
+              stroke={color} 
+              strokeWidth={2} 
+              activeDot={{ r: 8 }} 
+            />
+          </LineChart>
+        </ResponsiveContainer>
+      </div>
+    </div>
+  );
+};
+
 const RotaractStatistics = () => {
+  // Type assertions for our imported data
+  const membershipData = statisticsData.membershipData as DataPoint[];
+  const clubsData = statisticsData.clubsData as DataPoint[];
+  const projectsData = statisticsData.projectsData as DataPoint[];
+  const cardStats = statisticsData.cardStats as CardStat[];
+  const chartConfig = statisticsData.chartConfig as ChartConfig[];
+
   return (
     <>
       <Helmet>
@@ -51,26 +114,37 @@ const RotaractStatistics = () => {
             </p>
 
             <div className="space-y-6 md:space-y-8">
-              <StatCard
-                number="170K"
-                title="Rotaract Around the World"
-                description="Hipster ipsum tattooed brunch I'm baby. Schlitz seitan listicle mixtape boys trust vice. Occupy tbh street brunch keffiyeh bicycle diy blog banjo fingerstache tote on locavore coffee pabst. Vibecession plant scenester affogato yr pinterest cred. Mug freegan leggings chicken booth pabst direct biodiesel them. Mixtape organic cornhole selvage big a mumblecore. Crucifix lo-fi tbh pour-over goth aesthetic."
-                icon={<img src="/assets/rotaract_around_the_world.svg" alt="Rotaract Around the World" className="w-16 h-16 md:w-auto md:h-auto" />}
-              />
+              {cardStats.map((stat, index) => (
+                <StatCard
+                  key={index}
+                  number={stat.number}
+                  title={stat.title}
+                  description={stat.description}
+                  icon={<img src={stat.iconPath} alt={stat.title} className="w-16 h-16 md:w-auto md:h-auto" />}
+                  reverse={index % 2 !== 0}
+                />
+              ))}
+            </div>
 
-              <StatCard
-                number="800"
-                title="Rotaract Clubs in the District"
-                description="Hipster ipsum tattooed brunch I'm baby. Schlitz seitan listicle mixtape boys trust vice. Occupy tbh street brunch keffiyeh. Bicycle diy blog banjo fingerstache tote on locavore coffee pabst. Vibecession plant scenester affogato yr pinterest cred. Mug freegan leggings chicken booth pabst direct biodiesel them. Mixtape organic cornhole selvage big a mumblecore. Crucifix lo-fi tbh pour-over goth aesthetic."
-                icon={<img src="/assets/rotaract_clubs_in_the_district.svg" alt="Rotaract Clubs in the District" className="w-16 h-16 md:w-auto md:h-auto" />}
-                reverse
+            <h2 className="text-2xl md:text-3xl font-bold my-8 md:my-12 text-[#0F3B7F]">Growth Trends</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <ChartCard 
+                title={chartConfig[0].title} 
+                data={membershipData} 
+                dataKey={chartConfig[0].dataKey} 
+                color={chartConfig[0].color}
               />
-
-              <StatCard
-                number="15K"
-                title="Rotaract Members in the Philippines"
-                description="Hipster ipsum tattooed brunch I'm baby. Schlitz seitan listicle mixtape boys trust vice. Occupy tbh street brunch keffiyeh. Bicycle diy blog banjo fingerstache tote on locavore coffee pabst. Vibecession plant scenester affogato yr pinterest cred. Mug freegan leggings chicken booth pabst direct biodiesel them. Mixtape organic cornhole selvage big a mumblecore. Crucifix lo-fi tbh pour-over goth aesthetic."
-                icon={<img src="/assets/rotaract_members_in_the_philippines.svg" alt="Rotaract Members in the Philippines" className="w-16 h-16 md:w-auto md:h-auto" />}
+              <ChartCard 
+                title={chartConfig[1].title} 
+                data={clubsData} 
+                dataKey={chartConfig[1].dataKey} 
+                color={chartConfig[1].color}
+              />
+              <ChartCard 
+                title={chartConfig[2].title} 
+                data={projectsData} 
+                dataKey={chartConfig[2].dataKey} 
+                color={chartConfig[2].color}
               />
             </div>
           </div>
