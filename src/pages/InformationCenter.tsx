@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import PageHero from '@/components/PageHero';
+import DistrictGrid from '@/components/DistrictGrid';
 import { districtData } from '@/data/districtData';
 
 const InformationCenter = () => {
@@ -47,48 +48,7 @@ const InformationCenter = () => {
         {/* Districts grid section */}
         <section className="py-10 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {districtData.map((district) => (
-                <div 
-                  key={district.id}
-                  className="overflow-hidden flex flex-col h-[500px]"
-                >
-                  <div 
-                    className="relative h-[350px] bg-cover bg-center" 
-                    style={{ backgroundImage: `url(${district.image})` }}
-                  >
-                    <div className="absolute inset-x-0 bottom-0 h-16 bg-black/50 flex items-center justify-between px-5">
-                      <div className="text-white">
-                        <p className="font-medium">Rotaract Clubs of Rotary</p>
-                        <p className="font-medium">International District #</p>
-                      </div>
-                      <div className="text-white text-5xl font-bold">
-                        {district.id}
-                      </div>
-                    </div>
-                  </div>
-                  <div className="w-full h-[1px] bg-white/30"></div>
-                  <div 
-                    style={{ backgroundColor: district.color }}
-                    className="p-6 text-white flex-grow flex flex-col"
-                  >
-                    <p className="mb-5">
-                      Hipster ipsum tattooed brunch I'm baby. Schlitz seitan listicle mixtape boys trust vice. Occupy tbh street brunch keffiyeh. Bicycle diy blog banjo fingerstache tote on locavore coffee pabst.
-                    </p>
-                    <div className="mt-auto flex flex-col justify-center">
-                      <Link to={`/district/${district.id}`}>
-                        <Button 
-                          variant="outline" 
-                          className="text-white border-white hover:bg-white/20 w-full py-2 rounded-full bg-transparent text-center"
-                        >
-                          LEARN MORE
-                        </Button>
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
+            <DistrictGrid districts={districtData} />
           </div>
         </section>
       </main>
