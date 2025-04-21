@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import PageHero from '@/components/PageHero';
+import { Link } from 'react-router-dom';
 
 const RotaryFoundationGiving = () => {
   return (
@@ -108,13 +109,13 @@ const RotaryFoundationGiving = () => {
 
             {/* Donation Button */}
             <div className="text-center">
-              <a 
-                href="https://my.rotary.org/en/donate"
+              <Link 
+                to="https://www.rotary.org/en/get-involved/ways-to-give"
                 className="btn-rotaract inline-block uppercase font-bold"
                 target="_blank"
               >
                 Donate to the Rotary Foundation
-              </a>
+              </Link>
             </div>
           </div>
         </section>

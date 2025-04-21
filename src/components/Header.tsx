@@ -185,7 +185,7 @@ const Header = ({ isTransparent = false }) => {
                     : "text-black hover:bg-black/10 focus:bg-black/10"
                 )}>
                 <Button asChild variant="ghost">
-                  <Link to="/under-construction">Donate</Link>
+                  <Link to="https://www.rotary.org/en/get-involved/ways-to-give" target="_blank">Donate</Link>
                 </Button>
               </NavigationMenuItem>
             </NavigationMenuList>

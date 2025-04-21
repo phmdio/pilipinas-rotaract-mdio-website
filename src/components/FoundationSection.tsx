@@ -7,6 +7,7 @@ import {
   CarouselContent, 
   CarouselItem,
 } from '@/components/ui/carousel';
+import { Link } from 'react-router-dom';
 
 const FoundationSection = () => {
   const { ref, inView } = useInView({
@@ -82,9 +83,9 @@ const FoundationSection = () => {
             <p className="text-gray-200 mb-8">
               The Rotary Foundation transforms your gifts into sustainable projects that change lives locally and globally. Since 1917, the Foundation has invested in communities through grants supporting clean water, disease prevention, peace, education, and economic development. Join us in making a lasting impact by contributing to the Rotary Foundation.
             </p>
-            <a href="/under-construction" className="inline-block bg-[#FF9500] text-white font-medium uppercase tracking-wider px-8 py-3 rounded-full hover:bg-opacity-90 transition-all">
+            <Link to="/the-rotary-foundation-giving" className="inline-block bg-[#FF9500] text-white font-medium uppercase tracking-wider px-8 py-3 rounded-full hover:bg-opacity-90 transition-all">
               Donate to the Rotary Foundation
-            </a>
+            </Link>
             
             <div className="mt-16">
               <h3 className="text-xl font-medium text-white mb-4">Follow us:</h3>
