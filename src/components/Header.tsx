@@ -48,7 +48,7 @@ const Header = ({ isTransparent = false }) => {
               <img 
                 src={`${isScrolled ? "/assets/logo.png" : isTransparent ? "/assets/logo.png" : "/assets/logo_pink.png"}`}
                 alt="Rotaract MDIO Logo" 
-                className="h-10 w-auto"
+                className="h-14 w-auto"
               />
             </Link>
           </div>
