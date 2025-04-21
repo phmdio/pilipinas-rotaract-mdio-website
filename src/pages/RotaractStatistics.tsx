@@ -195,8 +195,6 @@ const LineChartCard = ({
 
 const RotaractStatistics = () => {
   // Type assertions for our imported data
-  const worldData = statisticsData.worldData as DataPoint[];
-  const philippinesData = statisticsData.philippinesData as DataPoint[];
   const districtData = statisticsData.districtData as DataPoint[];
   const contributionsData = statisticsData.contributionsData as DataPoint[];
   const cardStats = statisticsData.cardStats as CardStat[];
@@ -205,8 +203,6 @@ const RotaractStatistics = () => {
   // Helper function to get data based on dataSource string
   const getDataSource = (source: string): DataPoint[] => {
     switch (source) {
-      case 'worldData': return worldData;
-      case 'philippinesData': return philippinesData;
       case 'districtData': return districtData;
       case 'contributionsData': return contributionsData;
       default: return [];
