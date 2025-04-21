@@ -2,13 +2,14 @@ import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import statisticsData from '../data/rotaractStatistics.json';
 
 // Types for our statistics data
 type DataPoint = {
-  year: string;
-  [key: string]: string | number;
+  year?: string;
+  district?: string;
+  [key: string]: string | number | undefined;
 };
 
 type CardStat = {
@@ -20,8 +21,10 @@ type CardStat = {
 
 type ChartConfig = {
   title: string;
-  dataKey: string;
-  color: string;
+  dataKey: string[];
+  colors: string[];
+  dataSource: string;
+  xAxisKey?: string;
 };
 
 const StatCard = ({
@@ -54,7 +57,19 @@ const StatCard = ({
   );
 };
 
-const ChartCard = ({ title, data, dataKey, color }: { title: string; data: DataPoint[]; dataKey: string; color: string }) => {
+const LineChartCard = ({ 
+  title, 
+  data, 
+  dataKeys, 
+  colors,
+  xAxisKey = "year"
+}: { 
+  title: string; 
+  data: DataPoint[]; 
+  dataKeys: string[];
+  colors: string[];
+  xAxisKey?: string;
+}) => {
   return (
     <div className="bg-white rounded-lg shadow-md p-4 md:p-6">
       <h3 className="text-xl font-bold mb-4 text-[#0F3B7F]">{title}</h3>
@@ -65,7 +80,7 @@ const ChartCard = ({ title, data, dataKey, color }: { title: string; data: DataP
             margin={{ top: 10, right: 30, left: 20, bottom: 30 }}
           >
             <CartesianGrid strokeDasharray="3 3" stroke="#eee" />
-            <XAxis dataKey="year" />
+            <XAxis dataKey={xAxisKey} />
             <YAxis />
             <Tooltip 
               contentStyle={{ 
@@ -75,14 +90,70 @@ const ChartCard = ({ title, data, dataKey, color }: { title: string; data: DataP
               }}
             />
             <Legend />
-            <Line 
-              type="monotone" 
-              dataKey={dataKey} 
-              stroke={color} 
-              strokeWidth={2} 
-              activeDot={{ r: 8 }} 
-            />
+            {dataKeys.map((key, index) => (
+              <Line 
+                key={key}
+                type="monotone" 
+                dataKey={key} 
+                stroke={colors[index]} 
+                strokeWidth={2} 
+                activeDot={{ r: 8 }} 
+              />
+            ))}
           </LineChart>
+        </ResponsiveContainer>
+      </div>
+    </div>
+  );
+};
+
+const BarChartCard = ({ 
+  title, 
+  data, 
+  dataKeys, 
+  colors,
+  xAxisKey = "district" 
+}: { 
+  title: string; 
+  data: DataPoint[]; 
+  dataKeys: string[];
+  colors: string[];
+  xAxisKey?: string;
+}) => {
+  return (
+    <div className="bg-white rounded-lg shadow-md p-4 md:p-6">
+      <h3 className="text-xl font-bold mb-4 text-[#0F3B7F]">{title}</h3>
+      <div className="h-64 md:h-80">
+        <ResponsiveContainer width="100%" height="100%">
+          <BarChart
+            data={data}
+            margin={{ top: 10, right: 30, left: 20, bottom: 60 }}
+          >
+            <CartesianGrid strokeDasharray="3 3" stroke="#eee" />
+            <XAxis 
+              dataKey={xAxisKey} 
+              angle={-45} 
+              textAnchor="end" 
+              height={60}
+            />
+            <YAxis />
+            <Tooltip 
+              contentStyle={{ 
+                backgroundColor: '#fff',
+                border: '1px solid #ccc',
+                borderRadius: '4px'
+              }}
+            />
+            <Legend />
+            {dataKeys.map((key, index) => (
+              <Bar 
+                key={key}
+                dataKey={key} 
+                fill={colors[index]} 
+                radius={[4, 4, 0, 0]}
+              />
+            ))}
+          </BarChart>
         </ResponsiveContainer>
       </div>
     </div>
@@ -91,11 +162,23 @@ const ChartCard = ({ title, data, dataKey, color }: { title: string; data: DataP
 
 const RotaractStatistics = () => {
   // Type assertions for our imported data
-  const membershipData = statisticsData.membershipData as DataPoint[];
-  const clubsData = statisticsData.clubsData as DataPoint[];
-  const projectsData = statisticsData.projectsData as DataPoint[];
+  const worldData = statisticsData.worldData as DataPoint[];
+  const philippinesData = statisticsData.philippinesData as DataPoint[];
+  const districtData = statisticsData.districtData as DataPoint[];
+  const contributionsData = statisticsData.contributionsData as DataPoint[];
   const cardStats = statisticsData.cardStats as CardStat[];
   const chartConfig = statisticsData.chartConfig as ChartConfig[];
+
+  // Helper function to get data based on dataSource string
+  const getDataSource = (source: string): DataPoint[] => {
+    switch(source) {
+      case 'worldData': return worldData;
+      case 'philippinesData': return philippinesData;
+      case 'districtData': return districtData;
+      case 'contributionsData': return contributionsData;
+      default: return [];
+    }
+  };
 
   return (
     <>
@@ -126,26 +209,37 @@ const RotaractStatistics = () => {
               ))}
             </div>
 
-            <h2 className="text-2xl md:text-3xl font-bold my-8 md:my-12 text-[#0F3B7F]">Growth Trends</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              <ChartCard 
-                title={chartConfig[0].title} 
-                data={membershipData} 
-                dataKey={chartConfig[0].dataKey} 
-                color={chartConfig[0].color}
-              />
-              <ChartCard 
-                title={chartConfig[1].title} 
-                data={clubsData} 
-                dataKey={chartConfig[1].dataKey} 
-                color={chartConfig[1].color}
-              />
-              <ChartCard 
-                title={chartConfig[2].title} 
-                data={projectsData} 
-                dataKey={chartConfig[2].dataKey} 
-                color={chartConfig[2].color}
-              />
+            <h2 className="text-2xl md:text-3xl font-bold my-8 md:my-12 text-[#0F3B7F]">Rotaract Growth Trends</h2>
+            <div className="grid grid-cols-1 gap-8">
+              {chartConfig.map((config, index) => {
+                const data = getDataSource(config.dataSource);
+                
+                // Use line charts for time series data (first two charts)
+                if (index < 2) {
+                  return (
+                    <LineChartCard 
+                      key={index}
+                      title={config.title} 
+                      data={data} 
+                      dataKeys={config.dataKey} 
+                      colors={config.colors}
+                      xAxisKey={config.xAxisKey || "year"}
+                    />
+                  );
+                }
+                
+                // Use bar charts for district data (last two charts)
+                return (
+                  <BarChartCard 
+                    key={index}
+                    title={config.title} 
+                    data={data} 
+                    dataKeys={config.dataKey} 
+                    colors={config.colors}
+                    xAxisKey={config.xAxisKey || "district"}
+                  />
+                );
+              })}
             </div>
           </div>
         </div>
