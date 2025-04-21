@@ -1,37 +1,141 @@
 {
   "worldData": [
-    { "year": "2024-25", "members": 170000, "clubs": 10500 },
-    { "year": "2025-26", "members": 185000, "clubs": 11200 }
+    {
+      "year": "2024-25",
+      "members": 170000,
+      "clubs": 10500
+    },
+    {
+      "year": "2025-26",
+      "members": 185000,
+      "clubs": 11200
+    }
   ],
   "philippinesData": [
-    { "year": "2024-25", "members": 15000, "clubs": 800 },
-    { "year": "2025-26", "members": 16500, "clubs": 840 }
+    {
+      "year": "2024-25",
+      "members": 15000,
+      "clubs": 800
+    },
+    {
+      "year": "2025-26",
+      "members": 16500,
+      "clubs": 840
+    }
   ],
   "districtData": [
-    { "district": "3770", "members": 1200, "clubs": 65 },
-    { "district": "3780", "members": 1450, "clubs": 78 },
-    { "district": "3790", "members": 1350, "clubs": 72 },
-    { "district": "3800", "members": 1620, "clubs": 86 },
-    { "district": "3810", "members": 1780, "clubs": 95 },
-    { "district": "3820", "members": 1540, "clubs": 83 },
-    { "district": "3830", "members": 1680, "clubs": 89 },
-    { "district": "3850", "members": 1420, "clubs": 76 },
-    { "district": "3860", "members": 1360, "clubs": 73 },
-    { "district": "3870", "members": 1240, "clubs": 67 },
-    { "district": "4510", "members": 1360, "clubs": 74 }
+    {
+      "district": "3770",
+      "members": 1200,
+      "clubs": 65
+    },
+    {
+      "district": "3780",
+      "members": 1450,
+      "clubs": 78
+    },
+    {
+      "district": "3790",
+      "members": 1350,
+      "clubs": 72
+    },
+    {
+      "district": "3800",
+      "members": 1620,
+      "clubs": 86
+    },
+    {
+      "district": "3810",
+      "members": 1780,
+      "clubs": 95
+    },
+    {
+      "district": "3820",
+      "members": 1540,
+      "clubs": 83
+    },
+    {
+      "district": "3830",
+      "members": 1680,
+      "clubs": 89
+    },
+    {
+      "district": "3850",
+      "members": 1420,
+      "clubs": 76
+    },
+    {
+      "district": "3860",
+      "members": 1360,
+      "clubs": 73
+    },
+    {
+      "district": "3870",
+      "members": 1240,
+      "clubs": 67
+    },
+    {
+      "district": "4510",
+      "members": 1360,
+      "clubs": 74
+    }
   ],
   "contributionsData": [
-    { "district": "3770", "contributions": 1250000, "projects": 85 },
-    { "district": "3780", "contributions": 1480000, "projects": 97 },
-    { "district": "3790", "contributions": 1320000, "projects": 88 },
-    { "district": "3800", "contributions": 1650000, "projects": 110 },
-    { "district": "3810", "contributions": 1780000, "projects": 115 },
-    { "district": "3820", "contributions": 1420000, "projects": 95 },
-    { "district": "3830", "contributions": 1580000, "projects": 105 },
-    { "district": "3850", "contributions": 1320000, "projects": 87 },
-    { "district": "3860", "contributions": 1280000, "projects": 86 },
-    { "district": "3870", "contributions": 1150000, "projects": 77 },
-    { "district": "4510", "contributions": 1270000, "projects": 85 }
+    {
+      "district": "3770",
+      "annualFund": 850000,
+      "polioPlus": 400000
+    },
+    {
+      "district": "3780",
+      "annualFund": 980000,
+      "polioPlus": 500000
+    },
+    {
+      "district": "3790",
+      "annualFund": 870000,
+      "polioPlus": 450000
+    },
+    {
+      "district": "3800",
+      "annualFund": 1050000,
+      "polioPlus": 600000
+    },
+    {
+      "district": "3810",
+      "annualFund": 1180000,
+      "polioPlus": 600000
+    },
+    {
+      "district": "3820",
+      "annualFund": 920000,
+      "polioPlus": 500000
+    },
+    {
+      "district": "3830",
+      "annualFund": 1080000,
+      "polioPlus": 500000
+    },
+    {
+      "district": "3850",
+      "annualFund": 870000,
+      "polioPlus": 450000
+    },
+    {
+      "district": "3860",
+      "annualFund": 830000,
+      "polioPlus": 450000
+    },
+    {
+      "district": "3870",
+      "annualFund": 750000,
+      "polioPlus": 400000
+    },
+    {
+      "district": "4510",
+      "annualFund": 820000,
+      "polioPlus": 450000
+    }
   ],
   "cardStats": [
     {
@@ -56,36 +160,53 @@
   "chartConfig": [
     {
       "title": "Rotaract Statistics (Around the World)",
-      "dataKey": ["members", "clubs"],
-      "colors": ["#C9175D", "#0F3B7F"],
+      "dataKey": [
+        "members",
+        "clubs"
+      ],
+      "colors": [
+        "#C9175D",
+        "#0F3B7F"
+      ],
       "dataSource": "worldData"
     },
     {
       "title": "Rotaract Statistics (Philippines)",
-      "dataKey": ["members", "clubs"],
-      "colors": ["#C9175D", "#0F3B7F"],
+      "dataKey": [
+        "members",
+        "clubs"
+      ],
+      "colors": [
+        "#C9175D",
+        "#0F3B7F"
+      ],
       "dataSource": "philippinesData"
     },
     {
       "title": "Rotaract Statistics (Philippines per member districts)",
-      "dataKey": ["members", "clubs"],
-      "colors": ["#C9175D", "#0F3B7F"],
+      "dataKey": [
+        "members",
+        "clubs"
+      ],
+      "colors": [
+        "#C9175D",
+        "#0F3B7F"
+      ],
       "dataSource": "districtData",
       "xAxisKey": "district"
     },
     {
-      "title": "PH Rotaract Contributions (Per district in PHP)",
-      "dataKey": ["contributions"],
-      "colors": ["#00A885"],
-      "dataSource": "contributionsData",
-      "xAxisKey": "district"
-    },
-    {
-      "title": "PH Rotaract Projects (Per district)",
-      "dataKey": ["projects"],
-      "colors": ["#FFC000"],
+      "title": "PH Rotaract Contributions (Per district in USD)",
+      "dataKey": [
+        "annualFund",
+        "polioPlus"
+      ],
+      "colors": [
+        "#00A885",
+        "#FFC000"
+      ],
       "dataSource": "contributionsData",
       "xAxisKey": "district"
     }
   ]
-} 
+}

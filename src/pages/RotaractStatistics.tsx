@@ -120,24 +120,37 @@ const BarChartCard = ({
   colors: string[];
   xAxisKey?: string;
 }) => {
-  // Check if this is the contributions chart
-  const isContributionsChart = dataKeys.includes('contributions');
+  // Check if this is a contributions chart
+  const isContributionsChart = dataKeys.includes('annualFund') || dataKeys.includes('polioPlus') || dataKeys.includes('contributions');
+
+  // Get friendly display names for data keys
+  const getKeyDisplayName = (key: string): string => {
+    switch(key) {
+      case 'annualFund': return 'Annual Fund';
+      case 'polioPlus': return 'Polio Plus Fund';
+      case 'contributions': return 'Contributions';
+      case 'projects': return 'Number of Projects';
+      case 'members': return 'Members';
+      case 'clubs': return 'Clubs';
+      default: return key;
+    }
+  };
 
   // Format numbers based on the key
   const formatYAxis = (value: any): string => {
     if (isContributionsChart) {
-      // For large money values, format in millions
-      return `₱${(value / 1000000).toFixed(1)}M`;
+      // For large money values, format in thousands
+      return `$${(value / 1000).toFixed(0)}K`;
     }
     return String(value);
   };
 
   // Format tooltip values
   const formatTooltip = (value: any, name: string) => {
-    if (name === 'contributions' || name === 'Contributions (PHP)') {
-      return [`₱${value.toLocaleString()}`, 'Contributions'];
+    if (name.includes('Annual Fund') || name.includes('Polio Plus') || name.includes('Contributions')) {
+      return [`$${value.toLocaleString()}`, name];
     }
-    return [value, name];
+    return [value.toLocaleString(), name];
   };
 
   // Custom bar with value label for all bars
@@ -145,8 +158,8 @@ const BarChartCard = ({
     const { x, y, width, height, fill, value, dataKey } = props;
     
     // Format the display value based on the data type
-    const displayValue = dataKey === 'contributions' 
-      ? `₱${(value / 1000000).toFixed(1)}M`
+    const displayValue = (dataKey === 'annualFund' || dataKey === 'polioPlus' || dataKey === 'contributions')
+      ? `$${(value / 1000).toFixed(0)}K`
       : value.toLocaleString();
     
     return (
@@ -188,7 +201,7 @@ const BarChartCard = ({
             <YAxis 
               tickFormatter={formatYAxis}
               label={isContributionsChart ? 
-                { value: 'Millions (PHP)', angle: -90, position: 'insideLeft', offset: -5 } : 
+                { value: 'Thousands (USD)', angle: -90, position: 'insideLeft', offset: -5 } : 
                 undefined
               }
             />
@@ -205,7 +218,7 @@ const BarChartCard = ({
               <Bar 
                 key={key}
                 dataKey={key} 
-                name={key === 'contributions' ? 'Contributions (PHP)' : key === 'projects' ? 'Number of Projects' : key}
+                name={getKeyDisplayName(key)}
                 fill={colors[index]} 
                 radius={[4, 4, 0, 0]}
                 shape={<CustomBar />}
