@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Separator } from '@/components/ui/separator';
@@ -14,76 +13,76 @@ interface ExecutiveMember {
 const ExecutiveCommitteeSection = () => {
   const executives: ExecutiveMember[] = [
     {
-      name: "Tiana Bator",
-      title: "District Rotaract Representative",
-      district: "Rotary International District 3770",
-      club: "Past President, Rotaract Club of San Jose Del Monte"
+      name: "Ana Luisa Torres",
+      title: "Chairperson",
+      district: "Rotary International District 3830",
+      club: "Past President, Rotaract Club of Makati Business District"
     },
     {
-      name: "Tatiana Mongo",
-      title: "District Rotaract Representative",
-      district: "Rotary International District 3770",
-      club: "Past President, Rotaract Club of San Jose Del Monte"
+      name: "Ramon Mercado",
+      title: "Vice Chair - Luzon",
+      district: "Rotary International District 3780",
+      club: "Past President, Rotaract Club of University of the Philippines"
     },
     {
-      name: "Jocelyn Botsch",
-      title: "District Rotaract Representative",
-      district: "Rotary International District 3770",
-      club: "Past President, Rotaract Club of San Jose Del Monte"
+      name: "Marielle Santiago",
+      title: "Vice Chair - Visayas",
+      district: "Rotary International District 3860",
+      club: "Past President, Rotaract Club of Metro Cebu"
     },
     {
-      name: "Meron Aminoff",
-      title: "District Rotaract Representative",
-      district: "Rotary International District 3770",
-      club: "Past President, Rotaract Club of San Jose Del Monte"
+      name: "Paolo Mendoza",
+      title: "Vice Chair - Mindanao",
+      district: "Rotary International District 3870",
+      club: "Past President, Rotaract Club of Davao City"
     },
     {
-      name: "Crisostomo Burra",
-      title: "District Rotaract Representative",
-      district: "Rotary International District 3770",
-      club: "Past President, Rotaract Club of San Jose Del Monte"
+      name: "Christine Reyes",
+      title: "Secretary",
+      district: "Rotary International District 3800",
+      club: "Past President, Rotaract Club of Manila Central"
     },
     {
-      name: "Dolce Gelft",
-      title: "District Rotaract Representative",
-      district: "Rotary International District 3770",
-      club: "Past President, Rotaract Club of San Jose Del Monte"
+      name: "Daniel Cruz",
+      title: "Treasurer",
+      district: "Rotary International District 3810",
+      club: "Past President, Rotaract Club of Manila Bay"
     },
     {
-      name: "Haylie Curtis",
-      title: "District Rotaract Representative",
+      name: "Angelica Santos",
+      title: "Communications Director",
       district: "Rotary International District 3770",
-      club: "Past President, Rotaract Club of San Jose Del Monte"
+      club: "Past President, Rotaract Club of Baguio Central"
     },
     {
-      name: "Marley Aminoff",
-      title: "District Rotaract Representative",
-      district: "Rotary International District 3770",
-      club: "Past President, Rotaract Club of San Jose Del Monte"
+      name: "Marco Rodriguez",
+      title: "Professional Development Chair",
+      district: "Rotary International District 3820",
+      club: "Past President, Rotaract Club of Batangas City"
     },
     {
-      name: "Rayna Franci",
-      title: "District Rotaract Representative",
-      district: "Rotary International District 3770",
-      club: "Past President, Rotaract Club of San Jose Del Monte"
+      name: "Jasmine Lim",
+      title: "Community Service Chair",
+      district: "Rotary International District 3790",
+      club: "Past President, Rotaract Club of Tarlac"
     },
     {
-      name: "Agent Lipshitz",
-      title: "District Rotaract Representative",
-      district: "Rotary International District 3770",
-      club: "Past President, Rotaract Club of San Jose Del Monte"
+      name: "Roberto Garcia",
+      title: "International Service Chair",
+      district: "Rotary International District 3850",
+      club: "Past President, Rotaract Club of Iloilo"
     },
     {
-      name: "Skylar Goose",
-      title: "District Rotaract Representative",
-      district: "Rotary International District 3770",
-      club: "Past President, Rotaract Club of San Jose Del Monte"
+      name: "Sophia Aquino",
+      title: "Youth Service Chair",
+      district: "Rotary International District 3780",
+      club: "Past President, Rotaract Club of Katipunan"
     },
     {
-      name: "Aaliyah Cottons",
-      title: "District Rotaract Representative",
-      district: "Rotary International District 3770",
-      club: "Past President, Rotaract Club of San Jose Del Monte"
+      name: "Miguel Tan",
+      title: "Membership Development Chair",
+      district: "Rotary International District 3830",
+      club: "Past President, Rotaract Club of San Juan"
     },
   ];
 

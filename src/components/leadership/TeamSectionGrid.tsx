@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 
@@ -10,9 +9,16 @@ interface TeamMember {
 
 const TeamSectionGrid = () => {
   const teamMembers: TeamMember[] = [
-    { name: 'Jane Smith', role: 'Program Director' },
-    { name: 'Mike Johnson', role: 'Operations Manager' },
-    // Add more team members as needed
+    { name: 'Maria Santos', role: 'District 3770 Representative' },
+    { name: 'Carlos Reyes', role: 'District 3780 Representative' },
+    { name: 'Isabella Cruz', role: 'District 3790 Representative' },
+    { name: 'Gabriel Lim', role: 'District 3800 Representative' },
+    { name: 'Sofia Tan', role: 'District 3810 Representative' },
+    { name: 'Miguel Rodriguez', role: 'District 3820 Representative' },
+    { name: 'Camille Aquino', role: 'District 3830 Representative' },
+    { name: 'Rafael Mendoza', role: 'District 3850 Representative' },
+    { name: 'Patricia Garcia', role: 'District 3860 Representative' },
+    { name: 'Antonio Torres', role: 'District 3870 Representative' },
   ];
 
   return (

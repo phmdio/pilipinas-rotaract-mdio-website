@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Separator } from '@/components/ui/separator';
 
@@ -70,16 +69,16 @@ const SigningDRRsSection = () => {
         
         <div className="space-y-4 text-gray-700">
           <p>
-            Duis dapibus, magna eget cursus vestibulum, turpis quam eleifend sem, nec faucibus enim tortor vel ex. Mauris a augue efficitur, condimentum nibh vel, facilisis nisi. Suspendisse potenti. Ut ultrices malesuada nibh, vel efficitur orci vehicula non. Donec vel vehicula nisi. Etiam sed ultricies lacus. Nulla facilisi. Cras tincidunt, arcu a tempor porta, nunc leo elementum enim, vel vehicula neque neque nec quam. Duis sed erat neque. Cras vel felis sit amet nisl aliquet feugiat.
+            The formation of the Pilipinas Rotaract Multi-District Information Organization (MDIO) represents a significant milestone in the history of Rotaract in the Philippines. This collaborative initiative began in 2007 when District Rotaract Representatives (DRRs) and District Governors (DGs) recognized the need for a united platform to enhance communication, share resources, and amplify the impact of Rotaract initiatives nationwide.
           </p>
           <p>
-            Praesent sed dictum dolor. Sed tincidunt nunc vitae dapibus cursus. Donec volutpat lectus vel felis ultrices tempus. Nullam porttitor sit amet dolor eu vehicula. Praesent et iaculis mi. Cras efficitur justo vel felis aliquam, vel rhoncus risus aliquet. Vestibulum rhoncus, turpis ut facilisis venenatis, dolor justo blandit nisi, ac interdum libero ligula eget arcu. Etiam et sapien et risus fringilla varius eu vel dolor. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae.
+            The journey toward official recognition was marked by dedication and perseverance. Between 2007 and 2012, each Rotary district in the Philippines gradually joined the movement, with districts 3780, 3790, 3810, and 3820 being among the first to sign and receive Rotary International approval in 2008. Districts 3800 and 3860 followed in 2009, while districts 3770, 3850, and 3870 completed the unification by 2012.
           </p>
           <p>
-            Nullam varius vel metus sit amet pulvinar. Sed facilisis est in vehicula dapibus. Maecenas id faucibus nibh. Donec vel ultricies purus. Cras accumsan nisi non odio vestibulum, sit amet euismod odio vehicula. Quisque laoreet molestie nulla, id interdum felis vehicula sit amet. Nulla mattis malesuada nulla eget pellentesque. Aliquam erat volutpat. Aenean semper aliquet efficitur. Cras commodo at ipsum eget fringilla. Integer facilisis euismod nisi, et commodo arcu condimentum sed. Nullam blandit, nisl ut sagittis dictum, elit urna vulputate ex, id volutpat nisl metus a orci.
+            This unified approach has enabled Rotaract clubs across the Philippines to coordinate national service initiatives, organize cross-district leadership training, and facilitate knowledge exchange between clubs. The MDIO structure has significantly strengthened the voice of Filipino Rotaractors on both national and international platforms, allowing for more effective advocacy on issues important to Filipino youth and communities.
           </p>
           <p>
-            Sed tincidunt vestibulum ex sed sodales. Vivamus at neque mollis, vestibulum urna at, facilisis mauris. Sed quis dui et magna lobortis pulvinar id sed metus. Proin porta, orci quis posuere feugiat, purus erat dictum dui, id vehicula nisi nisl sit amet nisl. Sed dapibus lacus eu fermentum auctor. Pellentesque et magna purus. Vivamus quis consequat enim, at faucibus sem. Vestibulum finibus lectus nec eros mattis, non pulvinar lectus volutpat. Donec ut ornare nulla, quis aliquam augue. Nulla consequat scelerisque augue, vitae tristique sapien finibus lacinia. Vivamus aliquam sagittis tortor, ac eleifend ipsum consequat vitae. Fusce tincidunt justo vel aliquam rutrum.
+            Today, the Pilipinas Rotaract MDIO continues to serve as a vital link between Rotaract clubs nationwide, fostering collaboration, promoting leadership development, and amplifying service impact. The organization stands as a testament to the power of unity and shared purpose, embodying the Rotaract principles of leadership, service, and fellowship across all ten Rotary districts in the Philippines.
           </p>
         </div>
       </div>

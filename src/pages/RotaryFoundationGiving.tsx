@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import Header from '@/components/Header';
@@ -29,10 +28,10 @@ const RotaryFoundationGiving = () => {
             {/* First Text Block */}
             <div className="mb-12">
               <h2 className="text-2xl font-bold text-rotaract-magenta mb-4">
-                Hipster ipsum tattooed brunch I'm baby.
+                Supporting The Rotary Foundation's Global Impact
               </h2>
               <p className="text-gray-700 mb-6">
-                Hipster ipsum pinterest kinfolk PBR&B. Single-origin kombucha mixtape kickstarter. Glossier gluten-free brioche, portland. Microdosing vegan waistcoat cold-press. Affogato art party edison blue four loko high life locavore beard gluten-free gluten-free. Authentic pour-over vaporware wayfarers keytar cardigan. Pork art quinoa gluten-free literally jean shorts cliche selvage. Style twee occupy raw denim cold cranberries your over glue mulciture.
+                The Rotary Foundation transforms your gifts into service projects that change lives both close to home and around the world. Since 1917, the Foundation has spent more than $4 billion on life-changing, sustainable projects that help people in need with access to safe water, medical care, literacy, education, and other critical needs. By giving to the Foundation, you become an essential part of these ongoing efforts to create lasting positive change in communities everywhere.
               </p>
             </div>
 
@@ -48,9 +47,9 @@ const RotaryFoundationGiving = () => {
                   />
                 </div>
                 <div className="w-full md:w-1/2">
-                  <h3 className="text-xl font-bold text-rotaract-magenta mb-3">Lorem Ipsum</h3>
+                  <h3 className="text-xl font-bold text-rotaract-magenta mb-3">Annual Fund</h3>
                   <p className="text-gray-700">
-                    Hipster ipsum pinterest tattooed I'm baby. Single pabst kinfolk mixtape kickstarter hashtagccino vegan waistcoat cold-press. Affogato art party edison blue four loko high life locavore beard cliche selvage authentic pour-over keytar cardigan. Actually locavore next level.
+                    The Annual Fund is the primary source of funding for Foundation activities. Your contributions to the Annual Fund help Rotary clubs take action to create positive change in communities at home and around the world. Through grants and projects, Rotary members combat diseases like polio and malaria, provide clean water, improve economic opportunities, and promote peace.
                   </p>
                 </div>
               </div>
@@ -65,9 +64,9 @@ const RotaryFoundationGiving = () => {
                   />
                 </div>
                 <div className="w-full md:w-1/2">
-                  <h3 className="text-xl font-bold text-rotaract-magenta mb-3">Lorem Ipsum</h3>
+                  <h3 className="text-xl font-bold text-rotaract-magenta mb-3">PolioPlus Fund</h3>
                   <p className="text-gray-700">
-                    Hipster ipsum pinterest tattooed I'm baby. Single pabst kinfolk mixtape kickstarter hashtagccino vegan waistcoat cold-press. Affogato art party edison blue four loko high life locavore beard cliche selvage authentic pour-over keytar cardigan.
+                    Rotary has been working to eradicate polio for more than 35 years. Our goal of ridding the world of this disease is closer than ever. When you contribute to the PolioPlus Fund, you're supporting Rotary's top priority - ensuring that polio is eradicated and that it never returns. Your donation helps deliver vaccinations, transportation, and educational materials.
                   </p>
                 </div>
               </div>
@@ -82,9 +81,9 @@ const RotaryFoundationGiving = () => {
                   />
                 </div>
                 <div className="w-full md:w-1/2">
-                  <h3 className="text-xl font-bold text-rotaract-magenta mb-3">Lorem Ipsum</h3>
+                  <h3 className="text-xl font-bold text-rotaract-magenta mb-3">Endowment Fund</h3>
                   <p className="text-gray-700">
-                    Hipster ipsum pinterest tattooed I'm baby. Single pabst kinfolk mixtape kickstarter hashtagccino vegan waistcoat cold-press. Affogato art party edison blue four loko high life locavore beard cliche selvage authentic pour-over keytar cardigan.
+                    The Endowment Fund ensures the long-term financial stability of the Foundation and provides essential support for Rotary's programs. Contributions to the Endowment Fund are invested in perpetuity, with a portion of the fund's earnings spent on Foundation programs each year. This provides a steady and reliable source of income to meet the world's greatest needs.
                   </p>
                 </div>
               </div>
@@ -99,9 +98,9 @@ const RotaryFoundationGiving = () => {
                   />
                 </div>
                 <div className="w-full md:w-1/2">
-                  <h3 className="text-xl font-bold text-rotaract-magenta mb-3">Lorem Ipsum</h3>
+                  <h3 className="text-xl font-bold text-rotaract-magenta mb-3">Disaster Response Fund</h3>
                   <p className="text-gray-700">
-                    Hipster ipsum pinterest tattooed I'm baby. Single pabst kinfolk mixtape kickstarter hashtagccino vegan waistcoat cold-press. Affogato art party edison blue four loko high life locavore beard cliche selvage authentic pour-over keytar cardigan.
+                    The Rotary Disaster Response Fund provides a ready mechanism for Rotary districts to respond quickly to local disasters. Districts in affected areas may receive disaster response grants to provide basic items such as water, food, medicine, and clothing. Your support enables our communities to recover more quickly after devastating natural disasters.
                   </p>
                 </div>
               </div>

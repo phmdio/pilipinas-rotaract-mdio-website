@@ -1,62 +1,61 @@
-
 import React from 'react';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { Card, CardContent } from '@/components/ui/card';
 
 const staffMembers = [
   {
-    name: "Terry Pascasondra Arcand",
-    role: "District Rotaract Representative",
-    district: "Rotary International District 3770",
-    club: "Past President, Rotaract Club of San Jose Del Monte"
+    name: "Patricia Mendoza",
+    role: "Executive Assistant",
+    district: "Rotary International District 3830",
+    club: "Member, Rotaract Club of Manila"
   },
   {
-    name: "Jerilyn Schieffer",
-    role: "District Rotaract Representative",
-    district: "Rotary International District 3770",
-    club: "Past President, Rotaract Club of San Jose Del Monte"
+    name: "Jose Santos",
+    role: "Communications Coordinator",
+    district: "Rotary International District 3780",
+    club: "Member, Rotaract Club of Quezon City"
   },
   {
-    name: "Omar Herneltz",
-    role: "District Rotaract Representative",
-    district: "Rotary International District 3770",
-    club: "Past President, Rotaract Club of San Jose Del Monte"
+    name: "Maria Reyes",
+    role: "Events Manager",
+    district: "Rotary International District 3810",
+    club: "Member, Rotaract Club of Parañaque"
   },
   {
-    name: "James Vaccaro",
-    role: "District Rotaract Representative",
-    district: "Rotary International District 3770",
-    club: "Past President, Rotaract Club of San Jose Del Monte"
+    name: "Antonio Cruz",
+    role: "Technology Officer",
+    district: "Rotary International District 3800",
+    club: "Member, Rotaract Club of Makati"
   },
   {
-    name: "Jaylen Baptiste",
-    role: "District Rotaract Representative",
+    name: "Sofia Lim",
+    role: "Project Coordinator",
     district: "Rotary International District 3770",
-    club: "Past President, Rotaract Club of San Jose Del Monte"
+    club: "Member, Rotaract Club of Baguio"
   },
   {
-    name: "Jerilyn Schieffer",
-    role: "District Rotaract Representative",
-    district: "Rotary International District 3770",
-    club: "Past President, Rotaract Club of San Jose Del Monte"
+    name: "Carlos Tan",
+    role: "Training Coordinator",
+    district: "Rotary International District 3850",
+    club: "Member, Rotaract Club of Bacolod"
   },
   {
-    name: "Omar Herneltz",
-    role: "District Rotaract Representative",
-    district: "Rotary International District 3770",
-    club: "Past President, Rotaract Club of San Jose Del Monte"
+    name: "Anna Rodriguez",
+    role: "Grants Officer",
+    district: "Rotary International District 3860",
+    club: "Member, Rotaract Club of Cebu"
   },
   {
-    name: "James Vaccaro",
-    role: "District Rotaract Representative",
-    district: "Rotary International District 3770",
-    club: "Past President, Rotaract Club of San Jose Del Monte"
+    name: "Miguel Santos",
+    role: "Public Relations Specialist",
+    district: "Rotary International District 3790",
+    club: "Member, Rotaract Club of San Fernando"
   },
   {
-    name: "Jaylen Baptiste",
-    role: "District Rotaract Representative",
-    district: "Rotary International District 3770",
-    club: "Past President, Rotaract Club of San Jose Del Monte"
+    name: "Isabella Garcia",
+    role: "Membership Coordinator",
+    district: "Rotary International District 3870",
+    club: "Member, Rotaract Club of Davao"
   },
 ];
 

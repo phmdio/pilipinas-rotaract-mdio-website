@@ -37,9 +37,9 @@ const InformationCenter = () => {
         <section className="py-10 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-4xl">
-              <h2 className="text-4xl font-bold text-rotaract-magenta mb-3">Hipster ipsum tattooed brunch I'm baby.</h2>
+              <h2 className="text-4xl font-bold text-rotaract-magenta mb-3">Welcome to Our District Information Center</h2>
               <p className="text-gray-700">
-                Hipster ipsum tattooed brunch I'm baby. Mumblecore pug man bun batch hella bitters batch offal pitchfork. Crucifix fanny dsa scenester mug skateboard brooklyn art. Williamsburg hoodie church-key letterpress tbh 3-moon whatever. Viral bun bruh bulb truffaut bun. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Explore the vibrant Rotaract districts across the Philippines. Each district represents a dynamic community of young professionals dedicated to service, leadership development, and creating positive change in their communities. With diverse projects spanning professional development, community service, and international understanding, our districts embody the Rotaract spirit of "Service Above Self." Browse through our district information to learn more about their initiatives, achievements, and impact.
               </p>
             </div>
           </div>

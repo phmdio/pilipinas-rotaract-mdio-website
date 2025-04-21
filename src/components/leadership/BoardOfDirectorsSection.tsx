@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
@@ -13,64 +12,64 @@ interface Director {
 const BoardOfDirectorsSection = () => {
   const directors: Director[] = [
     {
-      name: "Justin Curtis",
+      name: "Maria Gonzales",
       title: "District Rotaract Representative",
       district: "Rotary International District 3770",
-      club: "Past President, Rotaract Club of San Jose Del Monte"
+      club: "Past President, Rotaract Club of Baguio"
     },
     {
-      name: "Janine Bazar",
+      name: "Carlos Santos",
       title: "District Rotaract Representative",
-      district: "Rotary International District 3770",
-      club: "Past President, Rotaract Club of San Jose Del Monte"
+      district: "Rotary International District 3780",
+      club: "Past President, Rotaract Club of Quezon City"
     },
     {
-      name: "Marinjoe Phillip",
+      name: "Isabella Reyes",
       title: "District Rotaract Representative",
-      district: "Rotary International District 3770",
-      club: "Past President, Rotaract Club of San Jose Del Monte"
+      district: "Rotary International District 3790",
+      club: "Past President, Rotaract Club of Dagupan"
     },
     {
-      name: "Shyron Lubis",
+      name: "Gabriel Tan",
       title: "District Rotaract Representative",
-      district: "Rotary International District 3770",
-      club: "Past President, Rotaract Club of San Jose Del Monte"
+      district: "Rotary International District 3800",
+      club: "Past President, Rotaract Club of Manila"
     },
     {
-      name: "Crisostomo Burro",
+      name: "Sofia Cruz",
       title: "District Rotaract Representative",
-      district: "Rotary International District 3770",
-      club: "Past President, Rotaract Club of San Jose Del Monte"
+      district: "Rotary International District 3810",
+      club: "Past President, Rotaract Club of Pasay"
     },
     {
-      name: "Karlynn Goose",
+      name: "Miguel Lim",
       title: "District Rotaract Representative",
-      district: "Rotary International District 3770",
-      club: "Past President, Rotaract Club of San Jose Del Monte"
+      district: "Rotary International District 3820",
+      club: "Past President, Rotaract Club of Lucena"
     },
     {
-      name: "Allison Siphron",
+      name: "Camille Aquino",
       title: "District Rotaract Representative",
-      district: "Rotary International District 3770",
-      club: "Past President, Rotaract Club of San Jose Del Monte"
+      district: "Rotary International District 3830",
+      club: "Past President, Rotaract Club of Makati"
     },
     {
-      name: "Angel Donin",
+      name: "Angelo Dela Cruz",
       title: "District Rotaract Representative",
-      district: "Rotary International District 3770",
-      club: "Past President, Rotaract Club of San Jose Del Monte"
+      district: "Rotary International District 3850",
+      club: "Past President, Rotaract Club of Bacolod"
     },
     {
-      name: "Jakob Rhod Madsen",
+      name: "Patricia Mendoza",
       title: "District Rotaract Representative",
-      district: "Rotary International District 3770",
-      club: "Past President, Rotaract Club of San Jose Del Monte"
+      district: "Rotary International District 3860",
+      club: "Past President, Rotaract Club of Cebu"
     },
     {
-      name: "Ryan Donin",
+      name: "Rafael Torres",
       title: "District Rotaract Representative",
-      district: "Rotary International District 3770",
-      club: "Past President, Rotaract Club of San Jose Del Monte"
+      district: "Rotary International District 3870",
+      club: "Past President, Rotaract Club of Cagayan de Oro"
     },
   ];
 
