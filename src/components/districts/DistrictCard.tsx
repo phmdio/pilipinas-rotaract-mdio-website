@@ -1,5 +1,5 @@
-
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 interface DistrictCardProps {
   district: {
@@ -13,11 +13,13 @@ interface DistrictCardProps {
 
 const DistrictCard = ({ district, index }: DistrictCardProps) => {
   return (
-    <div 
-      className="group relative overflow-hidden rounded-lg aspect-square"
+    <Link 
+      to={`/district/${district.id}`}
+      className="group relative overflow-hidden rounded-lg aspect-square cursor-pointer block"
       style={{ 
         animationDelay: `${index * 0.1}s`
       }}
+      aria-label={`View District ${district.id} details`}
     >
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${district.image})` }}>
@@ -32,7 +34,7 @@ const DistrictCard = ({ district, index }: DistrictCardProps) => {
       
       {/* Hover Effect */}
       <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-    </div>
+    </Link>
   );
 };
 
