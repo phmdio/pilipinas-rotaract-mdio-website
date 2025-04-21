@@ -130,7 +130,7 @@ const AboutSection = () => {
             inView && "opacity-100 translate-y-0"
           )}>
             <p className="text-gray-700 mb-8">
-              Hipster ipsum tattooed brunch I'm baby. Mumblecore pug man batch hella bitters batch offal pitchfork. Crucifix fanny dsa scenester mug skateboard brooklyn art. Williamsburg hoodie church-key letterpress tbh 3-moon whatever. Viral bun bruh bulb truffaut bun.
+              Rotaract in the Philippines has a rich history of service, leadership, and impactful community initiatives. Through our stories section, we showcase the inspiring journeys of clubs across the country, highlighting their innovative approaches to addressing local challenges and creating lasting positive change.
             </p>
             
             <div className="space-y-8 mt-12">
@@ -148,7 +148,7 @@ const AboutSection = () => {
                 <div className="md:w-1/3 bg-green-600 p-8 flex flex-col justify-center text-right">
                   <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">Philippine Rotaract Magazine</h3>
                   <p className="text-white mb-4">
-                    Hipster ipsum tattooed brunch I'm baby. Distillery bulb green whatever etsy godard vhs tumeric.
+                    Our official publication showcasing outstanding projects, member achievements, and important updates from Rotaract clubs throughout the Philippines.
                   </p>
                 </div>
               </article>
@@ -167,7 +167,7 @@ const AboutSection = () => {
                 <div className="md:w-1/3 bg-red-600 p-8 flex flex-col justify-center text-right order-2 md:order-1">
                   <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">Ang Balangay</h3>
                   <p className="text-white mb-4">
-                    Hipster ipsum tattooed brunch I'm baby. Distillery bulb green whatever etsy godard vhs tumeric.
+                    Our quarterly newsletter connecting Rotaract clubs across the archipelago, featuring collaborative initiatives and best practices in community service.
                   </p>
                 </div>
               </article>

@@ -1,4 +1,3 @@
-
 import { useState, useRef } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
@@ -30,7 +29,7 @@ const programs = [
   {
     id: 3,
     title: 'District Rotaract Representative Election Training Seminar',
-    description: 'Hipster ipsum tattooed brunch I\'m baby. Mumblecore pug man batch hella bitters batch offal pitchfork.',
+    description: 'Comprehensive training program preparing future district leaders for their roles and responsibilities in Rotaract governance.',
     date: 'JANUARY 01, 2025',
     image: '/assets/our-history.png',
   },

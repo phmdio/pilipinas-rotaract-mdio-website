@@ -80,7 +80,7 @@ const FoundationSection = () => {
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-2">The Rotary Foundation Giving</h2>
             <div className="w-full max-w-xl h-0.5 bg-white mb-6"></div>
             <p className="text-gray-200 mb-8">
-              Hipster ipsum tattooed brunch I'm baby. Mumblecore pug man batch hella bitters batch offal pitchfork. Crucifix fanny dsa scenester mug skateboard brooklyn art. Williamsburg hoodie church-key letterpress tbh 3-moon whatever. Viral bun bruh bulb truffaut bun.
+              The Rotary Foundation transforms your gifts into sustainable projects that change lives locally and globally. Since 1917, the Foundation has invested in communities through grants supporting clean water, disease prevention, peace, education, and economic development. Join us in making a lasting impact by contributing to the Rotary Foundation.
             </p>
             <a href="/under-construction" className="inline-block bg-[#FF9500] text-white font-medium uppercase tracking-wider px-8 py-3 rounded-full hover:bg-opacity-90 transition-all">
               Donate to the Rotary Foundation

@@ -35,7 +35,7 @@ const StatisticsSection = () => {
         )}>
           <h2 className="text-4xl font-bold mb-4">Rotaract Statistics</h2>
           <p className="text-white/90">
-            Hipster ipsum tattooed brunch I'm baby. Mumblecore pug man batch hella bitters batch offal pitchfork. Crucifx fanny dsa scenester mug skateboard brooklyn art. Williamsburg hoodie church-key letterpress tbh 3-moon whatever. Viral bun bruh bulb truffaut bun.
+            Rotaract continues to grow as a global network of young leaders. These figures reflect our expanding impact across the Philippines and around the world. Each number represents passionate individuals working together to create positive change in their communities through professional development, leadership opportunities, and service projects.
           </p>
         </div>
 

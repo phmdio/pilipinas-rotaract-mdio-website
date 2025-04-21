@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { cn } from '@/lib/utils';
 
@@ -15,7 +14,7 @@ const SectionHeading = ({ inView }: SectionHeadingProps) => {
       <h2 className="text-4xl font-bold mb-2">Our Information Center</h2>
       <h3 className="text-2xl font-medium mb-6">Member Philippine Districts</h3>
       <p className="text-white/90 max-w-3xl mb-8">
-        Hipster ipsum tattooed brunch I'm baby. Mumblecore pug man batch hella bitters batch offal pitchfork. Crucifix fanny dsa scenester mug skateboard brooklyn art. Williamsburg hoodie church-key letterpress tbh 3-moon whatever. Viral bun bruh bulb truffaut bun.
+        Explore the diverse Rotaract districts across the Philippines, each with unique initiatives and vibrant communities of young leaders. Our Information Center provides resources, contacts, and highlights from all ten districts that make up the Pilipinas Rotaract MDIO, showcasing their impactful service projects and collaborative efforts.
       </p>
     </div>
   );

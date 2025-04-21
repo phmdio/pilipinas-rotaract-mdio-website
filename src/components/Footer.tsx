@@ -16,7 +16,7 @@ const Footer = () => {
               />
             </div>
             <p className="text-sm text-white/80 mt-4">
-              Hipster ipsum tattooed brunch I'm baby. Mumblecore pug man bun batch hello bitters batch offal pitchfork. Crucifix fanny dsa scenester mug skateboard brooklyn art. Williamsburg hoodie church-key letterpress tbh 3-moon whatever. Viral bun bruh bulb truffaut bun.
+              Pilipinas Rotaract MDIO serves as the coordinating entity for all Rotaract clubs across the Philippines. We facilitate collaboration between districts, share best practices, organize national events, and provide leadership development opportunities to empower young professionals in their service journeys.
             </p>
           </div>
           
