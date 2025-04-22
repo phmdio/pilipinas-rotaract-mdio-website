@@ -9,6 +9,108 @@
       "title": "3780 - Rotaract Club of Quezon City MediaTech - Transform",
       "imageUrl": "https://images.ctfassets.net/dze7xj4zfu0b/61DkZSvZBfbeiZdkjmZVAE/8ddee39739a78e7d3728f3aac80a8813/3780_-_Rotaract_Club_of_Quezon_City_MediaTech_-_Transform.png",
       "alt": "3780 - Rotaract Club of Quezon City MediaTech - Transform"
+    },
+    {
+      "title": "Connect - D3860 - Rotaract Club of Cebu Fuente",
+      "imageUrl": "https://images.ctfassets.net/dze7xj4zfu0b/7o6egAoC0nMy1fweN9JFSS/516fe333d0f6932a89690dd202d39167/Connect_-_D3860_-_Rotaract_Club_of_Cebu_Fuente.png",
+      "alt": "Connect - D3860 - Rotaract Club of Cebu Fuente"
+    },
+    {
+      "title": "Empower - D3830 - Rotaract Club of Makati",
+      "imageUrl": "https://images.ctfassets.net/dze7xj4zfu0b/qU4NUnigqQcr0Nh3J98LL/ee059caa03a47dea839d8451d8023c96/Empower_-_D3830_-_Rotaract_Club_of_Makati.png",
+      "alt": "Empower - D3830 - Rotaract Club of Makati"
+    },
+    {
+      "title": "End Polio - D3810 - Rotaract Club of Dasmarinas",
+      "imageUrl": "https://images.ctfassets.net/dze7xj4zfu0b/5bHcqKhZSofTI2jYxxNuSD/a5339239b1b302a5a129a713789cec26/End_Polio_-_D3810_-_Rotaract_Club_of_Dasmarinas.png",
+      "alt": "End Polio - D3810 - Rotaract Club of Dasmarinas"
+    },
+    {
+      "title": "Fight Hunger - D3870 - Rotaract Club of Carmen Valley",
+      "imageUrl": "https://images.ctfassets.net/dze7xj4zfu0b/OzWpDPZTEZCa12l6Rv53U/32d8e3ecaf941fc4bc16c2401a662561/Fight_Hunger_-_D3870_-_Rotaract_Club_of_Carmen_Valley.png",
+      "alt": "Fight Hunger - D3870 - Rotaract Club of Carmen Valley"
+    },
+    {
+      "title": "Inspire - D3870 - Rotaract Club of Carmen Valley",
+      "imageUrl": "https://images.ctfassets.net/dze7xj4zfu0b/6ByTMTPXCWgZr0vnZaee7w/efc7e82f2431e134dd26005f06ca3207/Inspire_-_D3870_-_Rotaract_Club_of_Carmen_Valley.png",
+      "alt": "Inspire - D3870 - Rotaract Club of Carmen Valley"
+    },
+    {
+      "title": "Learn - D3850 - Rotaract Club of Zamboanga City North",
+      "imageUrl": "https://images.ctfassets.net/dze7xj4zfu0b/34gqGQhY1Lw7vFkbKVLuKk/fe4eb4f3ada507ee59e46b45e2a4c2eb/Learn_-_D3850_-_Rotaract_Club_of_Zamboanga_City_North.jpg",
+      "alt": "Learn - D3850 - Rotaract Club of Zamboanga City North"
+    },
+    {
+      "title": "Mentor - D3860 - Rotaract Club of Cebu Fuente",
+      "imageUrl": "https://images.ctfassets.net/dze7xj4zfu0b/2byG0BvI171HARhTx6jkGu/0208762831e38b1795a5a646556297e6/Mentor_-_D3860_-_Rotaract_Club_of_Cebu_Fuente.png",
+      "alt": "Mentor - D3860 - Rotaract Club of Cebu Fuente"
+    },
+    {
+      "title": "Promote Peace - D3810 - Rotaract Club of Dasmarinas",
+      "imageUrl": "https://images.ctfassets.net/dze7xj4zfu0b/VWicQK3DjSD0TKh2UYUnf/5fa8e478bc11797548f55ac2933ee9f8/Promote_Peace_-_D3810_-_Rotaract_Club_of_Dasmarinas.jpg",
+      "alt": "Promote Peace - D3810 - Rotaract Club of Dasmarinas"
+    }
+  ],
+  "districts": [
+    {
+      "id": "3770",
+      "color": "#F6A81C",
+      "image": "https://images.ctfassets.net/dze7xj4zfu0b/6inPXcgt3v6RDkjKUhd7gA/373cfe99949563bc7e421e42f384b30b/3770.jpeg",
+      "description": "District 3770 is the first Rotary International district in the Philippines in terms of numerical sequence. It may be small in numbers but through the years, it has been able to build a strong base of sturdy, passionate and competent Rotaract clubs that develop effective leaders and promote responsible citizenship."
+    },
+    {
+      "id": "3780",
+      "color": "#16478E",
+      "image": "https://images.ctfassets.net/dze7xj4zfu0b/59gyOMiRE46OaJq7On3PXG/fb763a5367cbed3884683dd71cc55e04/3780.jpeg",
+      "description": "Rotaract Clubs of Rotary International District #"
+    },
+    {
+      "id": "3790",
+      "color": "#00A2E1",
+      "image": "https://images.ctfassets.net/dze7xj4zfu0b/2VTBqj19fXkzz0dTLY0BwI/ccecfcb7f611830adfcfcdee92fff8c3/3790.jpeg",
+      "description": "Rotaract Clubs of Rotary International District #"
+    },
+    {
+      "id": "3800",
+      "color": "#003366",
+      "image": "https://images.ctfassets.net/dze7xj4zfu0b/1Iil4pp2hUhuSrMgGEiYuD/1eaede1528d9c2d05cc0c8071e32c988/3800.jpeg",
+      "description": "Rotaract Clubs of Rotary International District #"
+    },
+    {
+      "id": "3810",
+      "color": "#F47621",
+      "image": "https://images.ctfassets.net/dze7xj4zfu0b/1lAtjcCr1rVxFTcPxddZek/5926bce6f7d2c99373ca3791ad8c02d0/3810.jpeg",
+      "description": "Rotaract Clubs of Rotary International District #"
+    },
+    {
+      "id": "3820",
+      "color": "#8E288F",
+      "image": "https://images.ctfassets.net/dze7xj4zfu0b/4c42rOzMr7REevdLjnyncz/e5d3d5675d4d8cded9023aa16f766ca3/3820.jpeg",
+      "description": "Rotaract Clubs of Rotary International District #"
+    },
+    {
+      "id": "3830",
+      "color": "#0D9648",
+      "image": "https://images.ctfassets.net/dze7xj4zfu0b/2YZ7B7KEA7WhBvexyIJirk/44f94bad43ddf56ce15a99492081472c/3830.jpeg",
+      "description": "Rotaract Clubs of Rotary International District #"
+    },
+    {
+      "id": "3850",
+      "color": "#E22626",
+      "image": "https://images.ctfassets.net/dze7xj4zfu0b/48WJuAhzpaR1UEcUlxoZvq/d7475a192953f86f4da70a7d00df4a85/3850.jpeg",
+      "description": "Rotaract Clubs of Rotary International District #"
+    },
+    {
+      "id": "3860",
+      "color": "#66819A",
+      "image": "https://images.ctfassets.net/dze7xj4zfu0b/1nMGPnGl5P82tJils5PBin/2d7f6f9200745a5a1a1bbfb627c919bb/3860.jpeg",
+      "description": "Rotaract Clubs of Rotary International District #"
+    },
+    {
+      "id": "3870",
+      "color": "#00ACBB",
+      "image": "https://images.ctfassets.net/dze7xj4zfu0b/7KgjC4KH1EMwIvbLB9uEdA/679ee8d5dbdd869b76d5f5e22517234d/3870.jpeg",
+      "description": "Rotaract Clubs of Rotary International District #"
     }
   ]
 }
