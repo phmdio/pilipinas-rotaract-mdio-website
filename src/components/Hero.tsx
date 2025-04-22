@@ -5,18 +5,31 @@ import {
   CarouselContent, 
   CarouselItem,
 } from '@/components/ui/carousel';
+import { useQuery } from '@tanstack/react-query';
+import { 
+  getHeroCarouselImages, 
+  contentfulKeys, 
+  fallbackCarouselImages,
+  HeroCarouselImage
+} from '@/lib/contentful';
 
 const Hero = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [rightSideApi, setRightSideApi] = useState<any>(null);
   const [rightSideCurrent, setRightSideCurrent] = useState(0);
 
-  // Images for the right side carousel
-  const rightSideImages = [
-    "/assets/carousel.png",
-    "/assets/carousel.png",
-    "/assets/carousel.png",
-  ];
+  // Fetch carousel images using React Query
+  const { 
+    data: carouselImages = fallbackCarouselImages,
+    isLoading,
+    isError,
+  } = useQuery({
+    queryKey: contentfulKeys.heroCarousel,
+    queryFn: getHeroCarouselImages,
+    staleTime: 1000 * 60 * 5, // 5 minutes
+    gcTime: 1000 * 60 * 60, // 1 hour
+    retry: 1,
+  });
 
   useEffect(() => {
     setIsLoaded(true);
@@ -86,45 +99,57 @@ const Hero = () => {
             isLoaded && "opacity-100 translate-y-0"
           )}>
             <div className="relative mx-auto max-w-md">
-              <Carousel
-                setApi={setRightSideApi}
-                opts={{
-                  loop: true,
-                  skipSnaps: false,
-                }}
-                className="w-full"
-              >
-                <CarouselContent>
-                  {rightSideImages.map((image, index) => (
-                    <CarouselItem key={index}>
-                      <div className="aspect-square w-full relative">
-                        <img 
-                          src={image} 
-                          alt={`Rotaract members ${index + 1}`} 
-                          className="relative z-10 rounded-lg shadow-xl w-full h-full object-cover"
-                        />
-                      </div>
-                    </CarouselItem>
-                  ))}
-                </CarouselContent>
-                
-                {/* Right side carousel indicators */}
-                <div className="absolute -bottom-6 left-0 right-0 flex justify-center gap-2 z-10">
-                  {rightSideImages.map((_, index) => (
-                    <button
-                      key={index}
-                      onClick={() => rightSideApi?.scrollTo(index)}
-                      className={cn(
-                        "h-2 rounded-full transition-all duration-300",
-                        rightSideCurrent === index 
-                          ? "w-8 bg-white" 
-                          : "w-2 bg-white/50 hover:bg-white/70"
-                      )}
-                      aria-label={`Go to image ${index + 1}`}
-                    />
-                  ))}
+              {isLoading ? (
+                <div className="aspect-square w-full flex items-center justify-center bg-gray-200 rounded-lg">
+                  <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white"></div>
                 </div>
-              </Carousel>
+              ) : isError ? (
+                <div className="aspect-square w-full flex items-center justify-center bg-gray-200 rounded-lg">
+                  <p className="text-gray-600 text-center px-4">
+                    Couldn't load images. Please try again later.
+                  </p>
+                </div>
+              ) : (
+                <Carousel
+                  setApi={setRightSideApi}
+                  opts={{
+                    loop: true,
+                    skipSnaps: false,
+                  }}
+                  className="w-full"
+                >
+                  <CarouselContent>
+                    {carouselImages.map((image, index) => (
+                      <CarouselItem key={index}>
+                        <div className="aspect-square w-full relative">
+                          <img 
+                            src={image.imageUrl} 
+                            alt={image.alt} 
+                            className="relative z-10 rounded-lg shadow-xl w-full h-full object-cover"
+                          />
+                        </div>
+                      </CarouselItem>
+                    ))}
+                  </CarouselContent>
+                  
+                  {/* Right side carousel indicators */}
+                  <div className="absolute -bottom-6 left-0 right-0 flex justify-center gap-2 z-10">
+                    {carouselImages.map((_, index) => (
+                      <button
+                        key={index}
+                        onClick={() => rightSideApi?.scrollTo(index)}
+                        className={cn(
+                          "h-2 rounded-full transition-all duration-300",
+                          rightSideCurrent === index 
+                            ? "w-8 bg-white" 
+                            : "w-2 bg-white/50 hover:bg-white/70"
+                        )}
+                        aria-label={`Go to image ${index + 1}`}
+                      />
+                    ))}
+                  </div>
+                </Carousel>
+              )}
             </div>
           </div>
         </div>
