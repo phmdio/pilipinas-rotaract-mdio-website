@@ -6,10 +6,13 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import PageHero from '@/components/PageHero';
 import DistrictGrid from '@/components/DistrictGrid';
-import { districtData } from '@/data/districtData';
+import { useDistrictsQuery } from '@/hooks/useDistrictsQuery';
 
 const InformationCenter = () => {
   const [hoveredCard, setHoveredCard] = useState<string | null>(null);
+  
+  // Use React Query to fetch the districts
+  const { data: districts, isLoading } = useDistrictsQuery();
   
   // Carousel images
   const carouselImages = [
@@ -48,7 +51,13 @@ const InformationCenter = () => {
         {/* Districts grid section */}
         <section className="py-10 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <DistrictGrid districts={districtData} />
+            {isLoading ? (
+              <div className="flex justify-center items-center min-h-[200px]">
+                <div className="animate-spin h-8 w-8 border-4 border-blue-600 rounded-full border-t-transparent"></div>
+              </div>
+            ) : (
+              <DistrictGrid districts={districts} />
+            )}
           </div>
         </section>
       </main>

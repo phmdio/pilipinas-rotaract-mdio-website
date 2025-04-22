@@ -1,12 +1,11 @@
-
 import { useState, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import SectionHeading from './districts/SectionHeading';
 import DistrictGrid from './districts/DistrictGrid';
-import { districtData } from '../data/districtData';
 import { Link } from 'react-router-dom';
+import { useDistrictsQuery } from '@/hooks/useDistrictsQuery';
 
 const InfoCenter = () => {
   const { ref, inView } = useInView({
@@ -21,6 +20,9 @@ const InfoCenter = () => {
   };
   
   const [windowSize, setWindowSize] = useState('desktop');
+  
+  // Fetch districts using React Query
+  const { data: districts, isLoading } = useDistrictsQuery();
   
   useEffect(() => {
     const handleResize = () => {
@@ -48,10 +50,16 @@ const InfoCenter = () => {
           "relative transition-all duration-500 delay-100 opacity-0 translate-y-4",
           inView && "opacity-100 translate-y-0"
         )}>
-          <DistrictGrid 
-            districts={districtData} 
-            windowSize={windowSize as 'mobile' | 'tablet' | 'desktop'} 
-          />
+          {isLoading ? (
+            <div className="flex justify-center items-center min-h-[200px]">
+              <div className="animate-spin h-8 w-8 border-4 border-blue-600 rounded-full border-t-transparent"></div>
+            </div>
+          ) : (
+            <DistrictGrid 
+              districts={districts} 
+              windowSize={windowSize as 'mobile' | 'tablet' | 'desktop'} 
+            />
+          )}
           
           <div className="flex justify-start mt-10">
             <Link to="/information-center">

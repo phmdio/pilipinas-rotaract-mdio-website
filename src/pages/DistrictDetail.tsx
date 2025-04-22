@@ -1,5 +1,4 @@
-
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { Button } from '@/components/ui/button';
@@ -7,8 +6,6 @@ import { Card, CardContent } from '@/components/ui/card';
 import { FacebookIcon, InstagramIcon, YoutubeIcon, TwitterIcon, MapPinIcon, UserIcon, CalendarIcon, PhoneIcon } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import { districtData } from '@/data/districtData';
-import { getDistrictDetail } from '@/data/districtDetailData';
 import { 
   Carousel, 
   CarouselContent, 
@@ -23,29 +20,44 @@ import {
   TableCell,
   TableRow,
 } from "@/components/ui/table";
+import { useDistrictByIdQuery } from '@/hooks/useDistrictsQuery';
+import { useDistrictDetailQuery } from '@/hooks/useDistrictDetailQuery';
 
 const DistrictDetail = () => {
   const { districtId } = useParams<{ districtId: string }>();
-  const [district, setDistrict] = useState<any>(null);
-  const [districtDetail, setDistrictDetail] = useState<any>(null);
-  const [currentDRR, setCurrentDRR] = useState<string>("");
   
-  useEffect(() => {
-    if (districtId) {
-      const foundDistrict = districtData.find(d => d.id === districtId);
-      const foundDistrictDetail = getDistrictDetail(districtId);
-      setDistrict(foundDistrict);
-      setDistrictDetail(foundDistrictDetail);
-      
-      // Get current DRR (first one in the list)
-      if (foundDistrictDetail && foundDistrictDetail.representatives && foundDistrictDetail.representatives.length > 0) {
-        setCurrentDRR(foundDistrictDetail.representatives[0].name);
-      }
-    }
-  }, [districtId]);
+  // Use React Query hooks to fetch data
+  const { 
+    data: district, 
+    isLoading: isDistrictLoading, 
+    error: districtError 
+  } = useDistrictByIdQuery(districtId);
+  
+  const { 
+    data: districtDetail, 
+    isLoading: isDetailLoading, 
+    error: detailError 
+  } = useDistrictDetailQuery(districtId);
+  
+  // Derive current DRR from district detail data
+  const currentDRR = districtDetail?.representatives?.[0]?.name || "";
+  
+  // Combine loading states
+  const isLoading = isDistrictLoading || isDetailLoading;
+  
+  // Check for errors
+  const hasError = districtError || detailError;
 
-  if (!district || !districtDetail) {
-    return <div className="flex items-center justify-center h-screen">Loading...</div>;
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <div className="animate-spin h-10 w-10 border-4 border-blue-600 rounded-full border-t-transparent"></div>
+      </div>
+    );
+  }
+
+  if (hasError || !district || !districtDetail) {
+    return <div className="flex items-center justify-center h-screen">District not found</div>;
   }
 
   return (
