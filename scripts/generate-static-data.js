@@ -252,7 +252,7 @@ async function fetchRotaractChartConfigs() {
 }
 
 // Main function to generate all static data
-async function generateStaticData() {
+export async function generateStaticData() {
   console.log('Generating static data from Contentful...');
   
   try {
@@ -293,5 +293,7 @@ async function generateStaticData() {
   }
 }
 
-// Run the generator
-generateStaticData(); 
+// Run the generator if this file is executed directly
+if (import.meta.url === `file://${process.argv[1]}`) {
+  generateStaticData();
+} 

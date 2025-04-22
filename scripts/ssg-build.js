@@ -6,6 +6,8 @@ import { build } from 'vite';
 import { createServer } from 'vite';
 import dotenv from 'dotenv';
 import { createClient } from 'contentful';
+// Import the generateStaticData function from generate-static-data.js
+import { generateStaticData } from './generate-static-data.js';
 
 // Load environment variables
 dotenv.config();
@@ -47,59 +49,17 @@ async function copyStaticData() {
     fs.mkdirSync(staticDataDir, { recursive: true });
   }
   
-  // Generate static data
-  const contentfulClient = createClient({
-    space: process.env.VITE_CONTENTFUL_SPACE_ID,
-    accessToken: process.env.VITE_CONTENTFUL_ACCESS_TOKEN,
-    environment: process.env.VITE_CONTENTFUL_ENVIRONMENT || 'master',
-  });
+  // Use the generateStaticData function to fetch all content from Contentful
+  // and save it to a temporary location
+  console.log('Fetching content from Contentful...');
+  await generateStaticData();
   
-  // Fetch hero carousel images
-  const heroEntries = await contentfulClient.getEntries({
-    content_type: 'heroCarouselImage',
-    order: ['sys.createdAt'],
-  });
+  // Copy the generated JSON file from public/static-data to the build output directory
+  const sourceFile = path.join(root, 'public/static-data/contentful-data.json');
+  const destFile = path.join(staticDataDir, 'contentful-data.json');
   
-  const heroCarouselImages = heroEntries.items.map((item) => ({
-    title: item.fields.title,
-    imageUrl: item.fields.image?.fields?.file?.url 
-      ? `https:${item.fields.image.fields.file.url}` 
-      : '/assets/carousel.png', // Fallback image
-    alt: item.fields.alt || item.fields.title || 'Rotaract carousel image',
-  }));
-  
-  // Fetch districts with basic details
-  const districtEntries = await contentfulClient.getEntries({
-    content_type: 'district',
-    order: ['sys.createdAt']
-  });
-  
-  const districts = districtEntries.items.map((item) => {
-    const districtId = item.fields.id || '';
-    
-    return {
-      id: districtId,
-      color: item.fields.color || '#003366',
-      image: item.fields.image?.fields?.file?.url 
-        ? `https:${item.fields.image.fields.file.url}` 
-        : '/assets/district/default.jpeg',
-      description: item.fields.description || 'Rotaract Clubs of Rotary International District #'
-    };
-  });
-  
-  // Combine all data
-  const staticData = {
-    heroCarouselImages,
-    districts
-  };
-  
-  // Write to file
-  fs.writeFileSync(
-    path.join(staticDataDir, 'contentful-data.json'),
-    JSON.stringify(staticData, null, 2)
-  );
-  
-  console.log('Static data generated and copied to output directory');
+  fs.copyFileSync(sourceFile, destFile);
+  console.log('Static data copied to output directory');
 }
 
 // Main build function
