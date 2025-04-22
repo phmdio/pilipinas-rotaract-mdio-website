@@ -112,5 +112,40 @@
       "image": "https://images.ctfassets.net/dze7xj4zfu0b/7KgjC4KH1EMwIvbLB9uEdA/679ee8d5dbdd869b76d5f5e22517234d/3870.jpeg",
       "description": "Rotaract Clubs of Rotary International District #"
     }
-  ]
+  ],
+  "featuredEvents": [
+    {
+      "id": "3OkKROfI6mofGHQUQmEPxq",
+      "date": "January 1, 2024",
+      "title": "District Rotaract Representative Elect Training Seminar",
+      "description": "Hipster ipsum tattooed brunch I'm baby. Schlitz seitan listicle mixtape boys trust vice. Occupy tbh street brunch keffiyeh. Bicycle diy blog banjo fingerstache tote on locavore coffee pabst. ",
+      "image": "https://images.ctfassets.net/dze7xj4zfu0b/4p5JH3l4a39EYNUmrnrm74/11bc196ed250a472c16c12e33266fcb9/Rectangle_60.png",
+      "landscape": true
+    }
+  ],
+  "upcomingEvents": [],
+  "statistics": [
+    {
+      "id": "3Uqi4yDayx30LcbIbg00fX",
+      "value": "170K",
+      "label": "Rotaract Around the World",
+      "iconUrl": "https://images.ctfassets.net/dze7xj4zfu0b/23GYc5Ssb4xuZhPA4tHzRx/3f1935e283da1727bfb8fc613b770da7/rotaract_around_the_world.svg"
+    },
+    {
+      "id": "5Ph8qlxGtoEQDsz2qJ0NGJ",
+      "value": "800",
+      "label": "Rotaract Clubs in the Philippines",
+      "iconUrl": "https://images.ctfassets.net/dze7xj4zfu0b/4q5FNxCN4cduygbfIDImLB/8cedf0792c4004a5e4983c92fe394932/rotaract_clubs_in_the_district.svg"
+    },
+    {
+      "id": "4PPWQZhHVzc0b1pUtYp4gN",
+      "value": "15K",
+      "label": "Rotaract Members in the Philippines",
+      "iconUrl": "https://images.ctfassets.net/dze7xj4zfu0b/b4zSaSkFx9Ffo0rms7pp9/4c4f9fc07c50a0955e5bad2358a94437/rotaract_members_in_the_philippines.svg"
+    }
+  ],
+  "rotaractStatisticsDistrict": [],
+  "rotaractStatisticsContributions": [],
+  "rotaractStatisticsCards": [],
+  "rotaractStatisticsCharts": []
 }

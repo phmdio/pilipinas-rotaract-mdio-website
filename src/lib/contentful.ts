@@ -58,6 +58,13 @@ declare module '@/data/contentful-static' {
   interface StaticContentfulData {
     heroCarouselImages: HeroCarouselImage[];
     districts: BaseDistrict[];
+    featuredEvents: FeaturedEvent[];
+    upcomingEvents: UpcomingEvent[];
+    statistics: Statistic[];
+    rotaractStatisticsDistrict: StatisticDataPoint[];
+    rotaractStatisticsContributions: StatisticDataPoint[];
+    rotaractStatisticsCards: StatisticCardStat[];
+    rotaractStatisticsCharts: StatisticChartConfig[];
   }
 }
 
