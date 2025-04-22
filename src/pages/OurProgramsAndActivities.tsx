@@ -1,100 +1,52 @@
-
 import React from "react";
-import FeaturedEventCard from "../components/FeaturedEventCard";
-import FeaturedGridCard from "../components/FeaturedGridCard";
-import UpcomingEventItem from "../components/UpcomingEventItem";
+import { Helmet } from "react-helmet-async";
+import { useQuery } from "@tanstack/react-query";
 
-const heroImage = "/lovable-uploads/ddad2c87-4b73-4256-b9f7-e07a0e1f1aba.png";
+import FeaturedEventCard from "@/components/FeaturedEventCard";
+import FeaturedGridCard from "@/components/FeaturedGridCard";
+import UpcomingEventItem from "@/components/UpcomingEventItem";
+import Footer from "@/components/Footer";
+import Header from "@/components/Header";
+import { 
+  getFeaturedEvents, 
+  getUpcomingEvents, 
+  programsAndActivitiesKeys,
+  fallbackFeaturedEvents,
+  fallbackUpcomingEvents
+} from "@/lib/contentful";
 
-const featuredEvents = [
-  {
-    id: 1,
-    date: "January 1, 2024",
-    title: "District Rotaract Representative Elect Training Seminar",
-    description:
-      "Hasten ipsum tincidunt faucibus in baby. Sollicitudin laoreet molestie lacus lectus. Quisquam interdum euismod turpis. Etiam dictum turpis turpis, dignissim eget facilisis eros rhoncus eu. Duis egestas euismod sollicitudin.",
-    image:
-      "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=800&q=80",
-    landscape: true,
-  },
-  {
-    id: 2,
-    date: "March 1, 2024",
-    title: "Pilipinas Gear Awards",
-    description:
-      "Hasten ipsum tincidunt faucibus in baby. Sollicitudin laoreet molestie lacus lectus. Quisquam interdum euismod turpis.",
-    image:
-      "https://images.unsplash.com/photo-1605810230434-7631ac76ec81?auto=format&fit=crop&w=800&q=80",
-  },
-  {
-    id: 3,
-    date: "March 5, 2024",
-    title: "Pilipinas Rotaract Convention",
-    description:
-      "Hasten ipsum tincidunt faucibus in baby. Sollicitudin laoreet molestie lacus lectus. Quisquam interdum euismod turpis.",
-    image:
-      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80",
-  },
-  {
-    id: 4,
-    date: "April 10, 2024",
-    title: "Rotaract Branding Academy",
-    description:
-      "Hasten ipsum tincidunt faucibus in baby. Sollicitudin laoreet molestie lacus lectus. Quisquam interdum euismod turpis.",
-    image:
-      "https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?auto=format&fit=crop&w=800&q=80",
-  },
-  {
-    id: 5,
-    date: "April 15, 2024",
-    title: "People of Action Campaign",
-    description:
-      "Hasten ipsum tincidunt faucibus in baby. Sollicitudin laoreet molestie lacus lectus. Quisquam interdum euismod turpis.",
-    image:
-      "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=800&q=80",
-  },
-];
-
-const upcomingEvents = [
-  {
-    id: 1,
-    date: "February 01, 2024",
-    title: "District Rotaract Representative Elect Training Seminar",
-    image:
-      "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=600&q=80",
-  },
-  {
-    id: 2,
-    date: "February 03, 2024",
-    title: "District Rotaract Representative Elect Training Seminar",
-    image:
-      "https://images.unsplash.com/photo-1605810230434-7631ac76ec81?auto=format&fit=crop&w=600&q=80",
-  },
-  {
-    id: 3,
-    date: "February 07, 2024",
-    title: "District Rotaract Representative Elect Training Seminar",
-    image:
-      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=600&q=80",
-  },
-  {
-    id: 4,
-    date: "February 11, 2024",
-    title: "District Rotaract Representative Elect Training Seminar",
-    image:
-      "https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?auto=format&fit=crop&w=600&q=80",
-  },
-  {
-    id: 5,
-    date: "February 17, 2024",
-    title: "District Rotaract Representative Elect Training Seminar",
-    image:
-      "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=600&q=80",
-  },
-];
+const heroImage = "/assets/our-programs-and-activities.png";
 
 const OurProgramsAndActivities = () => {
+  // Fetch featured events
+  const { 
+    data: featuredEvents = fallbackFeaturedEvents,
+    isLoading: isFeaturedEventsLoading 
+  } = useQuery({
+    queryKey: programsAndActivitiesKeys.featuredEvents,
+    queryFn: getFeaturedEvents,
+  });
+
+  // Fetch upcoming events
+  const { 
+    data: upcomingEvents = fallbackUpcomingEvents,
+    isLoading: isUpcomingEventsLoading 
+  } = useQuery({
+    queryKey: programsAndActivitiesKeys.upcomingEvents,
+    queryFn: getUpcomingEvents,
+  });
+
   return (
+    <>
+     <Helmet>
+        <title>Programs and Activities | Pilipinas Rotaract MDIO</title>
+        <meta 
+          name="description" 
+          content="Discover the impactful programs and activities of Pilipinas Rotaract MDIO - serving communities across the Philippines." 
+        />
+      </Helmet>
+      
+      <Header />
     <div className="bg-white">
       {/* Hero Section */}
       <section className="relative w-full h-[280px] md:h-[320px] flex items-end">
@@ -117,14 +69,30 @@ const OurProgramsAndActivities = () => {
           Featured Events
         </h2>
         <div className="grid gap-8">
-          {/* First featured event: landscape card */}
-          <FeaturedEventCard event={featuredEvents[0]} />
-          {/* Next four: grid, 2 columns per row, stack on mobile */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {featuredEvents.slice(1).map((event) => (
-              <FeaturedGridCard key={event.id} event={event} />
-            ))}
-          </div>
+          {isFeaturedEventsLoading ? (
+            <div className="min-h-[300px] flex items-center justify-center">
+              <div className="animate-pulse w-12 h-12 rounded-full bg-gray-200"></div>
+            </div>
+          ) : featuredEvents.length === 0 ? (
+            <div className="flex flex-col items-center justify-center min-h-[300px] bg-gray-50 rounded-lg border border-gray-200 p-8">
+              <div className="text-5xl mb-4">🎭</div>
+              <h3 className="text-xl font-semibold text-gray-600 mb-2">No Featured Events Yet</h3>
+              <p className="text-gray-500 text-center max-w-md">
+                We're planning featured events to showcase our impact. Check back soon to see our upcoming flagship programs!
+              </p>
+            </div>
+          ) : (
+            <>
+              {/* First featured event: landscape card */}
+              <FeaturedEventCard event={featuredEvents[0]} />
+              {/* Next four: grid, 2 columns per row, stack on mobile */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                {featuredEvents.slice(1).map((event) => (
+                  <FeaturedGridCard key={event.id} event={event} />
+                ))}
+              </div>
+            </>
+          )}
         </div>
       </section>
 
@@ -134,12 +102,29 @@ const OurProgramsAndActivities = () => {
           Upcoming Events
         </h2>
         <div className="flex flex-col gap-4">
-          {upcomingEvents.map((event) => (
-            <UpcomingEventItem key={event.id} event={event} />
-          ))}
+          {isUpcomingEventsLoading ? (
+            <div className="min-h-[200px] flex items-center justify-center">
+              <div className="animate-pulse w-12 h-12 rounded-full bg-gray-200"></div>
+            </div>
+          ) : upcomingEvents.length === 0 ? (
+            <div className="flex flex-col items-center justify-center min-h-[200px] bg-gray-50 rounded-lg border border-gray-200 p-8">
+              <div className="text-5xl mb-4">📆</div>
+              <h3 className="text-xl font-semibold text-gray-600 mb-2">No Upcoming Events Scheduled</h3>
+              <p className="text-gray-500 text-center max-w-md">
+                We're currently planning our calendar of activities. Please check back soon for upcoming events and opportunities to participate!
+              </p>
+            </div>
+          ) : (
+            upcomingEvents.map((event) => (
+              <UpcomingEventItem key={event.id} event={event} />
+            ))
+          )}
         </div>
       </section>
     </div>
+
+    <Footer />
+    </>
   );
 };
 
