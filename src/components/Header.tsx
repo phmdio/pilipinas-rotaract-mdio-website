@@ -35,31 +35,31 @@ const Header = ({ isTransparent = false }) => {
   return (
     <header className={cn(
       "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-      isScrolled 
-        ? "bg-rotaract-magenta text-white shadow-md" 
-        : isTransparent 
-          ? "bg-transparent text-white shadow-md" 
+      isScrolled
+        ? "bg-rotaract-magenta text-white shadow-md"
+        : isTransparent
+          ? "bg-transparent text-white shadow-md"
           : "bg-white text-black shadow-sm"
     )}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 md:h-20">
           <div className="flex items-center">
             <Link to="/" className="flex items-center">
-              <img 
+              <img
                 src={`${isScrolled ? "/assets/logo.png" : isTransparent ? "/assets/logo.png" : "/assets/logo_pink.png"}`}
-                alt="Rotaract MDIO Logo" 
+                alt="Rotaract MDIO Logo"
                 className="h-14 w-auto"
               />
             </Link>
           </div>
-          
+
           <NavigationMenu className="hidden md:flex">
             <NavigationMenuList className="space-x-1">
               <NavigationMenuItem>
                 <NavigationMenuTrigger className={cn(
                   "bg-transparent",
                   isScrolled || isTransparent
-                    ? "text-white hover:bg-white/10 focus:bg-white/10" 
+                    ? "text-white hover:bg-white/10 focus:bg-white/10"
                     : "text-black hover:bg-black/10 focus:bg-black/10"
                 )}>
                   About Us
@@ -108,7 +108,7 @@ const Header = ({ isTransparent = false }) => {
                 <NavigationMenuTrigger className={cn(
                   "bg-transparent",
                   isScrolled || isTransparent
-                    ? "text-white hover:bg-white/10 focus:bg-white/10" 
+                    ? "text-white hover:bg-white/10 focus:bg-white/10"
                     : "text-black hover:bg-black/10 focus:bg-black/10"
                 )}>
                   Information Center
@@ -145,59 +145,37 @@ const Header = ({ isTransparent = false }) => {
                 </NavigationMenuContent>
               </NavigationMenuItem>
 
-              <NavigationMenuItem>
-                <NavigationMenuTrigger className={cn(
-                  "bg-transparent",
-                  isScrolled || isTransparent
-                    ? "text-white hover:bg-white/10 focus:bg-white/10" 
-                    : "text-black hover:bg-black/10 focus:bg-black/10"
-                )}>
-                  Our Programs and Activities
-                </NavigationMenuTrigger>
-                <NavigationMenuContent className={cn(
-                  "bg-[#1a237e] text-white",
-                  isScrolled || isTransparent ? "" : "shadow-lg"
-                )}>
-                  <ul className="w-[250px]">
-                    <li>
-                      <NavigationMenuLink asChild>
-                        <Link to="/under-construction" className="block p-4 hover:bg-white/10 rounded-none">
-                          Key Projects
-                        </Link>
-                      </NavigationMenuLink>
-                      <Separator className="bg-white/20" />
-                    </li>
-                    <li>
-                      <NavigationMenuLink asChild>
-                        <Link to="/under-construction" className="block p-4 hover:bg-white/10 rounded-none">
-                          Upcoming Events
-                        </Link>
-                      </NavigationMenuLink>
-                    </li>
-                  </ul>
-                </NavigationMenuContent>
+              <NavigationMenuItem className={cn(
+                "bg-transparent",
+                isScrolled || isTransparent
+                  ? "text-white hover:bg-white/10 focus:bg-white/10"
+                  : "text-black hover:bg-black/10 focus:bg-black/10"
+              )}>
+                <Button asChild variant="ghost">
+                  <Link to="/our-programs-and-activities">Our Programs and Activities</Link>
+                </Button>
               </NavigationMenuItem>
 
               <NavigationMenuItem className={cn(
-                  "bg-transparent",
-                  isScrolled || isTransparent
-                    ? "text-white hover:bg-white/10 focus:bg-white/10" 
-                    : "text-black hover:bg-black/10 focus:bg-black/10"
-                )}>
+                "bg-transparent",
+                isScrolled || isTransparent
+                  ? "text-white hover:bg-white/10 focus:bg-white/10"
+                  : "text-black hover:bg-black/10 focus:bg-black/10"
+              )}>
                 <Button asChild variant="ghost">
                   <Link to="https://www.rotary.org/en/get-involved/ways-to-give?utm_source=pilipinas_rotaract_mdio&utm_medium=website&utm_campaign=foundation_giving" target="_blank" rel="noopener noreferrer">Donate</Link>
                 </Button>
               </NavigationMenuItem>
             </NavigationMenuList>
           </NavigationMenu>
-          
+
           <div className="md:hidden">
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className={cn(
                 "inline-flex items-center justify-center p-2 rounded-md",
-                isScrolled 
-                  ? "text-white hover:text-gray-200" 
+                isScrolled
+                  ? "text-white hover:text-gray-200"
                   : "text-black hover:text-gray-700"
               )}
             >
@@ -206,12 +184,12 @@ const Header = ({ isTransparent = false }) => {
           </div>
         </div>
       </div>
-      
+
       {isMenuOpen && (
         <div className={cn(
           "md:hidden absolute w-full",
-          isScrolled 
-            ? "bg-rotaract-magenta shadow-lg text-white" 
+          isScrolled
+            ? "bg-rotaract-magenta shadow-lg text-white"
             : "bg-white shadow-md text-black"
         )}>
           <div className="px-4 pt-2 pb-4 space-y-1 sm:px-3">
@@ -239,7 +217,7 @@ const Header = ({ isTransparent = false }) => {
                 <Link to="/ang-balangay" className="block py-3 px-4 hover:bg-white/10" onClick={() => setIsMenuOpen(false)}>Ang Balangay</Link>
               </div>
             </div>
-            
+
             <div className="py-2">
               <button
                 onClick={(e) => {
@@ -262,29 +240,12 @@ const Header = ({ isTransparent = false }) => {
                 <Link to="/the-rotary-foundation-giving" className="block py-3 px-4 hover:bg-white/10" onClick={() => setIsMenuOpen(false)}>The Rotary Foundation Giving</Link>
               </div>
             </div>
-            
+
             <div className="py-2">
-              <button
-                onClick={(e) => {
-                  e.preventDefault();
-                  const programsSubmenu = document.getElementById('mobile-programs-submenu');
-                  if (programsSubmenu) {
-                    programsSubmenu.classList.toggle('hidden');
-                  }
-                }}
-                className="flex justify-between items-center w-full"
-              >
-                <span>Our Programs and Activities</span>
-                <ChevronDown size={16} />
-              </button>
-              <div id="mobile-programs-submenu" className="hidden pl-4 mt-2 space-y-2 bg-[#1a237e] rounded text-white">
-                <Link to="/under-construction" className="block py-3 px-4 hover:bg-white/10" onClick={() => setIsMenuOpen(false)}>Key Projects</Link>
-                <Separator className="bg-white/20" />
-                <Link to="/under-construction" className="block py-3 px-4 hover:bg-white/10" onClick={() => setIsMenuOpen(false)}>Upcoming Events</Link>
-              </div>
+              <Link to="/our-programs-and-activities" className="block py-2" onClick={() => setIsMenuOpen(false)}>Our Programs and Activities</Link>
             </div>
-            
-            <Link to="/under-construction" className="block py-2" onClick={() => setIsMenuOpen(false)}>Donate</Link>
+
+            <Link to="https://www.rotary.org/en/get-involved/ways-to-give?utm_source=pilipinas_rotaract_mdio&utm_medium=website&utm_campaign=foundation_giving" target="_blank" rel="noopener noreferrer" className="block py-2" onClick={() => setIsMenuOpen(false)}>Donate</Link>
           </div>
         </div>
       )}
