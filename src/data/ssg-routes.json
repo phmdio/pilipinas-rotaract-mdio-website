@@ -1,0 +1,14 @@
+{
+  "routes": [
+    "/",
+    "/launching-soon",
+    "/under-construction",
+    "/information-center",
+    "/our-history",
+    "/our-leadership-team",
+    "/rotaract-statistics", 
+    "/philippine-rotaract-magazine",
+    "/ang-balangay",
+    "/the-rotary-foundation-giving"
+  ]
+} 

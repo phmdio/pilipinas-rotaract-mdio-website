@@ -3,7 +3,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
@@ -28,23 +28,38 @@ const ScrollToTop = () => {
   return null;
 };
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      // Disable refetching on window focus for SSG
+      refetchOnWindowFocus: false,
+      // Cache the data for 24 hours
+      staleTime: 1000 * 60 * 60 * 24,
+      gcTime: 1000 * 60 * 60 * 24,
+    },
+  },
+});
 
 const App = () => {
-  const currentHostname = window.location.hostname;
+  // Check if we're in the browser environment
+  const isBrowser = typeof window !== 'undefined';
+  const currentHostname = isBrowser ? window.location.hostname : '';
   const customDomain = 'www.pilipinasrotaract.org';
   const customDomainWithoutWWW = 'pilipinasrotaract.org';
 
-  if (currentHostname === customDomain || currentHostname === customDomainWithoutWWW) {
-    return (
-      <QueryClientProvider client={queryClient}>
-        <HelmetProvider>
-          <TooltipProvider>
-            <Toaster />
-            <Sonner />
-            <BrowserRouter>
-              <ScrollToTop />
-              <Routes>
+  const isCustomDomain = isBrowser && 
+    (currentHostname === customDomain || currentHostname === customDomainWithoutWWW);
+
+  return (
+    <QueryClientProvider client={queryClient}>
+      <HelmetProvider>
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
+          <ScrollToTop />
+          <Routes>
+            {isCustomDomain ? (
+              <>
                 <Route path="/" element={<LaunchingSoon />} />
                 <Route path="/under-construction" element={<UnderConstruction />} />
                 <Route path="/information-center" element={<InformationCenter />} />
@@ -56,22 +71,9 @@ const App = () => {
                 <Route path="/ang-balangay" element={<AngBalangay />} />
                 <Route path="/the-rotary-foundation-giving" element={<RotaryFoundationGiving />} />
                 <Route path="*" element={<NotFound />} />
-              </Routes>
-            </BrowserRouter>
-          </TooltipProvider>
-        </HelmetProvider>
-      </QueryClientProvider>
-    );
-  } else {
-    return (
-      <QueryClientProvider client={queryClient}>
-        <HelmetProvider>
-          <TooltipProvider>
-            <Toaster />
-            <Sonner />
-            <BrowserRouter>
-              <ScrollToTop />
-              <Routes>
+              </>
+            ) : (
+              <>
                 <Route path="/" element={<Index />} />
                 <Route path="/launching-soon" element={<LaunchingSoon />} />
                 <Route path="/under-construction" element={<UnderConstruction />} />
@@ -84,13 +86,13 @@ const App = () => {
                 <Route path="/ang-balangay" element={<AngBalangay />} />
                 <Route path="/the-rotary-foundation-giving" element={<RotaryFoundationGiving />} />
                 <Route path="*" element={<NotFound />} />
-              </Routes>
-            </BrowserRouter>
-          </TooltipProvider>
-        </HelmetProvider>
-      </QueryClientProvider>
-    );
-  }
+              </>
+            )}
+          </Routes>
+        </TooltipProvider>
+      </HelmetProvider>
+    </QueryClientProvider>
+  );
 };
 
 export default App;

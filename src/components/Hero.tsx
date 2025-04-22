@@ -18,7 +18,7 @@ const Hero = () => {
   const [rightSideApi, setRightSideApi] = useState<any>(null);
   const [rightSideCurrent, setRightSideCurrent] = useState(0);
 
-  // Fetch carousel images using React Query
+  // Fetch carousel images using React Query with extended cache times for SSG
   const { 
     data: carouselImages = fallbackCarouselImages,
     isLoading,
@@ -26,8 +26,8 @@ const Hero = () => {
   } = useQuery({
     queryKey: contentfulKeys.heroCarousel,
     queryFn: getHeroCarouselImages,
-    staleTime: 1000 * 60 * 5, // 5 minutes
-    gcTime: 1000 * 60 * 60, // 1 hour
+    staleTime: 1000 * 60 * 60 * 24, // 24 hours
+    gcTime: 1000 * 60 * 60 * 24, // 24 hours
     retry: 1,
   });
 
