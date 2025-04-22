@@ -49,17 +49,69 @@ async function copyStaticData() {
     fs.mkdirSync(staticDataDir, { recursive: true });
   }
   
-  // Use the generateStaticData function to fetch all content from Contentful
-  // and save it to a temporary location
-  console.log('Fetching content from Contentful...');
-  await generateStaticData();
-  
-  // Copy the generated JSON file from public/static-data to the build output directory
-  const sourceFile = path.join(root, 'public/static-data/contentful-data.json');
-  const destFile = path.join(staticDataDir, 'contentful-data.json');
-  
-  fs.copyFileSync(sourceFile, destFile);
-  console.log('Static data copied to output directory');
+  try {
+    // Use the generateStaticData function to fetch all content from Contentful
+    // and save it to a temporary location
+    console.log('Fetching content from Contentful...');
+    await generateStaticData();
+    
+    // Copy the generated JSON file from public/static-data to the build output directory
+    const sourceFile = path.join(root, 'public/static-data/contentful-data.json');
+    const destFile = path.join(staticDataDir, 'contentful-data.json');
+    
+    // Verify the file exists and is readable
+    if (!fs.existsSync(sourceFile)) {
+      throw new Error(`Static data file not found at ${sourceFile}`);
+    }
+    
+    // Read and validate the file content
+    try {
+      const fileContents = fs.readFileSync(sourceFile, 'utf-8');
+      // Validate JSON by parsing and then re-stringifying
+      const parsedData = JSON.parse(fileContents);
+      const validatedJson = JSON.stringify(parsedData);
+      
+      // Write the validated JSON directly to the destination
+      fs.writeFileSync(destFile, validatedJson);
+      console.log('Static data validated and copied to output directory');
+    } catch (jsonError) {
+      console.error('Error validating JSON static data:', jsonError);
+      // Create a minimal valid JSON data structure if the original is corrupt
+      const minimalData = JSON.stringify({
+        heroCarouselImages: [],
+        districts: [],
+        featuredEvents: [],
+        upcomingEvents: [],
+        statistics: [],
+        rotaractStatisticsDistrict: [],
+        rotaractStatisticsContributions: [],
+        rotaractStatisticsCards: [],
+        rotaractStatisticsCharts: []
+      }, null, 2);
+      
+      fs.writeFileSync(destFile, minimalData);
+      console.warn('Created minimal fallback static data due to validation failure');
+    }
+  } catch (error) {
+    console.error('Error copying static data:', error);
+    
+    // Create a minimal valid JSON data structure as fallback
+    const minimalData = JSON.stringify({
+      heroCarouselImages: [],
+      districts: [],
+      featuredEvents: [],
+      upcomingEvents: [],
+      statistics: [],
+      rotaractStatisticsDistrict: [],
+      rotaractStatisticsContributions: [],
+      rotaractStatisticsCards: [],
+      rotaractStatisticsCharts: []
+    }, null, 2);
+    
+    const destFile = path.join(staticDataDir, 'contentful-data.json');
+    fs.writeFileSync(destFile, minimalData);
+    console.warn('Created fallback static data file due to error');
+  }
 }
 
 // Main build function

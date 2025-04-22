@@ -267,6 +267,52 @@ export async function generateStaticData() {
     const rotaractStatisticsCards = await fetchRotaractStatisticCards();
     const rotaractStatisticsCharts = await fetchRotaractChartConfigs();
     
+    // Validate that each data set is an array (even if empty)
+    if (!Array.isArray(heroCarouselImages)) {
+      console.warn('heroCarouselImages is not an array, using empty array instead');
+      heroCarouselImages = [];
+    }
+    
+    if (!Array.isArray(districts)) {
+      console.warn('districts is not an array, using empty array instead');
+      districts = [];
+    }
+    
+    if (!Array.isArray(featuredEvents)) {
+      console.warn('featuredEvents is not an array, using empty array instead');
+      featuredEvents = [];
+    }
+    
+    if (!Array.isArray(upcomingEvents)) {
+      console.warn('upcomingEvents is not an array, using empty array instead');
+      upcomingEvents = [];
+    }
+    
+    if (!Array.isArray(statistics)) {
+      console.warn('statistics is not an array, using empty array instead');
+      statistics = [];
+    }
+    
+    if (!Array.isArray(rotaractStatisticsDistrict)) {
+      console.warn('rotaractStatisticsDistrict is not an array, using empty array instead');
+      rotaractStatisticsDistrict = [];
+    }
+    
+    if (!Array.isArray(rotaractStatisticsContributions)) {
+      console.warn('rotaractStatisticsContributions is not an array, using empty array instead');
+      rotaractStatisticsContributions = [];
+    }
+    
+    if (!Array.isArray(rotaractStatisticsCards)) {
+      console.warn('rotaractStatisticsCards is not an array, using empty array instead');
+      rotaractStatisticsCards = [];
+    }
+    
+    if (!Array.isArray(rotaractStatisticsCharts)) {
+      console.warn('rotaractStatisticsCharts is not an array, using empty array instead');
+      rotaractStatisticsCharts = [];
+    }
+    
     // Combine all data
     const staticData = {
       heroCarouselImages,
@@ -280,13 +326,29 @@ export async function generateStaticData() {
       rotaractStatisticsCharts
     };
     
-    // Write combined data to a JSON file
-    fs.writeFileSync(
-      path.join(OUTPUT_DIR, 'contentful-data.json'),
-      JSON.stringify(staticData, null, 2)
-    );
+    // Ensure the output directory exists
+    if (!fs.existsSync(OUTPUT_DIR)) {
+      fs.mkdirSync(OUTPUT_DIR, { recursive: true });
+    }
     
-    console.log('Static data generated successfully!');
+    const outputPath = path.join(OUTPUT_DIR, 'contentful-data.json');
+    
+    try {
+      // Validate that the data can be properly serialized
+      const jsonString = JSON.stringify(staticData, null, 2);
+      
+      // Test parsing the string back to ensure it's valid JSON
+      JSON.parse(jsonString);
+      
+      // Write the file
+      fs.writeFileSync(outputPath, jsonString);
+      console.log(`Static data successfully written to ${outputPath}`);
+    } catch (writeError) {
+      console.error('Error writing static data file:', writeError);
+      process.exit(1);
+    }
+    
+    console.log('Static data generation completed successfully!');
   } catch (error) {
     console.error('Error generating static data:', error);
     process.exit(1);

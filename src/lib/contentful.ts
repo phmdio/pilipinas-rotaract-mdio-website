@@ -144,9 +144,37 @@ export interface RotaractStatisticsData {
 async function loadStaticData<T>(key: keyof StaticContentfulData): Promise<T[]> {
   try {
     if (USE_STATIC_DATA) {
-      const response = await fetch('/static-data/contentful-data.json');
-      const data = await response.json() as StaticContentfulData;
-      return data[key] as T[];
+      try {
+        const response = await fetch('/static-data/contentful-data.json');
+        
+        if (!response.ok) {
+          throw new Error(`Failed to fetch static data: ${response.status} ${response.statusText}`);
+        }
+        
+        const text = await response.text();
+        let data: StaticContentfulData;
+        
+        try {
+          data = JSON.parse(text) as StaticContentfulData;
+        } catch (parseError) {
+          console.error('Failed to parse static data JSON:', parseError);
+          throw new Error('Invalid JSON in static data');
+        }
+        
+        if (!data || typeof data !== 'object') {
+          throw new Error('Invalid data format in static data');
+        }
+        
+        if (!data[key] || !Array.isArray(data[key])) {
+          console.warn(`Key "${key}" not found in static data or not an array`);
+          return [] as T[];
+        }
+        
+        return data[key] as T[];
+      } catch (fetchError) {
+        console.error('Error fetching static data:', fetchError);
+        throw fetchError;
+      }
     }
     throw new Error('Static data not available or disabled');
   } catch (error) {
