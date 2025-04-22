@@ -32,7 +32,7 @@ async function fetchDistrictIds() {
       content_type: 'district',
     });
     
-    return entries.items.map(item => `/district/${item.sys.id}`);
+    return entries.items.map(item => `/district/${item.fields.id}`);
   } catch (error) {
     console.error('Error fetching district IDs:', error);
     return [];
@@ -118,6 +118,10 @@ async function buildSSG() {
     define: {
       'process.env.SSG': JSON.stringify(true),
     },
+    // Force bundle all node_modules for SSR
+    ssr: {
+      noExternal: true,
+    },
   });
   
   // 3. Copy static data
@@ -130,46 +134,52 @@ async function buildSSG() {
   
   // 5. Pre-render each route
   console.log('Pre-rendering routes...');
-  const serverEntryPath = path.join(outDir, 'server', 'entry-server.js');
-  const { render } = await import(`file://${serverEntryPath}`);
   
-  // Create a temporary Vite server for rendering
-  const viteServer = await createServer({
-    root,
-    server: { middlewareMode: true },
-  });
-  
-  const templatePath = path.join(outDir, 'index.html');
-  const template = fs.readFileSync(templatePath, 'utf-8');
-  
-  // Process each route
-  for (const route of allRoutes) {
-    console.log(`Pre-rendering route: ${route}`);
+  try {
+    const serverEntryPath = path.join(outDir, 'server', 'entry-server.js');
+    const renderModule = await import(`file://${serverEntryPath}`);
+    const { render } = renderModule;
     
-    try {
-      // Render the route to HTML
-      const appHtml = render(route);
+    // Create a temporary Vite server for rendering
+    const viteServer = await createServer({
+      root,
+      server: { middlewareMode: true },
+    });
+    
+    const templatePath = path.join(outDir, 'index.html');
+    const template = fs.readFileSync(templatePath, 'utf-8');
+    
+    // Process each route
+    for (const route of allRoutes) {
+      console.log(`Pre-rendering route: ${route}`);
       
-      // Replace the app placeholder with the rendered HTML
-      const html = template.replace('<div id="root"></div>', `<div id="root">${appHtml}</div>`);
-      
-      // Determine output path
-      let outputPath;
-      if (route === '/') {
-        outputPath = path.join(outDir, 'index.html');
-      } else {
-        outputPath = path.join(outDir, route.slice(1), 'index.html');
-        fs.mkdirSync(path.dirname(outputPath), { recursive: true });
+      try {
+        // Render the route to HTML
+        const appHtml = render(route);
+        
+        // Replace the app placeholder with the rendered HTML
+        const html = template.replace('<div id="root"></div>', `<div id="root">${appHtml}</div>`);
+        
+        // Determine output path
+        let outputPath;
+        if (route === '/') {
+          outputPath = path.join(outDir, 'index.html');
+        } else {
+          outputPath = path.join(outDir, route.slice(1), 'index.html');
+          fs.mkdirSync(path.dirname(outputPath), { recursive: true });
+        }
+        
+        // Write the HTML file
+        fs.writeFileSync(outputPath, html);
+      } catch (error) {
+        console.error(`Error pre-rendering route ${route}:`, error);
       }
-      
-      // Write the HTML file
-      fs.writeFileSync(outputPath, html);
-    } catch (error) {
-      console.error(`Error pre-rendering route ${route}:`, error);
     }
+    
+    await viteServer.close();
+  } catch (error) {
+    console.error('Error during pre-rendering:', error);
   }
-  
-  await viteServer.close();
   
   console.log('SSG build completed!');
 }
