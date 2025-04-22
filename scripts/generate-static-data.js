@@ -44,6 +44,33 @@ async function fetchHeroCarouselImages() {
   }
 }
 
+// Function to fetch districts with all details
+async function fetchDistricts() {
+  console.log('Fetching districts with basic details...');
+  try {
+    const entries = await client.getEntries({
+      content_type: 'district',
+      order: ['sys.createdAt'],
+    });
+
+    return entries.items.map((item) => {
+      const districtId = item.fields.id || '';
+      
+      return {
+        id: districtId,
+        color: item.fields.color || '#003366',
+        image: item.fields.image?.fields?.file?.url 
+          ? `https:${item.fields.image.fields.file.url}` 
+          : '/assets/district/default.jpeg',
+        description: item.fields.description || 'Rotaract Clubs of Rotary International District #',
+      };
+    });
+  } catch (error) {
+    console.error('Error fetching districts:', error);
+    return [];
+  }
+}
+
 // Main function to generate all static data
 async function generateStaticData() {
   console.log('Generating static data from Contentful...');
@@ -51,12 +78,12 @@ async function generateStaticData() {
   try {
     // Fetch all required data
     const heroCarouselImages = await fetchHeroCarouselImages();
-    // Add other data fetching functions here
+    const districts = await fetchDistricts();
     
     // Combine all data
     const staticData = {
       heroCarouselImages,
-      // Add other data here
+      districts
     };
     
     // Write combined data to a JSON file

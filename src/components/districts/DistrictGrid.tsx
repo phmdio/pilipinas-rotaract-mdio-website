@@ -1,15 +1,10 @@
-
+import { BaseDistrict } from '@/lib/contentful';
 import React, { useState } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import DistrictCard from './DistrictCard';
 
 interface DistrictGridProps {
-  districts: Array<{
-    id: string;
-    color: string;
-    image: string;
-    description: string;
-  }>;
+  districts: BaseDistrict[];
   windowSize: 'mobile' | 'tablet' | 'desktop';
 }
 

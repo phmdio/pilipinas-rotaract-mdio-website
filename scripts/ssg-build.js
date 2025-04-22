@@ -55,12 +55,12 @@ async function copyStaticData() {
   });
   
   // Fetch hero carousel images
-  const entries = await contentfulClient.getEntries({
+  const heroEntries = await contentfulClient.getEntries({
     content_type: 'heroCarouselImage',
     order: ['sys.createdAt'],
   });
   
-  const heroCarouselImages = entries.items.map((item) => ({
+  const heroCarouselImages = heroEntries.items.map((item) => ({
     title: item.fields.title,
     imageUrl: item.fields.image?.fields?.file?.url 
       ? `https:${item.fields.image.fields.file.url}` 
@@ -68,10 +68,29 @@ async function copyStaticData() {
     alt: item.fields.alt || item.fields.title || 'Rotaract carousel image',
   }));
   
+  // Fetch districts with basic details
+  const districtEntries = await contentfulClient.getEntries({
+    content_type: 'district',
+    order: ['sys.createdAt']
+  });
+  
+  const districts = districtEntries.items.map((item) => {
+    const districtId = item.fields.id || '';
+    
+    return {
+      id: districtId,
+      color: item.fields.color || '#003366',
+      image: item.fields.image?.fields?.file?.url 
+        ? `https:${item.fields.image.fields.file.url}` 
+        : '/assets/district/default.jpeg',
+      description: item.fields.description || 'Rotaract Clubs of Rotary International District #'
+    };
+  });
+  
   // Combine all data
   const staticData = {
     heroCarouselImages,
-    // Add other data here
+    districts
   };
   
   // Write to file

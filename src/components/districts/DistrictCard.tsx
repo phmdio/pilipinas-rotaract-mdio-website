@@ -1,13 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { BaseDistrict } from '@/lib/contentful';
 
 interface DistrictCardProps {
-  district: {
-    id: string;
-    color: string;
-    image: string;
-    description: string;
-  };
+  district: BaseDistrict;
   index: number;
 }
 
@@ -28,7 +24,7 @@ const DistrictCard = ({ district, index }: DistrictCardProps) => {
       
       {/* Content */}
       <div className="absolute inset-0 flex flex-col justify-end p-4 text-white">
-        <p className="text-sm font-medium mb-1 opacity-90">{district.description}</p>
+        <p className="text-sm font-medium mb-1 opacity-90">Rotaract Clubs of Rotary International District #</p>
         <h4 className="text-5xl font-bold">{district.id}</h4>
       </div>
       

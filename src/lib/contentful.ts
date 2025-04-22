@@ -18,12 +18,37 @@ export interface HeroCarouselImage {
   alt: string;
 }
 
-// Type definition for District data
-export interface District {
+// Type definition for District Representative
+export interface DistrictRepresentative {
+  name: string;
+  club: string;
+  year: string;
+  rotaryYear: string;
+  dates: string;
+}
+
+// Base District type with required minimal fields
+export interface BaseDistrict {
   id: string;
   color: string;
   image: string;
+}
+
+// Full District type with all details
+export interface District extends BaseDistrict {
+  title: string;
   description: string;
+  composition: string[];
+  highlights: string;
+  gallery: string[];
+  representatives: DistrictRepresentative[];
+  headerImage: string;
+  mainClub: string;
+  activities: string[];
+  // Markdown content fields
+  mission: string; // Markdown content
+  vision: string; // Markdown content
+  facebookPageUrl: string;
 }
 
 // Update the imported StaticContentfulData interface to include districts
@@ -32,7 +57,7 @@ export interface District {
 declare module '@/data/contentful-static' {
   interface StaticContentfulData {
     heroCarouselImages: HeroCarouselImage[];
-    districts: District[];
+    districts: BaseDistrict[];
   }
 }
 
@@ -40,6 +65,7 @@ declare module '@/data/contentful-static' {
 export const contentfulKeys = {
   heroCarousel: ['contentful', 'heroCarousel'] as const,
   districts: ['contentful', 'districts'] as const,
+  districtDetail: ['contentful', 'districtDetail'] as const,
 };
 
 // Helper function to load static data
@@ -84,11 +110,11 @@ export async function getHeroCarouselImages(): Promise<HeroCarouselImage[]> {
 }
 
 // Function to fetch district data
-export async function getDistricts(): Promise<District[]> {
+export async function getDistricts(): Promise<BaseDistrict[]> {
   // Try to load from static data first
   if (USE_STATIC_DATA) {
     try {
-      return await loadStaticData<District>('districts');
+      return await loadStaticData<BaseDistrict>('districts');
     } catch (error) {
       console.warn('Falling back to API for districts data');
     }
@@ -110,8 +136,106 @@ export async function getDistricts(): Promise<District[]> {
   }));
 }
 
+// Function to fetch district detail data
+export async function getDistrictDetail(districtId: string): Promise<District> {
+  // Try to load from static data first
+  if (USE_STATIC_DATA) {
+    try {
+      const districts = await loadStaticData<BaseDistrict>('districts');
+      const district = districts.find(d => d.id === districtId);
+      if (district) {
+        // Fetch full detail from API since static data only has BaseDistrict
+        return await fetchDistrictFromContentful(districtId);
+      }
+      console.warn(`District detail for ${districtId} not found in static data`);
+    } catch (error) {
+      console.warn('Falling back to API for district detail data');
+    }
+  }
+  
+  return fetchDistrictFromContentful(districtId);
+}
+
+// Helper function to fetch complete district data from Contentful
+async function fetchDistrictFromContentful(districtId: string): Promise<District> {
+  const entries = await client.getEntries({
+    content_type: 'district',
+    'fields.id': districtId,
+    include: 2
+  });
+
+  if (entries.items.length === 0) {
+    return createFallbackDistrictDetail(districtId);
+  }
+
+  const item = entries.items[0];
+  return mapContentfulDistrictDetail(item, districtId);
+}
+
+// Helper function to map Contentful response to District
+function mapContentfulDistrictDetail(item: any, districtId: string): District {
+  // Map gallery images
+  const gallery = item.fields.gallery?.map((img: any) => 
+    img.fields?.file?.url ? `https:${img.fields.file.url}` : '/assets/district/default.jpeg'
+  ) || [`/assets/district/${districtId}.jpeg`];
+
+  // Map representatives
+  const representatives = item.fields.representatives?.map((rep: any) => ({
+    name: rep.fields?.name || 'District Representative',
+    club: rep.fields?.club || '',
+    year: rep.fields?.year || '',
+    rotaryYear: rep.fields?.rotaryYear || '',
+    dates: rep.fields?.dates || ''
+  })) || [];
+
+  // Construct full district detail object
+  return {
+    id: districtId,
+    color: item.fields.color || '#003366',
+    image: item.fields.image?.fields?.file?.url 
+      ? `https:${item.fields.image.fields.file.url}` 
+      : '/assets/district/default.jpeg',
+    description: item.fields.description || '',
+    title: item.fields.title || `District ${districtId}`,
+    composition: item.fields.composition || [],
+    highlights: item.fields.highlights || '',
+    gallery,
+    representatives,
+    headerImage: item.fields.headerImage?.fields?.file?.url 
+      ? `https:${item.fields.headerImage.fields.file.url}` 
+      : `/assets/district/${districtId}.jpeg`,
+    mainClub: item.fields.mainClub || '',
+    activities: item.fields.activities || [],
+    // Preserve markdown formatting from Contentful
+    mission: item.fields.mission || '',
+    vision: item.fields.vision || '',
+    facebookPageUrl: item.fields.facebookPageUrl || `https://www.facebook.com/district${districtId}rotaract`
+  };
+}
+
+// Create a fallback district detail for when no data is found
+function createFallbackDistrictDetail(districtId: string): District {
+  return {
+    id: districtId,
+    color: '#003366',
+    image: `/assets/district/${districtId}.jpeg`,
+    title: `District ${districtId}`,
+    description: "This district is currently updating its information. Please check back soon for a complete profile of its activities, membership, and achievements.",
+    composition: ["Community-Based Clubs", "University-Based Clubs", "Active Rotaractors"],
+    highlights: "Information about district highlights and achievements coming soon.",
+    gallery: [`/assets/district/${districtId}.jpeg`, `/assets/district/default.jpeg`],
+    representatives: [],
+    headerImage: `/assets/district/${districtId}.jpeg`,
+    mainClub: "District Headquarters",
+    activities: [],
+    mission: "",
+    vision: "",
+    facebookPageUrl: `https://www.facebook.com/district${districtId}rotaract`
+  };
+}
+
 // Fallback district data
-export const fallbackDistrictData: District[] = [
+export const fallbackDistrictData: BaseDistrict[] = [
   { 
     id: '3770', 
     color: '#F6A81C',

@@ -1,9 +1,9 @@
-import { HeroCarouselImage, District } from '@/lib/contentful';
+import { HeroCarouselImage, BaseDistrict } from '@/lib/contentful';
 
 // Interfaces for static data
 export interface StaticContentfulData {
   heroCarouselImages: HeroCarouselImage[];
-  districts: District[];
+  districts: BaseDistrict[];
   // Add other content types here as needed
 }
 

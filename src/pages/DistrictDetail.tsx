@@ -6,6 +6,8 @@ import { Card, CardContent } from '@/components/ui/card';
 import { FacebookIcon, InstagramIcon, YoutubeIcon, TwitterIcon, MapPinIcon, UserIcon, CalendarIcon, PhoneIcon } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import { 
   Carousel, 
   CarouselContent, 
@@ -101,11 +103,25 @@ const DistrictDetail = () => {
             )}
             
             {districtDetail.mission && (
-              <p className="text-gray-800 leading-relaxed">{districtDetail.mission}</p>
+              <div className="mt-4">
+                <h3 className="text-gray-800 font-bold mb-2">Mission</h3>
+                <div className="prose prose-sm max-w-none">
+                  <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                    {districtDetail.mission}
+                  </ReactMarkdown>
+                </div>
+              </div>
             )}
             
             {districtDetail.vision && (
-              <p className="text-gray-800 leading-relaxed">{districtDetail.vision}</p>
+              <div className="mt-4">
+                <h3 className="text-gray-800 font-bold mb-2">Vision</h3>
+                <div className="prose prose-sm max-w-none">
+                  <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                    {districtDetail.vision}
+                  </ReactMarkdown>
+                </div>
+              </div>
             )}
           </div>
         </section>
@@ -151,8 +167,8 @@ const DistrictDetail = () => {
                   <TableRow key={index} className="border-0">
                     <TableCell className="py-1 pl-0 text-lg w-6">{index + 1}.</TableCell>
                     <TableCell className="py-1 font-medium text-lg">{rep.name}</TableCell>
-                    <TableCell className="py-1 text-lg">{rep.club || `Rotaract Club of ${rep.clubName || 'Majayjay'}`}</TableCell>
-                    <TableCell className="py-1 text-lg">{rep.year || rep.rotaryYear.replace('Rotary Year ', '').split(' | ')[0]}</TableCell>
+                    <TableCell className="py-1 text-lg">{rep.club}</TableCell>
+                    <TableCell className="py-1 text-lg">{rep.year}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>
@@ -162,7 +178,7 @@ const DistrictDetail = () => {
           <div className="flex flex-col sm:flex-row gap-4 mt-8">
             <Button 
               className="bg-[#16478E] hover:bg-[#0E3068] text-white rounded-full px-8"
-              onClick={() => window.open(`https://www.facebook.com/district${district.id}rotaract`, '_blank')}
+              onClick={() => window.open(districtDetail.facebookPageUrl || `https://www.facebook.com/district${district.id}rotaract`, '_blank')}
             >
               VISIT DISTRICT {district.id} FACEBOOK PAGE
             </Button>
