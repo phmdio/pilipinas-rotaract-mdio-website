@@ -120,7 +120,8 @@
       "title": "District Rotaract Representative Elect Training Seminar",
       "description": "Hipster ipsum tattooed brunch I'm baby. Schlitz seitan listicle mixtape boys trust vice. Occupy tbh street brunch keffiyeh. Bicycle diy blog banjo fingerstache tote on locavore coffee pabst. ",
       "image": "https://images.ctfassets.net/dze7xj4zfu0b/4p5JH3l4a39EYNUmrnrm74/11bc196ed250a472c16c12e33266fcb9/Rectangle_60.png",
-      "landscape": true
+      "landscape": true,
+      "slug": "district-rotaract-representative-elect-training-seminar"
     }
   ],
   "upcomingEvents": [],
@@ -144,8 +145,43 @@
       "iconUrl": "https://images.ctfassets.net/dze7xj4zfu0b/b4zSaSkFx9Ffo0rms7pp9/4c4f9fc07c50a0955e5bad2358a94437/rotaract_members_in_the_philippines.svg"
     }
   ],
-  "rotaractStatisticsDistrict": [],
-  "rotaractStatisticsContributions": [],
-  "rotaractStatisticsCards": [],
+  "rotaractStatisticsDistrict": [
+    {
+      "year": "2024",
+      "district": "3770",
+      "members": 1200,
+      "clubs": 65
+    }
+  ],
+  "rotaractStatisticsContributions": [
+    {
+      "district": "3770",
+      "annualFund": 850000,
+      "polioPlus": 400000
+    }
+  ],
+  "rotaractStatisticsCards": [
+    {
+      "id": "3JJQghbKdRRCB5tFH2Ngsj",
+      "number": "170K",
+      "title": "Rotaract Around the World",
+      "description": "Rotaract has become a global movement with over 170,000 members in more than 10,500 clubs across 180 countries. Rotaract members are making significant impacts in their communities through service projects, leadership development, and international cooperation initiatives.",
+      "iconUrl": "https://images.ctfassets.net/dze7xj4zfu0b/23GYc5Ssb4xuZhPA4tHzRx/3f1935e283da1727bfb8fc613b770da7/rotaract_around_the_world.svg"
+    },
+    {
+      "id": "1VedS4KiryEpea4XjCzmtr",
+      "number": "800",
+      "title": "Rotaract Clubs in the Philippines",
+      "description": "The Philippines is home to 800 Rotaract clubs distributed across 11 districts. The strong Rotaract presence in the country reflects the commitment of young Filipino professionals and students to service, leadership, and community development through the Rotary network.",
+      "iconUrl": "https://images.ctfassets.net/dze7xj4zfu0b/4q5FNxCN4cduygbfIDImLB/8cedf0792c4004a5e4983c92fe394932/rotaract_clubs_in_the_district.svg"
+    },
+    {
+      "id": "4aqiAdhutVF4ZWzhlObPOX",
+      "number": "15K",
+      "title": "Rotaract Members in the Philippines",
+      "description": "With 15,000 active members, Philippine Rotaract represents one of the largest and most active Rotaract communities globally. These young leaders are engaged in numerous service projects, professional development initiatives, and cross-district collaborations through the MDIO framework.",
+      "iconUrl": "https://images.ctfassets.net/dze7xj4zfu0b/b4zSaSkFx9Ffo0rms7pp9/4c4f9fc07c50a0955e5bad2358a94437/rotaract_members_in_the_philippines.svg"
+    }
+  ],
   "rotaractStatisticsCharts": []
 }

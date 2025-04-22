@@ -85,6 +85,7 @@ export interface FeaturedEvent {
   description: string;
   image: string;
   landscape?: boolean;
+  slug?: string;
 }
 
 export interface UpcomingEvent {
@@ -92,6 +93,7 @@ export interface UpcomingEvent {
   date: string;
   title: string;
   image: string;
+  slug?: string;
 }
 
 // Query keys for programs and activities
@@ -138,6 +140,38 @@ export interface RotaractStatisticsData {
   contributionsData: StatisticDataPoint[];
   cardStats: StatisticCardStat[];
   chartConfig: StatisticChartConfig[];
+}
+
+// Type for detailed event information
+export interface EventDetail {
+  id: string;
+  date: string;
+  title: string;
+  description: string;
+  image: string;
+  location: string;
+  objectiveDetails: string[];
+  moreInfo: string;
+  additionalDetails: string[];
+  closingDetails: string;
+  eventUrl?: string;
+  isFeatured: boolean;
+  slug: string;
+}
+
+// Query keys for event details
+export const eventKeys = {
+  eventDetail: ['contentful', 'eventDetail'] as const,
+};
+
+// Helper function to generate slug from title
+function generateSlug(title: string): string {
+  return title
+    .toLowerCase()
+    .replace(/[^\w\s-]/g, '') // Remove special characters
+    .replace(/\s+/g, '-') // Replace spaces with dashes
+    .replace(/--+/g, '-') // Replace multiple dashes with single dash
+    .trim(); // Trim any leading/trailing spaces or dashes
 }
 
 // Helper function to load static data
@@ -400,7 +434,12 @@ export async function getFeaturedEvents(): Promise<FeaturedEvent[]> {
   // Try to load from static data first
   if (USE_STATIC_DATA) {
     try {
-      return await loadStaticData<FeaturedEvent>('featuredEvents');
+      const events = await loadStaticData<FeaturedEvent>('featuredEvents');
+      // Add slugs to any events that don't have them
+      return events.map(event => ({
+        ...event,
+        slug: event.slug || generateSlug(event.title)
+      }));
     } catch (error) {
       console.warn('Falling back to API for featured events');
     }
@@ -413,16 +452,20 @@ export async function getFeaturedEvents(): Promise<FeaturedEvent[]> {
     limit: 5,
   });
 
-  return entries.items.map((item: any) => ({
-    id: item.sys.id,
-    date: item.fields.date || new Date().toLocaleDateString(),
-    title: item.fields.title || 'Featured Event',
-    description: item.fields.description || '',
-    image: item.fields.image?.fields?.file?.url 
-      ? `https:${item.fields.image.fields.file.url}` 
-      : 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=800&q=80',
-    landscape: item.fields.landscape || false,
-  }));
+  return entries.items.map((item: any) => {
+    const title = item.fields.title || 'Featured Event';
+    return {
+      id: item.sys.id,
+      date: item.fields.date || new Date().toLocaleDateString(),
+      title,
+      description: item.fields.description || '',
+      image: item.fields.image?.fields?.file?.url 
+        ? `https:${item.fields.image.fields.file.url}` 
+        : 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=800&q=80',
+      landscape: item.fields.landscape || false,
+      slug: item.fields.slug || generateSlug(title)
+    };
+  });
 }
 
 // Function to fetch upcoming events
@@ -430,7 +473,12 @@ export async function getUpcomingEvents(): Promise<UpcomingEvent[]> {
   // Try to load from static data first
   if (USE_STATIC_DATA) {
     try {
-      return await loadStaticData<UpcomingEvent>('upcomingEvents');
+      const events = await loadStaticData<UpcomingEvent>('upcomingEvents');
+      // Add slugs to any events that don't have them
+      return events.map(event => ({
+        ...event,
+        slug: event.slug || generateSlug(event.title)
+      }));
     } catch (error) {
       console.warn('Falling back to API for upcoming events');
     }
@@ -443,14 +491,18 @@ export async function getUpcomingEvents(): Promise<UpcomingEvent[]> {
     limit: 5,
   });
 
-  return entries.items.map((item: any) => ({
-    id: item.sys.id,
-    date: item.fields.date || new Date().toLocaleDateString(),
-    title: item.fields.title || 'Upcoming Event',
-    image: item.fields.image?.fields?.file?.url 
-      ? `https:${item.fields.image.fields.file.url}` 
-      : 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=600&q=80',
-  }));
+  return entries.items.map((item: any) => {
+    const title = item.fields.title || 'Upcoming Event';
+    return {
+      id: item.sys.id,
+      date: item.fields.date || new Date().toLocaleDateString(),
+      title,
+      image: item.fields.image?.fields?.file?.url 
+        ? `https:${item.fields.image.fields.file.url}` 
+        : 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=600&q=80',
+      slug: item.fields.slug || generateSlug(title)
+    };
+  });
 }
 
 // Fallback data for featured events
@@ -463,6 +515,7 @@ export const fallbackFeaturedEvents: FeaturedEvent[] = [
       "Annual training seminar for incoming District Rotaract Representatives to prepare them for their leadership roles in the upcoming Rotary year.",
     image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=800&q=80",
     landscape: true,
+    slug: "district-rotaract-representative-elect-training-seminar"
   },
   {
     id: '2',
@@ -471,6 +524,7 @@ export const fallbackFeaturedEvents: FeaturedEvent[] = [
     description:
       "Recognition event celebrating outstanding Rotaract clubs and individuals across the Philippines who have made significant contributions to their communities.",
     image: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81?auto=format&fit=crop&w=800&q=80",
+    slug: "pilipinas-gear-awards"
   },
   {
     id: '3',
@@ -479,6 +533,7 @@ export const fallbackFeaturedEvents: FeaturedEvent[] = [
     description:
       "Annual national convention bringing together Rotaractors from across the Philippines for fellowship, learning, and service.",
     image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80",
+    slug: "pilipinas-rotaract-convention"
   },
   {
     id: '4',
@@ -487,6 +542,7 @@ export const fallbackFeaturedEvents: FeaturedEvent[] = [
     description:
       "Workshop focused on strengthening Rotaract brand identity and improving club marketing and communications strategies.",
     image: "https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?auto=format&fit=crop&w=800&q=80",
+    slug: "rotaract-branding-academy"
   },
   {
     id: '5',
@@ -495,6 +551,7 @@ export const fallbackFeaturedEvents: FeaturedEvent[] = [
     description:
       "Service initiative highlighting Rotaractors as people of action through community service projects across the Philippines.",
     image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=800&q=80",
+    slug: "people-of-action-campaign"
   },
 ];
 
@@ -505,30 +562,35 @@ export const fallbackUpcomingEvents: UpcomingEvent[] = [
     date: "February 01, 2024",
     title: "District Rotaract Representative Elect Training Seminar",
     image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=600&q=80",
+    slug: "district-rotaract-representative-elect-training-seminar-feb-01"
   },
   {
     id: '2',
     date: "February 03, 2024",
     title: "District Rotaract Representative Elect Training Seminar",
     image: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81?auto=format&fit=crop&w=600&q=80",
+    slug: "district-rotaract-representative-elect-training-seminar-feb-03"
   },
   {
     id: '3',
     date: "February 07, 2024",
     title: "District Rotaract Representative Elect Training Seminar",
     image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=600&q=80",
+    slug: "district-rotaract-representative-elect-training-seminar-feb-07"
   },
   {
     id: '4',
     date: "February 11, 2024",
     title: "District Rotaract Representative Elect Training Seminar",
     image: "https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?auto=format&fit=crop&w=600&q=80",
+    slug: "district-rotaract-representative-elect-training-seminar-feb-11"
   },
   {
     id: '5',
     date: "February 17, 2024",
     title: "District Rotaract Representative Elect Training Seminar",
     image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=600&q=80",
+    slug: "district-rotaract-representative-elect-training-seminar-feb-17"
   },
 ];
 
@@ -758,4 +820,152 @@ export const fallbackRotaractStatistics: RotaractStatisticsData = {
       asOfDate: 'December 2023'
     }
   ]
-}; 
+};
+
+// Function to fetch event details by slug
+export async function getEventDetailBySlug(slug: string): Promise<EventDetail | null> {
+  // Try to find in featured events first
+  const featuredEvents = await getFeaturedEvents();
+  const featuredEvent = featuredEvents.find(e => e.slug === slug);
+  
+  if (featuredEvent) {
+    return getEventDetail(featuredEvent.id);
+  }
+  
+  // Then try in upcoming events
+  const upcomingEvents = await getUpcomingEvents();
+  const upcomingEvent = upcomingEvents.find(e => e.slug === slug);
+  
+  if (upcomingEvent) {
+    return getEventDetail(upcomingEvent.id);
+  }
+  
+  return null;
+}
+
+// Function to fetch event details by ID
+export async function getEventDetail(eventId: string): Promise<EventDetail | null> {
+  // Try to load from static data first
+  if (USE_STATIC_DATA) {
+    try {
+      // Check in featured events
+      const featuredEvents = await loadStaticData<FeaturedEvent>('featuredEvents');
+      const featuredEvent = featuredEvents.find(e => e.id === eventId);
+      
+      if (featuredEvent) {
+        // Convert featured event to event detail with default values for additional fields
+        return {
+          id: featuredEvent.id,
+          date: featuredEvent.date,
+          title: featuredEvent.title,
+          description: featuredEvent.description,
+          image: featuredEvent.image,
+          location: 'Philippines',
+          objectiveDetails: ['Learn more about this event at the event page.'],
+          moreInfo: featuredEvent.description,
+          additionalDetails: [],
+          closingDetails: 'Visit the event page for more information.',
+          isFeatured: true,
+          slug: generateSlug(featuredEvent.title)
+        };
+      }
+      
+      // Check in upcoming events if not found in featured
+      const upcomingEvents = await loadStaticData<UpcomingEvent>('upcomingEvents');
+      const upcomingEvent = upcomingEvents.find(e => e.id === eventId);
+      
+      if (upcomingEvent) {
+        // Convert upcoming event to event detail with default values
+        return {
+          id: upcomingEvent.id,
+          date: upcomingEvent.date,
+          title: upcomingEvent.title,
+          description: 'Details coming soon.',
+          image: upcomingEvent.image,
+          location: 'Philippines',
+          objectiveDetails: ['Learn more about this event at the event page.'],
+          moreInfo: 'Details coming soon.',
+          additionalDetails: [],
+          closingDetails: 'Visit the event page for more information.',
+          isFeatured: false,
+          slug: generateSlug(upcomingEvent.title)
+        };
+      }
+      
+      console.warn(`Event detail for ${eventId} not found in static data`);
+      return null;
+    } catch (error) {
+      console.warn('Falling back to API for event detail');
+    }
+  }
+  
+  // Fall back to API
+  try {
+    // First try featured events
+    const featuredEntries = await client.getEntries({
+      content_type: 'featuredEvent',
+      'sys.id': eventId,
+    });
+    
+    if (featuredEntries.items.length > 0) {
+      const item = featuredEntries.items[0];
+      const fields = item.fields as Record<string, any>;
+      const title = typeof fields.title === 'string' ? fields.title : 'Event';
+      
+      return {
+        id: item.sys.id,
+        date: typeof fields.date === 'string' ? fields.date : new Date().toLocaleDateString(),
+        title,
+        description: typeof fields.description === 'string' ? fields.description : '',
+        image: fields.image?.fields?.file?.url 
+          ? `https:${fields.image.fields.file.url}` 
+          : 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=800&q=80',
+        location: typeof fields.location === 'string' ? fields.location : 'Philippines',
+        objectiveDetails: Array.isArray(fields.objectiveDetails) ? fields.objectiveDetails : ['Learn more about this event at the event page.'],
+        moreInfo: typeof fields.moreInfo === 'string' ? fields.moreInfo : 
+                  typeof fields.description === 'string' ? fields.description : '',
+        additionalDetails: Array.isArray(fields.additionalDetails) ? fields.additionalDetails : [],
+        closingDetails: typeof fields.closingDetails === 'string' ? fields.closingDetails : 'Visit the event page for more information.',
+        eventUrl: typeof fields.eventUrl === 'string' ? fields.eventUrl : undefined,
+        isFeatured: true,
+        slug: generateSlug(title)
+      };
+    }
+    
+    // Then try upcoming events
+    const upcomingEntries = await client.getEntries({
+      content_type: 'upcomingEvent',
+      'sys.id': eventId,
+    });
+    
+    if (upcomingEntries.items.length > 0) {
+      const item = upcomingEntries.items[0];
+      const fields = item.fields as Record<string, any>;
+      const title = typeof fields.title === 'string' ? fields.title : 'Event';
+      
+      return {
+        id: item.sys.id,
+        date: typeof fields.date === 'string' ? fields.date : new Date().toLocaleDateString(),
+        title,
+        description: typeof fields.description === 'string' ? fields.description : 'Details coming soon.',
+        image: fields.image?.fields?.file?.url 
+          ? `https:${fields.image.fields.file.url}` 
+          : 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=800&q=80',
+        location: typeof fields.location === 'string' ? fields.location : 'Philippines',
+        objectiveDetails: Array.isArray(fields.objectiveDetails) ? fields.objectiveDetails : ['Learn more about this event at the event page.'],
+        moreInfo: typeof fields.moreInfo === 'string' ? fields.moreInfo : 
+                  typeof fields.description === 'string' ? fields.description : 'Details coming soon.',
+        additionalDetails: Array.isArray(fields.additionalDetails) ? fields.additionalDetails : [],
+        closingDetails: typeof fields.closingDetails === 'string' ? fields.closingDetails : 'Visit the event page for more information.',
+        eventUrl: typeof fields.eventUrl === 'string' ? fields.eventUrl : undefined,
+        isFeatured: false,
+        slug: generateSlug(title)
+      };
+    }
+    
+    return null;
+  } catch (error) {
+    console.error('Error fetching event detail:', error);
+    return null;
+  }
+} 

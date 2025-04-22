@@ -3,9 +3,48 @@ import fs from 'fs';
 import path from 'path';
 import dotenv from 'dotenv';
 import { createClient } from 'contentful';
+import { fileURLToPath } from 'url';
 
 // Load environment variables
 dotenv.config();
+
+// Get the directory name of the current module
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+// Import the generateSlugFromTitle function from utils
+// We need to use a dynamic import since ES modules don't support synchronous imports
+let generateSlugFromTitle;
+
+async function importUtils() {
+  try {
+    // Import the TS file by using ts-node to transpile it on the fly
+    const utilsPath = path.join(__dirname, '..', 'src', 'utils', 'string.ts');
+    if (fs.existsSync(utilsPath)) {
+      // For production, we use a simpler version directly
+      generateSlugFromTitle = function(title) {
+        return title
+          .toLowerCase()
+          .replace(/[^\w\s-]/g, '')
+          .replace(/\s+/g, '-')
+          .replace(/--+/g, '-')
+          .trim()
+          .replace(/^-+|-+$/g, '');
+      };
+    }
+  } catch (error) {
+    console.warn('Could not import utils, using fallback implementation:', error);
+    // Fallback implementation
+    generateSlugFromTitle = function(title) {
+      return title
+        .toLowerCase()
+        .replace(/[^\w\s-]/g, '')
+        .replace(/\s+/g, '-')
+        .replace(/--+/g, '-')
+        .trim()
+        .replace(/^-+|-+$/g, '');
+    };
+  }
+}
 
 // Initialize Contentful client
 const client = createClient({
@@ -21,6 +60,8 @@ const OUTPUT_DIR = path.resolve('public/static-data');
 if (!fs.existsSync(OUTPUT_DIR)) {
   fs.mkdirSync(OUTPUT_DIR, { recursive: true });
 }
+
+// Helper function to generate slug from title - removed and replaced with imported version
 
 // Function to fetch hero carousel images
 async function fetchHeroCarouselImages() {
@@ -81,16 +122,20 @@ async function fetchFeaturedEvents() {
       limit: 5,
     });
 
-    return entries.items.map((item) => ({
-      id: item.sys.id,
-      date: item.fields.date || new Date().toLocaleDateString(),
-      title: item.fields.title || 'Featured Event',
-      description: item.fields.description || '',
-      image: item.fields.image?.fields?.file?.url 
-        ? `https:${item.fields.image.fields.file.url}` 
-        : 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=800&q=80',
-      landscape: item.fields.landscape || false,
-    }));
+    return entries.items.map((item) => {
+      const title = item.fields.title || 'Featured Event';
+      return {
+        id: item.sys.id,
+        date: item.fields.date || new Date().toLocaleDateString(),
+        title: title,
+        description: item.fields.description || '',
+        image: item.fields.image?.fields?.file?.url 
+          ? `https:${item.fields.image.fields.file.url}` 
+          : 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=800&q=80',
+        landscape: item.fields.landscape || false,
+        slug: item.fields.slug || generateSlugFromTitle(title)
+      };
+    });
   } catch (error) {
     console.error('Error fetching featured events:', error);
     return [];
@@ -107,14 +152,18 @@ async function fetchUpcomingEvents() {
       limit: 5,
     });
 
-    return entries.items.map((item) => ({
-      id: item.sys.id,
-      date: item.fields.date || new Date().toLocaleDateString(),
-      title: item.fields.title || 'Upcoming Event',
-      image: item.fields.image?.fields?.file?.url 
-        ? `https:${item.fields.image.fields.file.url}` 
-        : 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=600&q=80',
-    }));
+    return entries.items.map((item) => {
+      const title = item.fields.title || 'Upcoming Event';
+      return {
+        id: item.sys.id,
+        date: item.fields.date || new Date().toLocaleDateString(),
+        title: title,
+        image: item.fields.image?.fields?.file?.url 
+          ? `https:${item.fields.image.fields.file.url}` 
+          : 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=600&q=80',
+        slug: item.fields.slug || generateSlugFromTitle(title)
+      };
+    });
   } catch (error) {
     console.error('Error fetching upcoming events:', error);
     return [];
@@ -254,6 +303,9 @@ async function fetchRotaractChartConfigs() {
 // Main function to generate all static data
 export async function generateStaticData() {
   console.log('Generating static data from Contentful...');
+  
+  // Import utils
+  await importUtils();
   
   try {
     // Fetch all required data

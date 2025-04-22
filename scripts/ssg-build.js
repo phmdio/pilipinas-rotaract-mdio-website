@@ -20,6 +20,30 @@ const outDir = path.join(root, 'dist');
 const routesFilePath = path.join(root, 'src', 'data', 'ssg-routes.json');
 const staticRoutes = JSON.parse(fs.readFileSync(routesFilePath, 'utf-8')).routes;
 
+// Import the generateSlugFromTitle function from utils
+// Since we can't directly import TypeScript in Node.js without transpilation,
+// we use the same implementation as in src/utils/string.ts
+let generateSlugFromTitle;
+
+async function importUtils() {
+  try {
+    // For a more structured approach, we would use ts-node or a build step
+    // but for simplicity, using the same implementation directly
+    generateSlugFromTitle = function(title) {
+      return title
+        .toLowerCase()                // Convert to lowercase
+        .replace(/[^\w\s-]/g, '')     // Remove special characters
+        .replace(/\s+/g, '-')         // Replace spaces with dashes
+        .replace(/--+/g, '-')         // Replace multiple dashes with single dash
+        .trim()                       // Trim leading/trailing spaces
+        .replace(/^-+|-+$/g, '');     // Remove leading/trailing dashes
+    };
+  } catch (error) {
+    console.error('Error setting up utilities:', error);
+    process.exit(1);
+  }
+}
+
 // Fetch district IDs from Contentful to generate district detail routes
 async function fetchDistrictIds() {
   console.log('Fetching district IDs from Contentful...');
@@ -37,6 +61,44 @@ async function fetchDistrictIds() {
     return entries.items.map(item => `/district/${item.fields.id}`);
   } catch (error) {
     console.error('Error fetching district IDs:', error);
+    return [];
+  }
+}
+
+// Fetch event slugs from Contentful to generate event detail routes
+async function fetchEventSlugs() {
+  console.log('Fetching event slugs from Contentful...');
+  const client = createClient({
+    space: process.env.VITE_CONTENTFUL_SPACE_ID,
+    accessToken: process.env.VITE_CONTENTFUL_ACCESS_TOKEN,
+    environment: process.env.VITE_CONTENTFUL_ENVIRONMENT || 'master',
+  });
+
+  try {
+    // Fetch featured events
+    const featuredEntries = await client.getEntries({
+      content_type: 'featuredEvent',
+    });
+    
+    // Fetch upcoming events
+    const upcomingEntries = await client.getEntries({
+      content_type: 'upcomingEvent',
+    });
+    
+    // Combine and process all events
+    const allEvents = [...featuredEntries.items, ...upcomingEntries.items];
+    
+    // Generate slug-based routes only
+    const eventSlugs = allEvents.map(item => {
+      const title = item.fields.title || 'Event';
+      const slug = item.fields.slug || generateSlugFromTitle(title);
+      return `/event/${slug}`;
+    });
+    
+    // Return unique routes
+    return [...new Set(eventSlugs)];
+  } catch (error) {
+    console.error('Error fetching event slugs:', error);
     return [];
   }
 }
@@ -118,6 +180,9 @@ async function copyStaticData() {
 async function buildSSG() {
   console.log('Starting SSG build...');
   
+  // Import utilities
+  await importUtils();
+  
   // Clear the output directory if it exists
   if (fs.existsSync(outDir)) {
     fs.rmSync(outDir, { recursive: true, force: true });
@@ -161,7 +226,8 @@ async function buildSSG() {
   // 4. Get dynamic routes
   console.log('Fetching dynamic routes...');
   const districtRoutes = await fetchDistrictIds();
-  const allRoutes = [...staticRoutes, ...districtRoutes];
+  const eventRoutes = await fetchEventSlugs();
+  const allRoutes = [...staticRoutes, ...districtRoutes, ...eventRoutes];
   
   // 5. Pre-render each route
   console.log('Pre-rendering routes...');
