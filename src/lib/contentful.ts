@@ -4,16 +4,12 @@ import { StaticContentfulData } from '@/data/contentful-static';
 // Static data flag - set to true to use static data from JSON files
 const USE_STATIC_DATA = import.meta.env.MODE === 'production';
 
-// Check if required Contentful env variables are present
-const hasContentfulCredentials = import.meta.env.VITE_CONTENTFUL_SPACE_ID && 
-                               import.meta.env.VITE_CONTENTFUL_ACCESS_TOKEN;
-
-// Initialize the Contentful client only if credentials are available
-const client = hasContentfulCredentials ? createClient({
+// Initialize the Contentful client
+const client = createClient({
   space: import.meta.env.VITE_CONTENTFUL_SPACE_ID,
   accessToken: import.meta.env.VITE_CONTENTFUL_ACCESS_TOKEN,
   environment: import.meta.env.VITE_CONTENTFUL_ENVIRONMENT || 'master',
-}) : null;
+});
 
 // Type definition for Hero carousel images
 export interface HeroCarouselImage {
@@ -89,12 +85,6 @@ async function loadStaticData<T>(key: keyof StaticContentfulData): Promise<T[]> 
 
 // Function to fetch hero carousel images
 export async function getHeroCarouselImages(): Promise<HeroCarouselImage[]> {
-  // Return fallback data if Contentful client is not available
-  if (!client) {
-    console.warn('Contentful client not initialized. Using fallback carousel data.');
-    return fallbackCarouselImages;
-  }
-
   // Try to load from static data first
   if (USE_STATIC_DATA) {
     try {
@@ -104,34 +94,23 @@ export async function getHeroCarouselImages(): Promise<HeroCarouselImage[]> {
     }
   }
   
-  try {
-    // Fall back to API if static data loading fails or is disabled
-    const entries = await client.getEntries({
-      content_type: 'heroCarouselImage',
-      order: ['sys.createdAt'],
-    });
+  // Fall back to API if static data loading fails or is disabled
+  const entries = await client.getEntries({
+    content_type: 'heroCarouselImage',
+    order: ['sys.createdAt'],
+  });
 
-    return entries.items.map((item: any) => ({
-      title: item.fields.title,
-      imageUrl: item.fields.image?.fields?.file?.url 
-        ? `https:${item.fields.image.fields.file.url}` 
-        : '/assets/carousel.png', // Fallback image
-      alt: item.fields.alt || item.fields.title || 'Rotaract carousel image',
-    }));
-  } catch (error) {
-    console.error('Error fetching hero carousel images:', error);
-    return fallbackCarouselImages;
-  }
+  return entries.items.map((item: any) => ({
+    title: item.fields.title,
+    imageUrl: item.fields.image?.fields?.file?.url 
+      ? `https:${item.fields.image.fields.file.url}` 
+      : '/assets/carousel.png', // Fallback image
+    alt: item.fields.alt || item.fields.title || 'Rotaract carousel image',
+  }));
 }
 
 // Function to fetch district data
 export async function getDistricts(): Promise<BaseDistrict[]> {
-  // Return fallback data if Contentful client is not available
-  if (!client) {
-    console.warn('Contentful client not initialized. Using fallback district data.');
-    return fallbackDistrictData;
-  }
-
   // Try to load from static data first
   if (USE_STATIC_DATA) {
     try {
@@ -141,35 +120,24 @@ export async function getDistricts(): Promise<BaseDistrict[]> {
     }
   }
   
-  try {
-    // Fall back to API if static data loading fails or is disabled
-    const entries = await client.getEntries({
-      content_type: 'district',
-      order: ['sys.createdAt'],
-    });
+  // Fall back to API if static data loading fails or is disabled
+  const entries = await client.getEntries({
+    content_type: 'district',
+    order: ['sys.createdAt'],
+  });
 
-    return entries.items.map((item: any) => ({
-      id: item.fields.id || '',
-      color: item.fields.color || '#003366',
-      image: item.fields.image?.fields?.file?.url 
-        ? `https:${item.fields.image.fields.file.url}` 
-        : '/assets/district/default.jpeg',
-      description: item.fields.description || 'Rotaract Clubs of Rotary International District #',
-    }));
-  } catch (error) {
-    console.error('Error fetching districts:', error);
-    return fallbackDistrictData;
-  }
+  return entries.items.map((item: any) => ({
+    id: item.fields.id || '',
+    color: item.fields.color || '#003366',
+    image: item.fields.image?.fields?.file?.url 
+      ? `https:${item.fields.image.fields.file.url}` 
+      : '/assets/district/default.jpeg',
+    description: item.fields.description || 'Rotaract Clubs of Rotary International District #',
+  }));
 }
 
 // Function to fetch district detail data
 export async function getDistrictDetail(districtId: string): Promise<District> {
-  // Return fallback data if Contentful client is not available
-  if (!client) {
-    console.warn('Contentful client not initialized. Using fallback district detail data.');
-    return createFallbackDistrictDetail(districtId);
-  }
-
   // Try to load from static data first
   if (USE_STATIC_DATA) {
     try {
@@ -185,20 +153,11 @@ export async function getDistrictDetail(districtId: string): Promise<District> {
     }
   }
   
-  try {
-    return await fetchDistrictFromContentful(districtId);
-  } catch (error) {
-    console.error('Error fetching district detail:', error);
-    return createFallbackDistrictDetail(districtId);
-  }
+  return fetchDistrictFromContentful(districtId);
 }
 
 // Helper function to fetch complete district data from Contentful
 async function fetchDistrictFromContentful(districtId: string): Promise<District> {
-  if (!client) {
-    return createFallbackDistrictDetail(districtId);
-  }
-
   const entries = await client.getEntries({
     content_type: 'district',
     'fields.id': districtId,
