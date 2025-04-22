@@ -98,7 +98,7 @@ const Hero = () => {
             "w-full md:w-1/2 mt-12 md:mt-0 transition-all duration-700 delay-300 opacity-0 translate-y-4",
             isLoaded && "opacity-100 translate-y-0"
           )}>
-            <div className="relative mx-auto max-w-md">
+            <div className="relative mx-auto max-w-2xl">
               {isLoading ? (
                 <div className="aspect-square w-full flex items-center justify-center bg-gray-200 rounded-lg">
                   <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white"></div>
@@ -121,7 +121,7 @@ const Hero = () => {
                   <CarouselContent>
                     {carouselImages.map((image, index) => (
                       <CarouselItem key={index}>
-                        <div className="aspect-square w-full relative">
+                        <div className="aspect-auto w-full relative">
                           <img 
                             src={image.imageUrl} 
                             alt={image.alt} 
