@@ -1,4 +1,4 @@
-import { HeroCarouselImage, BaseDistrict, FeaturedEvent, UpcomingEvent, Statistic, StatisticDataPoint, StatisticCardStat, StatisticChartConfig } from '@/lib/contentful';
+import { HeroCarouselImage, BaseDistrict, FeaturedEvent, UpcomingEvent, Statistic, StatisticDataPoint, StatisticCardStat, StatisticChartConfig, LeadershipChair, BoardMember, ExecutiveCommitteeMember, StaffMember } from '@/lib/contentful';
 
 // Interfaces for static data
 export interface StaticContentfulData {
@@ -11,6 +11,10 @@ export interface StaticContentfulData {
   rotaractStatisticsContributions: StatisticDataPoint[];
   rotaractStatisticsCards: StatisticCardStat[];
   rotaractStatisticsCharts: StatisticChartConfig[];
+  leadershipChair: LeadershipChair[];
+  boardMembers: BoardMember[];
+  executiveCommittee: ExecutiveCommitteeMember[];
+  staffMembers: StaffMember[];
   // Add other content types here as needed
 }
 
@@ -25,5 +29,8 @@ export const emptyStaticData: StaticContentfulData = {
   rotaractStatisticsContributions: [],
   rotaractStatisticsCards: [],
   rotaractStatisticsCharts: [],
-  // Initialize other content types with empty values
+  leadershipChair: [],
+  boardMembers: [],
+  executiveCommittee: [],
+  staffMembers: []
 }; 

@@ -51,6 +51,51 @@ export interface District extends BaseDistrict {
   facebookPageUrl: string;
 }
 
+// Type definitions for Leadership Team members
+export interface LeadershipChair {
+  id: string;
+  name: string;
+  title: string;
+  description: string;
+  image: string;
+  club: string;
+  isCurrentChair?: boolean;
+}
+
+export interface BoardMember {
+  id: string;
+  name: string;
+  title: string;
+  district: string;
+  club: string;
+  image: string;
+}
+
+export interface ExecutiveCommitteeMember {
+  id: string;
+  name: string;
+  title: string;
+  district: string;
+  club: string;
+  image: string;
+}
+
+export interface StaffMember {
+  id: string;
+  name: string;
+  role: string;
+  district: string;
+  club: string;
+  image: string;
+}
+
+export interface LeadershipTeamData {
+  chair: LeadershipChair;
+  boardMembers: BoardMember[];
+  executiveCommittee: ExecutiveCommitteeMember[];
+  staff: StaffMember[];
+}
+
 // Update the imported StaticContentfulData interface to include districts
 // This should be done in the contentful-static.ts file, but we're adding a declare here
 // to augment the existing interface
@@ -65,6 +110,10 @@ declare module '@/data/contentful-static' {
     rotaractStatisticsContributions: StatisticDataPoint[];
     rotaractStatisticsCards: StatisticCardStat[];
     rotaractStatisticsCharts: StatisticChartConfig[];
+    leadershipChair: LeadershipChair[];
+    boardMembers: BoardMember[];
+    executiveCommittee: ExecutiveCommitteeMember[];
+    staffMembers: StaffMember[];
   }
 }
 
@@ -162,6 +211,15 @@ export interface EventDetail {
 // Query keys for event details
 export const eventKeys = {
   eventDetail: ['contentful', 'eventDetail'] as const,
+};
+
+// Add query keys for leadership team
+export const leadershipKeys = {
+  leadershipTeam: ['contentful', 'leadershipTeam'] as const,
+  chair: ['contentful', 'leadershipChair'] as const,
+  boardMembers: ['contentful', 'boardMembers'] as const,
+  executiveCommittee: ['contentful', 'executiveCommitteeMember'] as const,
+  staff: ['contentful', 'staff'] as const,
 };
 
 // Helper function to generate slug from title
@@ -968,4 +1026,200 @@ export async function getEventDetail(eventId: string): Promise<EventDetail | nul
     console.error('Error fetching event detail:', error);
     return null;
   }
-} 
+}
+
+// Helper function to safely extract image URL from Contentful response
+function getImageUrl(imageField: any, fallbackUrl: string): string {
+  try {
+    if (imageField && 
+        typeof imageField === 'object' && 
+        'fields' in imageField && 
+        imageField.fields && 
+        'file' in imageField.fields && 
+        imageField.fields.file && 
+        'url' in imageField.fields.file && 
+        imageField.fields.file.url) {
+      return `https:${imageField.fields.file.url}`;
+    }
+    return fallbackUrl;
+  } catch (error) {
+    return fallbackUrl;
+  }
+}
+
+// Function to fetch leadership team data
+export async function getLeadershipTeam(): Promise<LeadershipTeamData> {
+  // Try to load from static data first
+  if (USE_STATIC_DATA) {
+    try {
+      const chairData = await loadStaticData<LeadershipChair>('leadershipChair');
+      const chair = chairData.length > 0 ? chairData[0] : fallbackLeadershipChair;
+      const boardMembers = await loadStaticData<BoardMember>('boardMembers');
+      const executiveCommittee = await loadStaticData<ExecutiveCommitteeMember>('executiveCommittee');
+      const staffMembers = await loadStaticData<StaffMember>('staffMembers');
+      
+      return {
+        chair,
+        boardMembers,
+        executiveCommittee,
+        staff: staffMembers
+      };
+    } catch (error) {
+      console.warn('Falling back to API for leadership team data');
+    }
+  }
+  
+  // Fetch chair data - filter by isCurrentChair field
+  const chairEntries = await client.getEntries({
+    content_type: 'leadershipChair',
+    'fields.isCurrentChair': true,
+    limit: 1,
+  });
+  
+  // If no current chair found, fall back to fetch any chair
+  let chairData = chairEntries.items;
+  if (chairData.length === 0) {
+    const anyChairEntries = await client.getEntries({
+      content_type: 'leadershipChair',
+      limit: 1,
+    });
+    chairData = anyChairEntries.items;
+  }
+  
+  // Fetch board members
+  const boardEntries = await client.getEntries({
+    content_type: 'boardMember',
+    order: ['fields.name'],
+  });
+  
+  // Fetch executive committee
+  const executiveEntries = await client.getEntries({
+    content_type: 'executiveCommitteeMember',
+    order: ['fields.name'],
+  });
+  
+  // Fetch staff members
+  const staffEntries = await client.getEntries({
+    content_type: 'staffMember',
+    order: ['fields.name'],
+  });
+  
+  // Map chair data
+  const chair: LeadershipChair = chairData.length > 0 ? {
+    id: chairData[0].sys.id,
+    name: String(chairData[0].fields.name || 'MDIO Chair'),
+    title: String(chairData[0].fields.title || 'Pilipinas Multi-District Information Organization, Chair'),
+    description: String(chairData[0].fields.description || ''),
+    image: getImageUrl(chairData[0].fields.image, 'https://i.pravatar.cc/1500'),
+    club: String(chairData[0].fields.club || ''),
+    isCurrentChair: Boolean(chairData[0].fields.isCurrentChair || false)
+  } : fallbackLeadershipChair;
+  
+  // Map board members
+  const boardMembers: BoardMember[] = boardEntries.items.map((item: any) => ({
+    id: item.sys.id,
+    name: String(item.fields.name || ''),
+    title: String(item.fields.title || 'District Rotaract Representative'),
+    district: String(item.fields.district || ''),
+    club: String(item.fields.club || ''),
+    image: getImageUrl(item.fields.image, '/placeholder.svg'),
+  }));
+  
+  // Map executive committee
+  const executiveCommittee: ExecutiveCommitteeMember[] = executiveEntries.items.map((item: any) => ({
+    id: item.sys.id,
+    name: String(item.fields.name || ''),
+    title: String(item.fields.title || ''),
+    district: String(item.fields.district || ''),
+    club: String(item.fields.club || ''),
+    image: getImageUrl(item.fields.image, '/placeholder.svg'),
+  }));
+  
+  // Map staff members
+  const staff: StaffMember[] = staffEntries.items.map((item: any) => ({
+    id: item.sys.id,
+    name: String(item.fields.name || ''),
+    role: String(item.fields.role || ''),
+    district: String(item.fields.district || ''),
+    club: String(item.fields.club || ''),
+    image: getImageUrl(item.fields.image, '/placeholder.svg'),
+  }));
+  
+  return {
+    chair,
+    boardMembers: boardMembers.length > 0 ? boardMembers : fallbackBoardMembers,
+    executiveCommittee: executiveCommittee.length > 0 ? executiveCommittee : fallbackExecutiveCommittee,
+    staff: staff.length > 0 ? staff : fallbackStaffMembers,
+  };
+}
+
+// Fallback data for leadership team
+export const fallbackLeadershipChair: LeadershipChair = {
+  id: 'fallback-chair',
+  name: 'Lerwin Bazar',
+  title: 'Pilipinas Multi-District Information Organization, Chair',
+  description: 'Leading with dedication and innovation, our Chair works tirelessly to strengthen Rotaract\'s presence and impact across the Philippines, fostering collaboration between districts and empowering the next generation of leaders.',
+  image: 'https://i.pravatar.cc/1500',
+  club: 'Past President, Rotaract Club of Manila',
+  isCurrentChair: true
+};
+
+export const fallbackBoardMembers: BoardMember[] = [
+  {
+    id: 'board-1',
+    name: "Maria Gonzales",
+    title: "District Rotaract Representative",
+    district: "Rotary International District 3770",
+    club: "Past President, Rotaract Club of Baguio",
+    image: "/placeholder.svg"
+  },
+  {
+    id: 'board-2',
+    name: "Carlos Santos",
+    title: "District Rotaract Representative",
+    district: "Rotary International District 3780",
+    club: "Past President, Rotaract Club of Quezon City",
+    image: "/placeholder.svg"
+  },
+  // Additional fallback board members...
+];
+
+export const fallbackExecutiveCommittee: ExecutiveCommitteeMember[] = [
+  {
+    id: 'exec-1',
+    name: "Ana Luisa Torres",
+    title: "Chairperson",
+    district: "Rotary International District 3830",
+    club: "Past President, Rotaract Club of Makati Business District",
+    image: "/placeholder.svg"
+  },
+  {
+    id: 'exec-2',
+    name: "Ramon Mercado",
+    title: "Vice Chair - Luzon",
+    district: "Rotary International District 3780",
+    club: "Past President, Rotaract Club of University of the Philippines",
+    image: "/placeholder.svg"
+  },
+  // Additional fallback executive committee members...
+];
+
+export const fallbackStaffMembers: StaffMember[] = [
+  {
+    id: 'staff-1',
+    name: "Patricia Mendoza",
+    role: "Executive Assistant",
+    district: "Rotary International District 3830",
+    club: "Member, Rotaract Club of Manila",
+    image: "/placeholder.svg"
+  },
+  {
+    id: 'staff-2',
+    name: "Jose Santos",
+    role: "Communications Coordinator",
+    district: "Rotary International District 3780",
+    club: "Member, Rotaract Club of Quezon City",
+    image: "/placeholder.svg"
+  },
+  // Additional fallback staff members...
+]; 
