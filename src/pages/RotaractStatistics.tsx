@@ -7,6 +7,7 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Responsi
 import { getRotaractStatistics, contentfulKeys, fallbackRotaractStatistics, StatisticDataPoint } from '@/lib/contentful';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
+import { Counter } from '@/components/ui/counter';
 
 // Types for our statistics data
 type CardStat = {
@@ -50,7 +51,9 @@ const StatCard = ({
         <div className="mb-4">
           {icon}
         </div>
-        <div className="text-4xl md:text-6xl font-bold">{number}</div>
+        <div className="text-4xl md:text-6xl font-bold">
+          <Counter value={number} />
+        </div>
         <div className="text-base md:text-lg mt-2">{title}</div>
       </div>
     </div>

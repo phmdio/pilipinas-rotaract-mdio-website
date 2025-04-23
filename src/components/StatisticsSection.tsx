@@ -1,6 +1,7 @@
 import { useInView } from 'react-intersection-observer';
 import { cn } from '@/lib/utils';
 import { Button } from './ui/button';
+import { Counter } from './ui/counter';
 import { Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { getStatistics, contentfulKeys, fallbackStatistics } from '@/lib/contentful';
@@ -78,7 +79,9 @@ const StatisticsSection = () => {
                       </>
                     )}
                   </div>
-                  <h3 className="text-4xl font-bold mt-1">{stat.value}</h3>
+                  <h3 className="text-4xl font-bold mt-1">
+                    <Counter value={stat.value} />
+                  </h3>
                 </div>
                 <p className="text-lg text-white/90">{stat.label}</p>
               </div>
