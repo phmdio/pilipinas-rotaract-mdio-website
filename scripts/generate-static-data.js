@@ -300,6 +300,117 @@ async function fetchRotaractChartConfigs() {
   }
 }
 
+// Function to fetch leadership chair data
+async function fetchLeadershipChair() {
+  console.log('Fetching leadership chair data...');
+  try {
+    // First try to get current chair
+    let entries = await client.getEntries({
+      content_type: 'leadershipChair',
+      'fields.isCurrentChair': true,
+      limit: 1,
+    });
+    
+    // If no current chair found, fall back to any chair
+    if (entries.items.length === 0) {
+      entries = await client.getEntries({
+        content_type: 'leadershipChair',
+        limit: 1,
+      });
+    }
+    
+    return entries.items.map((item) => ({
+      id: item.sys.id,
+      name: item.fields.name || 'MDIO Chair',
+      title: item.fields.title || 'Pilipinas Multi-District Information Organization, Chair',
+      description: item.fields.description || '',
+      image: item.fields.image?.fields?.file?.url 
+        ? `https:${item.fields.image.fields.file.url}` 
+        : 'https://i.pravatar.cc/1500',
+      club: item.fields.club || '',
+      isCurrentChair: item.fields.isCurrentChair || false
+    }));
+  } catch (error) {
+    console.error('Error fetching leadership chair data:', error);
+    return [];
+  }
+}
+
+// Function to fetch board members
+async function fetchBoardMembers() {
+  console.log('Fetching board members data...');
+  try {
+    const entries = await client.getEntries({
+      content_type: 'boardMember',
+      order: ['fields.name'],
+    });
+    
+    return entries.items.map((item) => ({
+      id: item.sys.id,
+      name: item.fields.name || '',
+      title: item.fields.title || 'District Rotaract Representative',
+      district: item.fields.district || '',
+      club: item.fields.club || '',
+      image: item.fields.image?.fields?.file?.url 
+        ? `https:${item.fields.image.fields.file.url}` 
+        : '/placeholder.svg',
+    }));
+  } catch (error) {
+    console.error('Error fetching board members data:', error);
+    return [];
+  }
+}
+
+// Function to fetch executive committee members
+async function fetchExecutiveCommittee() {
+  console.log('Fetching executive committee data...');
+  try {
+    const entries = await client.getEntries({
+      content_type: 'executiveCommitteeMember',
+      order: ['fields.name'],
+    });
+    
+    return entries.items.map((item) => ({
+      id: item.sys.id,
+      name: item.fields.name || '',
+      title: item.fields.title || '',
+      district: item.fields.district || '',
+      club: item.fields.club || '',
+      image: item.fields.image?.fields?.file?.url 
+        ? `https:${item.fields.image.fields.file.url}` 
+        : '/placeholder.svg',
+    }));
+  } catch (error) {
+    console.error('Error fetching executive committee data:', error);
+    return [];
+  }
+}
+
+// Function to fetch staff members
+async function fetchStaffMembers() {
+  console.log('Fetching staff members data...');
+  try {
+    const entries = await client.getEntries({
+      content_type: 'staffMember',
+      order: ['fields.name'],
+    });
+    
+    return entries.items.map((item) => ({
+      id: item.sys.id,
+      name: item.fields.name || '',
+      role: item.fields.role || '',
+      district: item.fields.district || '',
+      club: item.fields.club || '',
+      image: item.fields.image?.fields?.file?.url 
+        ? `https:${item.fields.image.fields.file.url}` 
+        : '/placeholder.svg',
+    }));
+  } catch (error) {
+    console.error('Error fetching staff members data:', error);
+    return [];
+  }
+}
+
 // Main function to generate all static data
 export async function generateStaticData() {
   console.log('Generating static data from Contentful...');
@@ -318,6 +429,12 @@ export async function generateStaticData() {
     const rotaractStatisticsContributions = await fetchRotaractContributionsData();
     const rotaractStatisticsCards = await fetchRotaractStatisticCards();
     const rotaractStatisticsCharts = await fetchRotaractChartConfigs();
+    
+    // Fetch leadership team data
+    const leadershipChair = await fetchLeadershipChair();
+    const boardMembers = await fetchBoardMembers();
+    const executiveCommittee = await fetchExecutiveCommittee();
+    const staffMembers = await fetchStaffMembers();
     
     // Validate that each data set is an array (even if empty)
     if (!Array.isArray(heroCarouselImages)) {
@@ -365,6 +482,26 @@ export async function generateStaticData() {
       rotaractStatisticsCharts = [];
     }
     
+    if (!Array.isArray(leadershipChair)) {
+      console.warn('leadershipChair is not an array, using empty array instead');
+      leadershipChair = [];
+    }
+    
+    if (!Array.isArray(boardMembers)) {
+      console.warn('boardMembers is not an array, using empty array instead');
+      boardMembers = [];
+    }
+    
+    if (!Array.isArray(executiveCommittee)) {
+      console.warn('executiveCommittee is not an array, using empty array instead');
+      executiveCommittee = [];
+    }
+    
+    if (!Array.isArray(staffMembers)) {
+      console.warn('staffMembers is not an array, using empty array instead');
+      staffMembers = [];
+    }
+    
     // Combine all data
     const staticData = {
       heroCarouselImages,
@@ -375,7 +512,11 @@ export async function generateStaticData() {
       rotaractStatisticsDistrict,
       rotaractStatisticsContributions,
       rotaractStatisticsCards,
-      rotaractStatisticsCharts
+      rotaractStatisticsCharts,
+      leadershipChair,
+      boardMembers,
+      executiveCommittee,
+      staffMembers
     };
     
     // Ensure the output directory exists

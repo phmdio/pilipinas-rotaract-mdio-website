@@ -117,7 +117,7 @@
     {
       "id": "3OkKROfI6mofGHQUQmEPxq",
       "date": "January 1, 2024",
-      "title": "District Rotaract Representative Elect Training Seminar",
+      "title": "District Rotaract RepresentativeElect Training Seminar",
       "description": "Hipster ipsum tattooed brunch I'm baby. Schlitz seitan listicle mixtape boys trust vice. Occupy tbh street brunch keffiyeh. Bicycle diy blog banjo fingerstache tote on locavore coffee pabst. ",
       "image": "https://images.ctfassets.net/dze7xj4zfu0b/4p5JH3l4a39EYNUmrnrm74/11bc196ed250a472c16c12e33266fcb9/Rectangle_60.png",
       "landscape": true,
@@ -128,19 +128,19 @@
   "statistics": [
     {
       "id": "3Uqi4yDayx30LcbIbg00fX",
-      "value": "170K",
-      "label": "Rotaract Around the World",
+      "value": "133,885",
+      "label": "Rotaractors Around the World",
       "iconUrl": "https://images.ctfassets.net/dze7xj4zfu0b/23GYc5Ssb4xuZhPA4tHzRx/3f1935e283da1727bfb8fc613b770da7/rotaract_around_the_world.svg"
     },
     {
       "id": "5Ph8qlxGtoEQDsz2qJ0NGJ",
-      "value": "800",
+      "value": "608",
       "label": "Rotaract Clubs in the Philippines",
       "iconUrl": "https://images.ctfassets.net/dze7xj4zfu0b/4q5FNxCN4cduygbfIDImLB/8cedf0792c4004a5e4983c92fe394932/rotaract_clubs_in_the_district.svg"
     },
     {
       "id": "4PPWQZhHVzc0b1pUtYp4gN",
-      "value": "15K",
+      "value": "8,094",
       "label": "Rotaract Members in the Philippines",
       "iconUrl": "https://images.ctfassets.net/dze7xj4zfu0b/b4zSaSkFx9Ffo0rms7pp9/4c4f9fc07c50a0955e5bad2358a94437/rotaract_members_in_the_philippines.svg"
     }
@@ -163,25 +163,70 @@
   "rotaractStatisticsCards": [
     {
       "id": "3JJQghbKdRRCB5tFH2Ngsj",
-      "number": "170K",
-      "title": "Rotaract Around the World",
-      "description": "Rotaract has become a global movement with over 170,000 members in more than 10,500 clubs across 180 countries. Rotaract members are making significant impacts in their communities through service projects, leadership development, and international cooperation initiatives.",
+      "number": "133,885",
+      "title": "Rotaractors Around the World as of April 2025",
+      "description": "Rotaract has become a global movement with over 133,885 members in more than 9,397 clubs across 180 countries. Rotaract members are making significant impacts in their communities through service projects, leadership development, and international cooperation initiatives.",
       "iconUrl": "https://images.ctfassets.net/dze7xj4zfu0b/23GYc5Ssb4xuZhPA4tHzRx/3f1935e283da1727bfb8fc613b770da7/rotaract_around_the_world.svg"
     },
     {
       "id": "1VedS4KiryEpea4XjCzmtr",
-      "number": "800",
-      "title": "Rotaract Clubs in the Philippines",
-      "description": "The Philippines is home to 800 Rotaract clubs distributed across 11 districts. The strong Rotaract presence in the country reflects the commitment of young Filipino professionals and students to service, leadership, and community development through the Rotary network.",
+      "number": "608",
+      "title": "Rotaract Clubs in the Philippines as of April 2025",
+      "description": "The Philippines is home to 608 Rotaract clubs distributed across 10 districts. The strong Rotaract presence in the country reflects the commitment of young Filipino professionals and students to service, leadership, and community development through the Rotary network.",
       "iconUrl": "https://images.ctfassets.net/dze7xj4zfu0b/4q5FNxCN4cduygbfIDImLB/8cedf0792c4004a5e4983c92fe394932/rotaract_clubs_in_the_district.svg"
     },
     {
       "id": "4aqiAdhutVF4ZWzhlObPOX",
-      "number": "15K",
-      "title": "Rotaract Members in the Philippines",
-      "description": "With 15,000 active members, Philippine Rotaract represents one of the largest and most active Rotaract communities globally. These young leaders are engaged in numerous service projects, professional development initiatives, and cross-district collaborations through the MDIO framework.",
+      "number": "8,094",
+      "title": "Rotaract Members in the Philippines as of April 2025",
+      "description": "With 8,094 active members, Philippine Rotaract represents one of the largest and most active Rotaract communities globally. These young leaders are engaged in numerous service projects, professional development initiatives, and cross-district collaborations through the MDIO framework.",
       "iconUrl": "https://images.ctfassets.net/dze7xj4zfu0b/b4zSaSkFx9Ffo0rms7pp9/4c4f9fc07c50a0955e5bad2358a94437/rotaract_members_in_the_philippines.svg"
     }
   ],
-  "rotaractStatisticsCharts": []
+  "rotaractStatisticsCharts": [
+    {
+      "id": "2gBoKBS9wcYQ93W6nhkUxB",
+      "title": "Rotaract Statistics (Philippines per member districts)",
+      "dataKey": [
+        "members",
+        "clubs"
+      ],
+      "colors": [
+        "#C9175D",
+        "#0F3B7F"
+      ],
+      "dataSource": "districtData",
+      "xAxisKey": "district",
+      "asOfDate": "2025-04-01T00:00+08:00"
+    },
+    {
+      "id": "6XoHqIGExoghdRlLjH4tpt",
+      "title": "PH Rotaract Contributions (Per district in USD)",
+      "dataKey": [
+        "annualFund",
+        "polioPlus"
+      ],
+      "colors": [
+        "#00A885",
+        "#FFC000"
+      ],
+      "dataSource": "contributionsData",
+      "xAxisKey": "district",
+      "asOfDate": "2025-04-01T00:00+08:00"
+    }
+  ],
+  "leadershipChair": [
+    {
+      "id": "4ZwaR02Ful16KK0FKjBFYJ",
+      "name": "Nick Paira",
+      "title": "Pilipinas Multi-District Information Organization, Chair",
+      "description": "Leading with dedication and innovation, our Chair works tirelessly to strengthen Rotaract's presence and impact across the Philippines, fostering collaboration between districts and empowering the next generation of leaders.",
+      "image": "https://images.ctfassets.net/dze7xj4zfu0b/4whFFmojLxId63SwIElTk/d646655171fd45cae5e1d3c1ae740ff9/nick.jpg",
+      "club": "3850",
+      "isCurrentChair": true
+    }
+  ],
+  "boardMembers": [],
+  "executiveCommittee": [],
+  "staffMembers": []
 }
