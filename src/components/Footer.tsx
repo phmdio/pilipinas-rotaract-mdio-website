@@ -23,10 +23,10 @@ const Footer = () => {
           {/* Middle Column: Navigation Links */}
           <div className="space-y-1">
             <Link to="/" className="block py-2 border-b border-white/10 hover:text-white/80 transition-colors">Home</Link>
-            <Link to="/under-construction" className="block py-2 border-b border-white/10 hover:text-white/80 transition-colors">Our Leadership Team</Link>
+            <Link to="/our-leadership-team" className="block py-2 border-b border-white/10 hover:text-white/80 transition-colors">Our Leadership Team</Link>
             <Link to="/information-center" className="block py-2 border-b border-white/10 hover:text-white/80 transition-colors">Our Members District</Link>
-            <Link to="/under-construction" className="block py-2 border-b border-white/10 hover:text-white/80 transition-colors">Our Program and Activities</Link>
-            <Link to="/#statistics" className="block py-2 border-b border-white/10 hover:text-white/80 transition-colors">Rotaract Statistics</Link>
+            <Link to="/our-program-and-activities" className="block py-2 border-b border-white/10 hover:text-white/80 transition-colors">Our Program and Activities</Link>
+            <Link to="/rotaract-statistics" className="block py-2 border-b border-white/10 hover:text-white/80 transition-colors">Rotaract Statistics</Link>
           </div>
           
           {/* Right Column: Our Stories and Social Media */}
@@ -34,8 +34,8 @@ const Footer = () => {
             <div className="mb-6">
               <h3 className="text-base font-bold mb-4">Our Stories</h3>
               <ul className="space-y-2 text-sm">
-                <li><Link to="/under-construction" className="hover:text-white/80 transition-colors">Philippine Rotaract Magazine</Link></li>
-                <li><Link to="/under-construction" className="hover:text-white/80 transition-colors">Ang Balangay</Link></li>
+                <li><Link to="/philippine-rotaract-magazine" className="hover:text-white/80 transition-colors">Philippine Rotaract Magazine</Link></li>
+                <li><Link to="/ang-balangay" className="hover:text-white/80 transition-colors">Ang Balangay</Link></li>
               </ul>
             </div>
             
