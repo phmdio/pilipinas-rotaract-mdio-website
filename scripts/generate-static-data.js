@@ -103,7 +103,7 @@ async function fetchDistricts() {
         image: item.fields.image?.fields?.file?.url 
           ? `https:${item.fields.image.fields.file.url}` 
           : '/assets/district/default.jpeg',
-        description: item.fields.description || 'Rotaract Clubs of Rotary International District #',
+        summary: item.fields.summary || 'Discover the vibrant community of Rotaract clubs in this district, where young professionals develop leadership skills and implement innovative service projects addressing local needs. Join us in making a positive impact through fellowship, professional development, and community service.',
       };
     });
   } catch (error) {

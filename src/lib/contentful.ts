@@ -32,12 +32,12 @@ export interface BaseDistrict {
   id: string;
   color: string;
   image: string;
+  summary: string;
 }
 
 // Full District type with all details
 export interface District extends BaseDistrict {
   title: string;
-  summary: string;
   description: string;
   composition: string[];
   gallery: string[];
@@ -475,52 +475,62 @@ export const fallbackDistrictData: BaseDistrict[] = [
   { 
     id: '3770', 
     color: '#F6A81C',
-    image: '/assets/district/3770.jpeg'
+    image: '/assets/district/3770.jpeg',
+    summary: 'Discover the vibrant community of Rotaract clubs in this district, where young professionals develop leadership skills and implement innovative service projects addressing local needs.'
   },
   { 
     id: '3780', 
     color: '#16478E',
     image: '/assets/district/3780.jpeg',
+    summary: 'A dynamic district fostering leadership, service, and fellowship among diverse Rotaract clubs across the region.'
   },
   { 
     id: '3790', 
     color: '#00A2E1',
     image: '/assets/district/3790.jpeg',
+    summary: 'Empowering youth through service projects and leadership development opportunities in communities throughout the district.'
   },
   { 
     id: '3800', 
     color: '#003366',
     image: '/assets/district/3800.jpeg',
+    summary: 'Uniting Rotaractors to create positive change through community service, professional development, and international understanding.'
   },
   { 
     id: '3810', 
     color: '#F47621',
     image: '/assets/district/3810.jpeg',
+    summary: 'Building connections and serving communities through innovative projects and collaborative initiatives across the district.'
   },
   { 
     id: '3820', 
     color: '#8E288F',
     image: '/assets/district/3820.jpeg',
+    summary: 'Promoting service above self through impactful community projects and leadership development programs for young professionals.'
   },
   { 
     id: '3830', 
     color: '#0D9648',
     image: '/assets/district/3830.jpeg',
+    summary: 'Cultivating future leaders through service projects, professional networking, and cross-cultural exchange opportunities.'
   },
   { 
     id: '3850', 
     color: '#E22626',
     image: '/assets/district/3850.jpeg',
+    summary: 'Engaging Rotaractors in meaningful service projects and leadership initiatives that address local and global challenges.'
   },
   { 
     id: '3860', 
     color: '#66819A',
     image: '/assets/district/3860.jpeg',
+    summary: 'Inspiring action through service projects that improve communities while developing leadership skills and fostering international understanding.'
   },
   { 
     id: '3870', 
     color: '#00ACBB',
     image: '/assets/district/3870.jpeg',
+    summary: 'Creating lasting change through targeted service projects and leadership development opportunities for young professionals.'
   },
 ];
 
