@@ -91,7 +91,7 @@ const DistrictDetail = () => {
           <div className="space-y-6">
             <p className="text-gray-800 leading-relaxed">{districtDetail.description}</p>
             
-            {districtDetail.activities && (
+            {districtDetail.activities && districtDetail.activities.length > 0 && (
               <div>
                 <h3 className="text-gray-800 font-bold mb-2">Usual District Rotaract activities include the following:</h3>
                 <ul className="list-disc pl-8 space-y-1">

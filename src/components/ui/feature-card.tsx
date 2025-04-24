@@ -23,9 +23,9 @@ const FeatureCard = ({
   linkPath = `/district/${id}`
 }: FeatureCardProps) => {
   return (
-    <div className="overflow-hidden flex flex-col h-[500px]">
+    <div className="overflow-hidden flex flex-col h-full">
       <div 
-        className="relative h-[350px] bg-cover bg-center" 
+        className="relative h-0 pb-[60%] bg-cover bg-center" 
         style={{ backgroundImage: `url(${image})` }}
       >
         <div className="absolute inset-x-0 bottom-0 h-16 bg-black/50 flex items-center justify-between px-5">
@@ -43,7 +43,7 @@ const FeatureCard = ({
         style={{ backgroundColor: color }}
         className="p-6 text-white flex-grow flex flex-col"
       >
-        <p className="mb-5">
+        <p className="mb-5 max-h-[30vh] overflow-y-auto pr-2">
           {summary}
         </p>
         <div className="mt-auto flex flex-col justify-center">
