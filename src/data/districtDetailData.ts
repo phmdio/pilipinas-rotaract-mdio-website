@@ -14,7 +14,6 @@ interface DistrictDetail {
   title: string;
   description: string;
   composition: string[];
-  highlights: string;
   gallery: string[];
   representatives: DistrictRepresentative[];
   headerImage?: string;
@@ -80,7 +79,6 @@ const districtDetails: Record<string, DistrictDetail> = {
       "Served over 90 communities",
       "Partnered with 20+ organizations"
     ],
-    highlights: "District 3780 has been at the forefront of urban development initiatives, addressing challenges unique to metropolitan areas through innovative service projects and collaborative efforts with various sectors.",
     gallery: [
       "/assets/district/3780.jpeg",
       "/assets/district/3780.jpeg",

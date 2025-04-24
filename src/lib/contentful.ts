@@ -37,17 +37,17 @@ export interface BaseDistrict {
 // Full District type with all details
 export interface District extends BaseDistrict {
   title: string;
+  summary: string;
   description: string;
   composition: string[];
-  highlights: string;
   gallery: string[];
   representatives: DistrictRepresentative[];
   headerImage: string;
   mainClub: string;
-  activities: string[];
+  activities?: string[];
   // Markdown content fields
-  mission: string; // Markdown content
-  vision: string; // Markdown content
+  mission?: string; // Markdown content
+  vision?: string; // Markdown content
   facebookPageUrl: string;
 }
 
@@ -369,7 +369,7 @@ export async function getDistricts(): Promise<BaseDistrict[]> {
     image: item.fields.image?.fields?.file?.url 
       ? `https:${item.fields.image.fields.file.url}` 
       : '/assets/district/default.jpeg',
-    description: item.fields.description || 'Rotaract Clubs of Rotary International District #',
+    summary: item.fields.summary || 'Discover the vibrant community of Rotaract clubs in this district, where young professionals develop leadership skills and implement innovative service projects addressing local needs. Join us in making a positive impact through fellowship, professional development, and community service.',
   }));
 }
 
@@ -433,9 +433,9 @@ function mapContentfulDistrictDetail(item: any, districtId: string): District {
       ? `https:${item.fields.image.fields.file.url}` 
       : '/assets/district/default.jpeg',
     description: item.fields.description || '',
+    summary: item.fields.summary || '',
     title: item.fields.title || `District ${districtId}`,
     composition: item.fields.composition || [],
-    highlights: item.fields.highlights || '',
     gallery,
     representatives,
     headerImage: item.fields.headerImage?.fields?.file?.url 
@@ -457,9 +457,9 @@ function createFallbackDistrictDetail(districtId: string): District {
     color: '#003366',
     image: `/assets/district/${districtId}.jpeg`,
     title: `District ${districtId}`,
+    summary: "This district is currently updating its information. Please check back soon for a complete profile of its activities, membership, and achievements.",
     description: "This district is currently updating its information. Please check back soon for a complete profile of its activities, membership, and achievements.",
     composition: ["Community-Based Clubs", "University-Based Clubs", "Active Rotaractors"],
-    highlights: "Information about district highlights and achievements coming soon.",
     gallery: [`/assets/district/${districtId}.jpeg`, `/assets/district/default.jpeg`],
     representatives: [],
     headerImage: `/assets/district/${districtId}.jpeg`,

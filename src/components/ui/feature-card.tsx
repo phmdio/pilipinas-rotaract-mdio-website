@@ -7,7 +7,6 @@ export interface FeatureCardProps {
   color: string;
   title?: string;
   subtitle?: string;
-  description?: string;
   summary?: string;
   buttonText?: string;
   linkPath?: string;
@@ -19,7 +18,6 @@ const FeatureCard = ({
   color,
   title = 'Rotaract Clubs of Rotary',
   subtitle = 'International District #',
-  description = '',
   summary = 'Discover the vibrant community of Rotaract clubs in this district, where young professionals develop leadership skills and implement innovative service projects addressing local needs. Join us in making a positive impact through fellowship, professional development, and community service.',
   buttonText = 'LEARN MORE',
   linkPath = `/district/${id}`
