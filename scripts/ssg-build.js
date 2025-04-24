@@ -148,7 +148,19 @@ async function copyStaticData() {
         rotaractStatisticsDistrict: [],
         rotaractStatisticsContributions: [],
         rotaractStatisticsCards: [],
-        rotaractStatisticsCharts: []
+        rotaractStatisticsCharts: [],
+        leadershipChair: [],
+        boardMembers: [],
+        executiveCommittee: [],
+        staffMembers: [],
+        rotaryFoundationData: {
+          introduction: {
+            title: "",
+            content: ""
+          },
+          funds: [],
+          donationLink: ""
+        }
       }, null, 2);
       
       fs.writeFileSync(destFile, minimalData);
@@ -167,7 +179,19 @@ async function copyStaticData() {
       rotaractStatisticsDistrict: [],
       rotaractStatisticsContributions: [],
       rotaractStatisticsCards: [],
-      rotaractStatisticsCharts: []
+      rotaractStatisticsCharts: [],
+      leadershipChair: [],
+      boardMembers: [],
+      executiveCommittee: [],
+      staffMembers: [],
+      rotaryFoundationData: {
+        introduction: {
+          title: "",
+          content: ""
+        },
+        funds: [],
+        donationLink: ""
+      }
     }, null, 2);
     
     const destFile = path.join(staticDataDir, 'contentful-data.json');

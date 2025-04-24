@@ -114,6 +114,7 @@ declare module '@/data/contentful-static' {
     boardMembers: BoardMember[];
     executiveCommittee: ExecutiveCommitteeMember[];
     staffMembers: StaffMember[];
+    rotaryFoundationData: RotaryFoundationData;
   }
 }
 
@@ -124,6 +125,7 @@ export const contentfulKeys = {
   districtDetail: ['contentful', 'districtDetail'] as const,
   statistics: ['contentful', 'statistics'] as const,
   rotaractStatistics: ['contentful', 'rotaractStatistics'] as const,
+  rotaryFoundation: ['contentful', 'rotaryFoundation'] as const,
 };
 
 // Type definitions for Programs and Activities
@@ -232,7 +234,7 @@ function generateSlug(title: string): string {
     .trim(); // Trim any leading/trailing spaces or dashes
 }
 
-// Helper function to load static data
+// Helper function to load static data (array version)
 async function loadStaticData<T>(key: keyof StaticContentfulData): Promise<T[]> {
   try {
     if (USE_STATIC_DATA) {
@@ -263,6 +265,49 @@ async function loadStaticData<T>(key: keyof StaticContentfulData): Promise<T[]> 
         }
         
         return data[key] as T[];
+      } catch (fetchError) {
+        console.error('Error fetching static data:', fetchError);
+        throw fetchError;
+      }
+    }
+    throw new Error('Static data not available or disabled');
+  } catch (error) {
+    console.warn(`Failed to load static data for ${key}, falling back to API:`, error);
+    throw error;
+  }
+}
+
+// Helper function to load non-array static data
+async function loadStaticSingleData<T>(key: keyof StaticContentfulData): Promise<T> {
+  try {
+    if (USE_STATIC_DATA) {
+      try {
+        const response = await fetch('/static-data/contentful-data.json');
+        
+        if (!response.ok) {
+          throw new Error(`Failed to fetch static data: ${response.status} ${response.statusText}`);
+        }
+        
+        const text = await response.text();
+        let data: StaticContentfulData;
+        
+        try {
+          data = JSON.parse(text) as StaticContentfulData;
+        } catch (parseError) {
+          console.error('Failed to parse static data JSON:', parseError);
+          throw new Error('Invalid JSON in static data');
+        }
+        
+        if (!data || typeof data !== 'object') {
+          throw new Error('Invalid data format in static data');
+        }
+        
+        if (!data[key]) {
+          console.warn(`Key "${key}" not found in static data`);
+          throw new Error(`Key "${key}" not found in static data`);
+        }
+        
+        return data[key] as T;
       } catch (fetchError) {
         console.error('Error fetching static data:', fetchError);
         throw fetchError;
@@ -1222,4 +1267,123 @@ export const fallbackStaffMembers: StaffMember[] = [
     image: "/placeholder.svg"
   },
   // Additional fallback staff members...
-]; 
+];
+
+// Type definition for Rotary Foundation Fund
+export interface RotaryFoundationFund {
+  id: string;
+  title: string;
+  description: string;
+  imageUrl: string;
+  alt: string;
+}
+
+// Type definition for Rotary Foundation data
+export interface RotaryFoundationData {
+  introduction: {
+    title: string;
+    content: string;
+  };
+  funds: RotaryFoundationFund[];
+  donationLink: string;
+}
+
+// Fallback data for Rotary Foundation
+export const fallbackRotaryFoundationData: RotaryFoundationData = {
+  introduction: {
+    title: "Supporting The Rotary Foundation's Global Impact",
+    content: "The Rotary Foundation transforms your gifts into service projects that change lives both close to home and around the world. Since 1917, the Foundation has spent more than $4 billion on life-changing, sustainable projects that help people in need with access to safe water, medical care, literacy, education, and other critical needs. By giving to the Foundation, you become an essential part of these ongoing efforts to create lasting positive change in communities everywhere."
+  },
+  funds: [
+    {
+      id: "annual-fund",
+      title: "Annual Fund",
+      description: "The Annual Fund is the primary source of funding for Foundation activities. Your contributions to the Annual Fund help Rotary clubs take action to create positive change in communities at home and around the world. Through grants and projects, Rotary members combat diseases like polio and malaria, provide clean water, improve economic opportunities, and promote peace.",
+      imageUrl: "/assets/trf.png",
+      alt: "People celebrating"
+    },
+    {
+      id: "polioplus-fund",
+      title: "PolioPlus Fund",
+      description: "Rotary has been working to eradicate polio for more than 35 years. Our goal of ridding the world of this disease is closer than ever. When you contribute to the PolioPlus Fund, you're supporting Rotary's top priority - ensuring that polio is eradicated and that it never returns. Your donation helps deliver vaccinations, transportation, and educational materials.",
+      imageUrl: "/assets/trf.png",
+      alt: "Construction site volunteer"
+    },
+    {
+      id: "endowment-fund",
+      title: "Endowment Fund",
+      description: "The Endowment Fund ensures the long-term financial stability of the Foundation and provides essential support for Rotary's programs. Contributions to the Endowment Fund are invested in perpetuity, with a portion of the fund's earnings spent on Foundation programs each year. This provides a steady and reliable source of income to meet the world's greatest needs.",
+      imageUrl: "/assets/trf.png",
+      alt: "Community service"
+    },
+    {
+      id: "disaster-response-fund",
+      title: "Disaster Response Fund",
+      description: "The Rotary Disaster Response Fund provides a ready mechanism for Rotary districts to respond quickly to local disasters. Districts in affected areas may receive disaster response grants to provide basic items such as water, food, medicine, and clothing. Your support enables our communities to recover more quickly after devastating natural disasters.",
+      imageUrl: "/assets/trf.png",
+      alt: "Foundation work"
+    }
+  ],
+  donationLink: "https://www.rotary.org/en/get-involved/ways-to-give?utm_source=pilipinas_rotaract_mdio&utm_medium=website&utm_campaign=foundation_giving"
+};
+
+// Function to fetch Rotary Foundation data
+export async function getRotaryFoundationData(): Promise<RotaryFoundationData> {
+  // Try to load from static data first
+  if (USE_STATIC_DATA) {
+    try {
+      return await loadStaticSingleData<RotaryFoundationData>('rotaryFoundationData');
+    } catch (error) {
+      console.warn('Falling back to API for Rotary Foundation data');
+    }
+  }
+  
+  // Fall back to API if static data loading fails or is disabled
+  try {
+    // Fetch from single content type
+    const entries = await client.getEntries({
+      content_type: 'rotaryFoundation',
+      limit: 1
+    });
+
+    if (entries.items.length === 0) {
+      return fallbackRotaryFoundationData;
+    }
+
+    const item = entries.items[0];
+    const fields = item.fields;
+    
+    // Extract the introduction
+    const introduction = {
+      title: String(fields.introductionTitle || fallbackRotaryFoundationData.introduction.title),
+      content: String(fields.introductionContent || fallbackRotaryFoundationData.introduction.content)
+    };
+
+    // Extract funds from references
+    const funds = Array.isArray(fields.funds) 
+      ? fields.funds.map((fund: any) => ({
+          id: fund.sys?.id || `fund-${Math.random().toString(36).substr(2, 9)}`,
+          title: String(fund.fields?.title || ''),
+          description: String(fund.fields?.description || ''),
+          imageUrl: fund.fields?.image?.fields?.file?.url 
+            ? `https:${fund.fields.image.fields.file.url}` 
+            : '/assets/trf.png',
+          alt: String(fund.fields?.alt || fund.fields?.title || 'Rotary Foundation image')
+        }))
+      : fallbackRotaryFoundationData.funds;
+
+    // Extract donation link
+    const donationLink = fields.donationLink
+      ? String(fields.donationLink)
+      : fallbackRotaryFoundationData.donationLink;
+
+    return {
+      introduction,
+      funds,
+      donationLink
+    };
+  } catch (error) {
+    console.error('Error fetching Rotary Foundation data:', error);
+    return fallbackRotaryFoundationData;
+  }
+} 

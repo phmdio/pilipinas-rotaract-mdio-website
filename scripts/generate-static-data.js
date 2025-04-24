@@ -411,6 +411,73 @@ async function fetchStaffMembers() {
   }
 }
 
+// Function to fetch Rotary Foundation data
+async function fetchRotaryFoundationData() {
+  console.log('Fetching Rotary Foundation data...');
+  try {
+    // Fetch from single content type
+    const entries = await client.getEntries({
+      content_type: 'rotaryFoundation',
+      limit: 1,
+      include: 2 // Include linked entries (funds)
+    });
+
+    if (entries.items.length === 0) {
+      return {
+        introduction: {
+          title: "Supporting The Rotary Foundation's Global Impact",
+          content: "The Rotary Foundation transforms your gifts into service projects that change lives both close to home and around the world."
+        },
+        funds: [],
+        donationLink: "https://www.rotary.org/en/get-involved/ways-to-give"
+      };
+    }
+
+    const item = entries.items[0];
+    const fields = item.fields;
+    
+    // Extract the introduction
+    const introduction = {
+      title: String(fields.introductionTitle || "Supporting The Rotary Foundation's Global Impact"),
+      content: String(fields.introductionContent || "The Rotary Foundation transforms your gifts into service projects that change lives both close to home and around the world.")
+    };
+
+    // Extract funds from references
+    const funds = Array.isArray(fields.funds) 
+      ? fields.funds.map((fund) => ({
+          id: fund.sys?.id || `fund-${Math.random().toString(36).substr(2, 9)}`,
+          title: String(fund.fields?.title || ''),
+          description: String(fund.fields?.description || ''),
+          imageUrl: fund.fields?.image?.fields?.file?.url 
+            ? `https:${fund.fields.image.fields.file.url}` 
+            : '/assets/trf.png',
+          alt: String(fund.fields?.alt || fund.fields?.title || 'Rotary Foundation image')
+        }))
+      : [];
+
+    // Extract donation link
+    const donationLink = fields.donationLink
+      ? String(fields.donationLink)
+      : "https://www.rotary.org/en/get-involved/ways-to-give";
+
+    return {
+      introduction,
+      funds,
+      donationLink
+    };
+  } catch (error) {
+    console.error('Error fetching Rotary Foundation data:', error);
+    return {
+      introduction: {
+        title: "Supporting The Rotary Foundation's Global Impact",
+        content: "The Rotary Foundation transforms your gifts into service projects that change lives both close to home and around the world."
+      },
+      funds: [],
+      donationLink: "https://www.rotary.org/en/get-involved/ways-to-give"
+    };
+  }
+}
+
 // Main function to generate all static data
 export async function generateStaticData() {
   console.log('Generating static data from Contentful...');
@@ -435,6 +502,9 @@ export async function generateStaticData() {
     const boardMembers = await fetchBoardMembers();
     const executiveCommittee = await fetchExecutiveCommittee();
     const staffMembers = await fetchStaffMembers();
+    
+    // Fetch Rotary Foundation data
+    const rotaryFoundationData = await fetchRotaryFoundationData();
     
     // Validate that each data set is an array (even if empty)
     if (!Array.isArray(heroCarouselImages)) {
@@ -516,7 +586,8 @@ export async function generateStaticData() {
       leadershipChair,
       boardMembers,
       executiveCommittee,
-      staffMembers
+      staffMembers,
+      rotaryFoundationData
     };
     
     // Ensure the output directory exists
