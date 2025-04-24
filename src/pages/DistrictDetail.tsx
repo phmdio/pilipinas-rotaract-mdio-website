@@ -89,7 +89,11 @@ const DistrictDetail = () => {
           <div className="border-t border-gray-300 my-6"></div>
           
           <div className="space-y-6">
-            <p className="text-gray-800 leading-relaxed">{districtDetail.description}</p>
+            <div className="prose prose-sm max-w-none">
+              <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                {districtDetail.description}
+              </ReactMarkdown>
+            </div>
             
             {districtDetail.activities && districtDetail.activities.length > 0 && (
               <div>

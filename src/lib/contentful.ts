@@ -45,9 +45,8 @@ export interface District extends BaseDistrict {
   headerImage: string;
   mainClub: string;
   activities?: string[];
-  // Markdown content fields
-  mission?: string; // Markdown content
-  vision?: string; // Markdown content
+  mission?: string;
+  vision?: string;
   facebookPageUrl: string;
 }
 
