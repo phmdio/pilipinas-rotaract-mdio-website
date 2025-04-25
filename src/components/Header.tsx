@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Menu, X, ChevronDown } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { cn } from '@/lib/utils';
+import useAnalytics from '@/hooks/useAnalytics';
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -16,6 +17,7 @@ import { Separator } from "@/components/ui/separator";
 const Header = ({ isTransparent = false }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const { events } = useAnalytics();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -32,6 +34,23 @@ const Header = ({ isTransparent = false }) => {
     };
   }, []);
 
+  const handleMobileMenuToggle = () => {
+    events.buttonClick(isMenuOpen ? 'mobile-menu-close' : 'mobile-menu-open');
+    setIsMenuOpen(!isMenuOpen);
+  };
+
+  const handleNavLinkClick = (linkId: string, linkText: string, url: string) => {
+    events.linkClick(url, linkText, { menu_section: 'header', link_id: linkId });
+  };
+
+  const handleMobileSubmenuToggle = (menuId: string) => {
+    events.buttonClick(`mobile-submenu-toggle-${menuId}`, { menu_id: menuId });
+    const submenu = document.getElementById(`mobile-${menuId}-submenu`);
+    if (submenu) {
+      submenu.classList.toggle('hidden');
+    }
+  };
+
   return (
     <header className={cn(
       "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
@@ -44,7 +63,11 @@ const Header = ({ isTransparent = false }) => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 md:h-20">
           <div className="flex items-center">
-            <Link to="/" className="flex items-center">
+            <Link 
+              to="/" 
+              className="flex items-center"
+              onClick={() => handleNavLinkClick('logo', 'Home Logo', '/')}
+            >
               <img
                 src={`${isScrolled ? "/assets/logo.png" : isTransparent ? "/assets/logo.png" : "/assets/logo_pink.png"}`}
                 alt="Rotaract MDIO Logo"
@@ -56,12 +79,15 @@ const Header = ({ isTransparent = false }) => {
           <NavigationMenu className="hidden md:flex">
             <NavigationMenuList className="space-x-1">
               <NavigationMenuItem>
-                <NavigationMenuTrigger className={cn(
-                  "bg-transparent",
-                  isScrolled || isTransparent
-                    ? "text-white hover:bg-white/10 focus:bg-white/10"
-                    : "text-black hover:bg-black/10 focus:bg-black/10"
-                )}>
+                <NavigationMenuTrigger 
+                  className={cn(
+                    "bg-transparent",
+                    isScrolled || isTransparent
+                      ? "text-white hover:bg-white/10 focus:bg-white/10"
+                      : "text-black hover:bg-black/10 focus:bg-black/10"
+                  )}
+                  onClick={() => events.buttonClick('about-us-menu-toggle')}
+                >
                   About Us
                 </NavigationMenuTrigger>
                 <NavigationMenuContent className={cn(
@@ -71,7 +97,11 @@ const Header = ({ isTransparent = false }) => {
                   <ul className="w-[240px]">
                     <li>
                       <NavigationMenuLink asChild>
-                        <Link to="/our-history" className="block p-4 hover:bg-white/10 rounded-none">
+                        <Link 
+                          to="/our-history" 
+                          className="block p-4 hover:bg-white/10 rounded-none"
+                          onClick={() => handleNavLinkClick('our-history', 'Our History', '/our-history')}
+                        >
                           Our History
                         </Link>
                       </NavigationMenuLink>
@@ -79,7 +109,11 @@ const Header = ({ isTransparent = false }) => {
                     </li>
                     <li>
                       <NavigationMenuLink asChild>
-                        <Link to="/our-leadership-team" className="block p-4 hover:bg-white/10 rounded-none">
+                        <Link 
+                          to="/our-leadership-team" 
+                          className="block p-4 hover:bg-white/10 rounded-none"
+                          onClick={() => handleNavLinkClick('our-leadership-team', 'Our Leadership Team', '/our-leadership-team')}
+                        >
                           Our Leadership Team
                         </Link>
                       </NavigationMenuLink>
@@ -87,7 +121,11 @@ const Header = ({ isTransparent = false }) => {
                     </li>
                     <li>
                       <NavigationMenuLink asChild>
-                        <Link to="/philippine-rotaract-magazine" className="block p-4 hover:bg-white/10 rounded-none">
+                        <Link 
+                          to="/philippine-rotaract-magazine" 
+                          className="block p-4 hover:bg-white/10 rounded-none"
+                          onClick={() => handleNavLinkClick('philippine-rotaract-magazine', 'Philippine Rotaract Magazine', '/philippine-rotaract-magazine')}
+                        >
                           Philippine Rotaract Magazine
                         </Link>
                       </NavigationMenuLink>
@@ -95,7 +133,11 @@ const Header = ({ isTransparent = false }) => {
                     </li>
                     <li>
                       <NavigationMenuLink asChild>
-                        <Link to="/ang-balangay" className="block p-4 hover:bg-white/10 rounded-none">
+                        <Link 
+                          to="/ang-balangay" 
+                          className="block p-4 hover:bg-white/10 rounded-none"
+                          onClick={() => handleNavLinkClick('ang-balangay', 'Ang Balangay', '/ang-balangay')}
+                        >
                           Ang Balangay
                         </Link>
                       </NavigationMenuLink>
@@ -171,7 +213,7 @@ const Header = ({ isTransparent = false }) => {
 
           <div className="md:hidden">
             <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              onClick={handleMobileMenuToggle}
               className={cn(
                 "inline-flex items-center justify-center p-2 rounded-md",
                 isScrolled
@@ -197,10 +239,7 @@ const Header = ({ isTransparent = false }) => {
               <button
                 onClick={(e) => {
                   e.preventDefault();
-                  const aboutSubmenu = document.getElementById('mobile-about-submenu');
-                  if (aboutSubmenu) {
-                    aboutSubmenu.classList.toggle('hidden');
-                  }
+                  handleMobileSubmenuToggle('about');
                 }}
                 className="flex justify-between items-center w-full"
               >
@@ -208,7 +247,16 @@ const Header = ({ isTransparent = false }) => {
                 <ChevronDown size={16} />
               </button>
               <div id="mobile-about-submenu" className="hidden pl-4 mt-2 space-y-2 bg-[#1a237e] rounded text-white">
-                <Link to="/our-history" className="block py-3 px-4 hover:bg-white/10" onClick={() => setIsMenuOpen(false)}>Our History</Link>
+                <Link 
+                  to="/our-history" 
+                  className="block py-3 px-4 hover:bg-white/10" 
+                  onClick={() => {
+                    handleNavLinkClick('mobile-our-history', 'Our History', '/our-history');
+                    setIsMenuOpen(false);
+                  }}
+                >
+                  Our History
+                </Link>
                 <Separator className="bg-white/20" />
                 <Link to="/our-leadership-team" className="block py-3 px-4 hover:bg-white/10" onClick={() => setIsMenuOpen(false)}>Our Leadership Team</Link>
                 <Separator className="bg-white/20" />
@@ -222,10 +270,7 @@ const Header = ({ isTransparent = false }) => {
               <button
                 onClick={(e) => {
                   e.preventDefault();
-                  const infoSubmenu = document.getElementById('mobile-info-submenu');
-                  if (infoSubmenu) {
-                    infoSubmenu.classList.toggle('hidden');
-                  }
+                  handleMobileSubmenuToggle('info');
                 }}
                 className="flex justify-between items-center w-full"
               >

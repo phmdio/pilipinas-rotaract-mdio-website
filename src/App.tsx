@@ -5,6 +5,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Routes, Route, useLocation } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
+import { initPostHog } from "./lib/posthog";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import LaunchingSoon from "./pages/LaunchingSoon";
@@ -52,6 +53,11 @@ const App = () => {
 
   const isCustomDomain = isBrowser && 
     (currentHostname === customDomain || currentHostname === customDomainWithoutWWW);
+    
+  // Initialize PostHog when the app loads
+  useEffect(() => {
+    initPostHog();
+  }, []);
 
   return (
     <QueryClientProvider client={queryClient}>
