@@ -51,7 +51,7 @@ const Index = () => {
       "@type": "PostalAddress",
       "addressCountry": "Philippines"
     },
-    "email": "info@pilipinasrotaract.org",
+    "email": "phmdiowebsite@gmail.com",
     "memberOf": {
       "@type": "Organization",
       "name": "Rotary International"
