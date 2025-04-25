@@ -8,6 +8,8 @@ import dotenv from 'dotenv';
 import { createClient } from 'contentful';
 // Import the generateStaticData function from generate-static-data.js
 import { generateStaticData } from './generate-static-data.js';
+// Import the generateSitemap function
+import generateSitemap from './generate-sitemap.js';
 
 // Load environment variables
 dotenv.config();
@@ -200,6 +202,29 @@ async function copyStaticData() {
   }
 }
 
+// Copy sitemap.xml and robots.txt to the dist directory
+async function copyImportantFiles() {
+  try {
+    // Create the dist directory if it doesn't exist
+    if (!fs.existsSync(outDir)) {
+      fs.mkdirSync(outDir, { recursive: true });
+    }
+    
+    // Copy robots.txt if it exists
+    const robotsSource = path.join(root, 'public', 'robots.txt');
+    const robotsDestination = path.join(outDir, 'robots.txt');
+    
+    if (fs.existsSync(robotsSource)) {
+      fs.copyFileSync(robotsSource, robotsDestination);
+      console.log('robots.txt copied to dist directory');
+    } else {
+      console.warn('robots.txt not found in public directory, skipping copy');
+    }
+  } catch (error) {
+    console.error('Error copying important files:', error);
+  }
+}
+
 // Main build function
 async function buildSSG() {
   console.log('Starting SSG build...');
@@ -210,6 +235,15 @@ async function buildSSG() {
   // Clear the output directory if it exists
   if (fs.existsSync(outDir)) {
     fs.rmSync(outDir, { recursive: true, force: true });
+  }
+  
+  // Generate sitemap before building
+  console.log('Generating sitemap...');
+  try {
+    await generateSitemap();
+  } catch (error) {
+    console.error('Error generating sitemap:', error);
+    console.warn('Continuing build without sitemap generation');
   }
   
   // 1. Build the client app
@@ -301,6 +335,10 @@ async function buildSSG() {
   } catch (error) {
     console.error('Error during pre-rendering:', error);
   }
+  
+  // After all pre-rendering is done
+  console.log('Copying important files...');
+  await copyImportantFiles();
   
   console.log('SSG build completed!');
 }
