@@ -5,6 +5,7 @@ import { cn } from '@/lib/utils';
 import { useQuery } from '@tanstack/react-query';
 import { getFeaturedEvents, programsAndActivitiesKeys, fallbackFeaturedEvents } from '@/lib/contentful';
 import { Link } from 'react-router-dom';
+import { generateSlugFromTitle } from '@/utils/string';
 import {
   Carousel,
   CarouselContent,
@@ -115,11 +116,13 @@ const ProgramsSection = () => {
                   </div>
                 </div>
                 <div className="p-4">
-                  <Button 
-                    className="w-full bg-[#16478E] text-white hover:bg-blue-800 rounded-full"
-                  >
-                    VIEW EVENT
-                  </Button>
+                  <Link to={`/event/${generateSlugFromTitle(program.title)}`}>
+                    <Button 
+                      className="w-full bg-[#16478E] text-white hover:bg-blue-800 rounded-full"
+                    >
+                      VIEW EVENT
+                    </Button>
+                  </Link>
                 </div>
               </div>
             ))}
