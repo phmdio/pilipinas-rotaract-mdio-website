@@ -1,3 +1,4 @@
+
 // Sample data structure for district details
 // This would be populated with real data for each district
 
@@ -21,6 +22,7 @@ interface DistrictDetail {
   activities?: string[];
   mission?: string;
   vision?: string;
+  highlights?: string;
 }
 
 const districtDetails: Record<string, DistrictDetail> = {
