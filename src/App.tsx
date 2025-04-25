@@ -19,6 +19,7 @@ import AngBalangay from "./pages/AngBalangay";
 import RotaryFoundationGiving from "./pages/RotaryFoundationGiving";
 import OurProgramsAndActivities from "./pages/OurProgramsAndActivities";
 import OurProgramsAndActivitiesDetail from "./pages/OurProgramsAndActivitiesDetail";
+import OurChair from "./pages/OurChair";
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -75,6 +76,7 @@ const App = () => {
                 <Route path="/our-programs-and-activities" element={<OurProgramsAndActivities />} />
                 <Route path="/our-programs-and-activities/:eventId" element={<OurProgramsAndActivitiesDetail />} />
                 <Route path="/event/:eventSlug" element={<OurProgramsAndActivitiesDetail />} />
+                <Route path="/our-chair" element={<OurChair />} />
                 <Route path="*" element={<NotFound />} />
               </>
             ) : (
@@ -93,6 +95,7 @@ const App = () => {
                 <Route path="/our-programs-and-activities" element={<OurProgramsAndActivities />} />
                 <Route path="/our-programs-and-activities/:eventId" element={<OurProgramsAndActivitiesDetail />} />
                 <Route path="/event/:eventSlug" element={<OurProgramsAndActivitiesDetail />} />
+                <Route path="/our-chair" element={<OurChair />} />
                 <Route path="*" element={<NotFound />} />
               </>
             )}
