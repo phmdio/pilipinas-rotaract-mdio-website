@@ -109,7 +109,7 @@ declare module '@/data/contentful-static' {
     heroCarouselImages: HeroCarouselImage[];
     districts: BaseDistrict[];
     featuredEvents: FeaturedEvent[];
-    upcomingEvents: UpcomingEvent[];
+    events: Event[];
     statistics: Statistic[];
     rotaractStatisticsDistrict: StatisticDataPoint[];
     rotaractStatisticsContributions: StatisticDataPoint[];
@@ -144,7 +144,7 @@ export interface FeaturedEvent {
   slug?: string;
 }
 
-export interface UpcomingEvent {
+export interface Event {
   id: string;
   date: string;
   title: string;
@@ -155,7 +155,7 @@ export interface UpcomingEvent {
 // Query keys for programs and activities
 export const programsAndActivitiesKeys = {
   featuredEvents: ['contentful', 'featuredEvents'] as const,
-  upcomingEvents: ['contentful', 'upcomingEvents'] as const,
+  events: ['contentful', 'events'] as const,
 };
 
 // Type definition for Statistics
@@ -586,19 +586,19 @@ export async function getFeaturedEvents(): Promise<FeaturedEvent[]> {
   });
 }
 
-// Function to fetch upcoming events
-export async function getUpcomingEvents(): Promise<UpcomingEvent[]> {
+// Function to fetch  events
+export async function getEvents(): Promise<Event[]> {
   // Try to load from static data first
   if (USE_STATIC_DATA) {
     try {
-      const events = await loadStaticData<UpcomingEvent>('upcomingEvents');
+      const events = await loadStaticData<Event>('events');
       // Add slugs to any events that don't have them
       return events.map(event => ({
         ...event,
         slug: event.slug || generateSlug(event.title)
       }));
     } catch (error) {
-      console.warn('Falling back to API for upcoming events');
+      console.warn('Falling back to API for events');
     }
   }
   
@@ -673,8 +673,8 @@ export const fallbackFeaturedEvents: FeaturedEvent[] = [
   },
 ];
 
-// Fallback data for upcoming events
-export const fallbackUpcomingEvents: UpcomingEvent[] = [
+// Fallback data for events
+export const fallbackEvents: Event[] = [
   {
     id: '1',
     date: "February 01, 2024",
@@ -950,12 +950,12 @@ export async function getEventDetailBySlug(slug: string): Promise<EventDetail | 
     return getEventDetail(featuredEvent.id);
   }
   
-  // Then try in upcoming events
-  const upcomingEvents = await getUpcomingEvents();
-  const upcomingEvent = upcomingEvents.find(e => e.slug === slug);
+  // Then try in events
+  const events = await getEvents();
+  const event = events.find(e => e.slug === slug);
   
-  if (upcomingEvent) {
-    return getEventDetail(upcomingEvent.id);
+  if (event) {
+    return getEventDetail(event.id);
   }
   
   return null;
@@ -989,24 +989,24 @@ export async function getEventDetail(eventId: string): Promise<EventDetail | nul
       }
       
       // Check in upcoming events if not found in featured
-      const upcomingEvents = await loadStaticData<UpcomingEvent>('upcomingEvents');
-      const upcomingEvent = upcomingEvents.find(e => e.id === eventId);
+      const events = await loadStaticData<Event>('events');
+      const event = events.find(e => e.id === eventId);
       
-      if (upcomingEvent) {
-        // Convert upcoming event to event detail with default values
+      if (event) {
+        // Convert event to event detail with default values
         return {
-          id: upcomingEvent.id,
-          date: upcomingEvent.date,
-          title: upcomingEvent.title,
+          id: event.id,
+          date: event.date,
+          title: event.title,
           description: 'Details coming soon.',
-          image: upcomingEvent.image,
+          image: event.image,
           location: 'Philippines',
           objectiveDetails: ['Learn more about this event at the event page.'],
           moreInfo: 'Details coming soon.',
           additionalDetails: [],
           closingDetails: 'Visit the event page for more information.',
           isFeatured: false,
-          slug: generateSlug(upcomingEvent.title)
+          slug: generateSlug(event.title)
         };
       }
       
@@ -1051,13 +1051,13 @@ export async function getEventDetail(eventId: string): Promise<EventDetail | nul
     }
     
     // Then try upcoming events
-    const upcomingEntries = await client.getEntries({
-      content_type: 'upcomingEvent',
+    const events = await client.getEntries({
+      content_type: 'event',
       'sys.id': eventId,
     });
     
-    if (upcomingEntries.items.length > 0) {
-      const item = upcomingEntries.items[0];
+    if (events.items.length > 0) {
+      const item = events.items[0];
       const fields = item.fields as Record<string, any>;
       const title = typeof fields.title === 'string' ? fields.title : 'Event';
       
@@ -1187,9 +1187,7 @@ export async function getLeadershipTeam(): Promise<LeadershipTeamData> {
       title: String(fields.title || 'Pilipinas Multi-District Information Organization, Chair'),
       description: String(fields.description || ''),
       image: getImageUrl(fields.image, 'https://i.pravatar.cc/1500'),
-      headerImage: fields.headerImage && fields.headerImage.fields && fields.headerImage.fields.file && fields.headerImage.fields.file.url
-        ? `https:${fields.headerImage.fields.file.url}`
-        : undefined,
+      headerImage: getImageUrl(fields.headerImage, undefined),
       club: String(fields.club || ''),
       isCurrentChair: Boolean(fields.isCurrentChair || false),
       actions

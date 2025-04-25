@@ -9,10 +9,10 @@ import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import { 
   getFeaturedEvents, 
-  getUpcomingEvents, 
+  getEvents, 
   programsAndActivitiesKeys,
   fallbackFeaturedEvents,
-  fallbackUpcomingEvents
+  fallbackEvents
 } from "@/lib/contentful";
 
 const heroImage = "/assets/our-programs-and-activities.png";
@@ -29,11 +29,11 @@ const OurProgramsAndActivities = () => {
 
   // Fetch upcoming events
   const { 
-    data: upcomingEvents = fallbackUpcomingEvents,
-    isLoading: isUpcomingEventsLoading 
+    data: events = fallbackEvents,
+    isLoading: isEventsLoading 
   } = useQuery({
-    queryKey: programsAndActivitiesKeys.upcomingEvents,
-    queryFn: getUpcomingEvents,
+    queryKey: programsAndActivitiesKeys.events,
+    queryFn: getEvents,
   });
 
   return (
@@ -96,17 +96,17 @@ const OurProgramsAndActivities = () => {
         </div>
       </section>
 
-      {/* Upcoming Events */}
+      {/* Events */}
       <section className="mx-auto max-w-7xl px-6 pb-16">
         <h2 className="text-[#D41A69] text-2xl lg:text-3xl font-bold mb-6">
-          Upcoming Events
+          Events
         </h2>
         <div className="flex flex-col gap-4">
-          {isUpcomingEventsLoading ? (
+          {isEventsLoading ? (
             <div className="min-h-[200px] flex items-center justify-center">
               <div className="animate-pulse w-12 h-12 rounded-full bg-gray-200"></div>
             </div>
-          ) : upcomingEvents.length === 0 ? (
+          ) : events.length === 0 ? (
             <div className="flex flex-col items-center justify-center min-h-[200px] bg-gray-50 rounded-lg border border-gray-200 p-8">
               <div className="text-5xl mb-4">📆</div>
               <h3 className="text-xl font-semibold text-gray-600 mb-2">No Upcoming Events Scheduled</h3>
@@ -115,7 +115,7 @@ const OurProgramsAndActivities = () => {
               </p>
             </div>
           ) : (
-            upcomingEvents.map((event) => (
+            events.map((event) => (
               <UpcomingEventItem key={event.id} event={event} />
             ))
           )}

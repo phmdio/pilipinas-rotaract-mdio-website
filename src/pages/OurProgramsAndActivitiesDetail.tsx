@@ -10,12 +10,12 @@ import { Card } from "@/components/ui/card";
 import { 
   getEventDetail, 
   getEventDetailBySlug,
-  getUpcomingEvents, 
+  getEvents, 
   EventDetail, 
-  UpcomingEvent,
+  Event,
   eventKeys,
   programsAndActivitiesKeys,
-  fallbackUpcomingEvents
+  fallbackEvents
 } from "@/lib/contentful";
 
 // Fallback banner image if none provided
@@ -47,13 +47,13 @@ const OurProgramsAndActivitiesDetail = () => {
     retry: 1
   });
 
-  // Fetch upcoming events for the bottom section
+  // Fetch events for the bottom section
   const { 
-    data: upcomingEvents = fallbackUpcomingEvents,
-    isLoading: isUpcomingEventsLoading 
+    data: events = fallbackEvents,
+    isLoading: isEventsLoading 
   } = useQuery({
-    queryKey: programsAndActivitiesKeys.upcomingEvents,
-    queryFn: getUpcomingEvents,
+    queryKey: programsAndActivitiesKeys.events,
+    queryFn: getEvents,
   });
   
   // Redirect to modern URL format if using the old ID-based URL
@@ -263,32 +263,32 @@ const OurProgramsAndActivitiesDetail = () => {
             </div>
           </div>
           
-          {isUpcomingEventsLoading ? (
+          {isEventsLoading ? (
             <div className="min-h-[300px] flex items-center justify-center">
               <div className="animate-pulse w-12 h-12 rounded-full bg-gray-200"></div>
             </div>
           ) : (
             <div className="grid gap-7 grid-cols-1 md:grid-cols-3">
-              {upcomingEvents.slice(0, 3).map((upcomingEvent: UpcomingEvent) => (
+              {events.slice(0, 3).map((event: Event) => (
                 <Card
-                  key={upcomingEvent.id}
+                  key={event.id}
                   className="rounded-lg overflow-hidden bg-white shadow-md border border-[#f1e9fc] flex flex-col transition hover:shadow-lg"
                 >
                   <div className="aspect-[4/3] bg-gray-200 w-full">
                     <img 
-                      src={upcomingEvent.image}
-                      alt={upcomingEvent.title}
+                      src={event.image}
+                      alt={event.title}
                       className="w-full h-full object-cover"
                     />
                   </div>
                   <div className="flex flex-col items-start py-4 px-5">
                     <div className="uppercase tracking-wider text-sm text-gray-400 mb-2">
-                      {upcomingEvent.date}
+                      {event.date}
                     </div>
                     <div className="text-lg font-semibold text-gray-700 mb-3">
-                      {upcomingEvent.title}
+                      {event.title}
                     </div>
-                    <Link to={`/event/${upcomingEvent.slug}`}>
+                    <Link to={`/event/${event.slug}`}>
                       <Button 
                         variant="outline" 
                         className="w-full border-[#16478E]/30 hover:bg-[#f7f3ff] rounded-full text-[#16478E] font-medium py-2 mt-auto"
