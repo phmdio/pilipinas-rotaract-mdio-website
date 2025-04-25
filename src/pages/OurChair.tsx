@@ -1,76 +1,127 @@
-
 import React from 'react';
-import { Button } from '@/components/ui/button';
-import PageHero from '@/components/PageHero';
+import { Helmet } from 'react-helmet-async';
+import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import useLeadershipTeamQuery from '@/hooks/useLeadershipTeamQuery';
+import NoData from '@/components/NoData';
+import ReactMarkdown from 'react-markdown';
+
+const LoadingSpinner = () => (
+  <div className="flex justify-center items-center">
+    <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-rotaract-magenta"></div>
+  </div>
+);
 
 const OurChair = () => {
+  const { data, isLoading, error } = useLeadershipTeamQuery();
+  const chair = data?.chair;
+
+  if (isLoading) {
+    return (
+      <>
+        <Header />
+        <div className="min-h-screen flex items-center justify-center">
+          <LoadingSpinner />
+        </div>
+        <Footer />
+      </>
+    );
+  }
+
+  if (error) {
+    console.error('Error loading chair data:', error);
+  }
+
+  const hasNoData = !chair;
+
   return (
-    <div className="min-h-screen">
-      {/* Hero Section with Image Overlay */}
-      <PageHero 
-        title="Cristofer Bator"
-        backgroundImage="/lovable-uploads/bf57f875-d2f4-4e95-bf20-55ea193287dd.png"
-      />
-
-      <main className="relative">
-        {/* Subtitle Box */}
-        <div className="absolute -top-32 right-0 max-w-xl bg-rotaract-magenta p-8 text-white">
-          <p className="text-lg">
-            Lorem ipsum dolor sit amet, consectetur adipiscing. Duo probo prima quaestione. Quid enim necesse est, tamquam meretricem in matronarum coetum, sic voluptatem in virtutum concilium adducere?
-          </p>
+    <>
+      <Helmet>
+        <title>Our Chair | Pilipinas Rotaract MDIO</title>
+        <meta 
+          name="description" 
+          content="Meet the Chair of Pilipinas Rotaract Multi-District Information Organization" 
+        />
+      </Helmet>
+      
+      <Header />
+      
+      <main>
+        {/* Hero Section with Image and Overlay */}
+        <div className="relative w-full h-[600px]">
+          <img 
+            src={chair?.headerImage || chair?.image || "/assets/our-leadership.jpeg"}
+            alt={chair?.name || "Our Chair"}
+            className="w-full h-full object-cover"
+          />
+          
+          {/* Overlaid Content Box */}
+          <div className="absolute top-1/2 left-1/2 transform -translate-y-1/2 lg:translate-x-0 -translate-x-1/2 lg:left-auto lg:right-16 bg-rotaract-magenta p-8 max-w-md text-white">
+            <h1 className="text-3xl font-bold mb-2">{chair?.name || "Our Chair"}</h1>
+            <p className="text-sm mb-4">Pilipinas Rotaract MDIO | Multi-District Information Organization Chair</p>
+            <div className="text-sm prose prose-sm prose-invert max-h-32 overflow-hidden">
+              <ReactMarkdown>{chair?.description || ""}</ReactMarkdown>
+            </div>
+          </div>
         </div>
 
-        {/* Content Sections */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-16">
-            {/* Text Section */}
-            <div>
-              <h2 className="text-2xl font-bold text-rotaract-magenta mb-4">Lorem Ipsum</h2>
-              <p className="text-gray-700">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quid enim necesse est, tamquam meretricem in matronarum coetum, sic voluptatem in virtutum concilium adducere? His enim rebus detractis negat se reperire in asotorum vita quod reprehendat.
-              </p>
-            </div>
-            {/* Image Section */}
-            <div>
-              <img 
-                src="/lovable-uploads/bf57f875-d2f4-4e95-bf20-55ea193287dd.png"
-                alt="Chair activity 1"
-                className="w-full h-64 object-cover rounded-lg"
-              />
-            </div>
+        {hasNoData ? (
+          <NoData message="Chair data is currently unavailable. Please check back soon." />
+        ) : (
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+            {/* If we have actions, render them as alternating sections */}
+            {chair.actions && chair.actions.length > 0 ? (
+              chair.actions.map((action, index) => (
+                <div 
+                  key={index}
+                  className={`flex flex-col ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} mb-16 gap-8`}
+                >
+                  <div className="w-full md:w-1/2">
+                    <img 
+                      src={action.image || chair.image}
+                      alt={action.title}
+                      className="w-full h-[300px] object-cover rounded-lg"
+                    />
+                  </div>
+                  <div className="w-full md:w-1/2">
+                    <h2 className="text-2xl font-bold text-rotaract-magenta mb-4">{action.title}</h2>
+                    <div className="text-gray-700 prose">
+                      <ReactMarkdown>{action.description}</ReactMarkdown>
+                    </div>
+                  </div>
+                </div>
+              ))
+            ) : (
+              // Fallback if no actions are defined
+              <div className="text-center py-12">
+                <div className="mx-auto w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mb-6">
+                  <svg 
+                    xmlns="http://www.w3.org/2000/svg" 
+                    className="h-12 w-12 text-gray-400" 
+                    fill="none" 
+                    viewBox="0 0 24 24" 
+                    stroke="currentColor"
+                  >
+                    <path 
+                      strokeLinecap="round" 
+                      strokeLinejoin="round" 
+                      strokeWidth={1.5} 
+                      d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" 
+                    />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-semibold text-gray-700 mb-2">No Actions Added Yet</h3>
+                <p className="text-gray-500 max-w-md mx-auto">
+                  Content sections for this chair haven't been added yet. Please check back soon for updates about their activities and initiatives.
+                </p>
+              </div>
+            )}
           </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-16">
-            {/* Image Section */}
-            <div>
-              <img 
-                src="/lovable-uploads/bf57f875-d2f4-4e95-bf20-55ea193287dd.png"
-                alt="Chair activity 2"
-                className="w-full h-64 object-cover rounded-lg"
-              />
-            </div>
-            {/* Text Section */}
-            <div>
-              <h2 className="text-2xl font-bold text-rotaract-magenta mb-4">Lorem Ipsum</h2>
-              <p className="text-gray-700">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quid enim necesse est, tamquam meretricem in matronarum coetum, sic voluptatem in virtutum concilium adducere? His enim rebus detractis negat se reperire in asotorum vita quod reprehendat.
-              </p>
-            </div>
-          </div>
-
-          {/* Full Width Image */}
-          <div className="mb-16">
-            <img 
-              src="/lovable-uploads/bf57f875-d2f4-4e95-bf20-55ea193287dd.png"
-              alt="Chair with team"
-              className="w-full h-96 object-cover rounded-lg"
-            />
-          </div>
-        </div>
+        )}
       </main>
+      
       <Footer />
-    </div>
+    </>
   );
 };
 

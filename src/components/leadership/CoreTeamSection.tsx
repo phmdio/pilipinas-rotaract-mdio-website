@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import { LeadershipChair } from '@/lib/contentful';
+import { Link } from 'react-router-dom';
 
 interface CoreTeamSectionProps {
   chair?: LeadershipChair;
@@ -43,12 +44,14 @@ const CoreTeamSection = ({ chair }: CoreTeamSectionProps) => {
                 <p className="text-black/80 mb-8">
                   {chair.description}
                 </p>
-                <Button 
-                  variant="default"
-                  className="bg-rotaract-blue hover:bg-rotaract-darkblue text-white w-full md:w-auto rounded-full"
-                >
-                  LEARN MORE ABOUT OUR CHAIR
-                </Button>
+                <Link to="/our-chair">
+                  <Button 
+                    variant="default"
+                    className="bg-rotaract-blue hover:bg-rotaract-darkblue text-white w-full md:w-auto rounded-full"
+                  >
+                    LEARN MORE ABOUT OUR CHAIR
+                  </Button>
+                </Link>
               </div>
             </div>
           </CardContent>

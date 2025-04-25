@@ -57,8 +57,14 @@ export interface LeadershipChair {
   title: string;
   description: string;
   image: string;
+  headerImage?: string;
   club: string;
   isCurrentChair?: boolean;
+  actions?: {
+    title: string;
+    description: string;
+    image: string;
+  }[];
 }
 
 export interface BoardMember {
@@ -1140,6 +1146,60 @@ export async function getLeadershipTeam(): Promise<LeadershipTeamData> {
     chairData = anyChairEntries.items;
   }
   
+  // Map chair data
+  let mappedChair: LeadershipChair;
+  
+  if (chairData.length > 0) {
+    const item = chairData[0];
+    const fields = item.fields || {};
+    
+    // Extract actions if they exist
+    let actions;
+    try {
+      if (fields.actions && Array.isArray(fields.actions)) {
+        actions = fields.actions.map((actionItem: any) => {
+          try {
+            const actionFields = actionItem.fields || {};
+            return {
+              title: String(actionFields.title || ''),
+              description: String(actionFields.description || ''),
+              image: actionFields.image && actionFields.image.fields && actionFields.image.fields.file && actionFields.image.fields.file.url
+                ? `https:${actionFields.image.fields.file.url}`
+                : getImageUrl(fields.image, 'https://i.pravatar.cc/1500')
+            };
+          } catch (e) {
+            console.error('Error mapping action item:', e);
+            return {
+              title: 'Action Item',
+              description: 'Content unavailable',
+              image: getImageUrl(fields.image, 'https://i.pravatar.cc/1500')
+            };
+          }
+        });
+      }
+    } catch (e) {
+      console.error('Error mapping actions array:', e);
+    }
+    
+    mappedChair = {
+      id: item.sys.id,
+      name: String(fields.name || 'MDIO Chair'),
+      title: String(fields.title || 'Pilipinas Multi-District Information Organization, Chair'),
+      description: String(fields.description || ''),
+      image: getImageUrl(fields.image, 'https://i.pravatar.cc/1500'),
+      headerImage: fields.headerImage && fields.headerImage.fields && fields.headerImage.fields.file && fields.headerImage.fields.file.url
+        ? `https:${fields.headerImage.fields.file.url}`
+        : undefined,
+      club: String(fields.club || ''),
+      isCurrentChair: Boolean(fields.isCurrentChair || false),
+      actions
+    };
+  } else {
+    mappedChair = fallbackLeadershipChair;
+  }
+  
+  const chair = mappedChair;
+  
   // Fetch board members
   const boardEntries = await client.getEntries({
     content_type: 'boardMember',
@@ -1157,17 +1217,6 @@ export async function getLeadershipTeam(): Promise<LeadershipTeamData> {
     content_type: 'staffMember',
     order: ['fields.name'],
   });
-  
-  // Map chair data
-  const chair: LeadershipChair = chairData.length > 0 ? {
-    id: chairData[0].sys.id,
-    name: String(chairData[0].fields.name || 'MDIO Chair'),
-    title: String(chairData[0].fields.title || 'Pilipinas Multi-District Information Organization, Chair'),
-    description: String(chairData[0].fields.description || ''),
-    image: getImageUrl(chairData[0].fields.image, 'https://i.pravatar.cc/1500'),
-    club: String(chairData[0].fields.club || ''),
-    isCurrentChair: Boolean(chairData[0].fields.isCurrentChair || false)
-  } : fallbackLeadershipChair;
   
   // Map board members
   const boardMembers: BoardMember[] = boardEntries.items.map((item: any) => ({
@@ -1214,8 +1263,26 @@ export const fallbackLeadershipChair: LeadershipChair = {
   title: 'Pilipinas Multi-District Information Organization, Chair',
   description: 'Leading with dedication and innovation, our Chair works tirelessly to strengthen Rotaract\'s presence and impact across the Philippines, fostering collaboration between districts and empowering the next generation of leaders.',
   image: 'https://i.pravatar.cc/1500',
+  headerImage: 'https://i.pravatar.cc/1800',
   club: 'Past President, Rotaract Club of Manila',
-  isCurrentChair: true
+  isCurrentChair: true,
+  actions: [
+    {
+      title: 'About the Chair',
+      description: 'Our Chair is committed to elevating Rotaract across the Philippines through strategic initiatives and collaborative leadership. With years of experience in Rotaract service, they bring valuable insights and a passion for community development.',
+      image: 'https://i.pravatar.cc/1200'
+    },
+    {
+      title: 'Vision & Leadership',
+      description: 'Under the current leadership, Pilipinas Rotaract MDIO is focused on strengthening connections between districts, enhancing member development programs, and increasing the impact of service projects nationwide.',
+      image: 'https://i.pravatar.cc/1201'
+    },
+    {
+      title: 'Achievements',
+      description: 'Throughout their term, our Chair has successfully launched several key initiatives, including nationwide service campaigns, leadership training programs, and improved communication channels between Rotaract clubs.',
+      image: 'https://i.pravatar.cc/1202'
+    }
+  ]
 };
 
 export const fallbackBoardMembers: BoardMember[] = [
