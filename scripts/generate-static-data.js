@@ -142,18 +142,18 @@ async function fetchFeaturedEvents() {
   }
 }
 
-// Function to fetch upcoming events
-async function fetchUpcomingEvents() {
-  console.log('Fetching upcoming events...');
+// Function to fetch events
+async function fetchEvents() {
+  console.log('Fetching events...');
   try {
     const entries = await client.getEntries({
-      content_type: 'upcomingEvent',
+      content_type: 'event',
       order: ['fields.date'],
       limit: 5,
     });
 
     return entries.items.map((item) => {
-      const title = item.fields.title || 'Upcoming Event';
+      const title = item.fields.title || 'Event';
       return {
         id: item.sys.id,
         date: item.fields.date || new Date().toLocaleDateString(),
@@ -165,7 +165,7 @@ async function fetchUpcomingEvents() {
       };
     });
   } catch (error) {
-    console.error('Error fetching upcoming events:', error);
+    console.error('Error fetching events:', error);
     return [];
   }
 }
@@ -490,7 +490,7 @@ export async function generateStaticData() {
     const heroCarouselImages = await fetchHeroCarouselImages();
     const districts = await fetchDistricts();
     const featuredEvents = await fetchFeaturedEvents();
-    const upcomingEvents = await fetchUpcomingEvents();
+    const events = await fetchEvents();
     const statistics = await fetchStatistics();
     const rotaractStatisticsDistrict = await fetchRotaractDistrictData();
     const rotaractStatisticsContributions = await fetchRotaractContributionsData();
@@ -522,9 +522,9 @@ export async function generateStaticData() {
       featuredEvents = [];
     }
     
-    if (!Array.isArray(upcomingEvents)) {
-      console.warn('upcomingEvents is not an array, using empty array instead');
-      upcomingEvents = [];
+    if (!Array.isArray(events)) {
+      console.warn('events is not an array, using empty array instead');
+      events = [];
     }
     
     if (!Array.isArray(statistics)) {
@@ -577,7 +577,7 @@ export async function generateStaticData() {
       heroCarouselImages,
       districts,
       featuredEvents,
-      upcomingEvents,
+      events,
       statistics,
       rotaractStatisticsDistrict,
       rotaractStatisticsContributions,

@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
-import { UpcomingEvent } from "@/lib/contentful";
+import { Event } from "@/lib/contentful";
 
-const UpcomingEventItem = ({ event }: { event: UpcomingEvent }) => {
+const EventItem = ({ event }: { event: Event }) => {
   return (
     <Link to={`/event/${event.slug}`} className="block">
       <div className="flex items-center bg-white rounded-lg shadow-sm border hover:shadow-md transition px-4 py-3 gap-4">
@@ -31,4 +31,4 @@ const UpcomingEventItem = ({ event }: { event: UpcomingEvent }) => {
   );
 };
 
-export default UpcomingEventItem;
+export default EventItem;

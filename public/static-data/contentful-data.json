@@ -56,61 +56,61 @@
       "id": "3770",
       "color": "#F6A81C",
       "image": "https://images.ctfassets.net/dze7xj4zfu0b/6inPXcgt3v6RDkjKUhd7gA/373cfe99949563bc7e421e42f384b30b/3770.jpeg",
-      "description": "District 3770 is the first Rotary International district in the Philippines in terms of numerical sequence. It may be small in numbers but through the years, it has been able to build a strong base of sturdy, passionate and competent Rotaract clubs that develop effective leaders and promote responsible citizenship."
+      "summary": "Discover the vibrant community of Rotaract clubs in this district, where young professionals develop leadership skills and implement innovative service projects addressing local needs. Join us in making a positive impact through fellowship, professional development, and community service."
     },
     {
       "id": "3780",
       "color": "#16478E",
       "image": "https://images.ctfassets.net/dze7xj4zfu0b/59gyOMiRE46OaJq7On3PXG/fb763a5367cbed3884683dd71cc55e04/3780.jpeg",
-      "description": "Rotaract Clubs of Rotary International District #"
+      "summary": "Discover the vibrant community of Rotaract clubs in this district, where young professionals develop leadership skills and implement innovative service projects addressing local needs. Join us in making a positive impact through fellowship, professional development, and community service."
     },
     {
       "id": "3790",
       "color": "#00A2E1",
       "image": "https://images.ctfassets.net/dze7xj4zfu0b/2VTBqj19fXkzz0dTLY0BwI/ccecfcb7f611830adfcfcdee92fff8c3/3790.jpeg",
-      "description": "Rotaract Clubs of Rotary International District #"
+      "summary": "Discover the vibrant community of Rotaract clubs in this district, where young professionals develop leadership skills and implement innovative service projects addressing local needs. Join us in making a positive impact through fellowship, professional development, and community service."
     },
     {
       "id": "3800",
       "color": "#003366",
       "image": "https://images.ctfassets.net/dze7xj4zfu0b/1Iil4pp2hUhuSrMgGEiYuD/1eaede1528d9c2d05cc0c8071e32c988/3800.jpeg",
-      "description": "Rotaract Clubs of Rotary International District #"
+      "summary": "Discover the vibrant community of Rotaract clubs in this district, where young professionals develop leadership skills and implement innovative service projects addressing local needs. Join us in making a positive impact through fellowship, professional development, and community service."
     },
     {
       "id": "3810",
       "color": "#F47621",
       "image": "https://images.ctfassets.net/dze7xj4zfu0b/1lAtjcCr1rVxFTcPxddZek/5926bce6f7d2c99373ca3791ad8c02d0/3810.jpeg",
-      "description": "Rotaract Clubs of Rotary International District #"
+      "summary": "Discover the vibrant community of Rotaract clubs in this district, where young professionals develop leadership skills and implement innovative service projects addressing local needs. Join us in making a positive impact through fellowship, professional development, and community service."
     },
     {
       "id": "3820",
       "color": "#8E288F",
       "image": "https://images.ctfassets.net/dze7xj4zfu0b/4c42rOzMr7REevdLjnyncz/e5d3d5675d4d8cded9023aa16f766ca3/3820.jpeg",
-      "description": "Rotaract Clubs of Rotary International District #"
+      "summary": "Discover the vibrant community of Rotaract clubs in this district, where young professionals develop leadership skills and implement innovative service projects addressing local needs. Join us in making a positive impact through fellowship, professional development, and community service."
     },
     {
       "id": "3830",
       "color": "#0D9648",
       "image": "https://images.ctfassets.net/dze7xj4zfu0b/2YZ7B7KEA7WhBvexyIJirk/44f94bad43ddf56ce15a99492081472c/3830.jpeg",
-      "description": "Rotaract Clubs of Rotary International District #"
+      "summary": "Discover the vibrant community of Rotaract clubs in this district, where young professionals develop leadership skills and implement innovative service projects addressing local needs. Join us in making a positive impact through fellowship, professional development, and community service."
     },
     {
       "id": "3850",
       "color": "#E22626",
-      "image": "https://images.ctfassets.net/dze7xj4zfu0b/48WJuAhzpaR1UEcUlxoZvq/d7475a192953f86f4da70a7d00df4a85/3850.jpeg",
-      "description": "Rotaract Clubs of Rotary International District #"
+      "image": "https://images.ctfassets.net/dze7xj4zfu0b/48WJuAhzpaR1UEcUlxoZvq/0c6034ef14cf1bca6a2659bdfb3d6a56/sama-bangingi-1.jpg",
+      "summary": "District 3850 is home of young, vibrant, and active Rotaractors and Interactors. As the district where the first Rotaract Club was chartered, District 3850 continues to imbibe the organization’s motto “Fellowship Through Service” and commits themselves to innovative ways of learning, giving, and educating the community towards progress."
     },
     {
       "id": "3860",
       "color": "#66819A",
       "image": "https://images.ctfassets.net/dze7xj4zfu0b/1nMGPnGl5P82tJils5PBin/2d7f6f9200745a5a1a1bbfb627c919bb/3860.jpeg",
-      "description": "Rotaract Clubs of Rotary International District #"
+      "summary": "Discover the vibrant community of Rotaract clubs in this district, where young professionals develop leadership skills and implement innovative service projects addressing local needs. Join us in making a positive impact through fellowship, professional development, and community service."
     },
     {
       "id": "3870",
       "color": "#00ACBB",
       "image": "https://images.ctfassets.net/dze7xj4zfu0b/7KgjC4KH1EMwIvbLB9uEdA/679ee8d5dbdd869b76d5f5e22517234d/3870.jpeg",
-      "description": "Rotaract Clubs of Rotary International District #"
+      "summary": "Discover the vibrant community of Rotaract clubs in this district, where young professionals develop leadership skills and implement innovative service projects addressing local needs. Join us in making a positive impact through fellowship, professional development, and community service."
     }
   ],
   "featuredEvents": [
@@ -124,11 +124,11 @@
       "slug": "district-rotaract-representative-elect-training-seminar"
     }
   ],
-  "upcomingEvents": [],
+  "events": [],
   "statistics": [
     {
       "id": "3Uqi4yDayx30LcbIbg00fX",
-      "value": "133,885",
+      "value": "133885",
       "label": "Rotaractors Around the World",
       "iconUrl": "https://images.ctfassets.net/dze7xj4zfu0b/23GYc5Ssb4xuZhPA4tHzRx/3f1935e283da1727bfb8fc613b770da7/rotaract_around_the_world.svg"
     },
@@ -140,7 +140,7 @@
     },
     {
       "id": "4PPWQZhHVzc0b1pUtYp4gN",
-      "value": "8,094",
+      "value": "8094",
       "label": "Rotaract Members in the Philippines",
       "iconUrl": "https://images.ctfassets.net/dze7xj4zfu0b/b4zSaSkFx9Ffo0rms7pp9/4c4f9fc07c50a0955e5bad2358a94437/rotaract_members_in_the_philippines.svg"
     }
@@ -163,7 +163,7 @@
   "rotaractStatisticsCards": [
     {
       "id": "3JJQghbKdRRCB5tFH2Ngsj",
-      "number": "133,885",
+      "number": "133885",
       "title": "Rotaractors Around the World as of April 2025",
       "description": "Rotaract has become a global movement with over 133,885 members in more than 9,397 clubs across 180 countries. Rotaract members are making significant impacts in their communities through service projects, leadership development, and international cooperation initiatives.",
       "iconUrl": "https://images.ctfassets.net/dze7xj4zfu0b/23GYc5Ssb4xuZhPA4tHzRx/3f1935e283da1727bfb8fc613b770da7/rotaract_around_the_world.svg"
@@ -177,7 +177,7 @@
     },
     {
       "id": "4aqiAdhutVF4ZWzhlObPOX",
-      "number": "8,094",
+      "number": "8094",
       "title": "Rotaract Members in the Philippines as of April 2025",
       "description": "With 8,094 active members, Philippine Rotaract represents one of the largest and most active Rotaract communities globally. These young leaders are engaged in numerous service projects, professional development initiatives, and cross-district collaborations through the MDIO framework.",
       "iconUrl": "https://images.ctfassets.net/dze7xj4zfu0b/b4zSaSkFx9Ffo0rms7pp9/4c4f9fc07c50a0955e5bad2358a94437/rotaract_members_in_the_philippines.svg"
@@ -226,7 +226,33 @@
       "isCurrentChair": true
     }
   ],
-  "boardMembers": [],
+  "boardMembers": [
+    {
+      "id": "6BYGEhXpr7my9saYYbf30u",
+      "name": "John Doe",
+      "title": "Board of Directors",
+      "district": "3850",
+      "club": "Zamboanga City West",
+      "image": "https://images.ctfassets.net/dze7xj4zfu0b/4whFFmojLxId63SwIElTk/d646655171fd45cae5e1d3c1ae740ff9/nick.jpg"
+    }
+  ],
   "executiveCommittee": [],
-  "staffMembers": []
+  "staffMembers": [
+    {
+      "id": "7bV8kDu7qJpooaYGUWswGC",
+      "name": "John the Staff",
+      "role": "Associate",
+      "district": "3850",
+      "club": "Zamboanga City West",
+      "image": "https://images.ctfassets.net/dze7xj4zfu0b/4whFFmojLxId63SwIElTk/d646655171fd45cae5e1d3c1ae740ff9/nick.jpg"
+    }
+  ],
+  "rotaryFoundationData": {
+    "introduction": {
+      "title": "Supporting The Rotary Foundation's Global Impact",
+      "content": "The Rotary Foundation transforms your gifts into service projects that change lives both close to home and around the world."
+    },
+    "funds": [],
+    "donationLink": "https://www.rotary.org/en/get-involved/ways-to-give"
+  }
 }

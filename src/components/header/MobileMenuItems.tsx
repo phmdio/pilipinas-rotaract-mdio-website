@@ -78,11 +78,6 @@ const MobileMenuItems: React.FC<MobileMenuItemsProps> = ({ isScrolled, setIsMenu
             <span>Our Programs and Activities</span>
             <ChevronDown size={16} />
           </button>
-          <div id="mobile-programs-submenu" className="hidden pl-4 mt-2 space-y-2 bg-[#1a237e] rounded">
-            <Link to="/under-construction" className="block py-3 px-4 hover:bg-white/10" onClick={() => setIsMenuOpen(false)}>Key Projects</Link>
-            <Separator className="bg-white/20" />
-            <Link to="/under-construction" className="block py-3 px-4 hover:bg-white/10" onClick={() => setIsMenuOpen(false)}>Upcoming Events</Link>
-          </div>
         </div>
 
         <Link to="/under-construction" className="block py-2" onClick={() => setIsMenuOpen(false)}>Donate</Link>

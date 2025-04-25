@@ -604,13 +604,13 @@ export async function getEvents(): Promise<Event[]> {
   
   // Fall back to API if static data loading fails or is disabled
   const entries = await client.getEntries({
-    content_type: 'upcomingEvent',
+    content_type: 'event',
     order: ['fields.date'],
     limit: 5,
   });
 
   return entries.items.map((item: any) => {
-    const title = item.fields.title || 'Upcoming Event';
+    const title = item.fields.title || 'Event';
     return {
       id: item.sys.id,
       date: item.fields.date || new Date().toLocaleDateString(),
@@ -988,7 +988,7 @@ export async function getEventDetail(eventId: string): Promise<EventDetail | nul
         };
       }
       
-      // Check in upcoming events if not found in featured
+      // Check in events if not found in featured
       const events = await loadStaticData<Event>('events');
       const event = events.find(e => e.id === eventId);
       
@@ -1050,7 +1050,7 @@ export async function getEventDetail(eventId: string): Promise<EventDetail | nul
       };
     }
     
-    // Then try upcoming events
+    // Then try events
     const events = await client.getEntries({
       content_type: 'event',
       'sys.id': eventId,

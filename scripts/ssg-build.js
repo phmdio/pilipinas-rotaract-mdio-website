@@ -80,13 +80,13 @@ async function fetchEventSlugs() {
       content_type: 'featuredEvent',
     });
     
-    // Fetch upcoming events
-    const upcomingEntries = await client.getEntries({
-      content_type: 'upcomingEvent',
+    // Fetch events
+    const eventsEntries = await client.getEntries({
+      content_type: 'event',
     });
     
     // Combine and process all events
-    const allEvents = [...featuredEntries.items, ...upcomingEntries.items];
+    const allEvents = [...featuredEntries.items, ...eventsEntries.items];
     
     // Generate slug-based routes only
     const eventSlugs = allEvents.map(item => {
@@ -143,7 +143,7 @@ async function copyStaticData() {
         heroCarouselImages: [],
         districts: [],
         featuredEvents: [],
-        upcomingEvents: [],
+        events: [],
         statistics: [],
         rotaractStatisticsDistrict: [],
         rotaractStatisticsContributions: [],
@@ -174,7 +174,7 @@ async function copyStaticData() {
       heroCarouselImages: [],
       districts: [],
       featuredEvents: [],
-      upcomingEvents: [],
+      events: [],
       statistics: [],
       rotaractStatisticsDistrict: [],
       rotaractStatisticsContributions: [],

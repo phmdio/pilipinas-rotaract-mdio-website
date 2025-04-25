@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 
 import FeaturedEventCard from "@/components/FeaturedEventCard";
 import FeaturedGridCard from "@/components/FeaturedGridCard";
-import UpcomingEventItem from "@/components/UpcomingEventItem";
+import EventItem from "@/components/EventItem";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import { 
@@ -27,7 +27,7 @@ const OurProgramsAndActivities = () => {
     queryFn: getFeaturedEvents,
   });
 
-  // Fetch upcoming events
+  // Fetch events
   const { 
     data: events = fallbackEvents,
     isLoading: isEventsLoading 
@@ -78,7 +78,7 @@ const OurProgramsAndActivities = () => {
               <div className="text-5xl mb-4">🎭</div>
               <h3 className="text-xl font-semibold text-gray-600 mb-2">No Featured Events Yet</h3>
               <p className="text-gray-500 text-center max-w-md">
-                We're planning featured events to showcase our impact. Check back soon to see our upcoming flagship programs!
+                We're planning featured events to showcase our impact. Check back soon to see our flagship programs!
               </p>
             </div>
           ) : (
@@ -109,14 +109,14 @@ const OurProgramsAndActivities = () => {
           ) : events.length === 0 ? (
             <div className="flex flex-col items-center justify-center min-h-[200px] bg-gray-50 rounded-lg border border-gray-200 p-8">
               <div className="text-5xl mb-4">📆</div>
-              <h3 className="text-xl font-semibold text-gray-600 mb-2">No Upcoming Events Scheduled</h3>
+              <h3 className="text-xl font-semibold text-gray-600 mb-2">No Events Scheduled</h3>
               <p className="text-gray-500 text-center max-w-md">
-                We're currently planning our calendar of activities. Please check back soon for upcoming events and opportunities to participate!
+                We're currently planning our calendar of activities. Please check back soon for events and opportunities to participate!
               </p>
             </div>
           ) : (
             events.map((event) => (
-              <UpcomingEventItem key={event.id} event={event} />
+              <EventItem key={event.id} event={event} />
             ))
           )}
         </div>

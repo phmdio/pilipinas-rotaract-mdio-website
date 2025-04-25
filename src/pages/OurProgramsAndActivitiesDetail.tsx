@@ -145,7 +145,7 @@ const OurProgramsAndActivitiesDetail = () => {
             />
             <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[#010101cc] to-transparent py-2 px-4">
               <span className="text-yellow-300 text-xs font-bold tracking-widest uppercase">
-                {event.isFeatured ? 'Featured Event' : 'Upcoming Event'}
+                {event.isFeatured ? 'Featured Event' : 'Event'}
               </span>
             </div>
           </div>
@@ -240,11 +240,11 @@ const OurProgramsAndActivitiesDetail = () => {
         </div>
       </main>
 
-      {/* Upcoming Events */}
+      {/* Events */}
       <section className="bg-[#f6f3fa] py-10 px-3">
         <div className="max-w-6xl mx-auto">
           <div className="flex flex-row items-center justify-between mb-8">
-            <h2 className="text-[#D41A69] text-2xl font-bold">Upcoming Events</h2>
+            <h2 className="text-[#D41A69] text-2xl font-bold">Events</h2>
             <div className="flex gap-2">
               <Button
                 size="icon"
