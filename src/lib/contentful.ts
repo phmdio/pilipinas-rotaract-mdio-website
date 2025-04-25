@@ -1362,6 +1362,7 @@ export interface RotaryFoundationData {
   };
   funds: RotaryFoundationFund[];
   donationLink: string;
+  statisticsData?: RotaractStatisticsData;
 }
 
 // Fallback data for Rotary Foundation
@@ -1400,7 +1401,13 @@ export const fallbackRotaryFoundationData: RotaryFoundationData = {
       alt: "Foundation work"
     }
   ],
-  donationLink: "https://www.rotary.org/en/get-involved/ways-to-give?utm_source=pilipinas_rotaract_mdio&utm_medium=website&utm_campaign=foundation_giving"
+  donationLink: "https://www.rotary.org/en/get-involved/ways-to-give?utm_source=pilipinas_rotaract_mdio&utm_medium=website&utm_campaign=foundation_giving",
+  statisticsData: {
+    districtData: [],
+    contributionsData: [],
+    cardStats: [],
+    chartConfig: []
+  }
 };
 
 // Function to fetch Rotary Foundation data
@@ -1456,7 +1463,8 @@ export async function getRotaryFoundationData(): Promise<RotaryFoundationData> {
     return {
       introduction,
       funds,
-      donationLink
+      donationLink,
+      statisticsData: fallbackRotaractStatistics
     };
   } catch (error) {
     console.error('Error fetching Rotary Foundation data:', error);

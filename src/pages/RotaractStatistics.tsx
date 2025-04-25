@@ -301,42 +301,6 @@ const RotaractStatistics = () => {
                   ))}
                 </div>
               )}
-
-              {statisticsData.chartConfig.length > 0 && (
-                <>
-                  <h2 className="text-2xl md:text-3xl font-bold my-8 md:my-12 text-[#0F3B7F]">Rotaract Growth Trends</h2>
-                  <div className="grid grid-cols-1 gap-8">
-                    {statisticsData.chartConfig.map((config, index) => {
-                      const data = getDataSource(config.dataSource);
-                      
-                      // Skip rendering the chart if there's no data
-                      if (data.length === 0) return null;
-
-                      return (
-                        <LineChartCard
-                          key={config.id}
-                          title={config.title} 
-                          data={data} 
-                          dataKeys={config.dataKey} 
-                          colors={config.colors}
-                          xAxisKey={config.xAxisKey || "year"}
-                          asOfDate={config.asOfDate}
-                        />
-                      );
-                    })}
-                  </div>
-                </>
-              )}
-
-              {statisticsData.chartConfig.length === 0 && (
-                <div className="flex flex-col items-center justify-center min-h-[300px] bg-gray-50 rounded-lg border border-gray-200 p-8 mt-8">
-                  <div className="text-5xl mb-4">📈</div>
-                  <h3 className="text-2xl font-semibold text-gray-600 mb-2">Growth Trends Coming Soon</h3>
-                  <p className="text-gray-500 text-center max-w-lg">
-                    We're gathering historical data to provide you with detailed growth trends. Check back soon to see visualizations of our progress over time.
-                  </p>
-                </div>
-              )}
             </div>
           </div>
         )}
