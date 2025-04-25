@@ -24,6 +24,16 @@ const InformationCenter = () => {
       <Helmet>
         <title>Information Center | Pilipinas Rotaract MDIO</title>
         <meta name="description" content="Information Center for Pilipinas Rotaract Multi-District Information Organization" />
+        <link rel="canonical" href="https://www.pilipinasrotaract.org/information-center" />
+        <meta property="og:title" content="Information Center | Pilipinas Rotaract MDIO" />
+        <meta property="og:description" content="Information Center for Pilipinas Rotaract Multi-District Information Organization" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://www.pilipinasrotaract.org/information-center" />
+        <meta property="og:image" content="https://www.pilipinasrotaract.org/assets/district/3810.jpeg" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Information Center | Pilipinas Rotaract MDIO" />
+        <meta name="twitter:description" content="Information Center for Pilipinas Rotaract Multi-District Information Organization" />
+        <meta name="twitter:image" content="https://www.pilipinasrotaract.org/assets/district/3810.jpeg" />
       </Helmet>
       
       <Header />

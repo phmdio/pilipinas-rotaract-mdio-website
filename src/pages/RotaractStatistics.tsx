@@ -229,6 +229,14 @@ const RotaractStatistics = () => {
           name="description" 
           content="View statistics about Rotaract in the Philippines, including membership data, club information, and humanitarian contributions." 
         />
+        <link rel="canonical" href="https://www.pilipinasrotaract.org/rotaract-statistics" />
+        <meta property="og:title" content="Rotaract Statistics | Pilipinas Rotaract MDIO" />
+        <meta property="og:description" content="View statistics about Rotaract in the Philippines, including membership data, club information, and humanitarian contributions." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://www.pilipinasrotaract.org/rotaract-statistics" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Rotaract Statistics | Pilipinas Rotaract MDIO" />
+        <meta name="twitter:description" content="View statistics about Rotaract in the Philippines, including membership data, club information, and humanitarian contributions." />
       </Helmet>
 
       <Header />

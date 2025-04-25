@@ -1,4 +1,3 @@
-
 import { useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import Header from '@/components/Header';
@@ -47,7 +46,18 @@ const Index = () => {
       "https://facebook.com/pilipinasrotaract",
       "https://instagram.com/pilipinasrotaract",
       "https://twitter.com/pilipinasrotaract"
-    ]
+    ],
+    "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "Philippines"
+    },
+    "email": "info@pilipinasrotaract.org",
+    "memberOf": {
+      "@type": "Organization",
+      "name": "Rotary International"
+    },
+    "foundingDate": "2006",
+    "keywords": "Rotaract, Youth Leadership, Community Service, Philippines, MDIO"
   };
 
   return (
@@ -55,6 +65,14 @@ const Index = () => {
       <Helmet>
         <title>Pilipinas Rotaract - Empowering Young Leaders</title>
         <meta name="description" content="Pilipinas Rotaract empowers young leaders to create positive change in communities across the Philippines through service, leadership, and fellowship." />
+        <link rel="canonical" href="https://www.pilipinasrotaract.org/" />
+        <meta property="og:title" content="Pilipinas Rotaract - Empowering Young Leaders" />
+        <meta property="og:description" content="Pilipinas Rotaract empowers young leaders to create positive change in communities across the Philippines through service, leadership, and fellowship." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://www.pilipinasrotaract.org/" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Pilipinas Rotaract - Empowering Young Leaders" />
+        <meta name="twitter:description" content="Pilipinas Rotaract empowers young leaders to create positive change in communities across the Philippines through service, leadership, and fellowship." />
         <script type="application/ld+json">
           {JSON.stringify(structuredData)}
         </script>

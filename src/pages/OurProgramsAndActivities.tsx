@@ -44,6 +44,16 @@ const OurProgramsAndActivities = () => {
           name="description" 
           content="Discover the impactful programs and activities of Pilipinas Rotaract MDIO - serving communities across the Philippines." 
         />
+        <link rel="canonical" href="https://www.pilipinasrotaract.org/our-programs-and-activities" />
+        <meta property="og:title" content="Programs and Activities | Pilipinas Rotaract MDIO" />
+        <meta property="og:description" content="Discover the impactful programs and activities of Pilipinas Rotaract MDIO - serving communities across the Philippines." /> 
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://www.pilipinasrotaract.org/our-programs-and-activities" />
+        <meta property="og:image" content="https://www.pilipinasrotaract.org/assets/our-programs-and-activities.png" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Programs and Activities | Pilipinas Rotaract MDIO" />
+        <meta name="twitter:description" content="Discover the impactful programs and activities of Pilipinas Rotaract MDIO - serving communities across the Philippines." />
+        <meta name="twitter:image" content="https://www.pilipinasrotaract.org/assets/our-programs-and-activities.png" />
       </Helmet>
       
       <Header />

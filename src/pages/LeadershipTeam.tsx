@@ -41,6 +41,49 @@ const LeadershipTeam = () => {
      !data.executiveCommittee?.length && 
      !data.staff?.length);
 
+  // Combine team members for structured data
+  const allTeamMembers = [
+    ...(data?.boardMembers || []),
+    ...(data?.executiveCommittee || []),
+    ...(data?.staff || [])
+  ];
+
+  // Define schema type that allows additional properties
+  type SchemaPersonType = {
+    "@type": string;
+    name: string;
+    jobTitle: string;
+    image: string;
+    [key: string]: any; // Allow additional properties
+  }
+
+  // Prepare structured data
+  const leadershipStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Pilipinas Rotaract MDIO",
+    "url": "https://www.pilipinasrotaract.org",
+    "logo": "https://www.pilipinasrotaract.org/logo.png",
+    "member": allTeamMembers.map((member: any) => ({
+      "@type": "Person",
+      "name": member.name,
+      "jobTitle": member.title || member.role,
+      "image": member.image
+    } as SchemaPersonType))
+  };
+
+  // Add the chair separately at the beginning if available
+  if (data?.chair) {
+    const chairPerson: SchemaPersonType = {
+      "@type": "Person",
+      "name": data.chair.name,
+      "jobTitle": data.chair.title,
+      "image": data.chair.image,
+      "description": data.chair.description
+    };
+    leadershipStructuredData.member.unshift(chairPerson);
+  }
+
   return (
     <>
       <Helmet>
@@ -49,6 +92,19 @@ const LeadershipTeam = () => {
           name="description" 
           content="Meet the dedicated leadership team of Pilipinas Rotaract Multi-District Information Organization" 
         />
+        <link rel="canonical" href="https://www.pilipinasrotaract.org/our-leadership-team" />
+        <meta property="og:title" content="Our Leadership Team | Pilipinas Rotaract MDIO" />
+        <meta property="og:description" content="Meet the dedicated leadership team of Pilipinas Rotaract Multi-District Information Organization" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://www.pilipinasrotaract.org/our-leadership-team" />
+        <meta property="og:image" content="https://www.pilipinasrotaract.org/assets/our-leadership.jpeg" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Our Leadership Team | Pilipinas Rotaract MDIO" />
+        <meta name="twitter:description" content="Meet the dedicated leadership team of Pilipinas Rotaract Multi-District Information Organization" />
+        <meta name="twitter:image" content="https://www.pilipinasrotaract.org/assets/our-leadership.jpeg" />
+        <script type="application/ld+json">
+          {JSON.stringify(leadershipStructuredData)}
+        </script>
       </Helmet>
       
       <Header />

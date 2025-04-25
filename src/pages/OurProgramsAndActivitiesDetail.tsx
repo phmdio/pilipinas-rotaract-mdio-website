@@ -109,6 +109,32 @@ const OurProgramsAndActivitiesDetail = () => {
     );
   }
   
+  // Prepare structured data for JSON-LD
+  const eventStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "Event",
+    "name": event.title,
+    "description": event.description,
+    "startDate": event.date,
+    "location": {
+      "@type": "Place",
+      "name": event.location
+    },
+    "image": event.image || "https://www.pilipinasrotaract.org/lovable-uploads/9fd84289-5060-4393-a74d-7846bfb24434.png",
+    "organizer": {
+      "@type": "Organization",
+      "name": "Pilipinas Rotaract",
+      "url": "https://www.pilipinasrotaract.org"
+    },
+    "eventStatus": "https://schema.org/EventScheduled",
+    "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+    "offers": event.eventUrl ? {
+      "@type": "Offer",
+      "url": event.eventUrl,
+      "availability": "https://schema.org/InStock"
+    } : undefined
+  };
+  
   return (
     <>
       <Helmet>
@@ -118,6 +144,19 @@ const OurProgramsAndActivitiesDetail = () => {
           content={`${event.title} - ${event.description.substring(0, 155)}...`} 
         />
         <link rel="canonical" href={`https://www.pilipinasrotaract.org/event/${event.slug}`} />
+        <meta property="og:title" content={`${event.title} | Pilipinas Rotaract MDIO`} />
+        <meta property="og:description" content={`${event.title} - ${event.description.substring(0, 155)}...`} />
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content={`https://www.pilipinasrotaract.org/event/${event.slug}`} />
+        <meta property="og:image" content={event.image || "https://www.pilipinasrotaract.org/lovable-uploads/9fd84289-5060-4393-a74d-7846bfb24434.png"} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={`${event.title} | Pilipinas Rotaract MDIO`} />
+        <meta name="twitter:description" content={`${event.title} - ${event.description.substring(0, 155)}...`} />
+        <meta name="twitter:image" content={event.image || "https://www.pilipinasrotaract.org/lovable-uploads/9fd84289-5060-4393-a74d-7846bfb24434.png"} />
+        <meta property="article:published_time" content={event.publishedDate} />
+        <script type="application/ld+json">
+          {JSON.stringify(eventStructuredData)}
+        </script>
       </Helmet>
 
       <Header />

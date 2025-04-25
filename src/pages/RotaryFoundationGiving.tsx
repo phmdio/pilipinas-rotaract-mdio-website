@@ -213,6 +213,16 @@ const RotaryFoundationGiving = () => {
           name="description" 
           content="Support The Rotary Foundation through giving and donations" 
         />
+        <link rel="canonical" href="https://www.pilipinasrotaract.org/the-rotary-foundation-giving" />
+        <meta property="og:title" content="The Rotary Foundation Giving | Pilipinas Rotaract MDIO" />
+        <meta property="og:description" content="Support The Rotary Foundation through giving and donations" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://www.pilipinasrotaract.org/the-rotary-foundation-giving" />
+        <meta property="og:image" content="https://www.pilipinasrotaract.org/assets/trf.png" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="The Rotary Foundation Giving | Pilipinas Rotaract MDIO" />
+        <meta name="twitter:description" content="Support The Rotary Foundation through giving and donations" />
+        <meta name="twitter:image" content="https://www.pilipinasrotaract.org/assets/trf.png" />
       </Helmet>
       
       <Header />

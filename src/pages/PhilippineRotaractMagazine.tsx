@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import Header from '@/components/Header';
@@ -14,6 +13,15 @@ const PhilippineRotaractMagazine = () => {
           name="description" 
           content="Philippine Rotaract Magazine - The official publication of Pilipinas Rotaract MDIO" 
         />
+        <link rel="canonical" href="https://www.pilipinasrotaract.org/philippine-rotaract-magazine" />
+        <meta property="og:title" content="Philippine Rotaract Magazine | Pilipinas Rotaract MDIO" />
+        <meta property="og:description" content="Philippine Rotaract Magazine - The official publication of Pilipinas Rotaract MDIO" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://www.pilipinasrotaract.org/philippine-rotaract-magazine" />
+        <meta property="og:image" content="https://www.pilipinasrotaract.org/assets/concert.png" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Philippine Rotaract Magazine | Pilipinas Rotaract MDIO" />
+        <meta name="twitter:description" content="Philippine Rotaract Magazine - The official publication of Pilipinas Rotaract MDIO" />
       </Helmet>
       
       <Header />

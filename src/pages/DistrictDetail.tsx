@@ -62,11 +62,71 @@ const DistrictDetail = () => {
     return <div className="flex items-center justify-center h-screen">District not found</div>;
   }
 
+  // Prepare breadcrumb structured data
+  const breadcrumbStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://www.pilipinasrotaract.org"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Information Center",
+        "item": "https://www.pilipinasrotaract.org/information-center"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": `District ${district.id}`,
+        "item": `https://www.pilipinasrotaract.org/district/${district.id}`
+      }
+    ]
+  };
+
+  // Prepare organization structured data
+  const organizationStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": `Rotaract District ${district.id}`,
+    "url": `https://www.pilipinasrotaract.org/district/${district.id}`,
+    "logo": districtDetail.headerImage || "https://www.pilipinasrotaract.org/lovable-uploads/8dde7e86-fd9e-4713-9917-b37609e31f4b.png",
+    "description": districtDetail.description.substring(0, 200),
+    "sameAs": [
+      districtDetail.facebookPageUrl || `https://www.facebook.com/district${district.id}rotaract`
+    ],
+    "parentOrganization": {
+      "@type": "Organization",
+      "name": "Pilipinas Rotaract MDIO",
+      "url": "https://www.pilipinasrotaract.org"
+    }
+  };
+
   return (
     <>
       <Helmet>
         <title>District {district.id} | Pilipinas Rotaract MDIO</title>
         <meta name="description" content={`Learn about Rotaract Clubs in District ${district.id}`} />
+        <link rel="canonical" href={`https://www.pilipinasrotaract.org/district/${district.id}`} />
+        <meta property="og:title" content={`District ${district.id} | Pilipinas Rotaract MDIO`} />
+        <meta property="og:description" content={`Learn about Rotaract Clubs in District ${district.id}`} />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={`https://www.pilipinasrotaract.org/district/${district.id}`} />
+        <meta property="og:image" content={districtDetail.headerImage || "https://www.pilipinasrotaract.org/lovable-uploads/8dde7e86-fd9e-4713-9917-b37609e31f4b.png"} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={`District ${district.id} | Pilipinas Rotaract MDIO`} />
+        <meta name="twitter:description" content={`Learn about Rotaract Clubs in District ${district.id}`} />
+        <meta name="twitter:image" content={districtDetail.headerImage || "https://www.pilipinasrotaract.org/lovable-uploads/8dde7e86-fd9e-4713-9917-b37609e31f4b.png"} />
+        <script type="application/ld+json">
+          {JSON.stringify(breadcrumbStructuredData)}
+        </script>
+        <script type="application/ld+json">
+          {JSON.stringify(organizationStructuredData)}
+        </script>
       </Helmet>
       
       <Header />
