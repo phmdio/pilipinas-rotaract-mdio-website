@@ -19,7 +19,7 @@ const FeaturedEventCard = ({ event }: { event: FeaturedEvent }) => {
         <p className="font-medium text-base opacity-90 mb-2">{event.date}</p>
         <h3 className="font-bold text-2xl mb-3">{event.title}</h3>
         <p className="text-white/90 mb-5">{event.description}</p>
-        <Link to={`/event/${event.slug}`}>
+        <Link to='/procon'>
           <Button
             variant="outline"
             className="text-white border-white bg-transparent hover:bg-white/10 w-fit px-8 mt-2"
