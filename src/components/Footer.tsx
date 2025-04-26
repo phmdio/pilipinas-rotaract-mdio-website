@@ -55,7 +55,7 @@ const Footer = () => {
               Our Members District
             </Link>
             <Link 
-              to="/our-program-and-activities" 
+              to="/our-programs-and-activities" 
               className="block py-2 border-b border-white/10 hover:text-white/80 transition-colors"
               onClick={() => handleNavLinkClick('footer-programs', 'Our Program and Activities', '/our-program-and-activities')}
             >
