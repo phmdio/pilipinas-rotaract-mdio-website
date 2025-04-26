@@ -34,6 +34,7 @@ const OurProgramsAndActivities = () => {
   } = useQuery({
     queryKey: programsAndActivitiesKeys.events,
     queryFn: getEvents,
+    select: (data) => data.filter(event => event.title.toLowerCase().includes('PILIPINAS ROTARACT CONVENTION'))
   });
 
   return (

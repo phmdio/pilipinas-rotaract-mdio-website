@@ -141,6 +141,7 @@ export interface FeaturedEvent {
   description: string;
   image: string;
   isProcon?: boolean;
+  procon?: Event[];
   slug?: string;
   location?: string;
   objectiveDetails?: string[];
@@ -601,6 +602,16 @@ export async function getFeaturedEvents(): Promise<FeaturedEvent[]> {
         ? `https:${item.fields.image.fields.file.url}` 
         : 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=800&q=80',
       isProcon: item.fields.isProcon || false,
+      procon: item.fields.procon?.map((event: any) => ({
+        id: event.sys.id,
+        date: event.fields.date || '',
+        title: event.fields.title || '',
+        description: event.fields.description || '',
+        image: event.fields.image?.fields?.file?.url 
+          ? `https:${event.fields.image.fields.file.url}` 
+          : '',
+        slug: event.fields.slug || generateSlug(event.fields.title || '')
+      })) || [],
       slug: item.fields.slug || generateSlug(title)
     };
   });

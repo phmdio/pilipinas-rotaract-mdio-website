@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import { useProConEventsQuery } from '@/hooks/useProConEventsQuery';
 import { fallbackFeaturedEvents } from '@/lib/contentful';
 import { AlertTriangle } from 'lucide-react';
+import { log } from 'console';
 
 // Fallback component for errors or no data
 const ProConFallback = ({ error }: { error?: unknown }) => {
@@ -79,6 +80,8 @@ const ProCon = () => {
     error
   } = useProConEventsQuery();
 
+  console.log(proconEvents);
+
   // Loading state
   if (isLoading) {
     return (
@@ -148,7 +151,7 @@ const ProCon = () => {
                   PROCON Through The Years
                   </h2>
                   <div className="space-y-12">
-                    {proconEvents.map((event, index) => (
+                    {proconEvents[0]?.procon?.map((event, index) => (
                       <div 
                         key={event.id}
                         className={`flex flex-col ${index % 2 !== 0 ? 'md:flex-row-reverse' : 'md:flex-row'} gap-8 items-center bg-rotaract-magenta/5 rounded-lg shadow-sm p-6`}
