@@ -133,7 +133,8 @@ const OurProgramsAndActivitiesDetail = () => {
       "@type": "Offer",
       "url": event.eventUrl,
       "availability": "https://schema.org/InStock"
-    } : undefined
+    } : undefined,
+    "sameAs": event.facebookPageUrl ? [event.facebookPageUrl] : undefined
   };
   
   return (
@@ -263,7 +264,7 @@ const OurProgramsAndActivitiesDetail = () => {
             <p className="text-[#232b3d] mb-8">{event.closingDetails}</p>
             
             {event.eventUrl && (
-              <div className="flex">
+              <div className="flex flex-col md:flex-row gap-4">
                 <a
                   href={event.eventUrl}
                   target="_blank"
@@ -274,6 +275,19 @@ const OurProgramsAndActivitiesDetail = () => {
                     VISIT EVENT PAGE OR REGISTER
                   </Button>
                 </a>
+                
+                {event.facebookPageUrl && (
+                  <a
+                    href={event.facebookPageUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block w-full md:w-auto"
+                  >
+                    <Button className="w-full md:w-auto px-6 py-3 rounded-full bg-[#4267B2] hover:bg-[#365899] text-white text-base font-medium shadow transition">
+                      VISIT FACEBOOK PAGE
+                    </Button>
+                  </a>
+                )}
               </div>
             )}
           </section>

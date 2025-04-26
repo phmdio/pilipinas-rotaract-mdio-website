@@ -211,6 +211,7 @@ export interface EventDetail {
   additionalDetails: string[];
   closingDetails: string;
   eventUrl?: string;
+  facebookPageUrl?: string;
   isFeatured: boolean;
   slug: string;
   publishedDate?: string;
@@ -1062,6 +1063,7 @@ export async function getEventDetail(eventId: string): Promise<EventDetail | nul
         additionalDetails: Array.isArray(fields.additionalDetails) ? fields.additionalDetails : [],
         closingDetails: typeof fields.closingDetails === 'string' ? fields.closingDetails : 'Visit the event page for more information.',
         eventUrl: typeof fields.eventUrl === 'string' ? fields.eventUrl : undefined,
+        facebookPageUrl: typeof fields.facebookPageUrl === 'string' ? fields.facebookPageUrl : undefined,
         isFeatured: true,
         slug: generateSlug(title),
         publishedDate: item.sys.updatedAt || item.sys.createdAt
@@ -1094,6 +1096,7 @@ export async function getEventDetail(eventId: string): Promise<EventDetail | nul
         additionalDetails: Array.isArray(fields.additionalDetails) ? fields.additionalDetails : [],
         closingDetails: typeof fields.closingDetails === 'string' ? fields.closingDetails : 'Visit the event page for more information.',
         eventUrl: typeof fields.eventUrl === 'string' ? fields.eventUrl : undefined,
+        facebookPageUrl: typeof fields.facebookPageUrl === 'string' ? fields.facebookPageUrl : undefined,
         isFeatured: false,
         slug: generateSlug(title),
         publishedDate: item.sys.updatedAt || item.sys.createdAt
