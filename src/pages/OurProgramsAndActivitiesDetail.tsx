@@ -332,7 +332,7 @@ const OurProgramsAndActivitiesDetail = () => {
                     <img
                       src={event.image}
                       alt={event.title}
-                      className="w-full h-full object-cover"
+                      className="w-full h-96 object-cover"
                     />
                   </div>
                   <div className="flex flex-col items-start py-4 px-5">
