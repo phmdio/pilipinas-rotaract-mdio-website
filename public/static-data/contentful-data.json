@@ -98,7 +98,7 @@
       "id": "3850",
       "color": "#E22626",
       "image": "https://images.ctfassets.net/dze7xj4zfu0b/48WJuAhzpaR1UEcUlxoZvq/0c6034ef14cf1bca6a2659bdfb3d6a56/sama-bangingi-1.jpg",
-      "summary": "District 3850 is home of young, vibrant, and active Rotaractors and Interactors. As the district where the first Rotaract Club was chartered, District 3850 continues to imbibe the organization’s motto “Fellowship Through Service” and commits themselves to innovative ways of learning, giving, and educating the community towards progress."
+      "summary": "District 3850 is home of young, vibrant, and active Rotaractors and Interactors. As the district where the first Rotaract Club was chartered, District 3850 continues to imbibe the organization's motto "Fellowship Through Service" and commits themselves to innovative ways of learning, giving, and educating the community towards progress."
     },
     {
       "id": "3860",
@@ -117,10 +117,10 @@
     {
       "id": "3OkKROfI6mofGHQUQmEPxq",
       "date": "January 1, 2024",
-      "title": "District Rotaract Representative Elect Training Seminar",
+      "title": "District Rotaract Representative Elect Training Seminar",
       "description": "Hipster ipsum tattooed brunch I'm baby. Schlitz seitan listicle mixtape boys trust vice. Occupy tbh street brunch keffiyeh. Bicycle diy blog banjo fingerstache tote on locavore coffee pabst. ",
       "image": "https://images.ctfassets.net/dze7xj4zfu0b/4p5JH3l4a39EYNUmrnrm74/11bc196ed250a472c16c12e33266fcb9/Rectangle_60.png",
-      "landscape": true,
+      "isProcon": true,
       "slug": "district-rotaract-representative-elect-training-seminar"
     }
   ],

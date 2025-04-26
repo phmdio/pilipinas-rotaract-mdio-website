@@ -91,7 +91,7 @@ interface FeaturedEvent {
   title: string;
   description: string;
   image: string;
-  landscape: boolean;
+  isProcon: boolean;
   slug: string;
 }
 
@@ -289,7 +289,7 @@ async function fetchFeaturedEvents(): Promise<FeaturedEvent[]> {
         image: item.fields.image?.fields?.file?.url 
           ? `https:${item.fields.image.fields.file.url}` 
           : 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=800&q=80',
-        landscape: getFieldValue(item, 'landscape', false),
+        isProcon: getFieldValue(item, 'isProcon', false),
         slug: getFieldValue(item, 'slug', generateSlugFromTitle(title))
       };
     });

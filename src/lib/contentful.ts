@@ -140,7 +140,7 @@ export interface FeaturedEvent {
   title: string;
   description: string;
   image: string;
-  landscape?: boolean;
+  isProcon?: boolean;
   slug?: string;
 }
 
@@ -555,10 +555,17 @@ export async function getFeaturedEvents(): Promise<FeaturedEvent[]> {
     try {
       const events = await loadStaticData<FeaturedEvent>('featuredEvents');
       // Add slugs to any events that don't have them
-      return events.map(event => ({
+      const mappedEvents = events.map(event => ({
         ...event,
         slug: event.slug || generateSlug(event.title)
       }));
+      
+      // Sort events to put isProcon=true events first
+      return mappedEvents.sort((a, b) => {
+        if (a.isProcon && !b.isProcon) return -1;
+        if (!a.isProcon && b.isProcon) return 1;
+        return 0;
+      });
     } catch (error) {
       console.warn('Falling back to API for featured events');
     }
@@ -571,7 +578,7 @@ export async function getFeaturedEvents(): Promise<FeaturedEvent[]> {
     limit: 5,
   });
 
-  return entries.items.map((item: any) => {
+  const mappedEvents = entries.items.map((item: any) => {
     const title = item.fields.title || 'Featured Event';
     return {
       id: item.sys.id,
@@ -581,9 +588,16 @@ export async function getFeaturedEvents(): Promise<FeaturedEvent[]> {
       image: item.fields.image?.fields?.file?.url 
         ? `https:${item.fields.image.fields.file.url}` 
         : 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=800&q=80',
-      landscape: item.fields.landscape || false,
+      isProcon: item.fields.isProcon || false,
       slug: item.fields.slug || generateSlug(title)
     };
+  });
+  
+  // Sort events to put isProcon=true events first
+  return mappedEvents.sort((a, b) => {
+    if (a.isProcon && !b.isProcon) return -1;
+    if (!a.isProcon && b.isProcon) return 1;
+    return 0;
   });
 }
 
@@ -633,7 +647,7 @@ export const fallbackFeaturedEvents: FeaturedEvent[] = [
     description:
       "Annual training seminar for incoming District Rotaract Representatives to prepare them for their leadership roles in the upcoming Rotary year.",
     image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=800&q=80",
-    landscape: true,
+    isProcon: true,
     slug: "district-rotaract-representative-elect-training-seminar"
   },
   {
