@@ -80,8 +80,6 @@ const ProCon = () => {
     error
   } = useProConEventsQuery();
 
-  console.log(proconEvents);
-
   // Loading state
   if (isLoading) {
     return (
