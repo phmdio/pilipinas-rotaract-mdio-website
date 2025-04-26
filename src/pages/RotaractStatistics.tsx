@@ -309,6 +309,35 @@ const RotaractStatistics = () => {
                   ))}
                 </div>
               )}
+              
+              {/* Charts Section - Only Display District Data Charts */}
+              {statisticsData.chartConfig && statisticsData.chartConfig.length > 0 && statisticsData.districtData.length > 0 && (
+                <div className="mt-16">
+                  <h2 className="text-2xl md:text-3xl font-bold mb-8 md:mb-12 text-[#0F3B7F]">District Statistics</h2>
+                  <div className="grid grid-cols-1 gap-8">
+                    {statisticsData.chartConfig
+                      .filter(config => config.dataSource === 'districtData')
+                      .map(config => {
+                        const data = getDataSource(config.dataSource);
+                        
+                        // Skip rendering the chart if there's no data
+                        if (data.length === 0) return null;
+
+                        return (
+                          <LineChartCard
+                            key={config.id}
+                            title={config.title} 
+                            data={data} 
+                            dataKeys={config.dataKey} 
+                            colors={config.colors}
+                            xAxisKey={config.xAxisKey || "year"}
+                            asOfDate={config.asOfDate}
+                          />
+                        );
+                      })}
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         )}

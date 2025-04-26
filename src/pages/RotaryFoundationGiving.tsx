@@ -294,7 +294,9 @@ const RotaryFoundationGiving = () => {
                   <div>
                     <h2 className="text-2xl md:text-3xl font-bold my-8 md:my-12 text-[#0F3B7F]">Foundation Contribution Trends</h2>
                     <div className="grid grid-cols-1 gap-8">
-                      {foundationData.statisticsData.chartConfig.map((config, index) => {
+                      {foundationData.statisticsData.chartConfig
+                        .filter(config => config.dataSource !== 'districtData') // Filter out district data charts
+                        .map((config, index) => {
                         const data = getDataSource(config.dataSource);
                         
                         // Skip rendering the chart if there's no data
