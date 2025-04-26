@@ -18,7 +18,15 @@ const queryClient = new QueryClient({
 })
 
 // Export the app component to be used by vite-react-ssg
+// No router included - the appropriate router will be provided by entry-client.tsx or entry-server.tsx
 export const ViteApp = () => (
+  <QueryClientProvider client={queryClient}>
+    <App />
+  </QueryClientProvider>
+)
+
+// Only use BrowserRouter in client-side rendering (entry-client.tsx will use this)
+export const ClientApp = () => (
   <QueryClientProvider client={queryClient}>
     <BrowserRouter>
       <App />
@@ -26,5 +34,5 @@ export const ViteApp = () => (
   </QueryClientProvider>
 )
 
-// Default export for development mode
-export default ViteApp
+// Default export for development mode (client-side only)
+export default ClientApp
