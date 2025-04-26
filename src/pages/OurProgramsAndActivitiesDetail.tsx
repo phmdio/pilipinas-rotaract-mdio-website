@@ -163,8 +163,8 @@ const OurProgramsAndActivitiesDetail = () => {
 
       <Header />
 
-      <div className="bg-[#D41A69] w-full min-h-[180px] flex flex-col items-center pt-12 pb-8 px-4">
-        <div className="w-full max-w-5xl flex flex-col md:flex-row md:items-end gap-8">
+      <div className="bg-rotaract-magenta w-full min-h-[180px] flex flex-col items-center pt-32 pb-8 px-4">
+        <div className="w-full max-w-5xl flex flex-col md:flex-row md:items-center gap-8">
           <div className="flex-1 mb-4 md:mb-0">
             <h1 className="text-white text-2xl sm:text-3xl md:text-4xl font-bold mb-3 leading-tight">
               {event.title}
@@ -178,7 +178,7 @@ const OurProgramsAndActivitiesDetail = () => {
               </span>
             </div>
           </div>
-          <div className="flex-shrink-0 w-full md:w-[330px] mx-auto relative rounded-lg bg-white shadow-lg overflow-hidden aspect-[1.5/1]">
+          <div className="flex-shrink-0 w-full md:w-[330px] mx-auto relative rounded-lg bg-white shadow-lg overflow-hidden aspect-auto">
             <img 
               src={event.image || defaultBannerImage}
               alt={event.title}
