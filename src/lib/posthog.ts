@@ -12,7 +12,6 @@ export const initPostHog = () => {
     posthog.init(apiKey, {
       api_host: apiHost,
       capture_pageview: true, // Enable automatic page view tracking
-      persistence: 'localStorage',
       autocapture: true,
       capture_performance: true,
       capture_heatmaps: true,
