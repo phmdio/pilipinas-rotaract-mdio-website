@@ -310,7 +310,16 @@ async function fetchFeaturedEvents(): Promise<FeaturedEvent[]> {
         eventUrl: typeof item.fields.eventUrl === 'string' ? item.fields.eventUrl : undefined,
         facebookPageUrl: typeof item.fields.facebookPageUrl === 'string' ? item.fields.facebookPageUrl : undefined,
         isProcon: true,
-        procon: Array.isArray(item.fields.procon) ? item.fields.procon : [],
+        procon: item.fields.procon?.map((event: any) => ({
+          id: event.sys.id,
+          date: event.fields.date || '',
+          title: event.fields.title || '',
+          description: event.fields.description || '',
+          image: event.fields.image?.fields?.file?.url 
+            ? `https:${event.fields.image.fields.file.url}` 
+            : '',
+          slug: event.fields.slug || generateSlugFromTitle(event.fields.title || '')
+        })) || [],
         slug: generateSlugFromTitle(title),
         publishedDate: item.sys.updatedAt || item.sys.createdAt
       };
