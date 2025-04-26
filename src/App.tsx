@@ -21,6 +21,7 @@ import RotaryFoundationGiving from "./pages/RotaryFoundationGiving";
 import OurProgramsAndActivities from "./pages/OurProgramsAndActivities";
 import OurProgramsAndActivitiesDetail from "./pages/OurProgramsAndActivitiesDetail";
 import OurChair from "./pages/OurChair";
+import ProCon from "./pages/ProCon";
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -85,6 +86,7 @@ const App = () => {
                 <Route path="/philippine-rotaract-magazine" element={<PhilippineRotaractMagazine />} />
                 <Route path="/ang-balangay" element={<AngBalangay />} />
                 <Route path="/the-rotary-foundation-giving" element={<RotaryFoundationGiving />} />
+                <Route path="/procon" element={<ProCon />} />
                 <Route path="/our-programs-and-activities" element={<OurProgramsAndActivities />} />
                 <Route path="/our-programs-and-activities/:eventId" element={<OurProgramsAndActivitiesDetail />} />
                 <Route path="/event/:eventSlug" element={<OurProgramsAndActivitiesDetail />} />

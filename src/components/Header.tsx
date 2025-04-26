@@ -182,6 +182,14 @@ const Header = ({ isTransparent = false }) => {
                           The Rotary Foundation Giving
                         </Link>
                       </NavigationMenuLink>
+                      <Separator className="bg-white/20" />
+                    </li>
+                    <li>
+                      <NavigationMenuLink asChild>
+                        <Link to="/procon" className="block p-4 hover:bg-white/10 rounded-none">
+                          PROCON Events
+                        </Link>
+                      </NavigationMenuLink>
                     </li>
                   </ul>
                 </NavigationMenuContent>

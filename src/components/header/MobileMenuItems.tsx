@@ -60,7 +60,11 @@ const MobileMenuItems: React.FC<MobileMenuItemsProps> = ({ isScrolled, setIsMenu
           <div id="mobile-info-submenu" className="hidden pl-4 mt-2 space-y-2 bg-[#1a237e] rounded">
             <Link to="/information-center" className="block py-3 px-4 hover:bg-white/10" onClick={() => setIsMenuOpen(false)}>Districts</Link>
             <Separator className="bg-white/20" />
-            <Link to="/under-construction" className="block py-3 px-4 hover:bg-white/10" onClick={() => setIsMenuOpen(false)}>Resources</Link>
+            <Link to="/rotaract-statistics" className="block py-3 px-4 hover:bg-white/10" onClick={() => setIsMenuOpen(false)}>Rotaract Statistics</Link>
+            <Separator className="bg-white/20" />
+            <Link to="/the-rotary-foundation-giving" className="block py-3 px-4 hover:bg-white/10" onClick={() => setIsMenuOpen(false)}>The Rotary Foundation Giving</Link>
+            <Separator className="bg-white/20" />
+            <Link to="/procon" className="block py-3 px-4 hover:bg-white/10" onClick={() => setIsMenuOpen(false)}>PROCON Events</Link>
           </div>
         </div>
 
