@@ -353,6 +353,7 @@ async function buildSSG(): Promise<void> {
   await copyImportantFiles();
   
   console.log('SSG build completed!');
+  process.exit(0);
 }
 
 buildSSG().catch(err => {
