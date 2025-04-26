@@ -70,19 +70,6 @@ const App = () => {
             {isCustomDomain ? (
               <>
                 <Route path="/" element={<LaunchingSoon />} />
-                <Route path="/under-construction" element={<UnderConstruction />} />
-                <Route path="/information-center" element={<InformationCenter />} />
-                <Route path="/district/:districtId" element={<DistrictDetail />} />
-                <Route path="/our-history" element={<OurHistory />} />
-                <Route path="/our-leadership-team" element={<LeadershipTeam />} />
-                <Route path="/rotaract-statistics" element={<RotaractStatistics />} />
-                <Route path="/philippine-rotaract-magazine" element={<PhilippineRotaractMagazine />} />
-                <Route path="/ang-balangay" element={<AngBalangay />} />
-                <Route path="/the-rotary-foundation-giving" element={<RotaryFoundationGiving />} />
-                <Route path="/our-programs-and-activities" element={<OurProgramsAndActivities />} />
-                <Route path="/our-programs-and-activities/:eventId" element={<OurProgramsAndActivitiesDetail />} />
-                <Route path="/event/:eventSlug" element={<OurProgramsAndActivitiesDetail />} />
-                <Route path="/our-chair" element={<OurChair />} />
                 <Route path="*" element={<NotFound />} />
               </>
             ) : (
