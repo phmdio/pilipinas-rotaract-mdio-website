@@ -310,6 +310,7 @@ async function fetchFeaturedEvents(): Promise<FeaturedEvent[]> {
         eventUrl: typeof item.fields.eventUrl === 'string' ? item.fields.eventUrl : undefined,
         facebookPageUrl: typeof item.fields.facebookPageUrl === 'string' ? item.fields.facebookPageUrl : undefined,
         isProcon: true,
+        procon: Array.isArray(item.fields.procon) ? item.fields.procon : [],
         slug: generateSlugFromTitle(title),
         publishedDate: item.sys.updatedAt || item.sys.createdAt
       };
@@ -348,7 +349,6 @@ async function fetchEvents(): Promise<Event[]> {
         closingDetails: typeof item.fields.closingDetails === 'string' ? item.fields.closingDetails : 'Visit the event page for more information.',
         eventUrl: typeof item.fields.eventUrl === 'string' ? item.fields.eventUrl : undefined,
         facebookPageUrl: typeof item.fields.facebookPageUrl === 'string' ? item.fields.facebookPageUrl : undefined,
-        isFeatured: false,
         slug: generateSlugFromTitle(title),
         publishedDate: item.sys.updatedAt || item.sys.createdAt
       };
