@@ -117,7 +117,7 @@
     {
       "id": "3OkKROfI6mofGHQUQmEPxq",
       "date": "January 1, 2024",
-      "title": "District Rotaract Representative\nElect Training Seminar",
+      "title": "District Rotaract Representative Elect Training Seminar",
       "description": "Hipster ipsum tattooed brunch I'm baby. Schlitz seitan listicle mixtape boys trust vice. Occupy tbh street brunch keffiyeh. Bicycle diy blog banjo fingerstache tote on locavore coffee pabst. ",
       "image": "https://images.ctfassets.net/dze7xj4zfu0b/4p5JH3l4a39EYNUmrnrm74/11bc196ed250a472c16c12e33266fcb9/Rectangle_60.png",
       "landscape": true,
@@ -250,9 +250,38 @@
   "rotaryFoundationData": {
     "introduction": {
       "title": "Supporting The Rotary Foundation's Global Impact",
-      "content": "The Rotary Foundation transforms your gifts into service projects that change lives both close to home and around the world."
+      "content": "The Rotary Foundation transforms your gifts into service projects that change lives both close to home and around the world. Since 1917, the Foundation has spent more than $4 billion on life-changing, sustainable projects that help people in need with access to safe water, medical care, literacy, education, and other critical needs. By giving to the Foundation, you become an essential part of these ongoing efforts to create lasting positive change in communities everywhere."
     },
-    "funds": [],
-    "donationLink": "https://www.rotary.org/en/get-involved/ways-to-give"
+    "funds": [
+      {
+        "id": "3LjNba29xHXzuFX9L3pU5q",
+        "title": "Annual Fund",
+        "description": "The Annual Fund is the primary source of funding for Foundation activities. Your contributions to the Annual Fund help Rotary clubs take action to create positive change in communities at home and around the world. Through grants and projects, Rotary members combat diseases like polio and malaria, provide clean water, improve economic opportunities, and promote peace.",
+        "imageUrl": "https://images.ctfassets.net/dze7xj4zfu0b/2YZ7B7KEA7WhBvexyIJirk/44f94bad43ddf56ce15a99492081472c/3830.jpeg",
+        "alt": "Annual Fund"
+      },
+      {
+        "id": "7vlEeeXiTn9lY9GAcCMQSa",
+        "title": "PolioPlus Fund",
+        "description": "Rotary has been working to eradicate polio for more than 35 years. Our goal of ridding the world of this disease is closer than ever. When you contribute to the PolioPlus Fund, you're supporting Rotary's top priority - ensuring that polio is eradicated and that it never returns. Your donation helps deliver vaccinations, transportation, and educational materials.",
+        "imageUrl": "https://images.ctfassets.net/dze7xj4zfu0b/2YZ7B7KEA7WhBvexyIJirk/44f94bad43ddf56ce15a99492081472c/3830.jpeg",
+        "alt": "PolioPlus Fund"
+      },
+      {
+        "id": "2NdKPjj90KgqPAjhveu4Wv",
+        "title": "Endowment Fund",
+        "description": "The Endowment Fund ensures the long-term financial stability of the Foundation and provides essential support for Rotary's programs. Contributions to the Endowment Fund are invested in perpetuity, with a portion of the fund's earnings spent on Foundation programs each year. This provides a steady and reliable source of income to meet the world's greatest needs.",
+        "imageUrl": "https://images.ctfassets.net/dze7xj4zfu0b/2YZ7B7KEA7WhBvexyIJirk/44f94bad43ddf56ce15a99492081472c/3830.jpeg",
+        "alt": "Endowment Fund"
+      },
+      {
+        "id": "2kWhHSJuqMSOjATUgua88U",
+        "title": "Disaster Response Fund",
+        "description": "The Rotary Disaster Response Fund provides a ready mechanism for Rotary districts to respond quickly to local disasters. Districts in affected areas may receive disaster response grants to provide basic items such as water, food, medicine, and clothing. Your support enables our communities to recover more quickly after devastating natural disasters.",
+        "imageUrl": "https://images.ctfassets.net/dze7xj4zfu0b/2YZ7B7KEA7WhBvexyIJirk/44f94bad43ddf56ce15a99492081472c/3830.jpeg",
+        "alt": "Disaster Response Fund"
+      }
+    ],
+    "donationLink": "https://www.rotary.org/en/get-involved/ways-to-give?utm_source=pilipinas_rotaract_mdio&utm_medium=website&utm_campaign=foundation_giving"
   }
 }

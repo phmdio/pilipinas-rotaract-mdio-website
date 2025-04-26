@@ -2,14 +2,13 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { build } from 'vite';
-import { createServer } from 'vite';
+import { build, createServer } from 'vite';
 import dotenv from 'dotenv';
 import { createClient } from 'contentful';
-// Import the generateStaticData function from generate-static-data.js
-import { generateStaticData } from './generate-static-data.js';
+// Import the generateStaticData function from generate-static-data.ts
+import { generateStaticData } from './generate-static-data.ts';
 // Import the generateSitemap function
-import generateSitemap from './generate-sitemap.js';
+import generateSitemap from './generate-sitemap.ts';
 
 // Load environment variables
 dotenv.config();
@@ -18,20 +17,29 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.join(__dirname, '..');
 const outDir = path.join(root, 'dist');
 
+// Define interfaces
+interface Route {
+  path: string;
+}
+
+interface SSGRoutes {
+  routes: string[];
+}
+
 // Load predefined routes from JSON file
 const routesFilePath = path.join(root, 'src', 'data', 'ssg-routes.json');
-const staticRoutes = JSON.parse(fs.readFileSync(routesFilePath, 'utf-8')).routes;
+const staticRoutes: string[] = JSON.parse(fs.readFileSync(routesFilePath, 'utf-8')).routes;
 
 // Import the generateSlugFromTitle function from utils
 // Since we can't directly import TypeScript in Node.js without transpilation,
 // we use the same implementation as in src/utils/string.ts
-let generateSlugFromTitle;
+let generateSlugFromTitle: (title: string) => string;
 
-async function importUtils() {
+async function importUtils(): Promise<void> {
   try {
     // For a more structured approach, we would use ts-node or a build step
     // but for simplicity, using the same implementation directly
-    generateSlugFromTitle = function(title) {
+    generateSlugFromTitle = function(title: string): string {
       return title
         .toLowerCase()                // Convert to lowercase
         .replace(/[^\w\s-]/g, '')     // Remove special characters
@@ -47,12 +55,12 @@ async function importUtils() {
 }
 
 // Fetch district IDs from Contentful to generate district detail routes
-async function fetchDistrictIds() {
+async function fetchDistrictIds(): Promise<string[]> {
   console.log('Fetching district IDs from Contentful...');
   const client = createClient({
-    space: process.env.VITE_CONTENTFUL_SPACE_ID,
-    accessToken: process.env.VITE_CONTENTFUL_ACCESS_TOKEN,
-    environment: process.env.VITE_CONTENTFUL_ENVIRONMENT || 'master',
+    space: process.env.VITE_CONTENTFUL_SPACE_ID as string,
+    accessToken: process.env.VITE_CONTENTFUL_ACCESS_TOKEN as string,
+    environment: process.env.VITE_CONTENTFUL_ENVIRONMENT as string || 'master',
   });
 
   try {
@@ -60,7 +68,7 @@ async function fetchDistrictIds() {
       content_type: 'district',
     });
     
-    return entries.items.map(item => `/district/${item.fields.id}`);
+    return entries.items.map(item => `/district/${item.fields.id as string}`);
   } catch (error) {
     console.error('Error fetching district IDs:', error);
     return [];
@@ -68,12 +76,12 @@ async function fetchDistrictIds() {
 }
 
 // Fetch event slugs from Contentful to generate event detail routes
-async function fetchEventSlugs() {
+async function fetchEventSlugs(): Promise<string[]> {
   console.log('Fetching event slugs from Contentful...');
   const client = createClient({
-    space: process.env.VITE_CONTENTFUL_SPACE_ID,
-    accessToken: process.env.VITE_CONTENTFUL_ACCESS_TOKEN,
-    environment: process.env.VITE_CONTENTFUL_ENVIRONMENT || 'master',
+    space: process.env.VITE_CONTENTFUL_SPACE_ID as string,
+    accessToken: process.env.VITE_CONTENTFUL_ACCESS_TOKEN as string,
+    environment: process.env.VITE_CONTENTFUL_ENVIRONMENT as string || 'master',
   });
 
   try {
@@ -92,8 +100,8 @@ async function fetchEventSlugs() {
     
     // Generate slug-based routes only
     const eventSlugs = allEvents.map(item => {
-      const title = item.fields.title || 'Event';
-      const slug = item.fields.slug || generateSlugFromTitle(title);
+      const title = (item.fields.title as string) || 'Event';
+      const slug = (item.fields.slug as string) || generateSlugFromTitle(title);
       return `/event/${slug}`;
     });
     
@@ -106,7 +114,7 @@ async function fetchEventSlugs() {
 }
 
 // Copy static data to output directory
-async function copyStaticData() {
+async function copyStaticData(): Promise<void> {
   // Create static-data directory if it doesn't exist
   const staticDataDir = path.join(outDir, 'static-data');
   if (!fs.existsSync(staticDataDir)) {
@@ -203,7 +211,7 @@ async function copyStaticData() {
 }
 
 // Copy sitemap.xml and robots.txt to the dist directory
-async function copyImportantFiles() {
+async function copyImportantFiles(): Promise<void> {
   try {
     // Create the dist directory if it doesn't exist
     if (!fs.existsSync(outDir)) {
@@ -225,8 +233,12 @@ async function copyImportantFiles() {
   }
 }
 
+interface RenderModule {
+  render: (route: string) => string;
+}
+
 // Main build function
-async function buildSSG() {
+async function buildSSG(): Promise<void> {
   console.log('Starting SSG build...');
   
   // Import utilities
@@ -292,7 +304,7 @@ async function buildSSG() {
   
   try {
     const serverEntryPath = path.join(outDir, 'server', 'entry-server.js');
-    const renderModule = await import(`file://${serverEntryPath}`);
+    const renderModule = await import(`file://${serverEntryPath}`) as RenderModule;
     const { render } = renderModule;
     
     // Create a temporary Vite server for rendering
@@ -316,7 +328,7 @@ async function buildSSG() {
         const html = template.replace('<div id="root"></div>', `<div id="root">${appHtml}</div>`);
         
         // Determine output path
-        let outputPath;
+        let outputPath: string;
         if (route === '/') {
           outputPath = path.join(outDir, 'index.html');
         } else {

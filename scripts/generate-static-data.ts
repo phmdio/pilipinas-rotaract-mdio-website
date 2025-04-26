@@ -2,7 +2,7 @@
 import fs from 'fs';
 import path from 'path';
 import dotenv from 'dotenv';
-import { createClient } from 'contentful';
+import { createClient, EntryCollection, Entry, Asset } from 'contentful';
 import { fileURLToPath } from 'url';
 
 // Load environment variables
@@ -11,17 +11,27 @@ dotenv.config();
 // Get the directory name of the current module
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
+// Define a type for the slug generator function
+type SlugGenerator = (title: string) => string;
+
+// Type for Contentful fields
+interface ContentfulFields {
+  [key: string]: any;
+  fields: Record<string, any>;
+  contentTypeId: string;
+}
+
 // Import the generateSlugFromTitle function from utils
 // We need to use a dynamic import since ES modules don't support synchronous imports
-let generateSlugFromTitle;
+let generateSlugFromTitle: SlugGenerator;
 
-async function importUtils() {
+async function importUtils(): Promise<void> {
   try {
     // Import the TS file by using ts-node to transpile it on the fly
     const utilsPath = path.join(__dirname, '..', 'src', 'utils', 'string.ts');
     if (fs.existsSync(utilsPath)) {
       // For production, we use a simpler version directly
-      generateSlugFromTitle = function(title) {
+      generateSlugFromTitle = function(title: string): string {
         return title
           .toLowerCase()
           .replace(/[^\w\s-]/g, '')
@@ -34,7 +44,7 @@ async function importUtils() {
   } catch (error) {
     console.warn('Could not import utils, using fallback implementation:', error);
     // Fallback implementation
-    generateSlugFromTitle = function(title) {
+    generateSlugFromTitle = function(title: string): string {
       return title
         .toLowerCase()
         .replace(/[^\w\s-]/g, '')
@@ -48,9 +58,9 @@ async function importUtils() {
 
 // Initialize Contentful client
 const client = createClient({
-  space: process.env.VITE_CONTENTFUL_SPACE_ID,
-  accessToken: process.env.VITE_CONTENTFUL_ACCESS_TOKEN,
-  environment: process.env.VITE_CONTENTFUL_ENVIRONMENT || 'master',
+  space: process.env.VITE_CONTENTFUL_SPACE_ID as string,
+  accessToken: process.env.VITE_CONTENTFUL_ACCESS_TOKEN as string,
+  environment: process.env.VITE_CONTENTFUL_ENVIRONMENT as string || 'master',
 });
 
 // Output directory for static data
@@ -61,23 +71,170 @@ if (!fs.existsSync(OUTPUT_DIR)) {
   fs.mkdirSync(OUTPUT_DIR, { recursive: true });
 }
 
-// Helper function to generate slug from title - removed and replaced with imported version
+// Define interfaces for the data types
+interface HeroCarouselImage {
+  title: string;
+  imageUrl: string;
+  alt: string;
+}
+
+interface District {
+  id: string;
+  color: string;
+  image: string;
+  summary: string;
+}
+
+interface FeaturedEvent {
+  id: string;
+  date: string;
+  title: string;
+  description: string;
+  image: string;
+  landscape: boolean;
+  slug: string;
+}
+
+interface Event {
+  id: string;
+  date: string;
+  title: string;
+  image: string;
+  slug: string;
+}
+
+interface Statistic {
+  id: string;
+  value: string;
+  label: string;
+  iconUrl?: string;
+}
+
+interface RotaractDistrictData {
+  year: string;
+  district: string;
+  [key: string]: any;
+}
+
+interface RotaractContributionsData {
+  district: string;
+  [key: string]: any;
+}
+
+interface RotaractStatisticCard {
+  id: string;
+  number: string;
+  title: string;
+  description: string;
+  iconUrl: string;
+}
+
+interface RotaractChartConfig {
+  id: string;
+  title: string;
+  dataKey: string[];
+  colors: string[];
+  dataSource: string;
+  xAxisKey: string;
+  asOfDate?: string;
+}
+
+interface LeadershipChair {
+  id: string;
+  name: string;
+  title: string;
+  description: string;
+  image: string;
+  club: string;
+  isCurrentChair: boolean;
+}
+
+interface BoardMember {
+  id: string;
+  name: string;
+  title: string;
+  district: string;
+  club: string;
+  image: string;
+}
+
+interface ExecutiveCommitteeMember {
+  id: string;
+  name: string;
+  title: string;
+  district: string;
+  club: string;
+  image: string;
+}
+
+interface StaffMember {
+  id: string;
+  name: string;
+  role: string;
+  district: string;
+  club: string;
+  image: string;
+}
+
+interface RotaryFoundationIntroduction {
+  title: string;
+  content: string;
+}
+
+interface RotaryFoundationFund {
+  id: string;
+  title: string;
+  description: string;
+  imageUrl: string;
+  alt: string;
+}
+
+interface RotaryFoundationData {
+  introduction: RotaryFoundationIntroduction;
+  funds: RotaryFoundationFund[];
+  donationLink: string;
+}
+
+interface StaticData {
+  heroCarouselImages: HeroCarouselImage[];
+  districts: District[];
+  featuredEvents: FeaturedEvent[];
+  events: Event[];
+  statistics: Statistic[];
+  rotaractStatisticsDistrict: RotaractDistrictData[];
+  rotaractStatisticsContributions: RotaractContributionsData[];
+  rotaractStatisticsCards: RotaractStatisticCard[];
+  rotaractStatisticsCharts: RotaractChartConfig[];
+  leadershipChair: LeadershipChair[];
+  boardMembers: BoardMember[];
+  executiveCommittee: ExecutiveCommitteeMember[];
+  staffMembers: StaffMember[];
+  rotaryFoundationData: RotaryFoundationData;
+}
+
+// Helper function to safely access Contentful entry fields
+function getFieldValue<T>(item: Entry<ContentfulFields>, field: string, defaultValue: T): T {
+  if (item?.fields && field in item.fields) {
+    return item.fields[field] as T;
+  }
+  return defaultValue;
+}
 
 // Function to fetch hero carousel images
-async function fetchHeroCarouselImages() {
+async function fetchHeroCarouselImages(): Promise<HeroCarouselImage[]> {
   console.log('Fetching hero carousel images...');
   try {
-    const entries = await client.getEntries({
+    const entries = await client.getEntries<ContentfulFields>({
       content_type: 'heroCarouselImage',
       order: ['sys.createdAt'],
     });
 
     return entries.items.map((item) => ({
-      title: item.fields.title,
+      title: getFieldValue(item, 'title', ''),
       imageUrl: item.fields.image?.fields?.file?.url 
         ? `https:${item.fields.image.fields.file.url}` 
         : '/assets/carousel.png', // Fallback image
-      alt: item.fields.alt || item.fields.title || 'Rotaract carousel image',
+      alt: getFieldValue(item, 'alt', getFieldValue(item, 'title', 'Rotaract carousel image')),
     }));
   } catch (error) {
     console.error('Error fetching hero carousel images:', error);
@@ -86,24 +243,24 @@ async function fetchHeroCarouselImages() {
 }
 
 // Function to fetch districts with all details
-async function fetchDistricts() {
+async function fetchDistricts(): Promise<District[]> {
   console.log('Fetching districts with basic details...');
   try {
-    const entries = await client.getEntries({
+    const entries = await client.getEntries<ContentfulFields>({
       content_type: 'district',
       order: ['sys.createdAt'],
     });
 
     return entries.items.map((item) => {
-      const districtId = item.fields.id || '';
+      const districtId = getFieldValue(item, 'id', '');
       
       return {
         id: districtId,
-        color: item.fields.color || '#003366',
+        color: getFieldValue(item, 'color', '#003366'),
         image: item.fields.image?.fields?.file?.url 
           ? `https:${item.fields.image.fields.file.url}` 
           : '/assets/district/default.jpeg',
-        summary: item.fields.summary || 'Discover the vibrant community of Rotaract clubs in this district, where young professionals develop leadership skills and implement innovative service projects addressing local needs. Join us in making a positive impact through fellowship, professional development, and community service.',
+        summary: getFieldValue(item, 'summary', 'Discover the vibrant community of Rotaract clubs in this district, where young professionals develop leadership skills and implement innovative service projects addressing local needs. Join us in making a positive impact through fellowship, professional development, and community service.'),
       };
     });
   } catch (error) {
@@ -113,27 +270,27 @@ async function fetchDistricts() {
 }
 
 // Function to fetch featured events
-async function fetchFeaturedEvents() {
+async function fetchFeaturedEvents(): Promise<FeaturedEvent[]> {
   console.log('Fetching featured events...');
   try {
-    const entries = await client.getEntries({
+    const entries = await client.getEntries<ContentfulFields>({
       content_type: 'featuredEvent',
       order: ['-sys.createdAt'],
       limit: 5,
     });
 
     return entries.items.map((item) => {
-      const title = item.fields.title || 'Featured Event';
+      const title = getFieldValue(item, 'title', 'Featured Event');
       return {
         id: item.sys.id,
-        date: item.fields.date || new Date().toLocaleDateString(),
-        title: title,
-        description: item.fields.description || '',
+        date: getFieldValue(item, 'date', new Date().toLocaleDateString()),
+        title,
+        description: getFieldValue(item, 'description', ''),
         image: item.fields.image?.fields?.file?.url 
           ? `https:${item.fields.image.fields.file.url}` 
           : 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=800&q=80',
-        landscape: item.fields.landscape || false,
-        slug: item.fields.slug || generateSlugFromTitle(title)
+        landscape: getFieldValue(item, 'landscape', false),
+        slug: getFieldValue(item, 'slug', generateSlugFromTitle(title))
       };
     });
   } catch (error) {
@@ -143,25 +300,25 @@ async function fetchFeaturedEvents() {
 }
 
 // Function to fetch events
-async function fetchEvents() {
+async function fetchEvents(): Promise<Event[]> {
   console.log('Fetching events...');
   try {
-    const entries = await client.getEntries({
+    const entries = await client.getEntries<ContentfulFields>({
       content_type: 'event',
       order: ['fields.date'],
       limit: 5,
     });
 
     return entries.items.map((item) => {
-      const title = item.fields.title || 'Event';
+      const title = getFieldValue(item, 'title', 'Event');
       return {
         id: item.sys.id,
-        date: item.fields.date || new Date().toLocaleDateString(),
-        title: title,
+        date: getFieldValue(item, 'date', new Date().toLocaleDateString()),
+        title,
         image: item.fields.image?.fields?.file?.url 
           ? `https:${item.fields.image.fields.file.url}` 
           : 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=600&q=80',
-        slug: item.fields.slug || generateSlugFromTitle(title)
+        slug: getFieldValue(item, 'slug', generateSlugFromTitle(title))
       };
     });
   } catch (error) {
@@ -171,18 +328,18 @@ async function fetchEvents() {
 }
 
 // Function to fetch statistics
-async function fetchStatistics() {
+async function fetchStatistics(): Promise<Statistic[]> {
   console.log('Fetching statistics...');
   try {
-    const entries = await client.getEntries({
+    const entries = await client.getEntries<ContentfulFields>({
       content_type: 'statistic',
       order: ['sys.createdAt'],
     });
 
     return entries.items.map((item) => ({
       id: item.sys.id,
-      value: item.fields.value || '0',
-      label: item.fields.label || 'Statistic',
+      value: getFieldValue(item, 'value', '0'),
+      label: getFieldValue(item, 'label', 'Statistic'),
       iconUrl: item.fields.icon?.fields?.file?.url 
         ? `https:${item.fields.icon.fields.file.url}` 
         : undefined
@@ -194,18 +351,18 @@ async function fetchStatistics() {
 }
 
 // Function to fetch Rotaract district data
-async function fetchRotaractDistrictData() {
+async function fetchRotaractDistrictData(): Promise<RotaractDistrictData[]> {
   console.log('Fetching Rotaract district data...');
   try {
-    const entries = await client.getEntries({
+    const entries = await client.getEntries<ContentfulFields>({
       content_type: 'rotaractDistrictData',
       order: ['fields.year', 'fields.district'],
     });
 
     return entries.items.map((item) => {
-      const data = {
-        year: item.fields.year,
-        district: item.fields.district,
+      const data: RotaractDistrictData = {
+        year: getFieldValue(item, 'year', ''),
+        district: getFieldValue(item, 'district', ''),
       };
       
       // Add any dynamic fields
@@ -224,17 +381,17 @@ async function fetchRotaractDistrictData() {
 }
 
 // Function to fetch Rotaract contributions data
-async function fetchRotaractContributionsData() {
+async function fetchRotaractContributionsData(): Promise<RotaractContributionsData[]> {
   console.log('Fetching Rotaract contributions data...');
   try {
-    const entries = await client.getEntries({
+    const entries = await client.getEntries<ContentfulFields>({
       content_type: 'rotaractContributionsData',
       order: ['fields.district'],
     });
 
     return entries.items.map((item) => {
-      const data = {
-        district: item.fields.district,
+      const data: RotaractContributionsData = {
+        district: getFieldValue(item, 'district', ''),
       };
       
       // Add any dynamic fields
@@ -253,19 +410,19 @@ async function fetchRotaractContributionsData() {
 }
 
 // Function to fetch Rotaract statistic cards
-async function fetchRotaractStatisticCards() {
+async function fetchRotaractStatisticCards(): Promise<RotaractStatisticCard[]> {
   console.log('Fetching Rotaract statistic cards...');
   try {
-    const entries = await client.getEntries({
+    const entries = await client.getEntries<ContentfulFields>({
       content_type: 'rotaractStatisticCard',
       order: ['sys.createdAt'],
     });
 
     return entries.items.map((item) => ({
       id: item.sys.id,
-      number: item.fields.number || '0',
-      title: item.fields.title || 'Statistic',
-      description: item.fields.description || '',
+      number: getFieldValue(item, 'number', '0'),
+      title: getFieldValue(item, 'title', 'Statistic'),
+      description: getFieldValue(item, 'description', ''),
       iconUrl: item.fields.icon?.fields?.file?.url 
         ? `https:${item.fields.icon.fields.file.url}` 
         : '/assets/statistics-icon.svg',
@@ -277,22 +434,22 @@ async function fetchRotaractStatisticCards() {
 }
 
 // Function to fetch Rotaract chart configs
-async function fetchRotaractChartConfigs() {
+async function fetchRotaractChartConfigs(): Promise<RotaractChartConfig[]> {
   console.log('Fetching Rotaract chart configs...');
   try {
-    const entries = await client.getEntries({
+    const entries = await client.getEntries<ContentfulFields>({
       content_type: 'rotaractChartConfig',
       order: ['sys.createdAt'],
     });
 
     return entries.items.map((item) => ({
       id: item.sys.id,
-      title: item.fields.title || 'Chart',
-      dataKey: item.fields.dataKey || [],
-      colors: item.fields.colors || ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'],
-      dataSource: item.fields.dataSource || 'districtData',
-      xAxisKey: item.fields.xAxisKey || 'year',
-      asOfDate: item.fields.asOfDate,
+      title: getFieldValue(item, 'title', 'Chart'),
+      dataKey: getFieldValue<string[]>(item, 'dataKey', []),
+      colors: getFieldValue<string[]>(item, 'colors', ['#0088FE', '#00C49F', '#FFBB28', '#FF8042']),
+      dataSource: getFieldValue(item, 'dataSource', 'districtData'),
+      xAxisKey: getFieldValue(item, 'xAxisKey', 'year'),
+      asOfDate: getFieldValue<string | undefined>(item, 'asOfDate', undefined),
     }));
   } catch (error) {
     console.error('Error fetching Rotaract chart configs:', error);
@@ -301,11 +458,11 @@ async function fetchRotaractChartConfigs() {
 }
 
 // Function to fetch leadership chair data
-async function fetchLeadershipChair() {
+async function fetchLeadershipChair(): Promise<LeadershipChair[]> {
   console.log('Fetching leadership chair data...');
   try {
     // First try to get current chair
-    let entries = await client.getEntries({
+    let entries = await client.getEntries<ContentfulFields>({
       content_type: 'leadershipChair',
       'fields.isCurrentChair': true,
       limit: 1,
@@ -321,14 +478,14 @@ async function fetchLeadershipChair() {
     
     return entries.items.map((item) => ({
       id: item.sys.id,
-      name: item.fields.name || 'MDIO Chair',
-      title: item.fields.title || 'Pilipinas Multi-District Information Organization, Chair',
-      description: item.fields.description || '',
+      name: getFieldValue(item, 'name', 'MDIO Chair'),
+      title: getFieldValue(item, 'title', 'Pilipinas Multi-District Information Organization, Chair'),
+      description: getFieldValue(item, 'description', ''),
       image: item.fields.image?.fields?.file?.url 
         ? `https:${item.fields.image.fields.file.url}` 
         : 'https://i.pravatar.cc/1500',
-      club: item.fields.club || '',
-      isCurrentChair: item.fields.isCurrentChair || false
+      club: getFieldValue(item, 'club', ''),
+      isCurrentChair: getFieldValue(item, 'isCurrentChair', false)
     }));
   } catch (error) {
     console.error('Error fetching leadership chair data:', error);
@@ -337,20 +494,20 @@ async function fetchLeadershipChair() {
 }
 
 // Function to fetch board members
-async function fetchBoardMembers() {
+async function fetchBoardMembers(): Promise<BoardMember[]> {
   console.log('Fetching board members data...');
   try {
-    const entries = await client.getEntries({
+    const entries = await client.getEntries<ContentfulFields>({
       content_type: 'boardMember',
       order: ['fields.name'],
     });
     
     return entries.items.map((item) => ({
       id: item.sys.id,
-      name: item.fields.name || '',
-      title: item.fields.title || 'District Rotaract Representative',
-      district: item.fields.district || '',
-      club: item.fields.club || '',
+      name: getFieldValue(item, 'name', ''),
+      title: getFieldValue(item, 'title', 'District Rotaract Representative'),
+      district: getFieldValue(item, 'district', ''),
+      club: getFieldValue(item, 'club', ''),
       image: item.fields.image?.fields?.file?.url 
         ? `https:${item.fields.image.fields.file.url}` 
         : '/placeholder.svg',
@@ -362,20 +519,20 @@ async function fetchBoardMembers() {
 }
 
 // Function to fetch executive committee members
-async function fetchExecutiveCommittee() {
+async function fetchExecutiveCommittee(): Promise<ExecutiveCommitteeMember[]> {
   console.log('Fetching executive committee data...');
   try {
-    const entries = await client.getEntries({
+    const entries = await client.getEntries<ContentfulFields>({
       content_type: 'executiveCommitteeMember',
       order: ['fields.name'],
     });
     
     return entries.items.map((item) => ({
       id: item.sys.id,
-      name: item.fields.name || '',
-      title: item.fields.title || '',
-      district: item.fields.district || '',
-      club: item.fields.club || '',
+      name: getFieldValue(item, 'name', ''),
+      title: getFieldValue(item, 'title', ''),
+      district: getFieldValue(item, 'district', ''),
+      club: getFieldValue(item, 'club', ''),
       image: item.fields.image?.fields?.file?.url 
         ? `https:${item.fields.image.fields.file.url}` 
         : '/placeholder.svg',
@@ -387,20 +544,20 @@ async function fetchExecutiveCommittee() {
 }
 
 // Function to fetch staff members
-async function fetchStaffMembers() {
+async function fetchStaffMembers(): Promise<StaffMember[]> {
   console.log('Fetching staff members data...');
   try {
-    const entries = await client.getEntries({
+    const entries = await client.getEntries<ContentfulFields>({
       content_type: 'staffMember',
       order: ['fields.name'],
     });
     
     return entries.items.map((item) => ({
       id: item.sys.id,
-      name: item.fields.name || '',
-      role: item.fields.role || '',
-      district: item.fields.district || '',
-      club: item.fields.club || '',
+      name: getFieldValue(item, 'name', ''),
+      role: getFieldValue(item, 'role', ''),
+      district: getFieldValue(item, 'district', ''),
+      club: getFieldValue(item, 'club', ''),
       image: item.fields.image?.fields?.file?.url 
         ? `https:${item.fields.image.fields.file.url}` 
         : '/placeholder.svg',
@@ -412,11 +569,11 @@ async function fetchStaffMembers() {
 }
 
 // Function to fetch Rotary Foundation data
-async function fetchRotaryFoundationData() {
+async function fetchRotaryFoundationData(): Promise<RotaryFoundationData> {
   console.log('Fetching Rotary Foundation data...');
   try {
     // Fetch from single content type
-    const entries = await client.getEntries({
+    const entries = await client.getEntries<ContentfulFields>({
       content_type: 'rotaryFoundation',
       limit: 1,
       include: 2 // Include linked entries (funds)
@@ -437,14 +594,14 @@ async function fetchRotaryFoundationData() {
     const fields = item.fields;
     
     // Extract the introduction
-    const introduction = {
+    const introduction: RotaryFoundationIntroduction = {
       title: String(fields.introductionTitle || "Supporting The Rotary Foundation's Global Impact"),
       content: String(fields.introductionContent || "The Rotary Foundation transforms your gifts into service projects that change lives both close to home and around the world.")
     };
 
     // Extract funds from references
-    const funds = Array.isArray(fields.funds) 
-      ? fields.funds.map((fund) => ({
+    const funds: RotaryFoundationFund[] = Array.isArray(fields.funds) 
+      ? fields.funds.map((fund: Entry<any>) => ({
           id: fund.sys?.id || `fund-${Math.random().toString(36).substr(2, 9)}`,
           title: String(fund.fields?.title || ''),
           description: String(fund.fields?.description || ''),
@@ -456,7 +613,7 @@ async function fetchRotaryFoundationData() {
       : [];
 
     // Extract donation link
-    const donationLink = fields.donationLink
+    const donationLink: string = fields.donationLink
       ? String(fields.donationLink)
       : "https://www.rotary.org/en/get-involved/ways-to-give";
 
@@ -479,7 +636,7 @@ async function fetchRotaryFoundationData() {
 }
 
 // Main function to generate all static data
-export async function generateStaticData() {
+export async function generateStaticData(): Promise<void> {
   console.log('Generating static data from Contentful...');
   
   // Import utils
@@ -487,21 +644,21 @@ export async function generateStaticData() {
   
   try {
     // Fetch all required data
-    const heroCarouselImages = await fetchHeroCarouselImages();
-    const districts = await fetchDistricts();
-    const featuredEvents = await fetchFeaturedEvents();
-    const events = await fetchEvents();
-    const statistics = await fetchStatistics();
-    const rotaractStatisticsDistrict = await fetchRotaractDistrictData();
-    const rotaractStatisticsContributions = await fetchRotaractContributionsData();
-    const rotaractStatisticsCards = await fetchRotaractStatisticCards();
-    const rotaractStatisticsCharts = await fetchRotaractChartConfigs();
+    let heroCarouselImages = await fetchHeroCarouselImages();
+    let districts = await fetchDistricts();
+    let featuredEvents = await fetchFeaturedEvents();
+    let events = await fetchEvents();
+    let statistics = await fetchStatistics();
+    let rotaractStatisticsDistrict = await fetchRotaractDistrictData();
+    let rotaractStatisticsContributions = await fetchRotaractContributionsData();
+    let rotaractStatisticsCards = await fetchRotaractStatisticCards();
+    let rotaractStatisticsCharts = await fetchRotaractChartConfigs();
     
     // Fetch leadership team data
-    const leadershipChair = await fetchLeadershipChair();
-    const boardMembers = await fetchBoardMembers();
-    const executiveCommittee = await fetchExecutiveCommittee();
-    const staffMembers = await fetchStaffMembers();
+    let leadershipChair = await fetchLeadershipChair();
+    let boardMembers = await fetchBoardMembers();
+    let executiveCommittee = await fetchExecutiveCommittee();
+    let staffMembers = await fetchStaffMembers();
     
     // Fetch Rotary Foundation data
     const rotaryFoundationData = await fetchRotaryFoundationData();
@@ -573,7 +730,7 @@ export async function generateStaticData() {
     }
     
     // Combine all data
-    const staticData = {
+    const staticData: StaticData = {
       heroCarouselImages,
       districts,
       featuredEvents,

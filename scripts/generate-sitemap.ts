@@ -7,17 +7,31 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 // Base URL for the site
-const BASE_URL = 'https://www.pilipinasrotaract.org';
+const BASE_URL: string = 'https://www.pilipinasrotaract.org';
 
 // Contentful client
 const contentfulClient = createClient({
-  space: process.env.VITE_CONTENTFUL_SPACE_ID,
-  accessToken: process.env.VITE_CONTENTFUL_ACCESS_TOKEN,
-  environment: process.env.VITE_CONTENTFUL_ENVIRONMENT || 'master',
+  space: process.env.VITE_CONTENTFUL_SPACE_ID as string,
+  accessToken: process.env.VITE_CONTENTFUL_ACCESS_TOKEN as string,
+  environment: process.env.VITE_CONTENTFUL_ENVIRONMENT as string || 'master',
 });
 
+interface StaticRoute {
+  path: string;
+  changefreq: string;
+  priority: string;
+}
+
+interface District {
+  id: string;
+}
+
+interface Event {
+  slug: string;
+}
+
 // Static routes with their change frequencies and priorities
-const staticRoutes = [
+const staticRoutes: StaticRoute[] = [
   { path: '/', changefreq: 'weekly', priority: '1.0' },
   { path: '/information-center', changefreq: 'weekly', priority: '0.8' },
   { path: '/our-history', changefreq: 'monthly', priority: '0.6' },
@@ -33,14 +47,14 @@ const staticRoutes = [
 ];
 
 // Fetch districts from Contentful
-async function getDistricts() {
+async function getDistricts(): Promise<District[]> {
   try {
     const entries = await contentfulClient.getEntries({
       content_type: 'district',
     });
     
     return entries.items.map(item => ({
-      id: item.fields.id
+      id: item.fields.id as string
     }));
   } catch (error) {
     console.error('Error fetching districts:', error);
@@ -49,14 +63,14 @@ async function getDistricts() {
 }
 
 // Fetch events from Contentful
-async function getEvents() {
+async function getEvents(): Promise<Event[]> {
   try {
     const entries = await contentfulClient.getEntries({
       content_type: 'event',
     });
     
     return entries.items.map(item => ({
-      slug: item.fields.slug || generateSlugFromTitle(item.fields.title || 'Event')
+      slug: (item.fields.slug as string) || generateSlugFromTitle(item.fields.title as string || 'Event')
     }));
   } catch (error) {
     console.error('Error fetching events:', error);
@@ -65,7 +79,7 @@ async function getEvents() {
 }
 
 // Simple slug generator as a fallback
-function generateSlugFromTitle(title) {
+function generateSlugFromTitle(title: string): string {
   return title
     .toLowerCase()
     .replace(/[^\w\s-]/g, '')
@@ -75,10 +89,15 @@ function generateSlugFromTitle(title) {
     .replace(/^-+|-+$/g, '');
 }
 
+interface SitemapResult {
+  success: boolean;
+  message: string;
+}
+
 /**
  * Generate the sitemap XML content
  */
-async function generateSitemap() {
+async function generateSitemap(): Promise<SitemapResult> {
   try {
     let sitemap = '<?xml version="1.0" encoding="UTF-8"?>\n';
     sitemap += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n';
@@ -107,7 +126,7 @@ async function generateSitemap() {
       } else {
         console.warn('No districts found. Using placeholder district data in sitemap.');
         // Use placeholder district IDs if no data is available
-        const placeholderDistricts = ['3780', '3790', '3810'];
+        const placeholderDistricts: string[] = ['3780', '3790', '3810'];
         for (const districtId of placeholderDistricts) {
           sitemap += '  <url>\n';
           sitemap += `    <loc>${BASE_URL}/district/${districtId}</loc>\n`;
@@ -120,7 +139,7 @@ async function generateSitemap() {
       console.error('Error fetching districts:', error);
       console.warn('Using placeholder district data in sitemap.');
       // Use placeholder district IDs if data fetch fails
-      const placeholderDistricts = ['3780', '3790', '3810'];
+      const placeholderDistricts: string[] = ['3780', '3790', '3810'];
       for (const districtId of placeholderDistricts) {
         sitemap += '  <url>\n';
         sitemap += `    <loc>${BASE_URL}/district/${districtId}</loc>\n`;
@@ -147,7 +166,7 @@ async function generateSitemap() {
       } else {
         console.warn('No events found. Using placeholder event data in sitemap.');
         // Use placeholder event slugs if no data is available
-        const placeholderEvents = ['rotaract-assembly-2023', 'mdio-conference-2023'];
+        const placeholderEvents: string[] = ['rotaract-assembly-2023', 'mdio-conference-2023'];
         for (const eventSlug of placeholderEvents) {
           sitemap += '  <url>\n';
           sitemap += `    <loc>${BASE_URL}/event/${eventSlug}</loc>\n`;
@@ -160,7 +179,7 @@ async function generateSitemap() {
       console.error('Error fetching events:', error);
       console.warn('Using placeholder event data in sitemap.');
       // Use placeholder event slugs if data fetch fails
-      const placeholderEvents = ['rotaract-assembly-2023', 'mdio-conference-2023'];
+      const placeholderEvents: string[] = ['rotaract-assembly-2023', 'mdio-conference-2023'];
       for (const eventSlug of placeholderEvents) {
         sitemap += '  <url>\n';
         sitemap += `    <loc>${BASE_URL}/event/${eventSlug}</loc>\n`;
