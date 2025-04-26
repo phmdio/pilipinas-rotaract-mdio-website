@@ -93,6 +93,12 @@ interface FeaturedEvent {
   image: string;
   isProcon: boolean;
   slug: string;
+  location: string;
+  objectiveDetails: string[];
+  moreInfo: string;
+  additionalDetails: string[];
+  closingDetails: string;
+  eventUrl: string;
 }
 
 interface Event {
@@ -101,6 +107,12 @@ interface Event {
   title: string;
   image: string;
   slug: string;
+  location: string;
+  objectiveDetails: string[];
+  moreInfo: string;
+  additionalDetails: string[];
+  closingDetails: string;
+  eventUrl: string;
 }
 
 interface Statistic {
@@ -229,7 +241,7 @@ async function fetchHeroCarouselImages(): Promise<HeroCarouselImage[]> {
       order: ['sys.createdAt'],
     });
 
-    return entries.items.map((item) => ({
+    return entries.items.map((item: any) => ({
       title: getFieldValue(item, 'title', ''),
       imageUrl: item.fields.image?.fields?.file?.url 
         ? `https:${item.fields.image.fields.file.url}` 
@@ -251,7 +263,7 @@ async function fetchDistricts(): Promise<District[]> {
       order: ['sys.createdAt'],
     });
 
-    return entries.items.map((item) => {
+    return entries.items.map((item: any) => {
       const districtId = getFieldValue(item, 'id', '');
       
       return {
@@ -279,18 +291,27 @@ async function fetchFeaturedEvents(): Promise<FeaturedEvent[]> {
       limit: 5,
     });
 
-    return entries.items.map((item) => {
+    return entries.items.map((item: any) => {
       const title = getFieldValue(item, 'title', 'Featured Event');
       return {
         id: item.sys.id,
-        date: getFieldValue(item, 'date', new Date().toLocaleDateString()),
+        date: typeof item.fields.date === 'string' ? item.fields.date : new Date().toLocaleDateString(),
         title,
-        description: getFieldValue(item, 'description', ''),
+        description: typeof item.fields.description === 'string' ? item.fields.description : '',
         image: item.fields.image?.fields?.file?.url 
           ? `https:${item.fields.image.fields.file.url}` 
           : 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=800&q=80',
-        isProcon: getFieldValue(item, 'isProcon', false),
-        slug: getFieldValue(item, 'slug', generateSlugFromTitle(title))
+        location: typeof item.fields.location === 'string' ? item.fields.location : 'Philippines',
+        objectiveDetails: Array.isArray(item.fields.objectiveDetails) ? item.fields.objectiveDetails : ['Learn more about this event at the event page.'],
+        moreInfo: typeof item.fields.moreInfo === 'string' ? item.fields.moreInfo : 
+                  typeof item.fields.description === 'string' ? item.fields.description : '',
+        additionalDetails: Array.isArray(item.fields.additionalDetails) ? item.fields.additionalDetails : [],
+        closingDetails: typeof item.fields.closingDetails === 'string' ? item.fields.closingDetails : 'Visit the event page for more information.',
+        eventUrl: typeof item.fields.eventUrl === 'string' ? item.fields.eventUrl : undefined,
+        facebookPageUrl: typeof item.fields.facebookPageUrl === 'string' ? item.fields.facebookPageUrl : undefined,
+        isProcon: true,
+        slug: generateSlugFromTitle(title),
+        publishedDate: item.sys.updatedAt || item.sys.createdAt
       };
     });
   } catch (error) {
@@ -309,16 +330,27 @@ async function fetchEvents(): Promise<Event[]> {
       limit: 5,
     });
 
-    return entries.items.map((item) => {
+    return entries.items.map((item: any) => {
       const title = getFieldValue(item, 'title', 'Event');
       return {
         id: item.sys.id,
-        date: getFieldValue(item, 'date', new Date().toLocaleDateString()),
+        date: typeof item.fields.date === 'string' ? item.fields.date : new Date().toLocaleDateString(),
         title,
+        description: typeof item.fields.description === 'string' ? item.fields.description : 'Details coming soon.',
         image: item.fields.image?.fields?.file?.url 
           ? `https:${item.fields.image.fields.file.url}` 
-          : 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=600&q=80',
-        slug: getFieldValue(item, 'slug', generateSlugFromTitle(title))
+          : 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=800&q=80',
+        location: typeof item.fields.location === 'string' ? item.fields.location : 'Philippines',
+        objectiveDetails: Array.isArray(item.fields.objectiveDetails) ? item.fields.objectiveDetails : ['Learn more about this event at the event page.'],
+        moreInfo: typeof item.fields.moreInfo === 'string' ? item.fields.moreInfo : 
+                  typeof item.fields.description === 'string' ? item.fields.description : 'Details coming soon.',
+        additionalDetails: Array.isArray(item.fields.additionalDetails) ? item.fields.additionalDetails : [],
+        closingDetails: typeof item.fields.closingDetails === 'string' ? item.fields.closingDetails : 'Visit the event page for more information.',
+        eventUrl: typeof item.fields.eventUrl === 'string' ? item.fields.eventUrl : undefined,
+        facebookPageUrl: typeof item.fields.facebookPageUrl === 'string' ? item.fields.facebookPageUrl : undefined,
+        isFeatured: false,
+        slug: generateSlugFromTitle(title),
+        publishedDate: item.sys.updatedAt || item.sys.createdAt
       };
     });
   } catch (error) {
@@ -336,7 +368,7 @@ async function fetchStatistics(): Promise<Statistic[]> {
       order: ['sys.createdAt'],
     });
 
-    return entries.items.map((item) => ({
+    return entries.items.map((item: any) => ({
       id: item.sys.id,
       value: getFieldValue(item, 'value', '0'),
       label: getFieldValue(item, 'label', 'Statistic'),
@@ -359,7 +391,7 @@ async function fetchRotaractDistrictData(): Promise<RotaractDistrictData[]> {
       order: ['fields.year', 'fields.district'],
     });
 
-    return entries.items.map((item) => {
+    return entries.items.map((item: any) => {
       const data: RotaractDistrictData = {
         year: getFieldValue(item, 'year', ''),
         district: getFieldValue(item, 'district', ''),
@@ -389,7 +421,7 @@ async function fetchRotaractContributionsData(): Promise<RotaractContributionsDa
       order: ['fields.district'],
     });
 
-    return entries.items.map((item) => {
+    return entries.items.map((item: any) => {
       const data: RotaractContributionsData = {
         district: getFieldValue(item, 'district', ''),
       };
@@ -418,7 +450,7 @@ async function fetchRotaractStatisticCards(): Promise<RotaractStatisticCard[]> {
       order: ['sys.createdAt'],
     });
 
-    return entries.items.map((item) => ({
+    return entries.items.map((item: any) => ({
       id: item.sys.id,
       number: getFieldValue(item, 'number', '0'),
       title: getFieldValue(item, 'title', 'Statistic'),
@@ -442,7 +474,7 @@ async function fetchRotaractChartConfigs(): Promise<RotaractChartConfig[]> {
       order: ['sys.createdAt'],
     });
 
-    return entries.items.map((item) => ({
+    return entries.items.map((item: any) => ({
       id: item.sys.id,
       title: getFieldValue(item, 'title', 'Chart'),
       dataKey: getFieldValue<string[]>(item, 'dataKey', []),
@@ -476,7 +508,7 @@ async function fetchLeadershipChair(): Promise<LeadershipChair[]> {
       });
     }
     
-    return entries.items.map((item) => ({
+    return entries.items.map((item: any) => ({
       id: item.sys.id,
       name: getFieldValue(item, 'name', 'MDIO Chair'),
       title: getFieldValue(item, 'title', 'Pilipinas Multi-District Information Organization, Chair'),
@@ -502,7 +534,7 @@ async function fetchBoardMembers(): Promise<BoardMember[]> {
       order: ['fields.name'],
     });
     
-    return entries.items.map((item) => ({
+    return entries.items.map((item: any) => ({
       id: item.sys.id,
       name: getFieldValue(item, 'name', ''),
       title: getFieldValue(item, 'title', 'District Rotaract Representative'),
@@ -527,7 +559,7 @@ async function fetchExecutiveCommittee(): Promise<ExecutiveCommitteeMember[]> {
       order: ['fields.name'],
     });
     
-    return entries.items.map((item) => ({
+    return entries.items.map((item: any) => ({
       id: item.sys.id,
       name: getFieldValue(item, 'name', ''),
       title: getFieldValue(item, 'title', ''),
@@ -552,7 +584,7 @@ async function fetchStaffMembers(): Promise<StaffMember[]> {
       order: ['fields.name'],
     });
     
-    return entries.items.map((item) => ({
+    return entries.items.map((item: any) => ({
       id: item.sys.id,
       name: getFieldValue(item, 'name', ''),
       role: getFieldValue(item, 'role', ''),
@@ -601,7 +633,7 @@ async function fetchRotaryFoundationData(): Promise<RotaryFoundationData> {
 
     // Extract funds from references
     const funds: RotaryFoundationFund[] = Array.isArray(fields.funds) 
-      ? fields.funds.map((fund: Entry<any>) => ({
+      ? fields.funds.map((fund: any) => ({
           id: fund.sys?.id || `fund-${Math.random().toString(36).substr(2, 9)}`,
           title: String(fund.fields?.title || ''),
           description: String(fund.fields?.description || ''),
