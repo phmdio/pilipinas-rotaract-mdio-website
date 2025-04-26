@@ -14,6 +14,8 @@ export const initPostHog = () => {
       capture_pageview: true, // Enable automatic page view tracking
       persistence: 'localStorage',
       autocapture: true,
+      capture_performance: true,
+      capture_heatmaps: true,
       loaded: (posthog) => {
         if (import.meta.env.MODE === 'development') {
           // Disable PostHog in development by default
