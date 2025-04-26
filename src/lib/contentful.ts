@@ -142,14 +142,25 @@ export interface FeaturedEvent {
   image: string;
   isProcon?: boolean;
   slug?: string;
+  location?: string;
+  objectiveDetails?: string[];
+  moreInfo?: string;
+  additionalDetails?: string[];
+  closingDetails?: string;
 }
 
 export interface Event {
   id: string;
   date: string;
   title: string;
+  description: string;
   image: string;
   slug?: string;
+  location?: string;
+  objectiveDetails?: string[];
+  moreInfo?: string;
+  additionalDetails?: string[];
+  closingDetails?: string;
 }
 
 // Query keys for programs and activities
@@ -631,6 +642,7 @@ export async function getEvents(): Promise<Event[]> {
       id: item.sys.id,
       date: item.fields.date || new Date().toLocaleDateString(),
       title,
+      description: item.fields.description || '',
       image: item.fields.image?.fields?.file?.url 
         ? `https:${item.fields.image.fields.file.url}` 
         : 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=600&q=80',
@@ -695,6 +707,7 @@ export const fallbackEvents: Event[] = [
     id: '1',
     date: "February 01, 2024",
     title: "District Rotaract Representative Elect Training Seminar",
+    description: "Details coming soon.",
     image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=600&q=80",
     slug: "district-rotaract-representative-elect-training-seminar-feb-01"
   },
@@ -702,6 +715,7 @@ export const fallbackEvents: Event[] = [
     id: '2',
     date: "February 03, 2024",
     title: "District Rotaract Representative Elect Training Seminar",
+    description: "Details coming soon.",
     image: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81?auto=format&fit=crop&w=600&q=80",
     slug: "district-rotaract-representative-elect-training-seminar-feb-03"
   },
@@ -709,6 +723,7 @@ export const fallbackEvents: Event[] = [
     id: '3',
     date: "February 07, 2024",
     title: "District Rotaract Representative Elect Training Seminar",
+    description: "Details coming soon.",
     image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=600&q=80",
     slug: "district-rotaract-representative-elect-training-seminar-feb-07"
   },
@@ -716,6 +731,7 @@ export const fallbackEvents: Event[] = [
     id: '4',
     date: "February 11, 2024",
     title: "District Rotaract Representative Elect Training Seminar",
+    description: "Details coming soon.",
     image: "https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?auto=format&fit=crop&w=600&q=80",
     slug: "district-rotaract-representative-elect-training-seminar-feb-11"
   },
@@ -723,6 +739,7 @@ export const fallbackEvents: Event[] = [
     id: '5',
     date: "February 17, 2024",
     title: "District Rotaract Representative Elect Training Seminar",
+    description: "Details coming soon.",
     image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=600&q=80",
     slug: "district-rotaract-representative-elect-training-seminar-feb-17"
   },
@@ -994,11 +1011,11 @@ export async function getEventDetail(eventId: string): Promise<EventDetail | nul
           title: featuredEvent.title,
           description: featuredEvent.description,
           image: featuredEvent.image,
-          location: 'Philippines',
-          objectiveDetails: ['Learn more about this event at the event page.'],
+          location: featuredEvent.location,
+          objectiveDetails: featuredEvent.objectiveDetails,
           moreInfo: featuredEvent.description,
-          additionalDetails: [],
-          closingDetails: 'Visit the event page for more information.',
+          additionalDetails: featuredEvent.additionalDetails,
+          closingDetails: featuredEvent.closingDetails,
           isFeatured: true,
           slug: generateSlug(featuredEvent.title),
           publishedDate: new Date().toISOString() // Fallback for static data
@@ -1015,13 +1032,13 @@ export async function getEventDetail(eventId: string): Promise<EventDetail | nul
           id: event.id,
           date: event.date,
           title: event.title,
-          description: 'Details coming soon.',
+          description: event.description,
           image: event.image,
-          location: 'Philippines',
-          objectiveDetails: ['Learn more about this event at the event page.'],
-          moreInfo: 'Details coming soon.',
-          additionalDetails: [],
-          closingDetails: 'Visit the event page for more information.',
+          location: event.location,
+          objectiveDetails: event.objectiveDetails,
+          moreInfo: event.moreInfo,
+          additionalDetails: event.additionalDetails,
+          closingDetails: event.closingDetails,
           isFeatured: false,
           slug: generateSlug(event.title),
           publishedDate: new Date().toISOString() // Fallback for static data
