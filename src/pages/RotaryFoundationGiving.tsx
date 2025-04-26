@@ -185,7 +185,9 @@ const RotaryFoundationGiving = () => {
     switch (source) {
       case 'districtData': return foundationData.statisticsData.districtData || [];
       case 'contributionsData': return foundationData.statisticsData.contributionsData || [];
-      default: return [];
+      default: 
+        // Try to dynamically access the property with the source name
+        return (foundationData.statisticsData[source as keyof typeof foundationData.statisticsData] as StatisticDataPoint[] | undefined) || [];
     }
   };
 
