@@ -56,7 +56,7 @@
       "id": "3770",
       "color": "#F6A81C",
       "image": "https://images.ctfassets.net/dze7xj4zfu0b/6inPXcgt3v6RDkjKUhd7gA/373cfe99949563bc7e421e42f384b30b/3770.jpeg",
-      "summary": "Discover the vibrant community of Rotaract clubs in this district, where young professionals develop leadership skills and implement innovative service projects addressing local needs. Join us in making a positive impact through fellowship, professional development, and community service."
+      "summary": "District 3770 is the first Rotary International district in the Philippines in terms of numerical sequence. It may be small in numbers but through the years, it has been able to build a strong base of sturdy, passionate and competent Rotaract clubs that develop effective leaders and promote responsible citizenship."
     },
     {
       "id": "3780",
@@ -98,7 +98,7 @@
       "id": "3850",
       "color": "#E22626",
       "image": "https://images.ctfassets.net/dze7xj4zfu0b/48WJuAhzpaR1UEcUlxoZvq/0c6034ef14cf1bca6a2659bdfb3d6a56/sama-bangingi-1.jpg",
-      "summary": "District 3850 is home of young, vibrant, and active Rotaractors and Interactors. As the district where the first Rotaract Club was chartered, District 3850 continues to imbibe the organization's motto "Fellowship Through Service" and commits themselves to innovative ways of learning, giving, and educating the community towards progress."
+      "summary": "District 3850 is home of young, vibrant, and active Rotaractors and Interactors. As the district where the first Rotaract Club was chartered, District 3850 continues to imbibe the organization’s motto “Fellowship Through Service” and commits themselves to innovative ways of learning, giving, and educating the community towards progress."
     },
     {
       "id": "3860",
@@ -115,16 +115,81 @@
   ],
   "featuredEvents": [
     {
+      "id": "4QdQ30LoUZLzXq1etzj0rd",
+      "date": "FEBRUARY 20-22, 2026",
+      "title": "14TH PILIPINAS ROTARACT CONVENTION",
+      "description": "A HEARTBEAT IN PROGRESS. Stay tuned for the full rhythm, coming real soon! We Beat With You!",
+      "image": "https://images.ctfassets.net/dze7xj4zfu0b/36PLLdqs6juVoYrenmu6l3/45c0502d8e3932b5b7104d6b6e1ddf0c/PROCON_ILOILO.jpg",
+      "location": "ILOILO CITY, PHILIPPINES",
+      "objectiveDetails": [
+        "Learn more about this event at the event page."
+      ],
+      "moreInfo": "A HEARTBEAT IN PROGRESS. Stay tuned for the full rhythm, coming real soon! We Beat With You!",
+      "additionalDetails": [],
+      "closingDetails": "CLOSING",
+      "eventUrl": "https://mdio-pilipinas.netlify.app/",
+      "isProcon": true,
+      "slug": "14th-pilipinas-rotaract-convention",
+      "publishedDate": "2025-04-26T17:58:15.410Z"
+    },
+    {
       "id": "3OkKROfI6mofGHQUQmEPxq",
       "date": "January 1, 2024",
-      "title": "District Rotaract Representative Elect Training Seminar",
+      "title": "District Rotaract Representative Elect Training Seminar",
       "description": "Hipster ipsum tattooed brunch I'm baby. Schlitz seitan listicle mixtape boys trust vice. Occupy tbh street brunch keffiyeh. Bicycle diy blog banjo fingerstache tote on locavore coffee pabst. ",
       "image": "https://images.ctfassets.net/dze7xj4zfu0b/4p5JH3l4a39EYNUmrnrm74/11bc196ed250a472c16c12e33266fcb9/Rectangle_60.png",
+      "location": "Philippines",
+      "objectiveDetails": [
+        "Learn more about this event at the event page."
+      ],
+      "moreInfo": "Hipster ipsum tattooed brunch I'm baby. Schlitz seitan listicle mixtape boys trust vice. Occupy tbh street brunch keffiyeh. Bicycle diy blog banjo fingerstache tote on locavore coffee pabst. ",
+      "additionalDetails": [],
+      "closingDetails": "Visit the event page for more information.",
       "isProcon": true,
-      "slug": "district-rotaract-representative-elect-training-seminar"
+      "slug": "district-rotaract-representative-elect-training-seminar",
+      "publishedDate": "2025-04-22T19:05:09.770Z"
     }
   ],
-  "events": [],
+  "events": [
+    {
+      "id": "01zpeDDo0flK3oT0t5ISzv",
+      "date": "February 20-22, 2025",
+      "title": "14th PILIPINAS ROTARACT CONVENTION",
+      "description": "TEST",
+      "image": "https://images.ctfassets.net/dze7xj4zfu0b/36PLLdqs6juVoYrenmu6l3/45c0502d8e3932b5b7104d6b6e1ddf0c/PROCON_ILOILO.jpg",
+      "location": "ILOILO CITY, PHILIPPINES",
+      "objectiveDetails": [
+        "Learn more about this event at the event page."
+      ],
+      "moreInfo": "TEST",
+      "additionalDetails": [],
+      "closingDetails": "TEST",
+      "eventUrl": "https://www.facebook.com/profile.php?id=61575208162134",
+      "facebookPageUrl": "https://www.facebook.com/profile.php?id=61575208162134",
+      "isFeatured": false,
+      "slug": "14th-pilipinas-rotaract-convention",
+      "publishedDate": "2025-04-26T17:38:19.347Z"
+    },
+    {
+      "id": "2qE9pTGoNXslJRvBwNURxX",
+      "date": "February 25-27, 2022",
+      "title": "10TH PILIPINAS ROTARACT CONVENTION",
+      "description": "Royce Hotel and Casino, Clark, Pampanga | Hosted by Rotary International District 3770 under the terms of DG Arturo Que and DRR Daniel Balubal, Chaired by PDRR Joseph Zamora",
+      "image": "https://images.ctfassets.net/dze7xj4zfu0b/5k436YjCu1Z66rSp0efpeO/d61557edb70a0a5f62cecf214850af42/10th_procon.avif",
+      "location": "Clark, Pampanga",
+      "objectiveDetails": [
+        "Learn more about this event at the event page."
+      ],
+      "moreInfo": "Royce Hotel and Casino, Clark, Pampanga | Hosted by Rotary International District 3770 under the terms of DG Arturo Que and DRR Daniel Balubal, Chaired by PDRR Joseph Zamora",
+      "additionalDetails": [],
+      "closingDetails": "test",
+      "eventUrl": "https://www.facebook.com/PilipinasRotaractMDIO",
+      "facebookPageUrl": "https://www.facebook.com/PilipinasRotaractMDIO",
+      "isFeatured": false,
+      "slug": "10th-pilipinas-rotaract-convention",
+      "publishedDate": "2025-04-26T18:05:18.217Z"
+    }
+  ],
   "statistics": [
     {
       "id": "3Uqi4yDayx30LcbIbg00fX",

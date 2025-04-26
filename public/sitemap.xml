@@ -61,12 +61,12 @@
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://www.pilipinasrotaract.org/district/3850</loc>
+    <loc>https://www.pilipinasrotaract.org/district/3770</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.pilipinasrotaract.org/district/3770</loc>
+    <loc>https://www.pilipinasrotaract.org/district/3850</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -111,12 +111,12 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.pilipinasrotaract.org/event/rotaract-assembly-2023</loc>
+    <loc>https://www.pilipinasrotaract.org/event/10th-pilipinas-rotaract-convention</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.pilipinasrotaract.org/event/mdio-conference-2023</loc>
+    <loc>https://www.pilipinasrotaract.org/event/14th-pilipinas-rotaract-convention</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
