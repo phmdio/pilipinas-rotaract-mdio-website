@@ -158,7 +158,7 @@ const ProCon = () => {
                           <img 
                             src={event.image}
                             alt={event.title}
-                            className="rounded-lg w-full h-64 object-cover"
+                            className="rounded-lg w-full h-64 object-contain"
                           />
                         </div>
                         <div className="w-full md:w-1/2">
