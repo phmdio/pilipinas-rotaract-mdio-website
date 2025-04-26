@@ -213,6 +213,7 @@ export interface EventDetail {
   eventUrl?: string;
   isFeatured: boolean;
   slug: string;
+  publishedDate?: string;
 }
 
 // Query keys for event details
@@ -984,7 +985,8 @@ export async function getEventDetail(eventId: string): Promise<EventDetail | nul
           additionalDetails: [],
           closingDetails: 'Visit the event page for more information.',
           isFeatured: true,
-          slug: generateSlug(featuredEvent.title)
+          slug: generateSlug(featuredEvent.title),
+          publishedDate: new Date().toISOString() // Fallback for static data
         };
       }
       
@@ -1006,7 +1008,8 @@ export async function getEventDetail(eventId: string): Promise<EventDetail | nul
           additionalDetails: [],
           closingDetails: 'Visit the event page for more information.',
           isFeatured: false,
-          slug: generateSlug(event.title)
+          slug: generateSlug(event.title),
+          publishedDate: new Date().toISOString() // Fallback for static data
         };
       }
       
@@ -1046,7 +1049,8 @@ export async function getEventDetail(eventId: string): Promise<EventDetail | nul
         closingDetails: typeof fields.closingDetails === 'string' ? fields.closingDetails : 'Visit the event page for more information.',
         eventUrl: typeof fields.eventUrl === 'string' ? fields.eventUrl : undefined,
         isFeatured: true,
-        slug: generateSlug(title)
+        slug: generateSlug(title),
+        publishedDate: item.sys.updatedAt || item.sys.createdAt
       };
     }
     
@@ -1077,7 +1081,8 @@ export async function getEventDetail(eventId: string): Promise<EventDetail | nul
         closingDetails: typeof fields.closingDetails === 'string' ? fields.closingDetails : 'Visit the event page for more information.',
         eventUrl: typeof fields.eventUrl === 'string' ? fields.eventUrl : undefined,
         isFeatured: false,
-        slug: generateSlug(title)
+        slug: generateSlug(title),
+        publishedDate: item.sys.updatedAt || item.sys.createdAt
       };
     }
     

@@ -116,6 +116,7 @@ const OurProgramsAndActivitiesDetail = () => {
     "name": event.title,
     "description": event.description,
     "startDate": event.date,
+    "datePublished": event.publishedDate,
     "location": {
       "@type": "Place",
       "name": event.location
