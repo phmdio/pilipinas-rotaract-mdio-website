@@ -7,11 +7,11 @@ import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { 
-  getEventDetail, 
+import {
+  getEventDetail,
   getEventDetailBySlug,
-  getEvents, 
-  EventDetail, 
+  getEvents,
+  EventDetail,
   Event,
   eventKeys,
   programsAndActivitiesKeys,
@@ -24,23 +24,23 @@ const defaultBannerImage = "/lovable-uploads/9fd84289-5060-4393-a74d-7846bfb2443
 const OurProgramsAndActivitiesDetail = () => {
   const { eventId, eventSlug } = useParams<{ eventId?: string; eventSlug?: string }>();
   const navigate = useNavigate();
-  
+
   // Determine if we're using a slug or ID route
   const isSlugRoute = !!eventSlug;
   const lookupValue = eventSlug || eventId;
-  
+
   // Fetch event details
-  const { 
-    data: event, 
-    isLoading, 
-    isError 
+  const {
+    data: event,
+    isLoading,
+    isError
   } = useQuery({
-    queryKey: isSlugRoute 
-      ? ['event', 'slug', lookupValue] 
+    queryKey: isSlugRoute
+      ? ['event', 'slug', lookupValue]
       : [...eventKeys.eventDetail, lookupValue],
     queryFn: () => {
       if (!lookupValue) return Promise.resolve(null);
-      return isSlugRoute 
+      return isSlugRoute
         ? getEventDetailBySlug(lookupValue)
         : getEventDetail(lookupValue);
     },
@@ -48,32 +48,32 @@ const OurProgramsAndActivitiesDetail = () => {
   });
 
   // Fetch events for the bottom section
-  const { 
+  const {
     data: events = fallbackEvents,
-    isLoading: isEventsLoading 
+    isLoading: isEventsLoading
   } = useQuery({
     queryKey: programsAndActivitiesKeys.events,
     queryFn: getEvents,
   });
-  
+
   // Redirect to modern URL format if using the old ID-based URL
   React.useEffect(() => {
     if (!isLoading && event && !isSlugRoute) {
       navigate(`/event/${event.slug}`, { replace: true });
     }
   }, [isLoading, event, isSlugRoute, navigate]);
-  
+
   // If event not found, redirect to programs page after a short delay
   React.useEffect(() => {
     if (!isLoading && !event) {
       const timeoutId = setTimeout(() => {
         navigate('/our-programs-and-activities');
       }, 2000);
-      
+
       return () => clearTimeout(timeoutId);
     }
   }, [isLoading, event, navigate]);
-  
+
   // Loading state
   if (isLoading) {
     return (
@@ -86,7 +86,7 @@ const OurProgramsAndActivitiesDetail = () => {
       </>
     );
   }
-  
+
   // Error state
   if (isError || !event) {
     return (
@@ -108,7 +108,7 @@ const OurProgramsAndActivitiesDetail = () => {
       </>
     );
   }
-  
+
   // Prepare structured data for JSON-LD
   const eventStructuredData = {
     "@context": "https://schema.org",
@@ -136,14 +136,14 @@ const OurProgramsAndActivitiesDetail = () => {
     } : undefined,
     "sameAs": event.facebookPageUrl ? [event.facebookPageUrl] : undefined
   };
-  
+
   return (
     <>
       <Helmet>
         <title>{event.title} | Pilipinas Rotaract MDIO</title>
-        <meta 
-          name="description" 
-          content={`${event.title} - ${event.description.substring(0, 155)}...`} 
+        <meta
+          name="description"
+          content={`${event.title} - ${event.description.substring(0, 155)}...`}
         />
         <link rel="canonical" href={`https://www.pilipinasrotaract.org/event/${event.slug}`} />
         <meta property="og:title" content={`${event.title} | Pilipinas Rotaract MDIO`} />
@@ -171,7 +171,7 @@ const OurProgramsAndActivitiesDetail = () => {
             </h1>
             <div className="text-pink-100 text-sm md:text-base font-medium mb-2 flex items-center gap-3 uppercase tracking-widest">
               <CalendarDays size={16} className="inline mr-1 opacity-70" />
-              {event.date} &nbsp; &bull; &nbsp; 
+              {event.date} &nbsp; &bull; &nbsp;
               <span className="font-bold flex items-center">
                 <MapPin size={16} className="inline mr-1 opacity-70" />
                 {event.location}
@@ -179,7 +179,7 @@ const OurProgramsAndActivitiesDetail = () => {
             </div>
           </div>
           <div className="flex-shrink-0 w-full md:w-[330px] mx-auto relative rounded-lg bg-white shadow-lg overflow-hidden aspect-auto">
-            <img 
+            <img
               src={event.image || defaultBannerImage}
               alt={event.title}
               className="object-cover w-full h-full"
@@ -203,7 +203,7 @@ const OurProgramsAndActivitiesDetail = () => {
               <strong>
                 {event.description.split('.')[0]}.
               </strong>
-              {event.description.split('.').length > 1 && 
+              {event.description.split('.').length > 1 &&
                 ` ${event.description.split('.').slice(1).join('.')}`
               }
             </p>
@@ -217,7 +217,7 @@ const OurProgramsAndActivitiesDetail = () => {
                 <ul className="space-y-4 pl-4 md:pl-8 relative">
                   {/* vertical pink line for timeline effect */}
                   <span className="absolute left-1.5 top-1 h-[83%] w-1 bg-[#D41A69] rounded-full opacity-20 hidden md:block"></span>
-                  
+
                   {event.objectiveDetails.map((detail, index) => (
                     <li key={index} className="flex gap-3 items-start relative">
                       <span className="mt-1">
@@ -262,7 +262,7 @@ const OurProgramsAndActivitiesDetail = () => {
           <section>
             <h3 className="text-[#232b3d] text-lg font-semibold mb-3">Closing Details</h3>
             <p className="text-[#232b3d] mb-8">{event.closingDetails}</p>
-            
+
             {event.eventUrl && (
               <div className="flex flex-col md:flex-row gap-4">
                 <a
@@ -272,10 +272,10 @@ const OurProgramsAndActivitiesDetail = () => {
                   className="block w-full md:w-auto"
                 >
                   <Button className="w-full md:w-auto px-6 py-3 rounded-full bg-[#16478E] hover:bg-[#0e3266] text-white text-base font-medium shadow transition">
-                    VISIT EVENT PAGE OR REGISTER
+                    VISIT EVENT PAGE OR REGISTRATION FORM
                   </Button>
                 </a>
-                
+
                 {event.facebookPageUrl && (
                   <a
                     href={event.facebookPageUrl}
@@ -283,7 +283,7 @@ const OurProgramsAndActivitiesDetail = () => {
                     rel="noopener noreferrer"
                     className="block w-full md:w-auto"
                   >
-                    <Button className="w-full md:w-auto px-6 py-3 rounded-full bg-[#4267B2] hover:bg-[#365899] text-white text-base font-medium shadow transition">
+                    <Button className="w-full md:w-auto px-6 py-3 rounded-full bg-[#16478E] hover:bg-[#0e3266] text-white text-base font-medium shadow transition">
                       VISIT FACEBOOK PAGE
                     </Button>
                   </a>
@@ -316,7 +316,7 @@ const OurProgramsAndActivitiesDetail = () => {
               </Button>
             </div>
           </div>
-          
+
           {isEventsLoading ? (
             <div className="min-h-[300px] flex items-center justify-center">
               <div className="animate-pulse w-12 h-12 rounded-full bg-gray-200"></div>
@@ -329,7 +329,7 @@ const OurProgramsAndActivitiesDetail = () => {
                   className="rounded-lg overflow-hidden bg-white shadow-md border border-[#f1e9fc] flex flex-col transition hover:shadow-lg"
                 >
                   <div className="aspect-[4/3] bg-gray-200 w-full">
-                    <img 
+                    <img
                       src={event.image}
                       alt={event.title}
                       className="w-full h-full object-cover"
@@ -343,8 +343,8 @@ const OurProgramsAndActivitiesDetail = () => {
                       {event.title}
                     </div>
                     <Link to={`/event/${event.slug}`}>
-                      <Button 
-                        variant="outline" 
+                      <Button
+                        variant="outline"
                         className="w-full border-[#16478E]/30 hover:bg-[#f7f3ff] rounded-full text-[#16478E] font-medium py-2 mt-auto"
                       >
                         VIEW EVENT
@@ -355,7 +355,7 @@ const OurProgramsAndActivitiesDetail = () => {
               ))}
             </div>
           )}
-          
+
           <div className="mt-10 flex justify-center">
             <Link to="/our-programs-and-activities">
               <Button className="bg-[#16478E] hover:bg-[#0e3266] text-white rounded-full px-8 py-6 h-auto font-medium">
