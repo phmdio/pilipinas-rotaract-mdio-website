@@ -1,0 +1,277 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+# Accessibility Standards
+
+This document outlines the accessibility standards and best practices for the Pilipinas Rotaract MDIO 53 project.
+
+## Core Principles
+
+- Follow WCAG 2.1 AA standards
+- Ensure the application is usable by people with diverse abilities
+- Design for inclusivity from the start, not as an afterthought
+- Test with screen readers and keyboard navigation
+
+## Semantic HTML
+
+- Use semantic HTML elements that convey meaning and structure
+- Choose the appropriate element for its intended purpose
+- Avoid using non-semantic elements like `<div>` when a semantic element would be more appropriate
+
+```tsx
+// Good: Using semantic HTML
+<article>
+  <h2>Latest News</h2>
+  <section>
+    <h3>Local Events</h3>
+    <p>Content about local events...</p>
+  </section>
+  <footer>
+    <p>Published on <time dateTime="2023-05-15">May 15, 2023</time></p>
+  </footer>
+</article>
+
+// Avoid: Using divs for everything
+<div class="article">
+  <div class="title">Latest News</div>
+  <div class="section">
+    <div class="subtitle">Local Events</div>
+    <div class="content">Content about local events...</div>
+  </div>
+  <div class="footer">
+    <div>Published on May 15, 2023</div>
+  </div>
+</div>
+```
+
+## ARIA Attributes
+
+- Use ARIA attributes when HTML semantics are insufficient
+- Ensure proper labeling of interactive elements
+- Implement proper ARIA roles, states, and properties
+- Don't overuse ARIA - prefer semantic HTML first
+
+```tsx
+// Button with icon only - needs aria-label
+<button 
+  aria-label="Close dialog" 
+  className="rounded-full p-2 bg-gray-200"
+  onClick={closeDialog}
+>
+  <XIcon className="w-5 h-5" />
+</button>
+
+// Custom toggle component with ARIA
+<div 
+  role="switch" 
+  aria-checked={isActive} 
+  aria-label="Toggle dark mode"
+  tabIndex={0}
+  className={`p-1 w-12 rounded-full ${isActive ? 'bg-blue-500' : 'bg-gray-300'}`}
+  onClick={toggle}
+  onKeyDown={(e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      toggle();
+    }
+  }}
+>
+  <div 
+    className={`w-5 h-5 rounded-full bg-white transition-transform ${isActive ? 'translate-x-5' : ''}`} 
+  />
+</div>
+```
+
+## Keyboard Navigation
+
+- Ensure all interactive elements are keyboard accessible
+- Implement logical tab order with proper focus management
+- Use tabIndex appropriately (0 for interactive elements, -1 for programmatic focus)
+- Provide visible focus indicators
+- Ensure keyboard traps are avoided
+
+## Focus Management
+
+- Manage focus when content changes, especially in SPAs
+- Focus the first interactive element when opening modals or dialogs
+- Return focus to the element that triggered an action after the action completes
+- Use refs and `focus()` to programmatically manage focus
+
+```tsx
+// Example focus management in a dialog
+import { useRef, useEffect } from 'react';
+
+export const Dialog = ({ isOpen, onClose, title, children }) => {
+  const dialogRef = useRef(null);
+  const closeButtonRef = useRef(null);
+
+  // Move focus to dialog when opened
+  useEffect(() => {
+    if (isOpen) {
+      closeButtonRef.current?.focus();
+    }
+  }, [isOpen]);
+
+  if (!isOpen) return null;
+
+  return (
+    <div 
+      className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center"
+      onClick={onClose}
+    >
+      <div 
+        ref={dialogRef}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="dialog-title"
+        className="bg-white p-6 rounded-lg max-w-md w-full"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="flex justify-between items-center mb-4">
+          <h2 id="dialog-title" className="text-xl font-bold">{title}</h2>
+          <button 
+            ref={closeButtonRef}
+            aria-label="Close dialog"
+            className="p-2 rounded-full hover:bg-gray-100"
+            onClick={onClose}
+          >
+            <span className="sr-only">Close</span>
+            <XIcon className="w-5 h-5" />
+          </button>
+        </div>
+        <div className="mt-4">
+          {children}
+        </div>
+      </div>
+    </div>
+  );
+};
+```
+
+## Color and Contrast
+
+- Ensure sufficient color contrast (at least 4.5:1 for normal text, 3:1 for large text)
+- Don't rely solely on color to convey information
+- Provide additional indicators (icons, text, patterns)
+- Support high contrast mode
+
+## Images and Media
+
+- Provide alternative text for all meaningful images
+- Use empty alt attributes for decorative images
+- Provide captions and transcripts for audio and video content
+- Ensure media is keyboard controllable
+
+```tsx
+// Meaningful image with alt text
+<img 
+  src="/images/chart-revenue-growth.png" 
+  alt="Chart showing revenue growth of 25% in Q1 2023"
+/>
+
+// Decorative image with empty alt
+<img 
+  src="/images/decorative-pattern.svg" 
+  alt="" 
+  role="presentation"
+/>
+```
+
+## Forms and Validation
+
+- Associate labels with form controls
+- Group related form elements with fieldset and legend
+- Provide clear error messages and validation
+- Support autocomplete where appropriate
+
+```tsx
+// Accessible form example
+<form onSubmit={handleSubmit}>
+  <div className="mb-4">
+    <label htmlFor="name" className="block mb-1">
+      Full Name
+    </label>
+    <input
+      id="name"
+      type="text"
+      name="name"
+      aria-required="true"
+      aria-invalid={errors.name ? "true" : "false"}
+      className="w-full p-2 border rounded"
+      value={formData.name}
+      onChange={handleChange}
+    />
+    {errors.name && (
+      <p className="text-red-500 text-sm mt-1" aria-live="polite">
+        {errors.name}
+      </p>
+    )}
+  </div>
+  
+  <fieldset className="mb-4">
+    <legend className="mb-1">Notification Preferences</legend>
+    <div className="flex items-center mb-2">
+      <input
+        id="email-notifications"
+        type="checkbox"
+        name="emailNotifications"
+        checked={formData.emailNotifications}
+        onChange={handleChange}
+      />
+      <label htmlFor="email-notifications" className="ml-2">
+        Receive email notifications
+      </label>
+    </div>
+  </fieldset>
+  
+  <button 
+    type="submit" 
+    className="bg-blue-500 text-white py-2 px-4 rounded"
+  >
+    Submit
+  </button>
+</form>
+```
+
+## Live Regions
+
+- Use aria-live regions for dynamic content updates
+- Set appropriate politeness levels (polite, assertive)
+- Ensure screen readers announce important updates
+
+```tsx
+// Toast notification with live region
+export const Toast = ({ message, type = 'info', isVisible }) => {
+  if (!isVisible) return null;
+  
+  return (
+    <div 
+      role="status"
+      aria-live="polite"
+      className={`fixed bottom-4 right-4 p-4 rounded shadow-lg ${
+        type === 'error' ? 'bg-red-500 text-white' : 
+        type === 'success' ? 'bg-green-500 text-white' : 
+        'bg-blue-500 text-white'
+      }`}
+    >
+      {message}
+    </div>
+  );
+};
+```
+
+## Testing Accessibility
+
+- Use automated testing tools like axe-core
+- Perform keyboard navigation testing
+- Test with screen readers (NVDA, VoiceOver, JAWS)
+- Include people with disabilities in user testing when possible
+
+## Resources
+
+- [WCAG 2.1 Guidelines](https://www.w3.org/TR/WCAG21/)
+- [WAI-ARIA Authoring Practices](https://www.w3.org/TR/wai-aria-practices-1.2/)
+- [A11y Project Checklist](https://www.a11yproject.com/checklist/)
+- [Axe Core Testing Library](https://github.com/dequelabs/axe-core)

@@ -1,0 +1,172 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+# Testing Standards
+
+This document outlines the testing standards and best practices for the Pilipinas Rotaract MDIO 53 project.
+
+## Testing Framework
+
+- Use Vitest as the primary test runner
+- Use React Testing Library for component testing
+- Use Mock Service Worker (MSW) for API mocking
+- Follow the Testing Trophy approach (unit, integration, e2e)
+
+## Testing Organization
+
+- Co-locate tests with the code they test
+- Use a consistent naming convention: 
+  - `ComponentName.test.tsx` for component tests
+  - `functionName.test.ts` for utility function tests
+  - `hooks.test.ts` for custom hook tests
+
+## Component Testing
+
+- Test component behavior, not implementation details
+- Focus on user interactions and accessibility
+- Use proper queries prioritizing accessibility roles
+- Write assertions from the user's perspective
+
+```tsx
+// Example component test
+import { render, screen, fireEvent } from '@testing-library/react';
+import { Counter } from './Counter';
+
+describe('Counter', () => {
+  it('should render initial count', () => {
+    render(<Counter initialCount={0} />);
+    expect(screen.getByText('Count: 0')).toBeInTheDocument();
+  });
+
+  it('should increment count when increment button is clicked', () => {
+    render(<Counter initialCount={0} />);
+    fireEvent.click(screen.getByRole('button', { name: /increment/i }));
+    expect(screen.getByText('Count: 1')).toBeInTheDocument();
+  });
+
+  it('should decrement count when decrement button is clicked', () => {
+    render(<Counter initialCount={5} />);
+    fireEvent.click(screen.getByRole('button', { name: /decrement/i }));
+    expect(screen.getByText('Count: 4')).toBeInTheDocument();
+  });
+
+  it('should not go below zero when decrementing from zero', () => {
+    render(<Counter initialCount={0} />);
+    fireEvent.click(screen.getByRole('button', { name: /decrement/i }));
+    expect(screen.getByText('Count: 0')).toBeInTheDocument();
+  });
+});
+```
+
+## Hook Testing
+
+- Use `@testing-library/react-hooks` for custom hook testing
+- Test the behavior and state changes of hooks
+- Mock external dependencies
+
+```tsx
+// Example hook test
+import { renderHook, act } from '@testing-library/react-hooks';
+import { useCounter } from './useCounter';
+
+describe('useCounter', () => {
+  it('should initialize with the provided initial count', () => {
+    const { result } = renderHook(() => useCounter(5));
+    expect(result.current.count).toBe(5);
+  });
+
+  it('should increment the count', () => {
+    const { result } = renderHook(() => useCounter(0));
+    act(() => {
+      result.current.increment();
+    });
+    expect(result.current.count).toBe(1);
+  });
+
+  it('should decrement the count', () => {
+    const { result } = renderHook(() => useCounter(5));
+    act(() => {
+      result.current.decrement();
+    });
+    expect(result.current.count).toBe(4);
+  });
+
+  it('should not decrement below 0', () => {
+    const { result } = renderHook(() => useCounter(0));
+    act(() => {
+      result.current.decrement();
+    });
+    expect(result.current.count).toBe(0);
+  });
+});
+```
+
+## API Testing
+
+- Mock API responses for component testing
+- Test error states and loading states
+- Use MSW to intercept and mock network requests
+
+```tsx
+// Example MSW setup
+import { rest } from 'msw';
+import { setupServer } from 'msw/node';
+
+const server = setupServer(
+  rest.get('/api/users', (req, res, ctx) => {
+    return res(
+      ctx.status(200),
+      ctx.json([
+        { id: '1', name: 'John Doe' },
+        { id: '2', name: 'Jane Smith' },
+      ])
+    );
+  }),
+  
+  rest.get('/api/users/:id', (req, res, ctx) => {
+    const { id } = req.params;
+    return res(
+      ctx.status(200),
+      ctx.json({ id, name: id === '1' ? 'John Doe' : 'Jane Smith' })
+    );
+  }),
+  
+  rest.post('/api/users', (req, res, ctx) => {
+    return res(
+      ctx.status(201),
+      ctx.json({ id: '3', ...req.body })
+    );
+  })
+);
+
+// Start server before all tests
+beforeAll(() => server.listen());
+// Reset handlers after each test
+afterEach(() => server.resetHandlers());
+// Close server after all tests
+afterAll(() => server.close());
+```
+
+## Test Coverage
+
+- Aim for high test coverage, but prioritize critical paths
+- Test edge cases and error scenarios
+- Use `vitest --coverage` to generate coverage reports
+- Review coverage reports regularly to identify untested areas
+
+## Integration and E2E Testing
+
+- Use Cypress for end-to-end testing
+- Focus on critical user journeys
+- Test authentication flows
+- Test form submissions and complex interactions
+
+## Test Best Practices
+
+- Keep tests simple and focused on a single behavior
+- Use setup and teardown functions for common test setup
+- Avoid test interdependence
+- Write maintainable tests that don't break with minor UI changes
+- Use test-driven development (TDD) when appropriate

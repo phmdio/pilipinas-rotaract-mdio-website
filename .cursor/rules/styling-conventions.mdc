@@ -1,0 +1,48 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+# Styling Conventions
+
+This document outlines the styling conventions used in the Pilipinas Rotaract MDIO 53 project.
+
+## TailwindCSS
+
+- [tailwind.config.ts](mdc:tailwind.config.ts) contains the project's Tailwind configuration
+- Use Tailwind utility classes for styling whenever possible
+- Avoid inline CSS styles and traditional CSS files
+
+## Class Naming
+
+- Use consistent class naming for components
+- For conditional classes, prefer the following syntax:
+  ```tsx
+  className={`
+    base-classes 
+    ${condition ? 'active-class' : 'inactive-class'}
+  `}
+  ```
+
+## Theme Variables
+
+- Use theme variables defined in tailwind.config.ts
+- Color scheme should follow the project's design system
+- Maintain consistent spacing, sizing, and typography
+
+## Component Styling
+
+- Keep styling logic within component files
+- For complex components, consider using Tailwind's @apply directive in a separate CSS file
+- Use responsive classes for different screen sizes (sm:, md:, lg:, etc.)
+
+## Dark Mode
+
+- Use Tailwind's dark mode utility for dark mode support
+- Example: `className="bg-white dark:bg-gray-800"`
+
+## Accessibility
+
+- Ensure proper color contrast for text and interactive elements
+- Use appropriate text sizes for readability
+- Support keyboard navigation and focus states

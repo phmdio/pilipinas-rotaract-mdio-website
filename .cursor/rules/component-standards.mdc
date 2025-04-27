@@ -1,0 +1,79 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+# Component Standards
+
+This document outlines the standards and best practices for creating components in the Pilipinas Rotaract MDIO 53 project.
+
+## Component Organization
+
+- Components should be organized in the [src/components/](mdc:src/components) directory
+- Each component should be in its own directory with the following structure:
+  - `ComponentName/index.tsx` - Main component file
+  - `ComponentName/ComponentName.tsx` - Component implementation (optional alternative)
+  - `ComponentName/types.ts` - Type definitions (if complex)
+
+## Component Implementation
+
+- Use functional components with TypeScript
+- Props should be properly typed using interfaces or types
+- Use destructuring for props
+- Implement proper accessibility attributes
+- Add JSDoc comments for complex components
+
+## Example Component Structure
+
+```tsx
+import { useState } from 'react';
+
+interface ButtonProps {
+  variant?: 'primary' | 'secondary' | 'outline';
+  size?: 'sm' | 'md' | 'lg';
+  children: React.ReactNode;
+  onClick?: () => void;
+  disabled?: boolean;
+}
+
+export const Button = ({
+  variant = 'primary',
+  size = 'md',
+  children,
+  onClick,
+  disabled = false,
+}: ButtonProps) => {
+  const handleClick = () => {
+    if (onClick) onClick();
+  };
+
+  return (
+    <button
+      className={`rounded font-medium ${
+        variant === 'primary' 
+          ? 'bg-primary text-white' 
+          : variant === 'secondary' 
+          ? 'bg-secondary text-white' 
+          : 'bg-transparent border border-gray-300 text-gray-700'
+      } ${
+        size === 'sm' 
+          ? 'px-3 py-1 text-sm' 
+          : size === 'md' 
+          ? 'px-4 py-2' 
+          : 'px-6 py-3 text-lg'
+      } ${disabled ? 'opacity-50 cursor-not-allowed' : 'hover:opacity-90'}`}
+      onClick={handleClick}
+      disabled={disabled}
+      aria-disabled={disabled}
+    >
+      {children}
+    </button>
+  );
+};
+```
+
+## State Management
+
+- Use React hooks for state management
+- For complex state, consider using Context API or a state management library
+- Keep state as local as possible

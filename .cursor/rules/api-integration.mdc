@@ -1,0 +1,199 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+# API Integration
+
+This document outlines the API integration patterns and best practices for the Pilipinas Rotaract MDIO 53 project.
+
+## API Client Structure
+
+- Organize API calls by domain/resource in dedicated service files
+- Use TypeScript interfaces to define API request and response types
+- Implement consistent error handling across all API calls
+
+```tsx
+// Example API client for users resource
+import { User, CreateUserDto, UpdateUserDto } from '@/types';
+
+const API_BASE_URL = '/api';
+
+export const UserService = {
+  async getAll(): Promise<User[]> {
+    const response = await fetch(`${API_BASE_URL}/users`);
+    
+    if (!response.ok) {
+      throw new Error(`Failed to fetch users: ${response.statusText}`);
+    }
+    
+    return response.json();
+  },
+  
+  async getById(id: string): Promise<User> {
+    const response = await fetch(`${API_BASE_URL}/users/${id}`);
+    
+    if (!response.ok) {
+      throw new Error(`Failed to fetch user: ${response.statusText}`);
+    }
+    
+    return response.json();
+  },
+  
+  async create(data: CreateUserDto): Promise<User> {
+    const response = await fetch(`${API_BASE_URL}/users`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+    
+    if (!response.ok) {
+      throw new Error(`Failed to create user: ${response.statusText}`);
+    }
+    
+    return response.json();
+  },
+  
+  async update(id: string, data: UpdateUserDto): Promise<User> {
+    const response = await fetch(`${API_BASE_URL}/users/${id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+    
+    if (!response.ok) {
+      throw new Error(`Failed to update user: ${response.statusText}`);
+    }
+    
+    return response.json();
+  },
+  
+  async delete(id: string): Promise<void> {
+    const response = await fetch(`${API_BASE_URL}/users/${id}`, {
+      method: 'DELETE',
+    });
+    
+    if (!response.ok) {
+      throw new Error(`Failed to delete user: ${response.statusText}`);
+    }
+  },
+};
+```
+
+## React Hooks for API Integration
+
+- Create custom hooks that encapsulate API calls
+- Implement proper loading, error, and success states
+- Use TanStack Query for complex data fetching with caching
+
+```tsx
+import { useState } from 'react';
+import { UserService } from '@/services/user-service';
+import { User, CreateUserDto, UpdateUserDto } from '@/types';
+
+export const useUsers = () => {
+  const [users, setUsers] = useState<User[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<Error | null>(null);
+
+  const fetchUsers = async () => {
+    setIsLoading(true);
+    setError(null);
+    
+    try {
+      const data = await UserService.getAll();
+      setUsers(data);
+    } catch (err) {
+      setError(err instanceof Error ? err : new Error('An unknown error occurred'));
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  return {
+    users,
+    isLoading,
+    error,
+    fetchUsers,
+  };
+};
+```
+
+## Authentication
+
+- Implement secure authentication with JWT or OAuth
+- Store authentication tokens securely
+- Handle token refresh automatically
+- Protect authenticated routes
+
+## Error Handling
+
+- Implement consistent error handling for all API calls
+- Display user-friendly error messages
+- Log detailed errors for debugging
+- Implement retry logic for transient failures
+
+## Request/Response Interceptors
+
+- Implement request interceptors for adding auth headers
+- Implement response interceptors for common error handling
+- Support global loading indicators
+
+```tsx
+// Example axios interceptors setup
+import axios from 'axios';
+
+const api = axios.create({
+  baseURL: '/api',
+  timeout: 10000,
+});
+
+// Request interceptor for authentication
+api.interceptors.request.use((config) => {
+  const token = localStorage.getItem('auth_token');
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+});
+
+// Response interceptor for error handling
+api.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    // Handle 401 Unauthorized
+    if (error.response && error.response.status === 401) {
+      // Redirect to login or refresh token
+      localStorage.removeItem('auth_token');
+      window.location.href = '/login';
+    }
+    
+    // Handle 500 server errors
+    if (error.response && error.response.status >= 500) {
+      // Log to monitoring service
+      console.error('Server error:', error);
+    }
+    
+    return Promise.reject(error);
+  }
+);
+
+export default api;
+```
+
+## API Mocking
+
+- Use MSW (Mock Service Worker) for local development and testing
+- Create mock API responses that match production data structure
+- Test error states by mocking API failures
+
+## Performance Optimization
+
+- Implement data caching strategies
+- Use request debouncing and throttling where appropriate
+- Optimize API payload size
+- Consider using GraphQL for more efficient data fetching

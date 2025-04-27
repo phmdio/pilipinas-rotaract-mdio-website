@@ -1,0 +1,62 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+# TypeScript Standards
+
+This document outlines the TypeScript standards and best practices for the Pilipinas Rotaract MDIO 53 project.
+
+## Type Definitions
+
+- Create proper interfaces and types for data structures
+- Place shared types in dedicated files:
+  - Component-specific types in the component directory
+  - Global types in `src/types` directory
+
+## Type Safety
+
+- Avoid using `any` type where possible
+- Use TypeScript's utility types (Partial, Pick, Omit, etc.)
+- Define proper return types for functions
+
+## Example Type Usage
+
+```tsx
+// Component props
+interface UserCardProps {
+  user: User;
+  onSelect?: (userId: string) => void;
+  isSelected?: boolean;
+}
+
+// Data models
+interface User {
+  id: string;
+  name: string;
+  email: string;
+  role: UserRole;
+}
+
+type UserRole = 'admin' | 'editor' | 'viewer';
+
+// Function types
+const fetchUsers = async (): Promise<User[]> => {
+  // implementation
+};
+```
+
+## React + TypeScript
+
+- Use proper typing for React components and hooks
+- Type props and state explicitly
+- Use TypeScript's React-specific types:
+  - `React.FC<Props>` (if preferred)
+  - `React.ReactNode`
+  - `React.MouseEvent<HTMLButtonElement>`
+
+## Configuration
+
+- [tsconfig.json](mdc:tsconfig.json) contains the project's TypeScript configuration
+- [tsconfig.app.json](mdc:tsconfig.app.json) contains application-specific TypeScript configuration
+- [tsconfig.node.json](mdc:tsconfig.node.json) contains Node-specific TypeScript configuration

@@ -1,0 +1,116 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+# State Management
+
+This document outlines the state management patterns and best practices for the Pilipinas Rotaract MDIO 53 project.
+
+## Local Component State
+
+- Use React's `useState` hook for component-local state
+- Prefer multiple atomic state values over a single complex state object
+- Use the functional update form for state updates that depend on previous state
+
+```tsx
+// Good: Atomic state values
+const [isLoading, setIsLoading] = useState(false);
+const [error, setError] = useState<Error | null>(null);
+const [data, setData] = useState<Data | null>(null);
+
+// Good: Functional updates
+setCount(prevCount => prevCount + 1);
+
+// Avoid: Single complex state object with partial updates
+const [state, setState] = useState({ count: 0, items: [] });
+setState(prevState => ({ ...prevState, count: prevState.count + 1 }));
+```
+
+## React Context
+
+- Use Context API for state that needs to be accessed by multiple components
+- Create a separate context provider for each domain concern
+- Implement proper memoization to prevent unnecessary re-renders
+
+```tsx
+// Example context implementation
+import { createContext, useContext, useState, useMemo, ReactNode } from 'react';
+
+interface ThemeContextType {
+  theme: 'light' | 'dark';
+  toggleTheme: () => void;
+}
+
+const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
+
+export const ThemeProvider = ({ children }: { children: ReactNode }) => {
+  const [theme, setTheme] = useState<'light' | 'dark'>('light');
+
+  const toggleTheme = () => {
+    setTheme(current => (current === 'light' ? 'dark' : 'light'));
+  };
+
+  // Memoize value to prevent unnecessary re-renders
+  const value = useMemo(() => ({ theme, toggleTheme }), [theme]);
+
+  return (
+    <ThemeContext.Provider value={value}>
+      {children}
+    </ThemeContext.Provider>
+  );
+};
+
+export const useTheme = (): ThemeContextType => {
+  const context = useContext(ThemeContext);
+  if (context === undefined) {
+    throw new Error('useTheme must be used within a ThemeProvider');
+  }
+  return context;
+};
+```
+
+## External State Libraries
+
+For complex global state management, consider using:
+
+- [Zustand](https://github.com/pmndrs/zustand) - Lightweight state management
+- [Redux Toolkit](https://redux-toolkit.js.org/) - For more complex applications with many state interactions
+- [TanStack Query](https://tanstack.com/query/latest) - For server state management
+
+## State Organization
+
+- Separate UI state from domain/business state
+- Keep state as local as possible
+- Use proper state initialization and reset mechanisms
+- Implement proper loading and error states
+
+## Data Fetching
+
+- Use a consistent data fetching pattern throughout the application
+- Implement proper loading, error, and success states
+- Consider using TanStack Query for complex data fetching needs
+
+```tsx
+import { useQuery } from '@tanstack/react-query';
+
+const fetchUsers = async () => {
+  const response = await fetch('/api/users');
+  if (!response.ok) throw new Error('Failed to fetch users');
+  return response.json();
+};
+
+export const useUsers = () => {
+  return useQuery({
+    queryKey: ['users'],
+    queryFn: fetchUsers,
+  });
+};
+```
+
+## Performance Considerations
+
+- Use `React.memo` for components that render often with the same props
+- Implement proper memoization with `useMemo` and `useCallback`
+- Avoid prop drilling by using Context API for deeply nested components
+- Consider code-splitting and lazy loading for large feature modules
