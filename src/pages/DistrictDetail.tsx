@@ -8,6 +8,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import MarkdownLink from '@/components/MarkdownLink';
 import { 
   Carousel, 
   CarouselContent, 
@@ -150,7 +151,7 @@ const DistrictDetail = () => {
           
           <div className="space-y-6">
             <div className="prose prose-sm max-w-none">
-              <ReactMarkdown remarkPlugins={[remarkGfm]}>
+              <ReactMarkdown remarkPlugins={[remarkGfm]} components={{ a: MarkdownLink }}>
                 {districtDetail.description}
               </ReactMarkdown>
             </div>
@@ -170,7 +171,7 @@ const DistrictDetail = () => {
               <div className="mt-4">
                 <h3 className="text-gray-800 font-bold mb-2">Mission</h3>
                 <div className="prose prose-sm max-w-none">
-                  <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                  <ReactMarkdown remarkPlugins={[remarkGfm]} components={{ a: MarkdownLink }}>
                     {districtDetail.mission}
                   </ReactMarkdown>
                 </div>
@@ -181,7 +182,7 @@ const DistrictDetail = () => {
               <div className="mt-4">
                 <h3 className="text-gray-800 font-bold mb-2">Vision</h3>
                 <div className="prose prose-sm max-w-none">
-                  <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                  <ReactMarkdown remarkPlugins={[remarkGfm]} components={{ a: MarkdownLink }}>
                     {districtDetail.vision}
                   </ReactMarkdown>
                 </div>

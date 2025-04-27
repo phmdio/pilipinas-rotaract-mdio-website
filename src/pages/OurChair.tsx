@@ -5,6 +5,7 @@ import Footer from '@/components/Footer';
 import useLeadershipTeamQuery from '@/hooks/useLeadershipTeamQuery';
 import NoData from '@/components/NoData';
 import ReactMarkdown from 'react-markdown';
+import MarkdownLink from '@/components/MarkdownLink';
 
 const LoadingSpinner = () => (
   <div className="flex justify-center items-center">
@@ -70,7 +71,7 @@ const OurChair = () => {
             <h1 className="text-3xl font-bold mb-2">{chair?.name || "Our Chair"}</h1>
             <p className="text-sm mb-4">Pilipinas Rotaract MDIO | Multi-District Information Organization Chair</p>
             <div className="text-sm prose prose-sm prose-invert max-h-32 overflow-hidden">
-              <ReactMarkdown>{chair?.description || ""}</ReactMarkdown>
+              <ReactMarkdown components={{ a: MarkdownLink }}>{chair?.description || ""}</ReactMarkdown>
             </div>
           </div>
         </div>
@@ -96,7 +97,7 @@ const OurChair = () => {
                   <div className="w-full md:w-1/2">
                     <h2 className="text-2xl font-bold text-rotaract-magenta mb-4">{action.title}</h2>
                     <div className="text-gray-700 prose">
-                      <ReactMarkdown>{action.description}</ReactMarkdown>
+                      <ReactMarkdown components={{ a: MarkdownLink }}>{action.description}</ReactMarkdown>
                     </div>
                   </div>
                 </div>
