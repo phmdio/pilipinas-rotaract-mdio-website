@@ -77,8 +77,8 @@ const ProgramsSection = () => {
     setCurrentPage((prev) => (prev === totalPages - 1 ? 0 : prev + 1));
   };
 
-  const handleEventClick = (eventId: string, eventTitle: string, slug: string) => {
-    analyticsEvents.linkClick(`/event/${slug}`, eventTitle, {
+  const handleEventClick = (eventId: string, eventTitle: string, link: string) => {
+    analyticsEvents.linkClick(link, eventTitle, {
       event_id: eventId,
       section: 'programs-section'
     });
@@ -140,6 +140,7 @@ const ProgramsSection = () => {
           )}>
             {allEvents.slice(currentPage * itemsPerPage, (currentPage * itemsPerPage) + itemsPerPage).map((event) => {
               const slug = event.slug || generateSlugFromTitle(event.title);
+              const link = event.isProcon ? `/procon` : `/event/${slug}`;
               return (
                 <Card
                   key={event.id}
@@ -161,8 +162,8 @@ const ProgramsSection = () => {
                     </div>
                     <div className="mt-8 w-full">
                       <Link
-                        to={`${event.isProcon ? `/procon` : `/event/${slug}`}`}
-                        onClick={() => handleEventClick(event.id, event.title, slug)}
+                        to={link}
+                        onClick={() => handleEventClick(event.id, event.title, link)}
                         className="block w-full"
                       >
                         <Button
