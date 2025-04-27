@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
@@ -7,6 +7,7 @@ import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import useAnalytics from "@/hooks/useAnalytics";
 import {
   getEventDetail,
   getEventDetailBySlug,
@@ -24,6 +25,13 @@ const defaultBannerImage = "/lovable-uploads/9fd84289-5060-4393-a74d-7846bfb2443
 const OurProgramsAndActivitiesDetail = () => {
   const { eventId, eventSlug } = useParams<{ eventId?: string; eventSlug?: string }>();
   const navigate = useNavigate();
+  const { events: analyticsEvents } = useAnalytics();
+  const [currentPage, setCurrentPage] = useState(0);
+
+  // Reset pagination when navigating between different events
+  useEffect(() => {
+    setCurrentPage(0);
+  }, [eventId, eventSlug]);
 
   // Determine if we're using a slug or ID route
   const isSlugRoute = !!eventSlug;
@@ -55,6 +63,18 @@ const OurProgramsAndActivitiesDetail = () => {
     queryKey: programsAndActivitiesKeys.events,
     queryFn: getEvents,
   });
+
+  const totalPages = Math.ceil((events?.length || 0) / 3);
+
+  const handlePrevPage = () => {
+    analyticsEvents.buttonClick('event-detail-carousel-prev', { current_page: currentPage });
+    setCurrentPage((prev) => (prev === 0 ? totalPages - 1 : prev - 1));
+  };
+
+  const handleNextPage = () => {
+    analyticsEvents.buttonClick('event-detail-carousel-next', { current_page: currentPage });
+    setCurrentPage((prev) => (prev === totalPages - 1 ? 0 : prev + 1));
+  };
 
   // Redirect to modern URL format if using the old ID-based URL
   React.useEffect(() => {
@@ -304,6 +324,8 @@ const OurProgramsAndActivitiesDetail = () => {
                 size="icon"
                 className="bg-[#FFD9EC] text-[#D41A69] hover:bg-[#fccdea] shadow-none border border-[#FFD9EC]"
                 aria-label="Prev"
+                onClick={handlePrevPage}
+                disabled={isEventsLoading || (events?.length || 0) <= 3}
               >
                 <ChevronLeft size={20} />
               </Button>
@@ -311,6 +333,8 @@ const OurProgramsAndActivitiesDetail = () => {
                 size="icon"
                 className="bg-[#FFD9EC] text-[#D41A69] hover:bg-[#fccdea] shadow-none border border-[#FFD9EC]"
                 aria-label="Next"
+                onClick={handleNextPage}
+                disabled={isEventsLoading || (events?.length || 0) <= 3}
               >
                 <ChevronRight size={20} />
               </Button>
@@ -323,7 +347,7 @@ const OurProgramsAndActivitiesDetail = () => {
             </div>
           ) : (
             <div className="grid gap-7 grid-cols-1 md:grid-cols-3">
-              {events.slice(0, 3).map((event: Event) => (
+              {events.slice(currentPage * 3, (currentPage * 3) + 3).map((event: Event) => (
                 <Card
                   key={event.id}
                   className="rounded-lg overflow-hidden bg-white shadow-md border border-[#f1e9fc] flex flex-col transition hover:shadow-lg"
@@ -342,7 +366,13 @@ const OurProgramsAndActivitiesDetail = () => {
                     <div className="text-lg font-semibold text-gray-700 mb-3">
                       {event.title}
                     </div>
-                    <Link to={`/event/${event.slug}`}>
+                    <Link 
+                      to={`/event/${event.slug}`}
+                      onClick={() => analyticsEvents.linkClick(`/event/${event.slug}`, event.title, { 
+                        event_id: event.id,
+                        section: 'event-detail-related-events'
+                      })}
+                    >
                       <Button
                         variant="outline"
                         className="w-full border-[#16478E]/30 hover:bg-[#f7f3ff] rounded-full text-[#16478E] font-medium py-2 mt-auto"
