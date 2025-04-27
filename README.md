@@ -67,3 +67,25 @@ Simply open [Lovable](https://lovable.dev/projects/f8347bbb-1217-4407-9514-51098
 ## I want to use a custom domain - is that possible?
 
 We don't support custom domains (yet). If you want to deploy your project under your own domain then we recommend using Netlify. Visit our docs for more details: [Custom domains](https://docs.lovable.dev/tips-tricks/custom-domain/)
+
+## Development Tools
+
+### Contentful TypeScript Types Generator
+
+This project uses the `cf-content-types-generator` package to generate TypeScript interfaces from Contentful content models. This ensures type safety when working with Contentful data.
+
+To generate updated types:
+
+1. Make sure you have the required environment variables:
+   ```
+   VITE_CONTENTFUL_SPACE_ID=your_space_id
+   VITE_CONTENTFUL_ACCESS_TOKEN=your_access_token
+   VITE_CONTENTFUL_ENVIRONMENT=master
+   ```
+
+2. Run the generator:
+   ```bash
+   npm run generate-contentful-types
+   ```
+
+The generated types will be available in `src/types/`.
