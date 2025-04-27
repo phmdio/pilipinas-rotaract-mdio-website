@@ -118,19 +118,19 @@
       "id": "4QdQ30LoUZLzXq1etzj0rd",
       "date": "FEBRUARY 20-22, 2026",
       "title": "14TH PILIPINAS ROTARACT CONVENTION",
-      "description": "A HEARTBEAT IN PROGRESS. Stay tuned for the full rhythm, coming real soon! We Beat With You!",
+      "description": "PROCON 2026: WE BEAT WITH YOU!\n\nThe Pilipinas Rotaract Convention (PROCON) 2026 is the biggest annual gathering of Rotaractors from all 10 districts across the Philippines. Happening on February 20–22, 2026, this year’s convention heads to the vibrant City of Love — Iloilo City!\n\nWith the theme \"WE BEAT WITH YOU,\" PROCON 2026 celebrates the heart and rhythm of service, leadership, and unity. Inspired by the spirit of Iloilo, the event highlights \"From Festive Streets to Flavor Feasts,\" promising a colorful fusion of learning, culture, and fellowship. Get ready to experience dynamic sessions, lively festivities, and a taste of Iloilo’s rich traditions as we come together to beat as one.",
       "image": "https://images.ctfassets.net/dze7xj4zfu0b/36PLLdqs6juVoYrenmu6l3/45c0502d8e3932b5b7104d6b6e1ddf0c/PROCON_ILOILO.jpg",
+      "isProcon": true,
       "location": "ILOILO CITY, PHILIPPINES",
       "objectiveDetails": [
         "Learn more about this event at the event page."
       ],
-      "moreInfo": "A HEARTBEAT IN PROGRESS. Stay tuned for the full rhythm, coming real soon! We Beat With You!",
+      "moreInfo": "PROCON 2026: WE BEAT WITH YOU!\n\nThe Pilipinas Rotaract Convention (PROCON) 2026 is the biggest annual gathering of Rotaractors from all 10 districts across the Philippines. Happening on February 20–22, 2026, this year’s convention heads to the vibrant City of Love — Iloilo City!\n\nWith the theme \"WE BEAT WITH YOU,\" PROCON 2026 celebrates the heart and rhythm of service, leadership, and unity. Inspired by the spirit of Iloilo, the event highlights \"From Festive Streets to Flavor Feasts,\" promising a colorful fusion of learning, culture, and fellowship. Get ready to experience dynamic sessions, lively festivities, and a taste of Iloilo’s rich traditions as we come together to beat as one.",
       "additionalDetails": [],
-      "closingDetails": "CLOSING",
+      "closingDetails": "Stay tuned for updates!",
       "eventUrl": "https://mdio-pilipinas.netlify.app/",
-      "isProcon": true,
       "slug": "14th-pilipinas-rotaract-convention",
-      "publishedDate": "2025-04-26T17:58:15.410Z"
+      "publishedDate": "2025-04-27T02:16:16.065Z"
     },
     {
       "id": "3OkKROfI6mofGHQUQmEPxq",
@@ -138,6 +138,7 @@
       "title": "District Rotaract Representative Elect Training Seminar",
       "description": "Hipster ipsum tattooed brunch I'm baby. Schlitz seitan listicle mixtape boys trust vice. Occupy tbh street brunch keffiyeh. Bicycle diy blog banjo fingerstache tote on locavore coffee pabst. ",
       "image": "https://images.ctfassets.net/dze7xj4zfu0b/4p5JH3l4a39EYNUmrnrm74/11bc196ed250a472c16c12e33266fcb9/Rectangle_60.png",
+      "isProcon": false,
       "location": "Philippines",
       "objectiveDetails": [
         "Learn more about this event at the event page."
@@ -145,37 +146,89 @@
       "moreInfo": "Hipster ipsum tattooed brunch I'm baby. Schlitz seitan listicle mixtape boys trust vice. Occupy tbh street brunch keffiyeh. Bicycle diy blog banjo fingerstache tote on locavore coffee pabst. ",
       "additionalDetails": [],
       "closingDetails": "Visit the event page for more information.",
-      "isProcon": true,
       "slug": "district-rotaract-representative-elect-training-seminar",
       "publishedDate": "2025-04-22T19:05:09.770Z"
     }
   ],
   "events": [
     {
-      "id": "01zpeDDo0flK3oT0t5ISzv",
-      "date": "February 20-22, 2025",
-      "title": "14th PILIPINAS ROTARACT CONVENTION",
-      "description": "TEST",
-      "image": "https://images.ctfassets.net/dze7xj4zfu0b/36PLLdqs6juVoYrenmu6l3/45c0502d8e3932b5b7104d6b6e1ddf0c/PROCON_ILOILO.jpg",
-      "location": "ILOILO CITY, PHILIPPINES",
+      "id": "QXGfxfVH6RrsCtfcgQedw",
+      "date": "April 8-10, 2022",
+      "title": "10th Pilipinas Rotaract Convention",
+      "description": "City of Majestic Waterfalls, Iligan City | Hosted by Rotary International District 3870\n\nThe PROCON 2022, being the first PROCON in Mindanao and the first to be hosted face-to-face in a pandemic-stricken Philippines, was definitely a half-week to remember. Despite all the restrictions, the delegates got to enjoy the city, the company of their fellow Rotaractors and the true spirit of Rotaract, which is “Fellowship Through Service”. The annual event is a perfect venue to embrace the diversity of the Pilipinas Rotaract, while celebrating oneness of goals, service and achievements. This is definitely a great way to celebrate the Rotary year!",
+      "image": "https://images.ctfassets.net/dze7xj4zfu0b/5UKk4AieM8w0bdkwtbhoDu/dcc9fd82eaebb10086d73507e7cd3636/PROCON_ILIGAN.jpg",
+      "location": "Iligan City, Lanao del Norte, Philippines",
       "objectiveDetails": [
         "Learn more about this event at the event page."
       ],
-      "moreInfo": "TEST",
+      "moreInfo": "City of Majestic Waterfalls, Iligan City | Hosted by Rotary International District 3870\n\nThe PROCON 2022, being the first PROCON in Mindanao and the first to be hosted face-to-face in a pandemic-stricken Philippines, was definitely a half-week to remember. Despite all the restrictions, the delegates got to enjoy the city, the company of their fellow Rotaractors and the true spirit of Rotaract, which is “Fellowship Through Service”. The annual event is a perfect venue to embrace the diversity of the Pilipinas Rotaract, while celebrating oneness of goals, service and achievements. This is definitely a great way to celebrate the Rotary year!",
       "additionalDetails": [],
-      "closingDetails": "TEST",
+      "closingDetails": "City of Majestic Waterfalls, Iligan City",
+      "eventUrl": "https://rotaract.rotaryphilippines.com/.../the-procon.../",
+      "facebookPageUrl": "https://www.facebook.com/PRoCon2024",
+      "slug": "10th-pilipinas-rotaract-convention",
+      "publishedDate": "2025-04-27T02:26:42.057Z"
+    },
+    {
+      "id": "JXYwyka6mtabwCroVax7T",
+      "date": "February 16-18, 2024",
+      "title": "12th Pilipinas Rotaract Convention",
+      "description": "Cebu Waterfront Hotel and Casino | Hosted by Rotary International District 3860",
+      "image": "https://images.ctfassets.net/dze7xj4zfu0b/3t8H6rKDrufToAMqw0q41F/c6579bf6dd948ac430d4fce52e292b7d/procon_cebu.jpg",
+      "location": "Cebu City, Philippines",
+      "objectiveDetails": [
+        "Learn more about this event at the event page."
+      ],
+      "moreInfo": "Cebu Waterfront Hotel and Casino | Hosted by Rotary International District 3860",
+      "additionalDetails": [],
+      "closingDetails": "Test",
+      "eventUrl": "https://www.facebook.com/PRoCon2024",
+      "facebookPageUrl": "https://www.facebook.com/PRoCon2024",
+      "slug": "12th-pilipinas-rotaract-convention",
+      "publishedDate": "2025-04-27T02:26:14.162Z"
+    },
+    {
+      "id": "01zpeDDo0flK3oT0t5ISzv",
+      "date": "February 20-22, 2026",
+      "title": "14th Pilipinas Rotaract Convention",
+      "description": "PROCON 2026: WE BEAT WITH YOU! \n\nFebruary 20-22, 2026\nILOILO CITY, PHILIPPINES | HOSTED BY ROTARY INTERNATIONAL DISTRICT 3850",
+      "image": "https://images.ctfassets.net/dze7xj4zfu0b/36PLLdqs6juVoYrenmu6l3/45c0502d8e3932b5b7104d6b6e1ddf0c/PROCON_ILOILO.jpg",
+      "location": "Iloilo City, Philippines",
+      "objectiveDetails": [
+        "Learn more about this event at the event page."
+      ],
+      "moreInfo": "PROCON 2026: WE BEAT WITH YOU! \n\nFebruary 20-22, 2026\nILOILO CITY, PHILIPPINES | HOSTED BY ROTARY INTERNATIONAL DISTRICT 3850",
+      "additionalDetails": [],
+      "closingDetails": "Stay tuned for more updates!",
       "eventUrl": "https://www.facebook.com/profile.php?id=61575208162134",
       "facebookPageUrl": "https://www.facebook.com/profile.php?id=61575208162134",
-      "isFeatured": false,
       "slug": "14th-pilipinas-rotaract-convention",
-      "publishedDate": "2025-04-26T17:38:19.347Z"
+      "publishedDate": "2025-04-27T02:25:27.044Z"
+    },
+    {
+      "id": "4O9VzBb40b6UXLy6SOXp0H",
+      "date": "February 21-23, 2025",
+      "title": "13th Pilipinas Rotaract Convention",
+      "description": "Manila Prince Hotel, Manila City | Hosted by Rotary International District 3810",
+      "image": "https://images.ctfassets.net/dze7xj4zfu0b/6CmLuPnY3isFOn2kwlQF3d/5976edcb9b1c0e84eca5f094f6a81517/procon_sa_manila.jpg",
+      "location": "Manila City, Philippines",
+      "objectiveDetails": [
+        "Learn more about this event at the event page."
+      ],
+      "moreInfo": "Manila Prince Hotel, Manila City | Hosted by Rotary International District 3810",
+      "additionalDetails": [],
+      "closingDetails": "Test",
+      "eventUrl": "https://www.facebook.com/PROCONsaManila",
+      "facebookPageUrl": "https://www.facebook.com/PROCONsaManila",
+      "slug": "13th-pilipinas-rotaract-convention",
+      "publishedDate": "2025-04-27T02:26:00.134Z"
     },
     {
       "id": "2qE9pTGoNXslJRvBwNURxX",
       "date": "February 25-27, 2022",
-      "title": "10TH PILIPINAS ROTARACT CONVENTION",
+      "title": "11th Pilipinas Rotaract Convention",
       "description": "Royce Hotel and Casino, Clark, Pampanga | Hosted by Rotary International District 3770 under the terms of DG Arturo Que and DRR Daniel Balubal, Chaired by PDRR Joseph Zamora",
-      "image": "https://images.ctfassets.net/dze7xj4zfu0b/5k436YjCu1Z66rSp0efpeO/d61557edb70a0a5f62cecf214850af42/10th_procon.avif",
+      "image": "https://images.ctfassets.net/dze7xj4zfu0b/5k436YjCu1Z66rSp0efpeO/0d17d1b3dc64a791c74c500928537efd/11th_procon.jpg",
       "location": "Clark, Pampanga",
       "objectiveDetails": [
         "Learn more about this event at the event page."
@@ -185,9 +238,8 @@
       "closingDetails": "test",
       "eventUrl": "https://www.facebook.com/PilipinasRotaractMDIO",
       "facebookPageUrl": "https://www.facebook.com/PilipinasRotaractMDIO",
-      "isFeatured": false,
-      "slug": "10th-pilipinas-rotaract-convention",
-      "publishedDate": "2025-04-26T18:05:18.217Z"
+      "slug": "11th-pilipinas-rotaract-convention",
+      "publishedDate": "2025-04-27T02:26:29.718Z"
     }
   ],
   "statistics": [

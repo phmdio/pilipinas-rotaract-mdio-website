@@ -99,6 +99,7 @@ interface FeaturedEvent {
   additionalDetails: string[];
   closingDetails: string;
   eventUrl: string;
+  facebookPageUrl?: string;
 }
 
 interface Event {
@@ -113,6 +114,7 @@ interface Event {
   additionalDetails: string[];
   closingDetails: string;
   eventUrl: string;
+  facebookPageUrl?: string;
 }
 
 interface Statistic {
@@ -287,8 +289,7 @@ async function fetchFeaturedEvents(): Promise<FeaturedEvent[]> {
   try {
     const entries = await client.getEntries<ContentfulFields>({
       content_type: 'featuredEvent',
-      order: ['-sys.createdAt'],
-      limit: 5,
+      order: ['fields.date'],
     });
 
     return entries.items.map((item: any) => {
@@ -297,29 +298,19 @@ async function fetchFeaturedEvents(): Promise<FeaturedEvent[]> {
         id: item.sys.id,
         date: typeof item.fields.date === 'string' ? item.fields.date : new Date().toLocaleDateString(),
         title,
-        description: typeof item.fields.description === 'string' ? item.fields.description : '',
+        description: typeof item.fields.description === 'string' ? item.fields.description : 'Details coming soon.',
         image: item.fields.image?.fields?.file?.url 
           ? `https:${item.fields.image.fields.file.url}` 
           : 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=800&q=80',
+        isProcon: typeof item.fields.isProcon === 'boolean' ? item.fields.isProcon : false,
         location: typeof item.fields.location === 'string' ? item.fields.location : 'Philippines',
         objectiveDetails: Array.isArray(item.fields.objectiveDetails) ? item.fields.objectiveDetails : ['Learn more about this event at the event page.'],
         moreInfo: typeof item.fields.moreInfo === 'string' ? item.fields.moreInfo : 
-                  typeof item.fields.description === 'string' ? item.fields.description : '',
+                  typeof item.fields.description === 'string' ? item.fields.description : 'Details coming soon.',
         additionalDetails: Array.isArray(item.fields.additionalDetails) ? item.fields.additionalDetails : [],
         closingDetails: typeof item.fields.closingDetails === 'string' ? item.fields.closingDetails : 'Visit the event page for more information.',
         eventUrl: typeof item.fields.eventUrl === 'string' ? item.fields.eventUrl : undefined,
         facebookPageUrl: typeof item.fields.facebookPageUrl === 'string' ? item.fields.facebookPageUrl : undefined,
-        isProcon: true,
-        procon: item.fields.procon?.map((event: any) => ({
-          id: event.sys.id,
-          date: event.fields.date || '',
-          title: event.fields.title || '',
-          description: event.fields.description || '',
-          image: event.fields.image?.fields?.file?.url 
-            ? `https:${event.fields.image.fields.file.url}` 
-            : '',
-          slug: event.fields.slug || generateSlugFromTitle(event.fields.title || '')
-        })) || [],
         slug: generateSlugFromTitle(title),
         publishedDate: item.sys.updatedAt || item.sys.createdAt
       };
