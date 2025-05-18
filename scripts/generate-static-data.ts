@@ -303,6 +303,16 @@ async function fetchFeaturedEvents(): Promise<FeaturedEvent[]> {
           ? `https:${item.fields.image.fields.file.url}` 
           : 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=800&q=80',
         isProcon: typeof item.fields.isProcon === 'boolean' ? item.fields.isProcon : false,
+        procon: item.fields.procon?.map((event: any) => ({
+          id: event.sys.id,
+          date: event.fields.date || '',
+          title: event.fields.title || '',
+          description: event.fields.description || '',
+          image: event.fields.image?.fields?.file?.url
+              ? `https:${event.fields.image.fields.file.url}`
+              : '',
+          slug: event.fields.slug || generateSlugFromTitle(event.fields.title || '')
+        })) || [],
         location: typeof item.fields.location === 'string' ? item.fields.location : 'Philippines',
         objectiveDetails: Array.isArray(item.fields.objectiveDetails) ? item.fields.objectiveDetails : ['Learn more about this event at the event page.'],
         moreInfo: typeof item.fields.moreInfo === 'string' ? item.fields.moreInfo : 
