@@ -1,91 +1,77 @@
-# Welcome to your Lovable project
+# Pilipinas Rotaract MDIO
 
-## Project info
+Welcome to the official repository for the Pilipinas Rotaract Multi-District Information Organization (MDIO) website!
 
-**URL**: https://lovable.dev/projects/f8347bbb-1217-4407-9514-510983652c05
+## Project Info
 
-## How can I edit this code?
+- **Production Site:** [http://pilipinasrotaract.org/](http://pilipinasrotaract.org/)
+- **Staging Site:** [https://mdio-pilipinas.netlify.app/](https://mdio-pilipinas.netlify.app/)
 
-There are several ways of editing your application.
+## Tech Stack
 
-**Use Lovable**
+This project is built with:
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/f8347bbb-1217-4407-9514-510983652c05) and start prompting.
+- [Bun](https://bun.sh/) – Fast all-in-one JavaScript runtime
+- [Vite](https://vitejs.dev/) – Next Generation Frontend Tooling
+- [TypeScript](https://www.typescriptlang.org/) – Typed JavaScript at Any Scale
+- [React](https://react.dev/) – A JavaScript library for building user interfaces
+- [shadcn/ui](https://ui.shadcn.com/) – Beautifully designed UI components
+- [Tailwind CSS](https://tailwindcss.com/) – Utility-first CSS framework
+- [Contentful](https://www.contentful.com/) – Headless Content Management System
 
-Changes made via Lovable will be committed automatically to this repo.
+## Getting Started
 
-**Use your preferred IDE**
+Follow these steps to set up and run the project locally:
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+### Prerequisites
+- [Bun](https://bun.sh/) (Install via `curl -fsSL https://bun.sh/install | bash`)
+- Contentful API credentials (for content management)
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+### Installation & Development
 
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
-
-**Edit a file directly in GitHub**
-
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with .
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/f8347bbb-1217-4407-9514-510983652c05) and click on Share -> Publish.
-
-## I want to use a custom domain - is that possible?
-
-We don't support custom domains (yet). If you want to deploy your project under your own domain then we recommend using Netlify. Visit our docs for more details: [Custom domains](https://docs.lovable.dev/tips-tricks/custom-domain/)
-
-## Development Tools
-
-### Contentful TypeScript Types Generator
-
-This project uses the `cf-content-types-generator` package to generate TypeScript interfaces from Contentful content models. This ensures type safety when working with Contentful data.
-
-To generate updated types:
-
-1. Make sure you have the required environment variables:
+1. **Clone the repository:**
+   ```sh
+   git clone <YOUR_GIT_URL>
+   cd pilipinas-rotaract-mdio-website
+   ```
+2. **Install dependencies:**
+   ```sh
+   bun install
+   ```
+3. **Set up environment variables:**
+   Create a `.env` file with:
    ```
    VITE_CONTENTFUL_SPACE_ID=your_space_id
    VITE_CONTENTFUL_ACCESS_TOKEN=your_access_token
    VITE_CONTENTFUL_ENVIRONMENT=master
    ```
-
-2. Run the generator:
-   ```bash
-   npm run generate-contentful-types
+4. **Start the development server:**
+   ```sh
+   bun run dev
    ```
+   The app will be available at [http://localhost:5173](http://localhost:5173) by default.
+
+## Development Tools
+
+### Contentful Type Generation
+
+This project uses automatic type generation for Contentful models:
+
+```bash
+bun run generate-contentful-types
+```
 
 The generated types will be available in `src/types/`.
+
+## Deployment
+
+- Deploy to [Netlify](https://www.netlify.com/) or your preferred static hosting provider
+- For custom domains, see [Netlify custom domains guide](https://docs.netlify.com/domains-https/custom-domains/)
+
+## Contributing
+
+Pull requests are welcome! For major changes, please open an issue first to discuss what you would like to change.
+
+## License
+
+This project is licensed under the MIT License.
