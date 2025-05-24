@@ -54,7 +54,7 @@ const PhilippineRotaractMagazine = () => {
                   From always being a dream to our Philippine Districts first own publication magazine. The Philippine Rotaract Magazine started as the successor s official online newsletter magazine, from then it became a growing aspiration of Philippine Rotaract leaders as we achieve its milestone It was a dream that was finally achieved as it can fina This time, the Philippine Rotaract was given a chance to have its kind of newsletter magazine, that is made for Rotaractors, made by fellow Rotaractors as they sail along the same boat in reaching out to co-Rotaractor sharing their service through words and content stories by other Philippine become the strongest force that made the Philippine district In a whole.
                 </p>
                 <Link
-                  to="https://rotaract.rotaryphilippines.com/"
+                  to="https://rotaract.rotaryphilippines.com?utm_source=pilipinas_rotaract_mdio&utm_medium=website&utm_campaign=foundation_giving"
                   className="btn-rotaract inline-block"
                   target="_blank"
                 >
