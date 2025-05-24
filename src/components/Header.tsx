@@ -134,7 +134,7 @@ const Header = ({ isTransparent = false }) => {
                     <li>
                       <NavigationMenuLink asChild>
                         <Link 
-                          to="/ang-balangay" 
+                          to="/under-construction"
                           className="block p-4 hover:bg-white/10 rounded-none"
                           onClick={() => handleNavLinkClick('ang-balangay', 'Ang Balangay', '/ang-balangay')}
                         >
@@ -270,7 +270,7 @@ const Header = ({ isTransparent = false }) => {
                 <Separator className="bg-white/20" />
                 <Link to="/philippine-rotaract-magazine" className="block py-3 px-4 hover:bg-white/10" onClick={() => setIsMenuOpen(false)}>Philippine Rotaract Magazine</Link>
                 <Separator className="bg-white/20" />
-                <Link to="/ang-balangay" className="block py-3 px-4 hover:bg-white/10" onClick={() => setIsMenuOpen(false)}>Ang Balangay</Link>
+                <Link to="/under-construction" className="block py-3 px-4 hover:bg-white/10" onClick={() => setIsMenuOpen(false)}>Ang Balangay</Link>
               </div>
             </div>
 

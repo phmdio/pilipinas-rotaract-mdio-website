@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import PageHero from '@/components/PageHero';
+import { Link } from "react-router-dom";
 
 const PhilippineRotaractMagazine = () => {
   return (
@@ -52,12 +53,13 @@ const PhilippineRotaractMagazine = () => {
                 <p className="text-gray-700 mb-6">
                   From always being a dream to our Philippine Districts first own publication magazine. The Philippine Rotaract Magazine started as the successor s official online newsletter magazine, from then it became a growing aspiration of Philippine Rotaract leaders as we achieve its milestone It was a dream that was finally achieved as it can fina This time, the Philippine Rotaract was given a chance to have its kind of newsletter magazine, that is made for Rotaractors, made by fellow Rotaractors as they sail along the same boat in reaching out to co-Rotaractor sharing their service through words and content stories by other Philippine become the strongest force that made the Philippine district In a whole.
                 </p>
-                <a 
-                  href="/under-construction"
+                <Link
+                  to="https://rotaract.rotaryphilippines.com/"
                   className="btn-rotaract inline-block"
+                  target="_blank"
                 >
                   VISIT WEBSITE
-                </a>
+                </Link>
               </div>
             </div>
           </div>

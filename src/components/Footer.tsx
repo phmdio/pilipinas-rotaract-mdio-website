@@ -86,7 +86,7 @@ const Footer = () => {
                 </li>
                 <li>
                   <Link 
-                    to="/ang-balangay" 
+                    to="/under-construction"
                     className="hover:text-white/80 transition-colors"
                     onClick={() => handleNavLinkClick('footer-balangay', 'Ang Balangay', '/ang-balangay')}
                   >
