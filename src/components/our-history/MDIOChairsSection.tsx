@@ -82,7 +82,7 @@ const MDIOChairsSection = () => {
               <img 
                 src={chair.image} 
                 alt={`${chair.name}`} 
-                className="w-32 h-32 object-cover rounded-full mx-auto mb-4"
+                className="w-32 h-32 rounded-lg mx-auto mb-4"
               />
               <h3 className="font-bold">{chair.name}</h3>
               <p className="text-sm">{chair.title && chair.title.includes('-') ? chair.title : 'MDIO Chair'}</p>
