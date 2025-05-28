@@ -5,16 +5,17 @@ import { BoardMember } from '@/lib/contentful';
 
 interface BoardOfDirectorsSectionProps {
   directors: BoardMember[];
+  rotaryYear: string;
 }
 
-const BoardOfDirectorsSection = ({ directors }: BoardOfDirectorsSectionProps) => {
+const BoardOfDirectorsSection = ({ directors, rotaryYear }: BoardOfDirectorsSectionProps) => {
   if (!directors.length) return null;
   
   return (
     <section className="py-16 bg-rotaract-magenta">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-4xl font-bold text-white mb-2">Our Board of Directors</h2>
-        <p className="text-sm text-white/90 mb-4">Rotary Year 2023-2024</p>
+        <p className="text-sm text-white/90 mb-4">{rotaryYear}</p>
         <Separator className="bg-white/20 my-6" />
         <p className="text-white/90 mb-12 max-w-3xl">
           Meet our dedicated Board of Directors who provide strategic guidance and leadership to strengthen Rotaract across the Philippines.

@@ -17,7 +17,7 @@ const CoreTeamSection = ({ chair }: CoreTeamSectionProps) => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-full">
           <h2 className="text-rotaract-magenta text-4xl font-bold mb-2">Our Chair</h2>
-          <p className="text-sm text-black mb-4">Rotary Year 2023-2024</p>
+          <p className="text-sm text-black mb-4">{chair.rotaryYear}</p>
           <Separator className="bg-rotaract-magenta/20 my-6" />
           <p className="text-black/80 mb-12 max-w-3xl">
             The MDIO Chair leads with vision and dedication, working closely with District Rotaract Representatives to strengthen Rotaract across the Philippines while fostering collaboration and innovation across all districts.

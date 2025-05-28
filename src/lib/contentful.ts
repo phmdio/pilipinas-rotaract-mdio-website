@@ -59,7 +59,8 @@ export interface LeadershipChair {
   image: string;
   headerImage?: string;
   club: string;
-  isCurrentChair?: boolean;
+  isCurrentChair: boolean;
+  rotaryYear: string;
   actions?: {
     title: string;
     description: string;
@@ -1240,6 +1241,7 @@ export async function getLeadershipTeam(): Promise<LeadershipTeamData> {
       headerImage: getImageUrl(fields.headerImage, undefined),
       club: String(fields.club || ''),
       isCurrentChair: Boolean(fields.isCurrentChair || false),
+      rotaryYear: String(fields.rotaryYear || ''),
       actions
     };
   } else {
@@ -1314,6 +1316,7 @@ export const fallbackLeadershipChair: LeadershipChair = {
   headerImage: 'https://i.pravatar.cc/1800',
   club: 'Past President, Rotaract Club of Manila',
   isCurrentChair: true,
+  rotaryYear: 'Rotary Year 2023-2024',
   actions: [
     {
       title: 'About the Chair',

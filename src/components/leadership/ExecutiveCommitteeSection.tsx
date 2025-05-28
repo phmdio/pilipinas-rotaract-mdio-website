@@ -5,16 +5,17 @@ import { ExecutiveCommitteeMember } from '@/lib/contentful';
 
 interface ExecutiveCommitteeSectionProps {
   executives: ExecutiveCommitteeMember[];
+  rotaryYear: string;
 }
 
-const ExecutiveCommitteeSection = ({ executives }: ExecutiveCommitteeSectionProps) => {
+const ExecutiveCommitteeSection = ({ executives, rotaryYear }: ExecutiveCommitteeSectionProps) => {
   if (!executives.length) return null;
   
   return (
     <section className="py-16 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-4xl font-bold text-rotaract-magenta mb-2">Our Executive Committee</h2>
-        <p className="text-sm text-black mb-4">Rotary Year 2023-2024</p>
+        <p className="text-sm text-black mb-4">{rotaryYear}</p>
         <Separator className="bg-rotaract-magenta/20 my-6" />
         <p className="text-black/80 mb-12 max-w-3xl">
           Our executive committee leads key initiatives and coordinates activities across all Rotaract districts in the Philippines, ensuring alignment with our strategic goals.

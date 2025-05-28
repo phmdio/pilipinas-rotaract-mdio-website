@@ -119,10 +119,10 @@ const LeadershipTeam = () => {
           <NoData message="Leadership team data is currently unavailable. Please check back soon to meet our team." />
         ) : (
           <>
-            <CoreTeamSection chair={data?.chair} />
-            <BoardOfDirectorsSection directors={data?.boardMembers || []} />
-            <ExecutiveCommitteeSection executives={data?.executiveCommittee || []} />
-            <StaffSection staffMembers={data?.staff || []} />
+            <CoreTeamSection chair={data.chair} />
+            <BoardOfDirectorsSection directors={data?.boardMembers || []} rotaryYear={data.chair.rotaryYear} />
+            <ExecutiveCommitteeSection executives={data?.executiveCommittee || []} rotaryYear={data.chair.rotaryYear} />
+            <StaffSection staffMembers={data?.staff || []} rotaryYear={data.chair.rotaryYear} />
           </>
         )}
       </main>

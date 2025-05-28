@@ -6,9 +6,10 @@ import { StaffMember } from '@/lib/contentful';
 
 interface StaffSectionProps {
   staffMembers: StaffMember[];
+  rotaryYear: string;
 }
 
-const StaffSection = ({ staffMembers }: StaffSectionProps) => {
+const StaffSection = ({ staffMembers, rotaryYear }: StaffSectionProps) => {
   if (!staffMembers.length) return null;
   
   return (
@@ -16,7 +17,7 @@ const StaffSection = ({ staffMembers }: StaffSectionProps) => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-12">
           <h2 className="text-4xl font-bold text-rotaract-magenta mb-2">Our Staff</h2>
-          <p className="text-sm text-black mb-4">Rotary Year 2023-2024</p>
+          <p className="text-sm text-black mb-4">{rotaryYear}</p>
           <Separator className="bg-rotaract-magenta/20 my-6" />
           <p className="text-black/80 mb-8 max-w-3xl">
             Our dedicated staff members support all MDIO operations and provide administrative assistance to ensure smooth execution of our programs and initiatives.

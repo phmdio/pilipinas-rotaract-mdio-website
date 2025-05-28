@@ -161,6 +161,7 @@ interface LeadershipChair {
   image: string;
   club: string;
   isCurrentChair: boolean;
+  rotaryYear: string;
 }
 
 interface BoardMember {
@@ -527,7 +528,8 @@ async function fetchLeadershipChair(): Promise<LeadershipChair[]> {
         ? `https:${item.fields.image.fields.file.url}` 
         : 'https://i.pravatar.cc/1500',
       club: getFieldValue(item, 'club', ''),
-      isCurrentChair: getFieldValue(item, 'isCurrentChair', false)
+      isCurrentChair: getFieldValue(item, 'isCurrentChair', false),
+      rotaryYear: getFieldValue(item, 'rotaryYear', 'Rotary Year 2024-2025'),
     }));
   } catch (error) {
     console.error('Error fetching leadership chair data:', error);
