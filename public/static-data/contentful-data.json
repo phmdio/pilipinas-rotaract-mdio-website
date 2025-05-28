@@ -383,7 +383,15 @@
       "description": "Leading with dedication and innovation, our Chair works tirelessly to strengthen Rotaract's presence and impact across the Philippines, fostering collaboration between districts and empowering the next generation of leaders.",
       "image": "https://images.ctfassets.net/dze7xj4zfu0b/EXz0Vd89SXYEQDNlCeNgo/e789ca71a86357a86c3df23343e71d72/CHAN_JOHN_PHILIP_7538_-_John_Philip_Chan.JPG",
       "club": "Rotaract Club of Taguig, Rotary International District 3830",
-      "isCurrentChair": true
+      "isCurrentChair": true,
+      "rotaryYear": "Rotary Year 2024-2025",
+      "actions": [
+        {
+          "title": "Kids Who Farm",
+          "description": "Kids Who Farm",
+          "image": "https://images.ctfassets.net/dze7xj4zfu0b/7s5dH0gZNmMa0j2I8XQXdz/f4de172b59d2b328edec01d6799e58af/action_nicl.jpg"
+        }
+      ]
     }
   ],
   "boardMembers": [
@@ -471,12 +479,12 @@
   "executiveCommittee": [],
   "staffMembers": [
     {
-      "id": "6EAzudjxkGur5SL7s73Tu8",
-      "name": "PDRR Sherry Ann M. Murillo",
-      "role": "Secretary General",
-      "district": "Rotary International District 3790",
-      "club": "Rotaract Club of Mariveles Freeport",
-      "image": "https://images.ctfassets.net/dze7xj4zfu0b/4bdfv2Bv67hvPLg7AYgbVz/a40151f4a4bf8b6721e9b2f960a89f2d/inbound8495667294759037779_-_Sherry_Ann_Murillo.jpg"
+      "id": "7bV8kDu7qJpooaYGUWswGC",
+      "name": "PDRR Stephen Leo T. Ferrera",
+      "role": "Vice Chairperson",
+      "district": "Rotary International District 3870",
+      "club": "Rotaract Club of Metro Valencia",
+      "image": "https://images.ctfassets.net/dze7xj4zfu0b/7wK2GDOxlPt6yVj8VJxCYK/6938b15d16dfd3a2702b4b5edc151549/ArmandAnsaldoPhoto-8469_-_Stephen_Leo_t._Ferrera.jpg"
     },
     {
       "id": "1L3V8HkT1wG28j6P3o2f2y",
@@ -487,12 +495,12 @@
       "image": "https://images.ctfassets.net/dze7xj4zfu0b/2ykzJ9OLgEImdCejKVHtEF/170c4b03be95d75beff384a189089ef0/PDRR_PRES_RICHARD_JERIC_L._CHUA_OFFICIAL_PORTRAIT__PH_ROTARACT_MDIO_CHAIRPERSON__-_Richard_Jeric_Chua.jpg"
     },
     {
-      "id": "7bV8kDu7qJpooaYGUWswGC",
-      "name": "PDRR Stephen Leo T. Ferrera",
-      "role": "Vice Chairperson",
-      "district": "Rotary International District 3870",
-      "club": "Rotaract Club of Metro Valencia",
-      "image": "https://images.ctfassets.net/dze7xj4zfu0b/7wK2GDOxlPt6yVj8VJxCYK/6938b15d16dfd3a2702b4b5edc151549/ArmandAnsaldoPhoto-8469_-_Stephen_Leo_t._Ferrera.jpg"
+      "id": "6EAzudjxkGur5SL7s73Tu8",
+      "name": "PDRR Sherry Ann M. Murillo",
+      "role": "Secretary General",
+      "district": "Rotary International District 3790",
+      "club": "Rotaract Club of Mariveles Freeport",
+      "image": "https://images.ctfassets.net/dze7xj4zfu0b/4bdfv2Bv67hvPLg7AYgbVz/a40151f4a4bf8b6721e9b2f960a89f2d/inbound8495667294759037779_-_Sherry_Ann_Murillo.jpg"
     }
   ],
   "rotaryFoundationData": {

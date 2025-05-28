@@ -1,23 +1,24 @@
 // Script to fetch data from Contentful at build time
-import fs from 'fs';
-import path from 'path';
-import dotenv from 'dotenv';
-import { createClient, EntryCollection, Entry, Asset } from 'contentful';
+import * as fs from 'fs';
+import * as path from 'path';
+import * as dotenv from 'dotenv';
+import { createClient, Entry } from 'contentful';
 import { fileURLToPath } from 'url';
 
 // Load environment variables
 dotenv.config();
 
 // Get the directory name of the current module
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // Define a type for the slug generator function
 type SlugGenerator = (title: string) => string;
 
 // Type for Contentful fields
 interface ContentfulFields {
-  [key: string]: any;
-  fields: Record<string, any>;
+  [key: string]: unknown;
+  fields: Record<string, unknown>;
   contentTypeId: string;
 }
 
@@ -127,12 +128,12 @@ interface Statistic {
 interface RotaractDistrictData {
   year: string;
   district: string;
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 interface RotaractContributionsData {
   district: string;
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 interface RotaractStatisticCard {
@@ -235,6 +236,26 @@ function getFieldValue<T>(item: Entry<ContentfulFields>, field: string, defaultV
   return defaultValue;
 }
 
+// Helper to extract asset URL from Contentful fields
+function getAssetUrl(asset: unknown): string | undefined {
+  if (
+    asset &&
+    typeof asset === 'object' &&
+    'fields' in asset &&
+    asset.fields &&
+    typeof asset.fields === 'object' &&
+    'file' in asset.fields &&
+    asset.fields.file &&
+    typeof asset.fields.file === 'object' &&
+    'url' in asset.fields.file &&
+    typeof asset.fields.file.url === 'string'
+  ) {
+    const fileUrl = (asset as { fields: { file: { url: string } } }).fields.file.url;
+    return fileUrl.startsWith('//') ? `https:${fileUrl}` : fileUrl;
+  }
+  return undefined;
+}
+
 // Function to fetch hero carousel images
 async function fetchHeroCarouselImages(): Promise<HeroCarouselImage[]> {
   console.log('Fetching hero carousel images...');
@@ -244,11 +265,9 @@ async function fetchHeroCarouselImages(): Promise<HeroCarouselImage[]> {
       order: ['sys.createdAt'],
     });
 
-    return entries.items.map((item: any) => ({
+    return entries.items.map((item: Entry<ContentfulFields>) => ({
       title: getFieldValue(item, 'title', ''),
-      imageUrl: item.fields.image?.fields?.file?.url 
-        ? `https:${item.fields.image.fields.file.url}` 
-        : '/assets/carousel.png', // Fallback image
+      imageUrl: getAssetUrl(item.fields.image) || '/assets/carousel.png', // Fallback image
       alt: getFieldValue(item, 'alt', getFieldValue(item, 'title', 'Rotaract carousel image')),
     }));
   } catch (error) {
@@ -266,15 +285,13 @@ async function fetchDistricts(): Promise<District[]> {
       order: ['sys.createdAt'],
     });
 
-    return entries.items.map((item: any) => {
+    return entries.items.map((item: Entry<ContentfulFields>) => {
       const districtId = getFieldValue(item, 'id', '');
       
       return {
         id: districtId,
         color: getFieldValue(item, 'color', '#003366'),
-        image: item.fields.image?.fields?.file?.url 
-          ? `https:${item.fields.image.fields.file.url}` 
-          : '/assets/district/default.jpeg',
+        image: getAssetUrl(item.fields.image) || '/assets/district/default.jpeg',
         summary: getFieldValue(item, 'summary', 'Discover the vibrant community of Rotaract clubs in this district, where young professionals develop leadership skills and implement innovative service projects addressing local needs. Join us in making a positive impact through fellowship, professional development, and community service.'),
       };
     });
@@ -290,30 +307,29 @@ async function fetchFeaturedEvents(): Promise<FeaturedEvent[]> {
   try {
     const entries = await client.getEntries<ContentfulFields>({
       content_type: 'featuredEvent',
+      // @ts-expect-error: Contentful API supports ordering by fields.date
       order: ['fields.date'],
     });
 
-    return entries.items.map((item: any) => {
+    return entries.items.map((item: Entry<ContentfulFields>) => {
       const title = getFieldValue(item, 'title', 'Featured Event');
       return {
         id: item.sys.id,
         date: typeof item.fields.date === 'string' ? item.fields.date : new Date().toLocaleDateString(),
         title,
         description: typeof item.fields.description === 'string' ? item.fields.description : 'Details coming soon.',
-        image: item.fields.image?.fields?.file?.url 
-          ? `https:${item.fields.image.fields.file.url}` 
-          : 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=800&q=80',
+        image: getAssetUrl(item.fields.image) || 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=800&q=80',
         isProcon: typeof item.fields.isProcon === 'boolean' ? item.fields.isProcon : false,
-        procon: item.fields.procon?.map((event: any) => ({
-          id: event.sys.id,
-          date: event.fields.date || '',
-          title: event.fields.title || '',
-          description: event.fields.description || '',
-          image: event.fields.image?.fields?.file?.url
-              ? `https:${event.fields.image.fields.file.url}`
-              : '',
-          slug: event.fields.slug || generateSlugFromTitle(event.fields.title || '')
-        })) || [],
+        procon: Array.isArray(item.fields.procon)
+          ? (item.fields.procon as Entry<ContentfulFields>[]).map((event) => ({
+              id: event.sys.id,
+              date: event.fields.date || '',
+              title: event.fields.title || '',
+              description: event.fields.description || '',
+              image: getAssetUrl(event.fields.image) || '',
+              slug: typeof event.fields.title === 'string' ? generateSlugFromTitle(event.fields.title) : '',
+            }))
+          : [],
         location: typeof item.fields.location === 'string' ? item.fields.location : 'Philippines',
         objectiveDetails: Array.isArray(item.fields.objectiveDetails) ? item.fields.objectiveDetails : ['Learn more about this event at the event page.'],
         moreInfo: typeof item.fields.moreInfo === 'string' ? item.fields.moreInfo : 
@@ -338,20 +354,19 @@ async function fetchEvents(): Promise<Event[]> {
   try {
     const entries = await client.getEntries<ContentfulFields>({
       content_type: 'event',
+      // @ts-expect-error: Contentful API supports ordering by fields.date
       order: ['fields.date'],
       limit: 5,
     });
 
-    return entries.items.map((item: any) => {
+    return entries.items.map((item: Entry<ContentfulFields>) => {
       const title = getFieldValue(item, 'title', 'Event');
       return {
         id: item.sys.id,
         date: typeof item.fields.date === 'string' ? item.fields.date : new Date().toLocaleDateString(),
         title,
         description: typeof item.fields.description === 'string' ? item.fields.description : 'Details coming soon.',
-        image: item.fields.image?.fields?.file?.url 
-          ? `https:${item.fields.image.fields.file.url}` 
-          : 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=800&q=80',
+        image: getAssetUrl(item.fields.image) || 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=800&q=80',
         location: typeof item.fields.location === 'string' ? item.fields.location : 'Philippines',
         objectiveDetails: Array.isArray(item.fields.objectiveDetails) ? item.fields.objectiveDetails : ['Learn more about this event at the event page.'],
         moreInfo: typeof item.fields.moreInfo === 'string' ? item.fields.moreInfo : 
@@ -379,13 +394,11 @@ async function fetchStatistics(): Promise<Statistic[]> {
       order: ['sys.createdAt'],
     });
 
-    return entries.items.map((item: any) => ({
+    return entries.items.map((item: Entry<ContentfulFields>) => ({
       id: item.sys.id,
       value: getFieldValue(item, 'value', '0'),
       label: getFieldValue(item, 'label', 'Statistic'),
-      iconUrl: item.fields.icon?.fields?.file?.url 
-        ? `https:${item.fields.icon.fields.file.url}` 
-        : undefined
+      iconUrl: getAssetUrl(item.fields.icon)
     }));
   } catch (error) {
     console.error('Error fetching statistics:', error);
@@ -399,10 +412,10 @@ async function fetchRotaractDistrictData(): Promise<RotaractDistrictData[]> {
   try {
     const entries = await client.getEntries<ContentfulFields>({
       content_type: 'rotaractDistrictData',
-      order: ['fields.year', 'fields.district'],
+      order: ['sys.createdAt'],
     });
 
-    return entries.items.map((item: any) => {
+    return entries.items.map((item: Entry<ContentfulFields>) => {
       const data: RotaractDistrictData = {
         year: getFieldValue(item, 'year', ''),
         district: getFieldValue(item, 'district', ''),
@@ -429,12 +442,13 @@ async function fetchRotaractContributionsData(): Promise<RotaractContributionsDa
   try {
     const entries = await client.getEntries<ContentfulFields>({
       content_type: 'rotaractContributionsData',
+      // @ts-expect-error: Contentful API supports ordering by fields.district
       order: ['fields.district'],
     });
 
-    return entries.items.map((item: any) => {
+    return entries.items.map((item: Entry<ContentfulFields>) => {
       const data: RotaractContributionsData = {
-        district: getFieldValue(item, 'district', ''),
+        district: String(getFieldValue(item, 'district', '')),
       };
       
       // Add any dynamic fields
@@ -461,14 +475,12 @@ async function fetchRotaractStatisticCards(): Promise<RotaractStatisticCard[]> {
       order: ['sys.createdAt'],
     });
 
-    return entries.items.map((item: any) => ({
+    return entries.items.map((item: Entry<ContentfulFields>) => ({
       id: item.sys.id,
       number: getFieldValue(item, 'number', '0'),
       title: getFieldValue(item, 'title', 'Statistic'),
       description: getFieldValue(item, 'description', ''),
-      iconUrl: item.fields.icon?.fields?.file?.url 
-        ? `https:${item.fields.icon.fields.file.url}` 
-        : '/assets/statistics-icon.svg',
+      iconUrl: getAssetUrl(item.fields.icon) || '/assets/statistics-icon.svg',
     }));
   } catch (error) {
     console.error('Error fetching Rotaract statistic cards:', error);
@@ -485,7 +497,7 @@ async function fetchRotaractChartConfigs(): Promise<RotaractChartConfig[]> {
       order: ['sys.createdAt'],
     });
 
-    return entries.items.map((item: any) => ({
+    return entries.items.map((item: Entry<ContentfulFields>) => ({
       id: item.sys.id,
       title: getFieldValue(item, 'title', 'Chart'),
       dataKey: getFieldValue<string[]>(item, 'dataKey', []),
@@ -504,40 +516,30 @@ async function fetchRotaractChartConfigs(): Promise<RotaractChartConfig[]> {
 async function fetchLeadershipChair(): Promise<LeadershipChair[]> {
   console.log('Fetching leadership chair data...');
   try {
-    // First try to get current chair
-    let entries = await client.getEntries<ContentfulFields>({
+    const entries = await client.getEntries<ContentfulFields>({
       content_type: 'leadershipChair',
-      'fields.isCurrentChair': true,
-      limit: 1,
+      order: ['sys.createdAt'],
     });
-    
-    // If no current chair found, fall back to any chair
-    if (entries.items.length === 0) {
-      entries = await client.getEntries({
-        content_type: 'leadershipChair',
-        limit: 1,
-      });
-    }
-    
-    return entries.items.map((item: any) => ({
-      id: item.sys.id,
-      name: getFieldValue(item, 'name', 'MDIO Chair'),
-      title: getFieldValue(item, 'title', 'Pilipinas Multi-District Information Organization, Chair'),
-      description: getFieldValue(item, 'description', ''),
-      image: item.fields.image?.fields?.file?.url 
-        ? `https:${item.fields.image.fields.file.url}` 
-        : 'https://i.pravatar.cc/1500',
-      club: getFieldValue(item, 'club', ''),
-      isCurrentChair: getFieldValue(item, 'isCurrentChair', false),
-      rotaryYear: getFieldValue(item, 'rotaryYear', 'Rotary Year 2024-2025'),
-      actions: item.fields.actions?.map((event) => ({
-        title: event.fields.title || '',
-        description: event.fields.description || '',
-        image: event.fields.image?.fields?.file?.url
-            ? `https:${event.fields.image.fields.file.url}`
-            : '',
-      })) || [],
-    }));
+
+    return entries.items
+      .filter((item: Entry<ContentfulFields>) => getFieldValue(item, 'isCurrentChair', false))
+      .map((item: Entry<ContentfulFields>) => ({
+        id: item.sys.id,
+        name: getFieldValue(item, 'name', 'MDIO Chair'),
+        title: getFieldValue(item, 'title', 'Pilipinas Multi-District Information Organization, Chair'),
+        description: getFieldValue(item, 'description', ''),
+        image: getAssetUrl(item.fields.image) || 'https://i.pravatar.cc/1500',
+        club: getFieldValue(item, 'club', ''),
+        isCurrentChair: getFieldValue(item, 'isCurrentChair', false),
+        rotaryYear: getFieldValue(item, 'rotaryYear', 'Rotary Year 2024-2025'),
+        actions: Array.isArray(item.fields.actions)
+          ? (item.fields.actions as Entry<ContentfulFields>[]).map((event) => ({
+              title: event.fields.title || '',
+              description: event.fields.description || '',
+              image: getAssetUrl(event.fields.image) || '',
+            }))
+          : [],
+      }));
   } catch (error) {
     console.error('Error fetching leadership chair data:', error);
     return [];
@@ -550,18 +552,16 @@ async function fetchBoardMembers(): Promise<BoardMember[]> {
   try {
     const entries = await client.getEntries<ContentfulFields>({
       content_type: 'boardMember',
-      order: ['fields.district'],
+      order: ['sys.createdAt'],
     });
     
-    return entries.items.map((item: any) => ({
+    return entries.items.map((item: Entry<ContentfulFields>) => ({
       id: item.sys.id,
       name: getFieldValue(item, 'name', ''),
       title: getFieldValue(item, 'title', 'District Rotaract Representative'),
       district: getFieldValue(item, 'district', ''),
       club: getFieldValue(item, 'club', ''),
-      image: item.fields.image?.fields?.file?.url 
-        ? `https:${item.fields.image.fields.file.url}` 
-        : '/placeholder.svg',
+      image: getAssetUrl(item.fields.image) || '/placeholder.svg',
     }));
   } catch (error) {
     console.error('Error fetching board members data:', error);
@@ -575,18 +575,16 @@ async function fetchExecutiveCommittee(): Promise<ExecutiveCommitteeMember[]> {
   try {
     const entries = await client.getEntries<ContentfulFields>({
       content_type: 'executiveCommitteeMember',
-      order: ['fields.district'],
+      order: ['sys.createdAt'],
     });
     
-    return entries.items.map((item: any) => ({
+    return entries.items.map((item: Entry<ContentfulFields>) => ({
       id: item.sys.id,
       name: getFieldValue(item, 'name', ''),
       title: getFieldValue(item, 'title', ''),
       district: getFieldValue(item, 'district', ''),
       club: getFieldValue(item, 'club', ''),
-      image: item.fields.image?.fields?.file?.url 
-        ? `https:${item.fields.image.fields.file.url}` 
-        : '/placeholder.svg',
+      image: getAssetUrl(item.fields.image) || '/placeholder.svg',
     }));
   } catch (error) {
     console.error('Error fetching executive committee data:', error);
@@ -600,18 +598,16 @@ async function fetchStaffMembers(): Promise<StaffMember[]> {
   try {
     const entries = await client.getEntries<ContentfulFields>({
       content_type: 'staffMember',
-      order: ['fields.district'],
+      order: ['sys.createdAt'],
     });
     
-    return entries.items.map((item: any) => ({
+    return entries.items.map((item: Entry<ContentfulFields>) => ({
       id: item.sys.id,
       name: getFieldValue(item, 'name', ''),
       role: getFieldValue(item, 'role', ''),
       district: getFieldValue(item, 'district', ''),
       club: getFieldValue(item, 'club', ''),
-      image: item.fields.image?.fields?.file?.url 
-        ? `https:${item.fields.image.fields.file.url}` 
-        : '/placeholder.svg',
+      image: getAssetUrl(item.fields.image) || '/placeholder.svg',
     }));
   } catch (error) {
     console.error('Error fetching staff members data:', error);
@@ -652,13 +648,11 @@ async function fetchRotaryFoundationData(): Promise<RotaryFoundationData> {
 
     // Extract funds from references
     const funds: RotaryFoundationFund[] = Array.isArray(fields.funds) 
-      ? fields.funds.map((fund: any) => ({
+      ? (fields.funds as Entry<ContentfulFields>[]).map((fund: Entry<ContentfulFields>) => ({
           id: fund.sys?.id || `fund-${Math.random().toString(36).substr(2, 9)}`,
           title: String(fund.fields?.title || ''),
           description: String(fund.fields?.description || ''),
-          imageUrl: fund.fields?.image?.fields?.file?.url 
-            ? `https:${fund.fields.image.fields.file.url}` 
-            : '/assets/trf.png',
+          imageUrl: getAssetUrl(fund.fields?.image) || '/assets/trf.png',
           alt: String(fund.fields?.alt || fund.fields?.title || 'Rotary Foundation image')
         }))
       : [];
@@ -828,6 +822,6 @@ export async function generateStaticData(): Promise<void> {
 }
 
 // Run the generator if this file is executed directly
-if (import.meta.url === `file://${process.argv[1]}`) {
+if (process.argv[1] && process.argv[1].endsWith('generate-static-data.ts')) {
   generateStaticData();
-} 
+}
