@@ -541,7 +541,7 @@ async function fetchBoardMembers(): Promise<BoardMember[]> {
   try {
     const entries = await client.getEntries<ContentfulFields>({
       content_type: 'boardMember',
-      order: ['fields.name'],
+      order: ['fields.district'],
     });
     
     return entries.items.map((item: any) => ({
@@ -566,7 +566,7 @@ async function fetchExecutiveCommittee(): Promise<ExecutiveCommitteeMember[]> {
   try {
     const entries = await client.getEntries<ContentfulFields>({
       content_type: 'executiveCommitteeMember',
-      order: ['fields.name'],
+      order: ['fields.district'],
     });
     
     return entries.items.map((item: any) => ({
@@ -591,7 +591,7 @@ async function fetchStaffMembers(): Promise<StaffMember[]> {
   try {
     const entries = await client.getEntries<ContentfulFields>({
       content_type: 'staffMember',
-      order: ['fields.name'],
+      order: ['fields.district'],
     });
     
     return entries.items.map((item: any) => ({
