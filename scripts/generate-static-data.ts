@@ -530,6 +530,13 @@ async function fetchLeadershipChair(): Promise<LeadershipChair[]> {
       club: getFieldValue(item, 'club', ''),
       isCurrentChair: getFieldValue(item, 'isCurrentChair', false),
       rotaryYear: getFieldValue(item, 'rotaryYear', 'Rotary Year 2024-2025'),
+      actions: item.fields.actions?.map((event) => ({
+        title: event.fields.title || '',
+        description: event.fields.description || '',
+        image: event.fields.image?.fields?.file?.url
+            ? `https:${event.fields.image.fields.file.url}`
+            : '',
+      })) || [],
     }));
   } catch (error) {
     console.error('Error fetching leadership chair data:', error);
