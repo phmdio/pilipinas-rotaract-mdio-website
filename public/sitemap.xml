@@ -61,6 +61,21 @@
     <priority>0.3</priority>
   </url>
   <url>
+    <loc>https://www.pilipinasrotaract.org/district/3860</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.pilipinasrotaract.org/district/3770</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.pilipinasrotaract.org/district/3800</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://www.pilipinasrotaract.org/district/3820</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -81,27 +96,12 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.pilipinasrotaract.org/district/3800</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://www.pilipinasrotaract.org/district/3790</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.pilipinasrotaract.org/district/3770</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://www.pilipinasrotaract.org/district/3870</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.pilipinasrotaract.org/district/3860</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>

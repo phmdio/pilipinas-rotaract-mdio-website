@@ -4,59 +4,88 @@ This directory contains utility scripts for the Pilipinas Rotaract MDIO website.
 
 ## Available Scripts
 
-### generate-static-data.js
+### simple-build.ts (NEW - Simplified Build)
 
-This script generates static data for the website during the build process.
+This is the new simplified build script that handles all pre-build data generation:
 
-### generate-sitemap.ts
-
-This script generates a sitemap.xml file for the website based on both static routes and dynamic content from Contentful.
+- Fetches data from Contentful and saves it as static JSON
+- Generates sitemap.xml based on static and dynamic routes
+- Collects all routes for static site generation
+- Copies important files to the dist directory
 
 Usage:
 ```bash
-# Generate sitemap directly
-npm run generate-sitemap
-
-# Sitemap is automatically generated during build
+# Run the simplified build process
 npm run build
+
+# Or run just the data generation
+npm run prebuild
 ```
 
-The sitemap is generated in the `public` directory as `sitemap.xml`.
+### generate-static-data.ts
 
-### generate-sitemap.js
+Fetches data from Contentful at build time and saves it as static JSON files.
 
-JavaScript version of the sitemap generator used by the SSG build process. This script has the same functionality as generate-sitemap.ts but is written in JavaScript for direct import in the SSG build script.
+### generate-sitemap.ts
 
-The sitemap is generated in both the `public` and `dist` directories.
+Generates a sitemap.xml file for the website based on both static routes and dynamic content from Contentful.
 
-### ssg-build.js
+### generate-contentful-types.ts
 
-This script handles the Static Site Generation (SSG) build process. It now includes:
+Generates TypeScript types from Contentful content models.
 
-1. Generating the sitemap before building
-2. Building the client app
-3. Building the server renderer
-4. Copying static data
-5. Pre-rendering all routes
-6. Copying important files like robots.txt to the dist directory
+## Simplified Build Process
+
+The new build process is much simpler:
+
+1. **Prebuild Step** (`npm run prebuild`):
+   - Generates static data from Contentful
+   - Creates sitemap.xml
+   - Collects all routes for SSG
+
+2. **Build Step** (`npm run build`):
+   - Runs Vite build (standard React SPA build)
+   - Copies static files to dist directory
+
+3. **Result**: A static site with all content pre-fetched and ready for deployment
+
+## Key Improvements
+
+- ✅ **Simplified**: Reduced from 362 lines of complex SSR logic to ~100 lines
+- ✅ **Reliable**: Uses standard Vite build process
+- ✅ **Fast**: No complex server-side rendering during build
+- ✅ **Maintainable**: Easy to understand and modify
+- ✅ **Static**: All content is pre-fetched and cached as JSON
+
+## Migration from Old SSG Build
+
+The old `ssg-build.ts` script has been removed. The new process:
+
+- Uses standard Vite build instead of custom SSR
+- Pre-fetches all data during prebuild step
+- Relies on client-side routing with static data
+- Much simpler deployment and debugging
 
 ## How to Run
 
-All scripts are integrated into the npm commands and can be run through them:
+All scripts are integrated into the npm commands:
 
 ```bash
 # Run the development server
 npm run dev
 
-# Build the site (includes sitemap generation)
+# Build the site (simplified process)
 npm run build
 
 # Build for development
 npm run build:dev
 
-# Build with SSG (now includes sitemap generation)
-npm run build:ssg
-
 # Generate sitemap only
 npm run generate-sitemap
+
+# Generate static data only
+npm run generate-static-data
+
+# Generate Contentful types
+npm run generate-contentful-types
 ``` 
