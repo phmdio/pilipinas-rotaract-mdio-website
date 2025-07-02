@@ -19,6 +19,28 @@ This project is built with:
 - [Tailwind CSS](https://tailwindcss.com/) – Utility-first CSS framework
 - [Contentful](https://www.contentful.com/) – Headless Content Management System
 
+## Architecture Overview
+
+```mermaid
+graph TB
+    A[Developer] -->|Code Changes| B[Bun + Vite]
+    B -->|Hot Reload| C[React App]
+    
+    D[Contentful CMS] -->|Content API| E[Content Delivery API]
+    E -->|Fetch Content| C
+    
+    C -->|Build Process| F[Static Site Generation]
+    F -->|Generated Files| G[dist/ folder]
+    
+    G -->|Deploy| H[Netlify]
+    H -->|CDN| I[Production Site]
+    H -->|Preview| J[Staging Site]
+    
+    K[shadcn/ui] -->|Components| C
+    L[Tailwind CSS] -->|Styling| C
+    M[TypeScript] -->|Type Safety| C
+```
+
 ## Getting Started
 
 Follow these steps to set up and run the project locally:
@@ -62,6 +84,34 @@ bun run generate-contentful-types
 ```
 
 The generated types will be available in `src/types/`.
+
+## Build
+
+### Static Site Generation (SSG)
+
+To build the project for production with static site generation:
+
+```bash
+# Build for production
+bun run build:ssg
+```
+
+This command will:
+- Generate TypeScript types from Contentful
+- Compile TypeScript to JavaScript
+- Bundle and optimize all assets with Vite
+- Create a `dist/` folder with static files ready for deployment
+
+### Preview Production Build
+
+To preview the production build locally:
+
+```bash
+# Preview the built site
+bun run preview
+```
+
+The preview will be available at [http://localhost:4173](http://localhost:4173) by default.
 
 ## Deployment
 
