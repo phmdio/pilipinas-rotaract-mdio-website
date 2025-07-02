@@ -20,17 +20,23 @@ export interface TypeStaffMemberFields {
      */
     role: EntryFieldTypes.Symbol;
     /**
-     * Field type definition for field 'district' (District)
-     * @name District
+     * Field type definition for field 'team' (Team)
+     * @name Team
      * @localized false
      */
-    district: EntryFieldTypes.Symbol;
+    team: EntryFieldTypes.Symbol<"GOVERNANCE AND SUPPORT TEAM" | "INFORMATION AND COMMUNICATIONS TEAM" | "LEARNING AND DEVELOPMENT TEAM" | "MEMBERSHIP ENGAGEMENT TEAM" | "PROGRAMS TEAM">;
     /**
      * Field type definition for field 'club' (Club)
      * @name Club
      * @localized false
      */
     club: EntryFieldTypes.Symbol;
+    /**
+     * Field type definition for field 'district' (District)
+     * @name District
+     * @localized false
+     */
+    district: EntryFieldTypes.Symbol;
     /**
      * Field type definition for field 'image' (Image)
      * @name Image
@@ -45,7 +51,7 @@ export interface TypeStaffMemberFields {
  * @type {TypeStaffMemberSkeleton}
  * @author 7JiRJp09BoeEJKAfADvMTf
  * @since 2025-04-23T03:24:00.386Z
- * @version 11
+ * @version 15
  */
 export type TypeStaffMemberSkeleton = EntrySkeletonType<TypeStaffMemberFields, "staffMember">;
 /**
@@ -54,6 +60,6 @@ export type TypeStaffMemberSkeleton = EntrySkeletonType<TypeStaffMemberFields, "
  * @type {TypeStaffMember}
  * @author 7JiRJp09BoeEJKAfADvMTf
  * @since 2025-04-23T03:24:00.386Z
- * @version 11
+ * @version 15
  */
 export type TypeStaffMember<Modifiers extends ChainModifiers, Locales extends LocaleCode = LocaleCode> = Entry<TypeStaffMemberSkeleton, Modifiers, Locales>;

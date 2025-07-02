@@ -187,6 +187,7 @@ interface StaffMember {
   id: string;
   name: string;
   role: string;
+  team: string;
   district: string;
   club: string;
   image: string;
@@ -605,6 +606,7 @@ async function fetchStaffMembers(): Promise<StaffMember[]> {
       id: item.sys.id,
       name: getFieldValue(item, 'name', ''),
       role: getFieldValue(item, 'role', ''),
+      team: getFieldValue(item, 'team', ''),
       district: getFieldValue(item, 'district', ''),
       club: getFieldValue(item, 'club', ''),
       image: getAssetUrl(item.fields.image) || '/placeholder.svg',

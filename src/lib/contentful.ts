@@ -90,6 +90,7 @@ export interface StaffMember {
   id: string;
   name: string;
   role: string;
+  team: string;
   district: string;
   club: string;
   image: string;
@@ -1293,6 +1294,7 @@ export async function getLeadershipTeam(): Promise<LeadershipTeamData> {
     id: item.sys.id,
     name: String(item.fields.name || ''),
     role: String(item.fields.role || ''),
+    team: String(item.fields.team || ''),
     district: String(item.fields.district || ''),
     club: String(item.fields.club || ''),
     image: getImageUrl(item.fields.image, '/placeholder.svg'),
@@ -1381,6 +1383,7 @@ export const fallbackStaffMembers: StaffMember[] = [
     id: 'staff-1',
     name: "Patricia Mendoza",
     role: "Executive Assistant",
+    team: "Team A",
     district: "Rotary International District 3830",
     club: "Member, Rotaract Club of Manila",
     image: "/placeholder.svg"
@@ -1389,6 +1392,7 @@ export const fallbackStaffMembers: StaffMember[] = [
     id: 'staff-2',
     name: "Jose Santos",
     role: "Communications Coordinator",
+    team: "Team B",
     district: "Rotary International District 3780",
     club: "Member, Rotaract Club of Quezon City",
     image: "/placeholder.svg"

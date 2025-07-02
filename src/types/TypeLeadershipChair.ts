@@ -52,6 +52,13 @@ export interface TypeLeadershipChairFields {
      */
     isCurrentChair: EntryFieldTypes.Boolean;
     /**
+     * Field type definition for field 'rotaryYear' (Rotary Year)
+     * @name Rotary Year
+     * @localized false
+     * @summary Rotary Year YYYY-YYYY
+     */
+    rotaryYear: EntryFieldTypes.Symbol;
+    /**
      * Field type definition for field 'actions' (Actions)
      * @name Actions
      * @localized false
@@ -66,7 +73,7 @@ export interface TypeLeadershipChairFields {
  * @type {TypeLeadershipChairSkeleton}
  * @author 7JiRJp09BoeEJKAfADvMTf
  * @since 2025-04-23T03:11:57.046Z
- * @version 11
+ * @version 13
  */
 export type TypeLeadershipChairSkeleton = EntrySkeletonType<TypeLeadershipChairFields, "leadershipChair">;
 /**
@@ -75,6 +82,6 @@ export type TypeLeadershipChairSkeleton = EntrySkeletonType<TypeLeadershipChairF
  * @type {TypeLeadershipChair}
  * @author 7JiRJp09BoeEJKAfADvMTf
  * @since 2025-04-23T03:11:57.046Z
- * @version 11
+ * @version 13
  */
 export type TypeLeadershipChair<Modifiers extends ChainModifiers, Locales extends LocaleCode = LocaleCode> = Entry<TypeLeadershipChairSkeleton, Modifiers, Locales>;

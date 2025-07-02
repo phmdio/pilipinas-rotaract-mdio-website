@@ -20,17 +20,17 @@ export interface TypeBoardMemberFields {
      */
     title: EntryFieldTypes.Symbol;
     /**
-     * Field type definition for field 'district' (District)
-     * @name District
-     * @localized false
-     */
-    district: EntryFieldTypes.Symbol;
-    /**
      * Field type definition for field 'club' (Club)
      * @name Club
      * @localized false
      */
     club: EntryFieldTypes.Symbol;
+    /**
+     * Field type definition for field 'district' (District)
+     * @name District
+     * @localized false
+     */
+    district: EntryFieldTypes.Symbol;
     /**
      * Field type definition for field 'image' (Image)
      * @name Image
@@ -45,7 +45,7 @@ export interface TypeBoardMemberFields {
  * @type {TypeBoardMemberSkeleton}
  * @author 7JiRJp09BoeEJKAfADvMTf
  * @since 2025-04-23T03:14:07.547Z
- * @version 3
+ * @version 5
  */
 export type TypeBoardMemberSkeleton = EntrySkeletonType<TypeBoardMemberFields, "boardMember">;
 /**
@@ -54,6 +54,6 @@ export type TypeBoardMemberSkeleton = EntrySkeletonType<TypeBoardMemberFields, "
  * @type {TypeBoardMember}
  * @author 7JiRJp09BoeEJKAfADvMTf
  * @since 2025-04-23T03:14:07.547Z
- * @version 3
+ * @version 5
  */
 export type TypeBoardMember<Modifiers extends ChainModifiers, Locales extends LocaleCode = LocaleCode> = Entry<TypeBoardMemberSkeleton, Modifiers, Locales>;
