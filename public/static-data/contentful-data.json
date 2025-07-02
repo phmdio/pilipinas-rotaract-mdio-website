@@ -103,8 +103,8 @@
     {
       "id": "3860",
       "color": "#66819A",
-      "image": "https://images.ctfassets.net/dze7xj4zfu0b/1nMGPnGl5P82tJils5PBin/2d7f6f9200745a5a1a1bbfb627c919bb/3860.jpeg",
-      "summary": "Discover the vibrant community of Rotaract clubs in this district, where young professionals develop leadership skills and implement innovative service projects addressing local needs. Join us in making a positive impact through fellowship, professional development, and community service."
+      "image": "https://images.ctfassets.net/dze7xj4zfu0b/133BdteIV3uI0X9FEO9FMt/b54684219b517c20d549d3812ba83f63/485010841_985035533731337_7435048167858166130_n.jpg",
+      "summary": "Rotary International District 3860 is hailed as the most festive and culturally rich district in the Philippines. Encompassing Regions 7, 8, 11, 12, and 13, it spans a diverse and dynamic territory."
     },
     {
       "id": "3870",
@@ -307,10 +307,64 @@
   ],
   "rotaractStatisticsDistrict": [
     {
-      "year": "2024",
+      "year": "April 2025",
       "district": "3770",
-      "members": 1200,
-      "clubs": 65
+      "members": 776,
+      "clubs": 45
+    },
+    {
+      "year": "April 2025",
+      "district": "3780",
+      "members": 711,
+      "clubs": 61
+    },
+    {
+      "year": "April 2025",
+      "district": "3790",
+      "members": 501,
+      "clubs": 56
+    },
+    {
+      "year": "April 2025",
+      "district": "3800",
+      "members": 971,
+      "clubs": 83
+    },
+    {
+      "year": "April 2025",
+      "district": "3810",
+      "members": 839,
+      "clubs": 59
+    },
+    {
+      "year": "April 2025",
+      "district": "3820",
+      "members": 1171,
+      "clubs": 89
+    },
+    {
+      "year": "April 2025",
+      "district": "3830",
+      "members": 1012,
+      "clubs": 76
+    },
+    {
+      "year": "April 2025",
+      "district": "3850",
+      "members": 553,
+      "clubs": 34
+    },
+    {
+      "year": "April 2025",
+      "district": "3860",
+      "members": 1168,
+      "clubs": 81
+    },
+    {
+      "year": "April 2025",
+      "district": "3870",
+      "members": 392,
+      "clubs": 24
     }
   ],
   "rotaractStatisticsContributions": [
@@ -318,6 +372,11 @@
       "district": "3770",
       "annualFund": 850000,
       "polioPlus": 400000
+    },
+    {
+      "district": "3850",
+      "annualFund": 70,
+      "polioPlus": 395
     }
   ],
   "rotaractStatisticsCards": [
@@ -387,8 +446,8 @@
       "rotaryYear": "Rotary Year 2024-2025",
       "actions": [
         {
-          "title": "Kids Who Farm",
-          "description": "Kids Who Farm",
+          "title": "Chairperson, Pilipinas Rotaract Multi-District Information Organization (MDIO) Rotary Year 2025–2026",
+          "description": "PDRR John Philip Chan has already become a name synonymous with servant leadership, purpose-driven impact, and unwavering dedication to the ideals of Rotaract. With a heart for public service and a mind sharpened by experience, John stands today as the Chairperson of the Pilipinas Rotaract Multi-District Information Organization—leading the nation’s premier platform for collaboration and innovation among Rotaract clubs in the Philippines.\n\nA proud graduate of Lyceum of the Philippines University – Manila with a degree in Foreign Service, Major in Diplomacy, John continues to pursue excellence through graduate studies in Public Management at the University of the Philippines – Open University. His academic journey is marked not only by scholarly pursuits but by a commitment to make governance work for the people.\n\nHis leadership extends far beyond the classroom. John has served at the heart of Philippine policymaking—as Deputy Party List Manager under Congresswoman Marissa “Del Mar” Magsino and as a Political Affairs Officer under the distinguished Senator Richard J. Gordon. Recognized early on for his leadership potential, he was awarded the Gerry Roxas Leadership Award—a reflection of the impact he continues to make.\n\nBut it is in Rotaract where John’s passion truly found its purpose.\n\nFrom his beginnings as President of the Rotaract Club of South Signal Village, he quickly rose as a transformational leader. Under his guidance, the club garnered multiple awards across all avenues of service, including gold, silver, and bronze distinctions for its impactful programs. His excellence in leadership earned him the rare honor of being appointed District Secretary of Rotaract District 3830 for two consecutive terms—proof of his consistency, credibility, and character.\n\nIn 2017, John made history. Not only was he elected as President of the LPU English Club—the university’s largest student organization—but he also became the first elected District Rotaract Representative-Nominee and, later, the youngest District Rotaract Representative of RI District 3830. At just 22, he led 71 clubs across Metro Manila and Palawan, setting a new standard for youth-led governance in Rotary.\n\nAfter his trailblazing term, he co-founded the Rotaract Club of Taguig—the first in his district and one of only two in the country without a sponsoring Rotary club. This bold and barrier-breaking move united seasoned leaders from four different clubs, proving that collaboration—not structure—creates impact.\n\nJohn’s journey in Pilipinas Rotaract MDIO is equally inspiring. From a Learning and Development Associate to Deputy Chief for Policy and Process Improvement, to a two-term Treasurer—and now, Chairperson—he has embodied the MDIO’s mission to connect, empower, and elevate Filipino Rotaractors. Under his leadership, the MDIO continues to champion excellence, innovation, and unity across all districts nationwide.\n\nMore than his titles, it is John’s humility, vision, and authenticity that define him. He reminds us that age is not a limitation, that service is not about status, and that leadership is not about being in front—but being for others.\n\nJohn Philip Chan is not just a leader of today—he is a catalyst for tomorrow, and a living example of what’s possible when passion meets purpose in the spirit of “Service Above Self.”",
           "image": "https://images.ctfassets.net/dze7xj4zfu0b/7s5dH0gZNmMa0j2I8XQXdz/f4de172b59d2b328edec01d6799e58af/action_nicl.jpg"
         }
       ]
