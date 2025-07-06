@@ -81,9 +81,22 @@ interface HeroCarouselImage {
 
 interface District {
   id: string;
+  title: string;
+  description: string;
   color: string;
   image: string;
   summary: string;
+  gallery: Array<{
+    url: string;
+    title: string;
+    description: string;
+  }>;
+  representatives: Array<{
+    name: string;
+    title: string;
+    club: string;
+    image: string;
+  }>;
 }
 
 interface FeaturedEvent {
@@ -279,7 +292,7 @@ async function fetchHeroCarouselImages(): Promise<HeroCarouselImage[]> {
 
 // Function to fetch districts with all details
 async function fetchDistricts(): Promise<District[]> {
-  console.log('Fetching districts with basic details...');
+  console.log('Fetching districts with full details...');
   try {
     const entries = await client.getEntries<ContentfulFields>({
       content_type: 'district',
@@ -289,11 +302,34 @@ async function fetchDistricts(): Promise<District[]> {
     return entries.items.map((item: Entry<ContentfulFields>) => {
       const districtId = getFieldValue(item, 'id', '');
       
+      // Process gallery
+      const gallery = Array.isArray(item.fields.gallery)
+        ? (item.fields.gallery as Entry<ContentfulFields>[]).map((galleryItem) => ({
+            url: getAssetUrl(galleryItem.fields.image) || '/placeholder.svg',
+            title: getFieldValue(galleryItem, 'title', 'Gallery Image'),
+            description: getFieldValue(galleryItem, 'description', ''),
+          }))
+        : [];
+
+      // Process representatives
+      const representatives = Array.isArray(item.fields.representatives)
+        ? (item.fields.representatives as Entry<ContentfulFields>[]).map((rep) => ({
+            name: getFieldValue(rep, 'name', ''),
+            title: getFieldValue(rep, 'title', 'District Representative'),
+            club: getFieldValue(rep, 'club', ''),
+            image: getAssetUrl(rep.fields.image) || '/placeholder.svg',
+          }))
+        : [];
+      
       return {
         id: districtId,
+        title: getFieldValue(item, 'title', `District ${districtId}`),
+        description: getFieldValue(item, 'description', 'Learn more about the vibrant community of Rotaract clubs in this district, where young professionals develop leadership skills and implement innovative service projects addressing local needs.'),
         color: getFieldValue(item, 'color', '#003366'),
         image: getAssetUrl(item.fields.image) || '/assets/district/default.jpeg',
         summary: getFieldValue(item, 'summary', 'Discover the vibrant community of Rotaract clubs in this district, where young professionals develop leadership skills and implement innovative service projects addressing local needs. Join us in making a positive impact through fellowship, professional development, and community service.'),
+        gallery,
+        representatives,
       };
     });
   } catch (error) {
@@ -337,7 +373,7 @@ async function fetchFeaturedEvents(): Promise<FeaturedEvent[]> {
                   typeof item.fields.description === 'string' ? item.fields.description : 'Details coming soon.',
         additionalDetails: Array.isArray(item.fields.additionalDetails) ? item.fields.additionalDetails : [],
         closingDetails: typeof item.fields.closingDetails === 'string' ? item.fields.closingDetails : 'Visit the event page for more information.',
-        eventUrl: typeof item.fields.eventUrl === 'string' ? item.fields.eventUrl : undefined,
+        eventUrl: typeof item.fields.eventUrl === 'string' ? item.fields.eventUrl : '#',
         facebookPageUrl: typeof item.fields.facebookPageUrl === 'string' ? item.fields.facebookPageUrl : undefined,
         slug: generateSlugFromTitle(title),
         publishedDate: item.sys.updatedAt || item.sys.createdAt
@@ -374,7 +410,7 @@ async function fetchEvents(): Promise<Event[]> {
                   typeof item.fields.description === 'string' ? item.fields.description : 'Details coming soon.',
         additionalDetails: Array.isArray(item.fields.additionalDetails) ? item.fields.additionalDetails : [],
         closingDetails: typeof item.fields.closingDetails === 'string' ? item.fields.closingDetails : 'Visit the event page for more information.',
-        eventUrl: typeof item.fields.eventUrl === 'string' ? item.fields.eventUrl : undefined,
+        eventUrl: typeof item.fields.eventUrl === 'string' ? item.fields.eventUrl : '#',
         facebookPageUrl: typeof item.fields.facebookPageUrl === 'string' ? item.fields.facebookPageUrl : undefined,
         slug: generateSlugFromTitle(title),
         publishedDate: item.sys.updatedAt || item.sys.createdAt

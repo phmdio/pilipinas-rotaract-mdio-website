@@ -1,127 +1,177 @@
-# Pilipinas Rotaract MDIO
+# Pilipinas Rotaract MDIO Website
 
-Welcome to the official repository for the Pilipinas Rotaract Multi-District Information Organization (MDIO) website!
+A static website built for the Pilipinas Multi-District Information Organization (MDIO) showcasing Rotaract districts, events, leadership, and foundation initiatives across the Philippines.
 
-## Project Info
-
-- **Production Site:** [http://pilipinasrotaract.org/](http://pilipinasrotaract.org/)
-- **Staging Site:** [https://mdio-pilipinas.netlify.app/](https://mdio-pilipinas.netlify.app/)
+**Live Site:** [pilipinas-rotaract.vercel.app](https://pilipinas-rotaract.vercel.app)  
+**Staging:** [staging.pilipinas-rotaract.vercel.app](https://staging.pilipinas-rotaract.vercel.app)
 
 ## Tech Stack
 
-This project is built with:
-
-- [Bun](https://bun.sh/) – Fast all-in-one JavaScript runtime
-- [Vite](https://vitejs.dev/) – Next Generation Frontend Tooling
-- [TypeScript](https://www.typescriptlang.org/) – Typed JavaScript at Any Scale
-- [React](https://react.dev/) – A JavaScript library for building user interfaces
-- [shadcn/ui](https://ui.shadcn.com/) – Beautifully designed UI components
-- [Tailwind CSS](https://tailwindcss.com/) – Utility-first CSS framework
-- [Contentful](https://www.contentful.com/) – Headless Content Management System
+- **Runtime:** [Bun](https://bun.sh)
+- **Build Tool:** [Vite](https://vitejs.dev)
+- **Language:** [TypeScript](https://www.typescriptlang.org)
+- **Framework:** [React 18+](https://react.dev)
+- **UI Components:** [shadcn/ui](https://ui.shadcn.com) ([Radix UI](https://www.radix-ui.com) primitives)
+- **Styling:** [Tailwind CSS](https://tailwindcss.com)
+- **CMS:** [Contentful](https://www.contentful.com) (headless CMS)
+- **Deployment:** [Vercel](https://vercel.com)
+- **Architecture:** **True Static Site Generation (SSG)**
 
 ## Architecture Overview
 
+This website uses **True Static Site Generation (SSG)** - all content is pre-generated at build time and served as static files.
+
 ```mermaid
-graph TB
-    A[Developer] -->|Code Changes| B[Bun + Vite]
-    B -->|Hot Reload| C[React App]
+graph TD
+    A[Contentful CMS] -->|Build Time| B[Static Data Generation]
+    B --> C[JSON Files in /public/static-data/]
+    C -->|Build Time| D[React Components]
+    D --> E[Static HTML/CSS/JS]
+    E --> F[CDN/Hosting]
+    F --> G[Users]
     
-    D[Contentful CMS] -->|Content API| E[Content Delivery API]
-    E -->|Fetch Content| C
-    
-    C -->|Build Process| F[Static Site Generation]
-    F -->|Generated Files| G[dist/ folder]
-    
-    G -->|Deploy| H[Netlify]
-    H -->|CDN| I[Production Site]
-    H -->|Preview| J[Staging Site]
-    
-    K[shadcn/ui] -->|Components| C
-    L[Tailwind CSS] -->|Styling| C
-    M[TypeScript] -->|Type Safety| C
+    H[Content Updates] --> A
+    A -.->|Requires Rebuild| I[New Build & Deploy]
+    I --> F
 ```
+
+### Key Features:
+- **Zero Runtime API Calls** in production
+- **Lightning Fast** loading times
+- **SEO Optimized** with pre-rendered content
+- **CDN Friendly** - fully static assets
+- **Offline Capable** after initial load
 
 ## Getting Started
 
-Follow these steps to set up and run the project locally:
-
 ### Prerequisites
-- [Bun](https://bun.sh/) (Install via `curl -fsSL https://bun.sh/install | bash`)
-- Contentful API credentials (for content management)
 
-### Installation & Development
+- [Bun](https://bun.sh) - JavaScript runtime and package manager
+- Node.js (for compatibility)
+- Contentful account (for content management)
 
-1. **Clone the repository:**
-   ```sh
-   git clone <YOUR_GIT_URL>
+### Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/your-username/pilipinas-rotaract-mdio-website.git
    cd pilipinas-rotaract-mdio-website
    ```
-2. **Install dependencies:**
-   ```sh
+
+2. **Install dependencies**
+   ```bash
    bun install
    ```
-3. **Set up environment variables:**
-   Create a `.env` file with:
-   ```
+
+3. **Set up environment variables**
+   
+   Create a `.env` file in the root directory:
+   ```env
+   # Contentful Configuration
    VITE_CONTENTFUL_SPACE_ID=your_space_id
    VITE_CONTENTFUL_ACCESS_TOKEN=your_access_token
    VITE_CONTENTFUL_ENVIRONMENT=master
    ```
-4. **Start the development server:**
-   ```sh
+
+4. **Generate static data**
+   ```bash
+   bun run generate-static-data
+   ```
+
+5. **Start development server**
+   ```bash
    bun run dev
    ```
-   The app will be available at [http://localhost:5173](http://localhost:5173) by default.
 
-## Development Tools
+6. **Build for production**
+   ```bash
+   bun run build
+   ```
 
-### Contentful Type Generation
+7. **Preview production build**
+   ```bash
+   bun run preview
+   ```
 
-This project uses automatic type generation for Contentful models:
+## Static Site Generation (SSG) Behavior
 
-```bash
-bun run generate-contentful-types
+### True SSG in Production
+- **No API calls** are made to Contentful during runtime
+- All content is loaded from pre-generated JSON files
+- Content is **frozen at build time**
+- New content requires a **rebuild and redeploy**
+
+### Development Mode
+- Tries to use live API calls to Contentful for easier development
+- Falls back to static data if API is unavailable
+- Falls back to hardcoded fallback data if both API and static data fail
+
+### Content Update Workflow
+1. Update content in Contentful CMS
+2. Run `bun run generate-static-data` to fetch latest content
+3. Run `bun run build` to build the site with new content
+4. Deploy the updated `dist/` folder
+
+### Environment Variable Reference
+
+| Variable | Description | Default | Required |
+|----------|-------------|---------|----------|
+| `VITE_CONTENTFUL_SPACE_ID` | Contentful space ID | - | ✅ |
+| `VITE_CONTENTFUL_ACCESS_TOKEN` | Contentful access token | - | ✅ |
+| `VITE_CONTENTFUL_ENVIRONMENT` | Contentful environment | `master` | ❌ |
+
+**Note:** In production, only static data is used. Development mode can use live API calls as the primary source.
+
+## Scripts
+
+| Command | Description |
+|---------|-------------|
+| `bun run dev` | Start development server |
+| `bun run build` | Build for production |
+| `bun run preview` | Preview production build |
+| `bun run generate-static-data` | Generate static data from Contentful |
+| `bun run lint` | Run ESLint |
+| `bun run type-check` | Run TypeScript checks |
+
+## Project Structure
+
 ```
+src/
+├── components/          # React components
+│   ├── ui/             # shadcn/ui components
+│   └── sections/       # Page sections
+├── pages/              # Page components
+├── lib/                # Utilities and services
+│   ├── contentful.ts   # Contentful service layer
+│   └── utils.ts        # Helper functions
+├── data/               # Static data and fallbacks
+├── types/              # TypeScript type definitions
+└── styles/             # Global styles
 
-The generated types will be available in `src/types/`.
+public/
+├── static-data/        # Generated static JSON files
+├── assets/             # Static assets
+└── ...                 # Other public files
 
-## Build
-
-### Static Site Generation (SSG)
-
-To build the project for production with static site generation:
-
-```bash
-# Build for production
-bun run build:ssg
+scripts/
+└── generate-static-data.ts  # Static data generation script
 ```
-
-This command will:
-- Generate TypeScript types from Contentful
-- Compile TypeScript to JavaScript
-- Bundle and optimize all assets with Vite
-- Create a `dist/` folder with static files ready for deployment
-
-### Preview Production Build
-
-To preview the production build locally:
-
-```bash
-# Preview the built site
-bun run preview
-```
-
-The preview will be available at [http://localhost:4173](http://localhost:4173) by default.
-
-## Deployment
-
-- Deploy to [Netlify](https://www.netlify.com/) or your preferred static hosting provider
-- For custom domains, see [Netlify custom domains guide](https://docs.netlify.com/domains-https/custom-domains/)
 
 ## Contributing
 
-Pull requests are welcome! For major changes, please open an issue first to discuss what you would like to change.
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Make your changes
+4. Generate updated static data if needed (`bun run generate-static-data`)
+5. Test your changes (`bun run build && bun run preview`)
+6. Commit your changes (`git commit -m 'Add some amazing feature'`)
+7. Push to the branch (`git push origin feature/amazing-feature`)
+8. Open a Pull Request
 
 ## License
 
-This project is licensed under the MIT License.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Support
+
+For support, please contact the Pilipinas Rotaract MDIO team or create an issue in this repository.

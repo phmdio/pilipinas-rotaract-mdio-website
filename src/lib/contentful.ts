@@ -4,12 +4,12 @@ import { StaticContentfulData } from '@/data/contentful-static';
 // Static data flag - set to true to use static data from JSON files
 const USE_STATIC_DATA = import.meta.env.MODE === 'production';
 
-// Initialize the Contentful client
-const client = createClient({
+// Initialize the Contentful client (only used in development)
+const client = !USE_STATIC_DATA ? createClient({
   space: import.meta.env.VITE_CONTENTFUL_SPACE_ID,
   accessToken: import.meta.env.VITE_CONTENTFUL_ACCESS_TOKEN,
   environment: import.meta.env.VITE_CONTENTFUL_ENVIRONMENT || 'master',
-});
+}) : null;
 
 // Type definition for Hero carousel images
 export interface HeroCarouselImage {
@@ -343,75 +343,130 @@ async function loadStaticSingleData<T>(key: keyof StaticContentfulData): Promise
 
 // Function to fetch hero carousel images
 export async function getHeroCarouselImages(): Promise<HeroCarouselImage[]> {
-  // Try to load from static data first
+  // In production, always use static data
   if (USE_STATIC_DATA) {
     try {
       return await loadStaticData<HeroCarouselImage>('heroCarouselImages');
     } catch (error) {
-      console.warn('Falling back to API for hero carousel images');
+      console.warn('Static data failed, using fallback for hero carousel images');
+      return fallbackCarouselImages;
     }
   }
   
-  // Fall back to API if static data loading fails or is disabled
-  const entries = await client.getEntries({
-    content_type: 'heroCarouselImage',
-    order: ['sys.createdAt'],
-  });
+  // Development mode - try API first, fallback to static if API fails
+  if (client) {
+    try {
+      const entries = await client.getEntries({
+        content_type: 'heroCarouselImage',
+        order: ['sys.createdAt'],
+      });
 
-  return entries.items.map((item: any) => ({
-    title: item.fields.title,
-    imageUrl: item.fields.image?.fields?.file?.url 
-      ? `https:${item.fields.image.fields.file.url}` 
-      : '/assets/carousel.png', // Fallback image
-    alt: item.fields.alt || item.fields.title || 'Rotaract carousel image',
-  }));
+      return entries.items.map((item: any) => ({
+        title: item.fields.title,
+        imageUrl: item.fields.image?.fields?.file?.url 
+          ? `https:${item.fields.image.fields.file.url}` 
+          : '/assets/carousel.png', // Fallback image
+        alt: item.fields.alt || item.fields.title || 'Rotaract carousel image',
+      }));
+    } catch (error) {
+      console.warn('API failed in development, falling back to static data');
+      try {
+        return await loadStaticData<HeroCarouselImage>('heroCarouselImages');
+      } catch (staticError) {
+        console.warn('Static data also failed, using fallback');
+        return fallbackCarouselImages;
+      }
+    }
+  }
+  
+  // Fallback data for development when API is not available
+  return fallbackCarouselImages;
 }
 
 // Function to fetch district data
 export async function getDistricts(): Promise<BaseDistrict[]> {
-  // Try to load from static data first
+  // In production, always use static data
   if (USE_STATIC_DATA) {
     try {
       return await loadStaticData<BaseDistrict>('districts');
     } catch (error) {
-      console.warn('Falling back to API for districts data');
+      console.warn('Static data failed, using fallback for districts data');
+      return fallbackDistrictData;
     }
   }
   
-  // Fall back to API if static data loading fails or is disabled
-  const entries = await client.getEntries({
-    content_type: 'district',
-    order: ['sys.createdAt'],
-  });
+  // Development mode - try API first, fallback to static if API fails
+  if (client) {
+    try {
+      const entries = await client.getEntries({
+        content_type: 'district',
+        order: ['sys.createdAt'],
+      });
 
-  return entries.items.map((item: any) => ({
-    id: item.fields.id || '',
-    color: item.fields.color || '#003366',
-    image: item.fields.image?.fields?.file?.url 
-      ? `https:${item.fields.image.fields.file.url}` 
-      : '/assets/district/default.jpeg',
-    summary: item.fields.summary || 'Discover the vibrant community of Rotaract clubs in this district, where young professionals develop leadership skills and implement innovative service projects addressing local needs. Join us in making a positive impact through fellowship, professional development, and community service.',
-  }));
+      return entries.items.map((item: any) => ({
+        id: item.fields.id || '',
+        color: item.fields.color || '#003366',
+        image: item.fields.image?.fields?.file?.url 
+          ? `https:${item.fields.image.fields.file.url}` 
+          : '/assets/district/default.jpeg',
+        summary: item.fields.summary || 'Discover the vibrant community of Rotaract clubs in this district, where young professionals develop leadership skills and implement innovative service projects addressing local needs. Join us in making a positive impact through fellowship, professional development, and community service.',
+      }));
+    } catch (error) {
+      console.warn('API failed in development, falling back to static data');
+      try {
+        return await loadStaticData<BaseDistrict>('districts');
+      } catch (staticError) {
+        console.warn('Static data also failed, using fallback');
+        return fallbackDistrictData;
+      }
+    }
+  }
+  
+  // Fallback data for development when API is not available
+  return fallbackDistrictData;
 }
 
 // Function to fetch district detail data
 export async function getDistrictDetail(districtId: string): Promise<District> {
-  // Try to load from static data first
+  // In production, always use static data
   if (USE_STATIC_DATA) {
     try {
-      const districts = await loadStaticData<BaseDistrict>('districts');
+      const districts = await loadStaticData<District>('districts');
       const district = districts.find(d => d.id === districtId);
       if (district) {
-        // Fetch full detail from API since static data only has BaseDistrict
-        return await fetchDistrictFromContentful(districtId);
+        // Return the full district data from static data
+        return district;
       }
       console.warn(`District detail for ${districtId} not found in static data`);
+      return createFallbackDistrictDetail(districtId);
     } catch (error) {
-      console.warn('Falling back to API for district detail data');
+      console.warn('Static data failed, using fallback for district detail data');
+      return createFallbackDistrictDetail(districtId);
     }
   }
   
-  return fetchDistrictFromContentful(districtId);
+  // Development mode - try API first, fallback to static if API fails
+  if (client) {
+    try {
+      return await fetchDistrictFromContentful(districtId);
+    } catch (error) {
+      console.warn('API failed in development, falling back to static data');
+      try {
+        const districts = await loadStaticData<District>('districts');
+        const district = districts.find(d => d.id === districtId);
+        if (district) {
+          return district;
+        }
+        return createFallbackDistrictDetail(districtId);
+      } catch (staticError) {
+        console.warn('Static data also failed, using fallback');
+        return createFallbackDistrictDetail(districtId);
+      }
+    }
+  }
+  
+  // Fallback data for development when API is not available
+  return createFallbackDistrictDetail(districtId);
 }
 
 // Helper function to fetch complete district data from Contentful
@@ -565,7 +620,7 @@ export const fallbackCarouselImages: HeroCarouselImage[] = [
 
 // Function to fetch featured events
 export async function getFeaturedEvents(): Promise<FeaturedEvent[]> {
-  // Try to load from static data first
+  // In production, always use static data
   if (USE_STATIC_DATA) {
     try {
       const events = await loadStaticData<FeaturedEvent>('featuredEvents');
@@ -582,53 +637,78 @@ export async function getFeaturedEvents(): Promise<FeaturedEvent[]> {
         return 0;
       });
     } catch (error) {
-      console.warn('Falling back to API for featured events');
+      console.warn('Static data failed, using fallback for featured events');
+      return fallbackFeaturedEvents;
     }
   }
   
-  // Fall back to API if static data loading fails or is disabled
-  const entries = await client.getEntries({
-    content_type: 'featuredEvent',
-    order: ['-sys.createdAt'],
-    limit: 5,
-  });
+  // Development mode - try API first, fallback to static if API fails
+  if (client) {
+    try {
+      const entries = await client.getEntries({
+        content_type: 'featuredEvent',
+        order: ['-sys.createdAt'],
+        limit: 5,
+      });
 
-  const mappedEvents = entries.items.map((item: any) => {
-    const title = item.fields.title || 'Featured Event';
-    return {
-      id: item.sys.id,
-      date: item.fields.date || new Date().toLocaleDateString(),
-      title,
-      description: item.fields.description || '',
-      image: item.fields.image?.fields?.file?.url 
-        ? `https:${item.fields.image.fields.file.url}` 
-        : 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=800&q=80',
-      isProcon: item.fields.isProcon || false,
-      procon: item.fields.procon?.map((event: any) => ({
-        id: event.sys.id,
-        date: event.fields.date || '',
-        title: event.fields.title || '',
-        description: event.fields.description || '',
-        image: event.fields.image?.fields?.file?.url 
-          ? `https:${event.fields.image.fields.file.url}` 
-          : '',
-        slug: event.fields.slug || generateSlug(event.fields.title || '')
-      })) || [],
-      slug: item.fields.slug || generateSlug(title)
-    };
-  });
+      const mappedEvents = entries.items.map((item: any) => {
+        const title = item.fields.title || 'Featured Event';
+        return {
+          id: item.sys.id,
+          date: item.fields.date || new Date().toLocaleDateString(),
+          title,
+          description: item.fields.description || '',
+          image: item.fields.image?.fields?.file?.url 
+            ? `https:${item.fields.image.fields.file.url}` 
+            : 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=800&q=80',
+          isProcon: item.fields.isProcon || false,
+          procon: item.fields.procon?.map((event: any) => ({
+            id: event.sys.id,
+            date: event.fields.date || '',
+            title: event.fields.title || '',
+            description: event.fields.description || '',
+            image: event.fields.image?.fields?.file?.url 
+              ? `https:${event.fields.image.fields.file.url}` 
+              : '',
+            slug: event.fields.slug || generateSlug(event.fields.title || '')
+          })) || [],
+          slug: item.fields.slug || generateSlug(title)
+        };
+      });
+      
+      // Sort events to put isProcon=true events first
+      return mappedEvents.sort((a, b) => {
+        if (a.isProcon && !b.isProcon) return -1;
+        if (!a.isProcon && b.isProcon) return 1;
+        return 0;
+      });
+    } catch (error) {
+      console.warn('API failed in development, falling back to static data');
+      try {
+        const events = await loadStaticData<FeaturedEvent>('featuredEvents');
+        const mappedEvents = events.map(event => ({
+          ...event,
+          slug: event.slug || generateSlug(event.title)
+        }));
+        return mappedEvents.sort((a, b) => {
+          if (a.isProcon && !b.isProcon) return -1;
+          if (!a.isProcon && b.isProcon) return 1;
+          return 0;
+        });
+      } catch (staticError) {
+        console.warn('Static data also failed, using fallback');
+        return fallbackFeaturedEvents;
+      }
+    }
+  }
   
-  // Sort events to put isProcon=true events first
-  return mappedEvents.sort((a, b) => {
-    if (a.isProcon && !b.isProcon) return -1;
-    if (!a.isProcon && b.isProcon) return 1;
-    return 0;
-  });
+  // Fallback data for development when API is not available
+  return fallbackFeaturedEvents;
 }
 
 // Function to fetch  events
 export async function getEvents(): Promise<Event[]> {
-  // Try to load from static data first
+  // In production, always use static data
   if (USE_STATIC_DATA) {
     try {
       const events = await loadStaticData<Event>('events');
@@ -638,30 +718,50 @@ export async function getEvents(): Promise<Event[]> {
         slug: event.slug || generateSlug(event.title)
       }));
     } catch (error) {
-      console.warn('Falling back to API for events');
+      console.warn('Static data failed, using fallback for events');
+      return fallbackEvents;
     }
   }
   
-  // Fall back to API if static data loading fails or is disabled
-  const entries = await client.getEntries({
-    content_type: 'event',
-    order: ['fields.date'],
-    limit: 5,
-  });
+  // Development mode - try API first, fallback to static if API fails
+  if (client) {
+    try {
+      const entries = await client.getEntries({
+        content_type: 'event',
+        order: ['fields.date'],
+        limit: 5,
+      });
 
-  return entries.items.map((item: any) => {
-    const title = item.fields.title || 'Event';
-    return {
-      id: item.sys.id,
-      date: item.fields.date || new Date().toLocaleDateString(),
-      title,
-      description: item.fields.description || '',
-      image: item.fields.image?.fields?.file?.url 
-        ? `https:${item.fields.image.fields.file.url}` 
-        : 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=600&q=80',
-      slug: item.fields.slug || generateSlug(title)
-    };
-  });
+      return entries.items.map((item: any) => {
+        const title = item.fields.title || 'Event';
+        return {
+          id: item.sys.id,
+          date: item.fields.date || new Date().toLocaleDateString(),
+          title,
+          description: item.fields.description || '',
+          image: item.fields.image?.fields?.file?.url 
+            ? `https:${item.fields.image.fields.file.url}` 
+            : 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=600&q=80',
+          slug: item.fields.slug || generateSlug(title)
+        };
+      });
+    } catch (error) {
+      console.warn('API failed in development, falling back to static data');
+      try {
+        const events = await loadStaticData<Event>('events');
+        return events.map(event => ({
+          ...event,
+          slug: event.slug || generateSlug(event.title)
+        }));
+      } catch (staticError) {
+        console.warn('Static data also failed, using fallback');
+        return fallbackEvents;
+      }
+    }
+  }
+  
+  // Fallback data for development when API is not available
+  return fallbackEvents;
 }
 
 // Fallback data for featured events
@@ -760,29 +860,45 @@ export const fallbackEvents: Event[] = [
 
 // Function to fetch statistics
 export async function getStatistics(): Promise<Statistic[]> {
-  // Try to load from static data first
+  // In production, always use static data
   if (USE_STATIC_DATA) {
     try {
       return await loadStaticData<Statistic>('statistics');
     } catch (error) {
-      console.warn('Falling back to API for statistics');
+      console.warn('Static data failed, using fallback for statistics');
+      return fallbackStatistics;
     }
   }
   
-  // Fall back to API if static data loading fails or is disabled
-  const entries = await client.getEntries({
-    content_type: 'statistic',
-    order: ['sys.createdAt'],
-  });
+  // Development mode - try API first, fallback to static if API fails
+  if (client) {
+    try {
+      const entries = await client.getEntries({
+        content_type: 'statistic',
+        order: ['sys.createdAt'],
+      });
 
-  return entries.items.map((item: any) => ({
-    id: item.sys.id,
-    value: item.fields.value || '0',
-    label: item.fields.label || 'Statistic',
-    iconUrl: item.fields.icon?.fields?.file?.url 
-      ? `https:${item.fields.icon.fields.file.url}` 
-      : undefined
-  }));
+      return entries.items.map((item: any) => ({
+        id: item.sys.id,
+        value: item.fields.value || '0',
+        label: item.fields.label || 'Statistic',
+        iconUrl: item.fields.icon?.fields?.file?.url 
+          ? `https:${item.fields.icon.fields.file.url}` 
+          : undefined
+      }));
+    } catch (error) {
+      console.warn('API failed in development, falling back to static data');
+      try {
+        return await loadStaticData<Statistic>('statistics');
+      } catch (staticError) {
+        console.warn('Static data also failed, using fallback');
+        return fallbackStatistics;
+      }
+    }
+  }
+  
+  // Fallback data for development when API is not available
+  return fallbackStatistics;
 }
 
 // Fallback data for statistics
@@ -806,7 +922,7 @@ export const fallbackStatistics: Statistic[] = [
 
 // Function to fetch detailed Rotaract statistics
 export async function getRotaractStatistics(): Promise<RotaractStatisticsData> {
-  // Try to load from static data first
+  // In production, always use static data
   if (USE_STATIC_DATA) {
     try {
       const districtData = await loadStaticData<StatisticDataPoint>('rotaractStatisticsDistrict');
@@ -821,91 +937,118 @@ export async function getRotaractStatistics(): Promise<RotaractStatisticsData> {
         chartConfig
       };
     } catch (error) {
-      console.warn('Falling back to API for Rotaract statistics');
+      console.warn('Static data failed, using fallback for Rotaract statistics');
+      return fallbackRotaractStatistics;
     }
   }
   
-  // Fetch card stats
-  const cardStatsEntries = await client.getEntries({
-    content_type: 'rotaractStatisticCard',
-    order: ['sys.createdAt'],
-  });
-  
-  const cardStats = cardStatsEntries.items.map((item: any) => ({
-    id: item.sys.id,
-    number: item.fields.number || '0',
-    title: item.fields.title || 'Statistic',
-    description: item.fields.description || '',
-    iconUrl: item.fields.icon?.fields?.file?.url 
-      ? `https:${item.fields.icon.fields.file.url}` 
-      : '/assets/statistics-icon.svg',
-  }));
-  
-  // Fetch district data
-  const districtDataEntries = await client.getEntries({
-    content_type: 'rotaractDistrictData',
-    order: ['fields.year', 'fields.district'],
-  });
-  
-  const districtData = districtDataEntries.items.map((item: any) => {
-    const data: StatisticDataPoint = {
-      year: item.fields.year,
-      district: item.fields.district,
-    };
-    
-    // Add any dynamic fields
-    Object.keys(item.fields).forEach(key => {
-      if (key !== 'year' && key !== 'district') {
-        data[key] = item.fields[key];
+  // Development mode - try API first, fallback to static if API fails
+  if (client) {
+    try {
+      // Fetch card stats
+      const cardStatsEntries = await client.getEntries({
+        content_type: 'rotaractStatisticCard',
+        order: ['sys.createdAt'],
+      });
+      
+      const cardStats = cardStatsEntries.items.map((item: any) => ({
+        id: item.sys.id,
+        number: item.fields.number || '0',
+        title: item.fields.title || 'Statistic',
+        description: item.fields.description || '',
+        iconUrl: item.fields.icon?.fields?.file?.url 
+          ? `https:${item.fields.icon.fields.file.url}` 
+          : '/assets/statistics-icon.svg',
+      }));
+      
+      // Fetch district data
+      const districtDataEntries = await client.getEntries({
+        content_type: 'rotaractDistrictData',
+        order: ['fields.year', 'fields.district'],
+      });
+      
+      const districtData = districtDataEntries.items.map((item: any) => {
+        const data: StatisticDataPoint = {
+          year: item.fields.year,
+          district: item.fields.district,
+        };
+        
+        // Add any dynamic fields
+        Object.keys(item.fields).forEach(key => {
+          if (key !== 'year' && key !== 'district') {
+            data[key] = item.fields[key];
+          }
+        });
+        
+        return data;
+      });
+      
+      // Fetch contributions data
+      const contributionsDataEntries = await client.getEntries({
+        content_type: 'rotaractContributionsData',
+        order: ['fields.district'],
+      });
+      
+      const contributionsData = contributionsDataEntries.items.map((item: any) => {
+        const data: StatisticDataPoint = {
+          district: item.fields.district,
+        };
+        
+        // Add any dynamic fields
+        Object.keys(item.fields).forEach(key => {
+          if (key !== 'district') {
+            data[key] = item.fields[key];
+          }
+        });
+        
+        return data;
+      });
+      
+      // Fetch chart configs
+      const chartConfigEntries = await client.getEntries({
+        content_type: 'rotaractChartConfig',
+        order: ['sys.createdAt'],
+      });
+      
+      const chartConfig = chartConfigEntries.items.map((item: any) => ({
+        id: item.sys.id,
+        title: item.fields.title || 'Chart',
+        dataKey: item.fields.dataKey || [],
+        colors: item.fields.colors || ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'],
+        dataSource: item.fields.dataSource || 'districtData',
+        xAxisKey: item.fields.xAxisKey || 'year',
+        asOfDate: item.fields.asOfDate,
+      }));
+      
+      return {
+        districtData,
+        contributionsData,
+        cardStats,
+        chartConfig
+      };
+    } catch (error) {
+      console.warn('API failed in development, falling back to static data');
+      try {
+        const districtData = await loadStaticData<StatisticDataPoint>('rotaractStatisticsDistrict');
+        const contributionsData = await loadStaticData<StatisticDataPoint>('rotaractStatisticsContributions');
+        const cardStats = await loadStaticData<StatisticCardStat>('rotaractStatisticsCards');
+        const chartConfig = await loadStaticData<StatisticChartConfig>('rotaractStatisticsCharts');
+        
+        return {
+          districtData,
+          contributionsData,
+          cardStats,
+          chartConfig
+        };
+      } catch (staticError) {
+        console.warn('Static data also failed, using fallback');
+        return fallbackRotaractStatistics;
       }
-    });
-    
-    return data;
-  });
+    }
+  }
   
-  // Fetch contributions data
-  const contributionsDataEntries = await client.getEntries({
-    content_type: 'rotaractContributionsData',
-    order: ['fields.district'],
-  });
-  
-  const contributionsData = contributionsDataEntries.items.map((item: any) => {
-    const data: StatisticDataPoint = {
-      district: item.fields.district,
-    };
-    
-    // Add any dynamic fields
-    Object.keys(item.fields).forEach(key => {
-      if (key !== 'district') {
-        data[key] = item.fields[key];
-      }
-    });
-    
-    return data;
-  });
-  
-  // Fetch chart configs
-  const chartConfigEntries = await client.getEntries({
-    content_type: 'rotaractChartConfig',
-    order: ['sys.createdAt'],
-  });
-  
-  const chartConfig = chartConfigEntries.items.map((item: any) => ({
-    id: item.sys.id,
-    title: item.fields.title || 'Chart',
-    dataKey: item.fields.dataKey || [],
-    colors: item.fields.colors || ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'],
-    dataSource: item.fields.dataSource || 'districtData',
-    xAxisKey: item.fields.xAxisKey || 'year',
-    asOfDate: item.fields.asOfDate,
-  }));
-  
-  return {
-    districtData,
-    contributionsData,
-    cardStats,
-    chartConfig
-  };
+  // Fallback data for development when API is not available
+  return fallbackRotaractStatistics;
 }
 
 // Fallback data for Rotaract statistics
@@ -1009,7 +1152,7 @@ export async function getEventDetailBySlug(slug: string): Promise<EventDetail | 
 
 // Function to fetch event details by ID
 export async function getEventDetail(eventId: string): Promise<EventDetail | null> {
-  // Try to load from static data first
+  // In production, always use static data
   if (USE_STATIC_DATA) {
     try {
       // Check in featured events
@@ -1024,11 +1167,11 @@ export async function getEventDetail(eventId: string): Promise<EventDetail | nul
           title: featuredEvent.title,
           description: featuredEvent.description,
           image: featuredEvent.image,
-          location: featuredEvent.location,
-          objectiveDetails: featuredEvent.objectiveDetails,
-          moreInfo: featuredEvent.description,
-          additionalDetails: featuredEvent.additionalDetails,
-          closingDetails: featuredEvent.closingDetails,
+          location: featuredEvent.location || 'Philippines',
+          objectiveDetails: featuredEvent.objectiveDetails || ['Learn more about this event.'],
+          moreInfo: featuredEvent.moreInfo || featuredEvent.description,
+          additionalDetails: featuredEvent.additionalDetails || [],
+          closingDetails: featuredEvent.closingDetails || 'Visit the event page for more information.',
           isFeatured: true,
           slug: generateSlug(featuredEvent.title),
           publishedDate: new Date().toISOString() // Fallback for static data
@@ -1045,13 +1188,13 @@ export async function getEventDetail(eventId: string): Promise<EventDetail | nul
           id: event.id,
           date: event.date,
           title: event.title,
-          description: event.description,
+          description: event.description || 'Details coming soon.',
           image: event.image,
-          location: event.location,
-          objectiveDetails: event.objectiveDetails,
-          moreInfo: event.moreInfo,
-          additionalDetails: event.additionalDetails,
-          closingDetails: event.closingDetails,
+          location: event.location || 'Philippines',
+          objectiveDetails: event.objectiveDetails || ['Learn more about this event.'],
+          moreInfo: event.moreInfo || event.description || 'Details coming soon.',
+          additionalDetails: event.additionalDetails || [],
+          closingDetails: event.closingDetails || 'Visit the event page for more information.',
           isFeatured: false,
           slug: generateSlug(event.title),
           publishedDate: new Date().toISOString() // Fallback for static data
@@ -1061,83 +1204,138 @@ export async function getEventDetail(eventId: string): Promise<EventDetail | nul
       console.warn(`Event detail for ${eventId} not found in static data`);
       return null;
     } catch (error) {
-      console.warn('Falling back to API for event detail');
+      console.warn('Static data failed for event detail, returning null');
+      return null;
     }
   }
   
-  // Fall back to API
-  try {
-    // First try featured events
-    const featuredEntries = await client.getEntries({
-      content_type: 'featuredEvent',
-      'sys.id': eventId,
-    });
-    
-    if (featuredEntries.items.length > 0) {
-      const item = featuredEntries.items[0];
-      const fields = item.fields as Record<string, any>;
-      const title = typeof fields.title === 'string' ? fields.title : 'Event';
+  // Development mode - try API first, fallback to static if API fails
+  if (client) {
+    try {
+      // First try featured events
+      const featuredEntries = await client.getEntries({
+        content_type: 'featuredEvent',
+        'sys.id': eventId,
+      });
       
-      return {
-        id: item.sys.id,
-        date: typeof fields.date === 'string' ? fields.date : new Date().toLocaleDateString(),
-        title,
-        description: typeof fields.description === 'string' ? fields.description : '',
-        image: fields.image?.fields?.file?.url 
-          ? `https:${fields.image.fields.file.url}` 
-          : 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=800&q=80',
-        location: typeof fields.location === 'string' ? fields.location : 'Philippines',
-        objectiveDetails: Array.isArray(fields.objectiveDetails) ? fields.objectiveDetails : ['Learn more about this event at the event page.'],
-        moreInfo: typeof fields.moreInfo === 'string' ? fields.moreInfo : 
-                  typeof fields.description === 'string' ? fields.description : '',
-        additionalDetails: Array.isArray(fields.additionalDetails) ? fields.additionalDetails : [],
-        closingDetails: typeof fields.closingDetails === 'string' ? fields.closingDetails : 'Visit the event page for more information.',
-        eventUrl: typeof fields.eventUrl === 'string' ? fields.eventUrl : undefined,
-        facebookPageUrl: typeof fields.facebookPageUrl === 'string' ? fields.facebookPageUrl : undefined,
-        isFeatured: true,
-        slug: generateSlug(title),
-        publishedDate: item.sys.updatedAt || item.sys.createdAt
-      };
-    }
-    
-    // Then try events
-    const events = await client.getEntries({
-      content_type: 'event',
-      'sys.id': eventId,
-    });
-    
-    if (events.items.length > 0) {
-      const item = events.items[0];
-      const fields = item.fields as Record<string, any>;
-      const title = typeof fields.title === 'string' ? fields.title : 'Event';
+      if (featuredEntries.items.length > 0) {
+        const item = featuredEntries.items[0];
+        const fields = item.fields as Record<string, any>;
+        const title = typeof fields.title === 'string' ? fields.title : 'Event';
+        
+        return {
+          id: item.sys.id,
+          date: typeof fields.date === 'string' ? fields.date : new Date().toLocaleDateString(),
+          title,
+          description: typeof fields.description === 'string' ? fields.description : '',
+          image: fields.image?.fields?.file?.url 
+            ? `https:${fields.image.fields.file.url}` 
+            : 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=800&q=80',
+          location: typeof fields.location === 'string' ? fields.location : 'Philippines',
+          objectiveDetails: Array.isArray(fields.objectiveDetails) ? fields.objectiveDetails : ['Learn more about this event at the event page.'],
+          moreInfo: typeof fields.moreInfo === 'string' ? fields.moreInfo : 
+                    typeof fields.description === 'string' ? fields.description : '',
+          additionalDetails: Array.isArray(fields.additionalDetails) ? fields.additionalDetails : [],
+          closingDetails: typeof fields.closingDetails === 'string' ? fields.closingDetails : 'Visit the event page for more information.',
+          eventUrl: typeof fields.eventUrl === 'string' ? fields.eventUrl : undefined,
+          facebookPageUrl: typeof fields.facebookPageUrl === 'string' ? fields.facebookPageUrl : undefined,
+          isFeatured: true,
+          slug: generateSlug(title),
+          publishedDate: item.sys.updatedAt || item.sys.createdAt
+        };
+      }
       
-      return {
-        id: item.sys.id,
-        date: typeof fields.date === 'string' ? fields.date : new Date().toLocaleDateString(),
-        title,
-        description: typeof fields.description === 'string' ? fields.description : 'Details coming soon.',
-        image: fields.image?.fields?.file?.url 
-          ? `https:${fields.image.fields.file.url}` 
-          : 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=800&q=80',
-        location: typeof fields.location === 'string' ? fields.location : 'Philippines',
-        objectiveDetails: Array.isArray(fields.objectiveDetails) ? fields.objectiveDetails : ['Learn more about this event at the event page.'],
-        moreInfo: typeof fields.moreInfo === 'string' ? fields.moreInfo : 
-                  typeof fields.description === 'string' ? fields.description : 'Details coming soon.',
-        additionalDetails: Array.isArray(fields.additionalDetails) ? fields.additionalDetails : [],
-        closingDetails: typeof fields.closingDetails === 'string' ? fields.closingDetails : 'Visit the event page for more information.',
-        eventUrl: typeof fields.eventUrl === 'string' ? fields.eventUrl : undefined,
-        facebookPageUrl: typeof fields.facebookPageUrl === 'string' ? fields.facebookPageUrl : undefined,
-        isFeatured: false,
-        slug: generateSlug(title),
-        publishedDate: item.sys.updatedAt || item.sys.createdAt
-      };
+      // Then try events
+      const events = await client.getEntries({
+        content_type: 'event',
+        'sys.id': eventId,
+      });
+      
+      if (events.items.length > 0) {
+        const item = events.items[0];
+        const fields = item.fields as Record<string, any>;
+        const title = typeof fields.title === 'string' ? fields.title : 'Event';
+        
+        return {
+          id: item.sys.id,
+          date: typeof fields.date === 'string' ? fields.date : new Date().toLocaleDateString(),
+          title,
+          description: typeof fields.description === 'string' ? fields.description : 'Details coming soon.',
+          image: fields.image?.fields?.file?.url 
+            ? `https:${fields.image.fields.file.url}` 
+            : 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=800&q=80',
+          location: typeof fields.location === 'string' ? fields.location : 'Philippines',
+          objectiveDetails: Array.isArray(fields.objectiveDetails) ? fields.objectiveDetails : ['Learn more about this event at the event page.'],
+          moreInfo: typeof fields.moreInfo === 'string' ? fields.moreInfo : 
+                    typeof fields.description === 'string' ? fields.description : 'Details coming soon.',
+          additionalDetails: Array.isArray(fields.additionalDetails) ? fields.additionalDetails : [],
+          closingDetails: typeof fields.closingDetails === 'string' ? fields.closingDetails : 'Visit the event page for more information.',
+          eventUrl: typeof fields.eventUrl === 'string' ? fields.eventUrl : undefined,
+          facebookPageUrl: typeof fields.facebookPageUrl === 'string' ? fields.facebookPageUrl : undefined,
+          isFeatured: false,
+          slug: generateSlug(title),
+          publishedDate: item.sys.updatedAt || item.sys.createdAt
+        };
+      }
+      
+      return null;
+    } catch (error) {
+      console.warn('API failed in development, falling back to static data');
+      try {
+        // Check in featured events
+        const featuredEvents = await loadStaticData<FeaturedEvent>('featuredEvents');
+        const featuredEvent = featuredEvents.find(e => e.id === eventId);
+        
+        if (featuredEvent) {
+          return {
+            id: featuredEvent.id,
+            date: featuredEvent.date,
+            title: featuredEvent.title,
+            description: featuredEvent.description,
+            image: featuredEvent.image,
+            location: featuredEvent.location || 'Philippines',
+            objectiveDetails: featuredEvent.objectiveDetails || ['Learn more about this event.'],
+            moreInfo: featuredEvent.moreInfo || featuredEvent.description,
+            additionalDetails: featuredEvent.additionalDetails || [],
+            closingDetails: featuredEvent.closingDetails || 'Visit the event page for more information.',
+            isFeatured: true,
+            slug: generateSlug(featuredEvent.title),
+            publishedDate: new Date().toISOString()
+          };
+        }
+        
+        // Check in events if not found in featured
+        const events = await loadStaticData<Event>('events');
+        const event = events.find(e => e.id === eventId);
+        
+        if (event) {
+          return {
+            id: event.id,
+            date: event.date,
+            title: event.title,
+            description: event.description || 'Details coming soon.',
+            image: event.image,
+            location: event.location || 'Philippines',
+            objectiveDetails: event.objectiveDetails || ['Learn more about this event.'],
+            moreInfo: event.moreInfo || event.description || 'Details coming soon.',
+            additionalDetails: event.additionalDetails || [],
+            closingDetails: event.closingDetails || 'Visit the event page for more information.',
+            isFeatured: false,
+            slug: generateSlug(event.title),
+            publishedDate: new Date().toISOString()
+          };
+        }
+        
+        return null;
+      } catch (staticError) {
+        console.warn('Static data also failed, returning null');
+        return null;
+      }
     }
-    
-    return null;
-  } catch (error) {
-    console.error('Error fetching event detail:', error);
-    return null;
   }
+  
+  // No API fallback in production
+  return null;
 }
 
 // Helper function to safely extract image URL from Contentful response
@@ -1161,7 +1359,7 @@ function getImageUrl(imageField: any, fallbackUrl: string): string {
 
 // Function to fetch leadership team data
 export async function getLeadershipTeam(): Promise<LeadershipTeamData> {
-  // Try to load from static data first
+  // In production, always use static data
   if (USE_STATIC_DATA) {
     try {
       const chairData = await loadStaticData<LeadershipChair>('leadershipChair');
@@ -1172,139 +1370,182 @@ export async function getLeadershipTeam(): Promise<LeadershipTeamData> {
       
       return {
         chair,
-        boardMembers,
-        executiveCommittee,
-        staff: staffMembers
+        boardMembers: boardMembers.length > 0 ? boardMembers : fallbackBoardMembers,
+        executiveCommittee: executiveCommittee.length > 0 ? executiveCommittee : fallbackExecutiveCommittee,
+        staff: staffMembers.length > 0 ? staffMembers : fallbackStaffMembers
       };
     } catch (error) {
-      console.warn('Falling back to API for leadership team data');
+      console.warn('Static data failed, using fallback for leadership team data');
+      return {
+        chair: fallbackLeadershipChair,
+        boardMembers: fallbackBoardMembers,
+        executiveCommittee: fallbackExecutiveCommittee,
+        staff: fallbackStaffMembers
+      };
     }
   }
   
-  // Fetch chair data - filter by isCurrentChair field
-  const chairEntries = await client.getEntries({
-    content_type: 'leadershipChair',
-    'fields.isCurrentChair': true,
-    limit: 1,
-  });
-  
-  // If no current chair found, fall back to fetch any chair
-  let chairData = chairEntries.items;
-  if (chairData.length === 0) {
-    const anyChairEntries = await client.getEntries({
-      content_type: 'leadershipChair',
-      limit: 1,
-    });
-    chairData = anyChairEntries.items;
-  }
-  
-  // Map chair data
-  let mappedChair: LeadershipChair;
-  
-  if (chairData.length > 0) {
-    const item = chairData[0];
-    const fields = item.fields || {};
-    
-    // Extract actions if they exist
-    let actions;
+  // Development mode - try API first, fallback to static if API fails
+  if (client) {
     try {
-      if (fields.actions && Array.isArray(fields.actions)) {
-        actions = fields.actions.map((actionItem: any) => {
-          try {
-            const actionFields = actionItem.fields || {};
-            return {
-              title: String(actionFields.title || ''),
-              description: String(actionFields.description || ''),
-              image: actionFields.image && actionFields.image.fields && actionFields.image.fields.file && actionFields.image.fields.file.url
-                ? `https:${actionFields.image.fields.file.url}`
-                : getImageUrl(fields.image, 'https://i.pravatar.cc/1500')
-            };
-          } catch (e) {
-            console.error('Error mapping action item:', e);
-            return {
-              title: 'Action Item',
-              description: 'Content unavailable',
-              image: getImageUrl(fields.image, 'https://i.pravatar.cc/1500')
-            };
-          }
+      // Fetch chair data - filter by isCurrentChair field
+      const chairEntries = await client.getEntries({
+        content_type: 'leadershipChair',
+        'fields.isCurrentChair': true,
+        limit: 1,
+      });
+      
+      // If no current chair found, fall back to fetch any chair
+      let chairData = chairEntries.items;
+      if (chairData.length === 0) {
+        const anyChairEntries = await client.getEntries({
+          content_type: 'leadershipChair',
+          limit: 1,
         });
+        chairData = anyChairEntries.items;
       }
-    } catch (e) {
-      console.error('Error mapping actions array:', e);
+      
+      // Map chair data
+      let mappedChair: LeadershipChair;
+      
+      if (chairData.length > 0) {
+        const item = chairData[0];
+        const fields = item.fields || {};
+        
+        // Extract actions if they exist
+        let actions;
+        try {
+          if (fields.actions && Array.isArray(fields.actions)) {
+            actions = fields.actions.map((actionItem: any) => {
+              try {
+                const actionFields = actionItem.fields || {};
+                return {
+                  title: String(actionFields.title || ''),
+                  description: String(actionFields.description || ''),
+                  image: actionFields.image && actionFields.image.fields && actionFields.image.fields.file && actionFields.image.fields.file.url
+                    ? `https:${actionFields.image.fields.file.url}`
+                    : getImageUrl(fields.image, 'https://i.pravatar.cc/1500')
+                };
+              } catch (e) {
+                console.error('Error mapping action item:', e);
+                return {
+                  title: 'Action Item',
+                  description: 'Content unavailable',
+                  image: getImageUrl(fields.image, 'https://i.pravatar.cc/1500')
+                };
+              }
+            });
+          }
+        } catch (e) {
+          console.error('Error mapping actions array:', e);
+        }
+        
+        mappedChair = {
+          id: item.sys.id,
+          name: String(fields.name || 'MDIO Chair'),
+          title: String(fields.title || 'Pilipinas Multi-District Information Organization, Chair'),
+          description: String(fields.description || ''),
+          image: getImageUrl(fields.image, 'https://i.pravatar.cc/1500'),
+          headerImage: getImageUrl(fields.headerImage, undefined),
+          club: String(fields.club || ''),
+          isCurrentChair: Boolean(fields.isCurrentChair || false),
+          rotaryYear: String(fields.rotaryYear || ''),
+          actions
+        };
+      } else {
+        mappedChair = fallbackLeadershipChair;
+      }
+      
+      const chair = mappedChair;
+      
+      // Fetch board members
+      const boardEntries = await client.getEntries({
+        content_type: 'boardMember',
+        order: ['fields.name'],
+      });
+      
+      // Fetch executive committee
+      const executiveEntries = await client.getEntries({
+        content_type: 'executiveCommitteeMember',
+        order: ['fields.name'],
+      });
+      
+      // Fetch staff members
+      const staffEntries = await client.getEntries({
+        content_type: 'staffMember',
+        order: ['fields.name'],
+      });
+      
+      // Map board members
+      const boardMembers: BoardMember[] = boardEntries.items.map((item: any) => ({
+        id: item.sys.id,
+        name: String(item.fields.name || ''),
+        title: String(item.fields.title || 'District Rotaract Representative'),
+        district: String(item.fields.district || ''),
+        club: String(item.fields.club || ''),
+        image: getImageUrl(item.fields.image, '/placeholder.svg'),
+      }));
+      
+      // Map executive committee
+      const executiveCommittee: ExecutiveCommitteeMember[] = executiveEntries.items.map((item: any) => ({
+        id: item.sys.id,
+        name: String(item.fields.name || ''),
+        title: String(item.fields.title || ''),
+        district: String(item.fields.district || ''),
+        club: String(item.fields.club || ''),
+        image: getImageUrl(item.fields.image, '/placeholder.svg'),
+      }));
+      
+      // Map staff members
+      const staff: StaffMember[] = staffEntries.items.map((item: any) => ({
+        id: item.sys.id,
+        name: String(item.fields.name || ''),
+        role: String(item.fields.role || ''),
+        team: String(item.fields.team || ''),
+        district: String(item.fields.district || ''),
+        club: String(item.fields.club || ''),
+        image: getImageUrl(item.fields.image, '/placeholder.svg'),
+      }));
+      
+      return {
+        chair,
+        boardMembers: boardMembers.length > 0 ? boardMembers : fallbackBoardMembers,
+        executiveCommittee: executiveCommittee.length > 0 ? executiveCommittee : fallbackExecutiveCommittee,
+        staff: staff.length > 0 ? staff : fallbackStaffMembers,
+      };
+    } catch (error) {
+      console.warn('API failed in development, falling back to static data');
+      try {
+        const chairData = await loadStaticData<LeadershipChair>('leadershipChair');
+        const chair = chairData.length > 0 ? chairData[0] : fallbackLeadershipChair;
+        const boardMembers = await loadStaticData<BoardMember>('boardMembers');
+        const executiveCommittee = await loadStaticData<ExecutiveCommitteeMember>('executiveCommittee');
+        const staffMembers = await loadStaticData<StaffMember>('staffMembers');
+        
+        return {
+          chair,
+          boardMembers: boardMembers.length > 0 ? boardMembers : fallbackBoardMembers,
+          executiveCommittee: executiveCommittee.length > 0 ? executiveCommittee : fallbackExecutiveCommittee,
+          staff: staffMembers.length > 0 ? staffMembers : fallbackStaffMembers
+        };
+      } catch (staticError) {
+        console.warn('Static data also failed, using fallback');
+        return {
+          chair: fallbackLeadershipChair,
+          boardMembers: fallbackBoardMembers,
+          executiveCommittee: fallbackExecutiveCommittee,
+          staff: fallbackStaffMembers
+        };
+      }
     }
-    
-    mappedChair = {
-      id: item.sys.id,
-      name: String(fields.name || 'MDIO Chair'),
-      title: String(fields.title || 'Pilipinas Multi-District Information Organization, Chair'),
-      description: String(fields.description || ''),
-      image: getImageUrl(fields.image, 'https://i.pravatar.cc/1500'),
-      headerImage: getImageUrl(fields.headerImage, undefined),
-      club: String(fields.club || ''),
-      isCurrentChair: Boolean(fields.isCurrentChair || false),
-      rotaryYear: String(fields.rotaryYear || ''),
-      actions
-    };
-  } else {
-    mappedChair = fallbackLeadershipChair;
   }
   
-  const chair = mappedChair;
-  
-  // Fetch board members
-  const boardEntries = await client.getEntries({
-    content_type: 'boardMember',
-    order: ['fields.name'],
-  });
-  
-  // Fetch executive committee
-  const executiveEntries = await client.getEntries({
-    content_type: 'executiveCommitteeMember',
-    order: ['fields.name'],
-  });
-  
-  // Fetch staff members
-  const staffEntries = await client.getEntries({
-    content_type: 'staffMember',
-    order: ['fields.name'],
-  });
-  
-  // Map board members
-  const boardMembers: BoardMember[] = boardEntries.items.map((item: any) => ({
-    id: item.sys.id,
-    name: String(item.fields.name || ''),
-    title: String(item.fields.title || 'District Rotaract Representative'),
-    district: String(item.fields.district || ''),
-    club: String(item.fields.club || ''),
-    image: getImageUrl(item.fields.image, '/placeholder.svg'),
-  }));
-  
-  // Map executive committee
-  const executiveCommittee: ExecutiveCommitteeMember[] = executiveEntries.items.map((item: any) => ({
-    id: item.sys.id,
-    name: String(item.fields.name || ''),
-    title: String(item.fields.title || ''),
-    district: String(item.fields.district || ''),
-    club: String(item.fields.club || ''),
-    image: getImageUrl(item.fields.image, '/placeholder.svg'),
-  }));
-  
-  // Map staff members
-  const staff: StaffMember[] = staffEntries.items.map((item: any) => ({
-    id: item.sys.id,
-    name: String(item.fields.name || ''),
-    role: String(item.fields.role || ''),
-    team: String(item.fields.team || ''),
-    district: String(item.fields.district || ''),
-    club: String(item.fields.club || ''),
-    image: getImageUrl(item.fields.image, '/placeholder.svg'),
-  }));
-  
+  // Fallback data for development when API is not available
   return {
-    chair,
-    boardMembers: boardMembers.length > 0 ? boardMembers : fallbackBoardMembers,
-    executiveCommittee: executiveCommittee.length > 0 ? executiveCommittee : fallbackExecutiveCommittee,
-    staff: staff.length > 0 ? staff : fallbackStaffMembers,
+    chair: fallbackLeadershipChair,
+    boardMembers: fallbackBoardMembers,
+    executiveCommittee: fallbackExecutiveCommittee,
+    staff: fallbackStaffMembers
   };
 }
 
@@ -1467,62 +1708,73 @@ export const fallbackRotaryFoundationData: RotaryFoundationData = {
 
 // Function to fetch Rotary Foundation data
 export async function getRotaryFoundationData(): Promise<RotaryFoundationData> {
-  // Try to load from static data first
+  // In production, always use static data
   if (USE_STATIC_DATA) {
     try {
       return await loadStaticSingleData<RotaryFoundationData>('rotaryFoundationData');
     } catch (error) {
-      console.warn('Falling back to API for Rotary Foundation data');
+      console.warn('Static data failed, using fallback for Rotary Foundation data');
+      return fallbackRotaryFoundationData;
     }
   }
   
-  // Fall back to API if static data loading fails or is disabled
-  try {
-    // Fetch from single content type
-    const entries = await client.getEntries({
-      content_type: 'rotaryFoundation',
-      limit: 1
-    });
+  // Development mode - try API first, fallback to static if API fails
+  if (client) {
+    try {
+      // Fetch from single content type
+      const entries = await client.getEntries({
+        content_type: 'rotaryFoundation',
+        limit: 1
+      });
 
-    if (entries.items.length === 0) {
-      return fallbackRotaryFoundationData;
+      if (entries.items.length === 0) {
+        return fallbackRotaryFoundationData;
+      }
+
+      const item = entries.items[0];
+      const fields = item.fields;
+      
+      // Extract the introduction
+      const introduction = {
+        title: String(fields.introductionTitle || fallbackRotaryFoundationData.introduction.title),
+        content: String(fields.introductionContent || fallbackRotaryFoundationData.introduction.content)
+      };
+
+      // Extract funds from references
+      const funds = Array.isArray(fields.funds) 
+        ? fields.funds.map((fund: any) => ({
+            id: fund.sys?.id || `fund-${Math.random().toString(36).substr(2, 9)}`,
+            title: String(fund.fields?.title || ''),
+            description: String(fund.fields?.description || ''),
+            imageUrl: fund.fields?.image?.fields?.file?.url 
+              ? `https:${fund.fields.image.fields.file.url}` 
+              : '/assets/trf.png',
+            alt: String(fund.fields?.alt || fund.fields?.title || 'Rotary Foundation image')
+          }))
+        : fallbackRotaryFoundationData.funds;
+
+      // Extract donation link
+      const donationLink = fields.donationLink
+        ? String(fields.donationLink)
+        : fallbackRotaryFoundationData.donationLink;
+
+      return {
+        introduction,
+        funds,
+        donationLink,
+        statisticsData: fallbackRotaractStatistics
+      };
+    } catch (error) {
+      console.warn('API failed in development, falling back to static data');
+      try {
+        return await loadStaticSingleData<RotaryFoundationData>('rotaryFoundationData');
+      } catch (staticError) {
+        console.warn('Static data also failed, using fallback');
+        return fallbackRotaryFoundationData;
+      }
     }
-
-    const item = entries.items[0];
-    const fields = item.fields;
-    
-    // Extract the introduction
-    const introduction = {
-      title: String(fields.introductionTitle || fallbackRotaryFoundationData.introduction.title),
-      content: String(fields.introductionContent || fallbackRotaryFoundationData.introduction.content)
-    };
-
-    // Extract funds from references
-    const funds = Array.isArray(fields.funds) 
-      ? fields.funds.map((fund: any) => ({
-          id: fund.sys?.id || `fund-${Math.random().toString(36).substr(2, 9)}`,
-          title: String(fund.fields?.title || ''),
-          description: String(fund.fields?.description || ''),
-          imageUrl: fund.fields?.image?.fields?.file?.url 
-            ? `https:${fund.fields.image.fields.file.url}` 
-            : '/assets/trf.png',
-          alt: String(fund.fields?.alt || fund.fields?.title || 'Rotary Foundation image')
-        }))
-      : fallbackRotaryFoundationData.funds;
-
-    // Extract donation link
-    const donationLink = fields.donationLink
-      ? String(fields.donationLink)
-      : fallbackRotaryFoundationData.donationLink;
-
-    return {
-      introduction,
-      funds,
-      donationLink,
-      statisticsData: fallbackRotaractStatistics
-    };
-  } catch (error) {
-    console.error('Error fetching Rotary Foundation data:', error);
-    return fallbackRotaryFoundationData;
   }
+  
+  // Fallback data for development when API is not available
+  return fallbackRotaryFoundationData;
 } 
