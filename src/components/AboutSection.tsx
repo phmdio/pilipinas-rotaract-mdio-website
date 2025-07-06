@@ -150,6 +150,9 @@ const AboutSection = () => {
                   <p className="text-white mb-4">
                     Our official publication showcasing outstanding projects, member achievements, and important updates from Rotaract clubs throughout the Philippines.
                   </p>
+                  <Link to="/philippine-rotaract-magazine" className="text-white font-medium underline underline-offset-2 self-end">
+                    Read More
+                  </Link>
                 </div>
               </article>
               
@@ -169,6 +172,9 @@ const AboutSection = () => {
                   <p className="text-white mb-4">
                     Our quarterly newsletter connecting Rotaract clubs across the archipelago, featuring collaborative initiatives and best practices in community service.
                   </p>
+                  <Link to="/ang-balangay" className="text-white font-medium underline underline-offset-2 self-end">
+                    Read More
+                  </Link>
                 </div>
               </article>
             </div>
