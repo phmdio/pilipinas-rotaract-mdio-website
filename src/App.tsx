@@ -45,6 +45,8 @@ const queryClient = new QueryClient({
   },
 });
 
+const isReadyToLaunch = process.env.VITE_READY_TO_LAUNCH === 'true';
+
 const App = () => {
   // Check if we're in the browser environment
   const isBrowser = typeof window !== 'undefined';
@@ -68,7 +70,7 @@ const App = () => {
           <Sonner />
           <ScrollToTop />
           <Routes>
-            {isCustomDomain ? (
+            {isCustomDomain && !isReadyToLaunch ? (
               <>
                 <Route path="/" element={<LaunchingSoon />} />
                 <Route path="*" element={<NotFound />} />
