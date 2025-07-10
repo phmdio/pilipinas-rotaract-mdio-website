@@ -2,8 +2,8 @@
 
 A static website built for the Pilipinas Multi-District Information Organization (MDIO) showcasing Rotaract districts, events, leadership, and foundation initiatives across the Philippines.
 
-**Live Site:** [pilipinas-rotaract.vercel.app](https://pilipinas-rotaract.vercel.app)  
-**Staging:** [staging.pilipinas-rotaract.vercel.app](https://staging.pilipinas-rotaract.vercel.app)
+**Live Site:** [pilipinasrotaract.org](http://pilipinasrotaract.org/)  
+**Staging:** [mdio-pilipinas.netlify.app](https://mdio-pilipinas.netlify.app/)
 
 ## Tech Stack
 
@@ -14,7 +14,7 @@ A static website built for the Pilipinas Multi-District Information Organization
 - **UI Components:** [shadcn/ui](https://ui.shadcn.com) ([Radix UI](https://www.radix-ui.com) primitives)
 - **Styling:** [Tailwind CSS](https://tailwindcss.com)
 - **CMS:** [Contentful](https://www.contentful.com) (headless CMS)
-- **Deployment:** [Vercel](https://vercel.com)
+- **Deployment:** [Netlify](https://netlify.com/)
 - **Architecture:** **True Static Site Generation (SSG)**
 
 ## Architecture Overview
