@@ -134,7 +134,7 @@ const DistrictDetail = () => {
       
       <main className="pb-16">
         {/* Hero Image with Orange Overlay - Updated to match design */}
-        <section className="relative h-[500px] bg-cover bg-center" style={{ backgroundImage: `url(${districtDetail.headerImage || "/public/lovable-uploads/8dde7e86-fd9e-4713-9917-b37609e31f4b.png"})` }}>
+        <section className="relative h-[500px] bg-cover bg-center" style={{ backgroundImage: `url(${districtDetail.headerImage || "/lovable-uploads/8dde7e86-fd9e-4713-9917-b37609e31f4b.png"})` }}>
           <div className="absolute inset-0 bg-black/20"></div>
           <div className="absolute left-0 top-1/2 -translate-y-1/2 w-[500px] max-w-[40%] bg-[#F6A81C] p-6 text-white">
             <p className="text-xl font-medium mb-2">Rotaract Clubs of Rotary International District #</p>

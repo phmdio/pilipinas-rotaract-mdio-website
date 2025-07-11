@@ -1,5 +1,6 @@
 import { createClient } from 'contentful';
 import { StaticContentfulData } from '@/data/contentful-static';
+import { getDistrictDetail as getDistrictDetailFallback } from '@/data/districtDetailData';
 
 // Static data flag - set to true to use static data from JSON files
 const USE_STATIC_DATA = import.meta.env.MODE === 'production';
@@ -437,11 +438,59 @@ export async function getDistrictDetail(districtId: string): Promise<District> {
         // Return the full district data from static data
         return district;
       }
-      console.warn(`District detail for ${districtId} not found in static data`);
-      return createFallbackDistrictDetail(districtId);
+      console.warn(`District detail for ${districtId} not found in static data, using fallback data`);
+      // Use the districtDetailData.ts as fallback instead of createFallbackDistrictDetail
+      const fallbackDetail = getDistrictDetailFallback(districtId);
+      // Convert the fallback data to match the expected District interface
+      return {
+        id: districtId,
+        color: '#003366', // Default color
+        image: fallbackDetail.headerImage || `/assets/district/${districtId}.jpeg`,
+        summary: fallbackDetail.description,
+        title: fallbackDetail.title,
+        description: fallbackDetail.description,
+        composition: fallbackDetail.composition || [],
+        gallery: fallbackDetail.gallery || [],
+        representatives: (fallbackDetail.representatives || []).map(rep => ({
+          name: rep.name,
+          club: rep.club || rep.clubName || '',
+          year: rep.year || '',
+          rotaryYear: rep.rotaryYear || '',
+          dates: rep.dates || ''
+        })),
+        headerImage: fallbackDetail.headerImage || `/assets/district/${districtId}.jpeg`,
+        mainClub: fallbackDetail.mainClub || '',
+        activities: fallbackDetail.activities || [],
+        mission: fallbackDetail.mission || '',
+        vision: fallbackDetail.vision || '',
+        facebookPageUrl: `https://www.facebook.com/district${districtId}rotaract`
+      };
     } catch (error) {
-      console.warn('Static data failed, using fallback for district detail data');
-      return createFallbackDistrictDetail(districtId);
+      console.warn('Static data failed, using fallback district detail data');
+      const fallbackDetail = getDistrictDetailFallback(districtId);
+      return {
+        id: districtId,
+        color: '#003366',
+        image: fallbackDetail.headerImage || `/assets/district/${districtId}.jpeg`,
+        summary: fallbackDetail.description,
+        title: fallbackDetail.title,
+        description: fallbackDetail.description,
+        composition: fallbackDetail.composition || [],
+        gallery: fallbackDetail.gallery || [],
+        representatives: (fallbackDetail.representatives || []).map(rep => ({
+          name: rep.name,
+          club: rep.club || rep.clubName || '',
+          year: rep.year || '',
+          rotaryYear: rep.rotaryYear || '',
+          dates: rep.dates || ''
+        })),
+        headerImage: fallbackDetail.headerImage || `/assets/district/${districtId}.jpeg`,
+        mainClub: fallbackDetail.mainClub || '',
+        activities: fallbackDetail.activities || [],
+        mission: fallbackDetail.mission || '',
+        vision: fallbackDetail.vision || '',
+        facebookPageUrl: `https://www.facebook.com/district${districtId}rotaract`
+      };
     }
   }
   
@@ -457,16 +506,85 @@ export async function getDistrictDetail(districtId: string): Promise<District> {
         if (district) {
           return district;
         }
-        return createFallbackDistrictDetail(districtId);
+        const fallbackDetail = getDistrictDetailFallback(districtId);
+        return {
+          id: districtId,
+          color: '#003366',
+          image: fallbackDetail.headerImage || `/assets/district/${districtId}.jpeg`,
+          summary: fallbackDetail.description,
+          title: fallbackDetail.title,
+          description: fallbackDetail.description,
+          composition: fallbackDetail.composition || [],
+          gallery: fallbackDetail.gallery || [],
+          representatives: (fallbackDetail.representatives || []).map(rep => ({
+            name: rep.name,
+            club: rep.club || rep.clubName || '',
+            year: rep.year || '',
+            rotaryYear: rep.rotaryYear || '',
+            dates: rep.dates || ''
+          })),
+          headerImage: fallbackDetail.headerImage || `/assets/district/${districtId}.jpeg`,
+          mainClub: fallbackDetail.mainClub || '',
+          activities: fallbackDetail.activities || [],
+          mission: fallbackDetail.mission || '',
+          vision: fallbackDetail.vision || '',
+          facebookPageUrl: `https://www.facebook.com/district${districtId}rotaract`
+        };
       } catch (staticError) {
-        console.warn('Static data also failed, using fallback');
-        return createFallbackDistrictDetail(districtId);
+        console.warn('Static data also failed, using district detail fallback');
+        const fallbackDetail = getDistrictDetailFallback(districtId);
+        return {
+          id: districtId,
+          color: '#003366',
+          image: fallbackDetail.headerImage || `/assets/district/${districtId}.jpeg`,
+          summary: fallbackDetail.description,
+          title: fallbackDetail.title,
+          description: fallbackDetail.description,
+          composition: fallbackDetail.composition || [],
+          gallery: fallbackDetail.gallery || [],
+          representatives: (fallbackDetail.representatives || []).map(rep => ({
+            name: rep.name,
+            club: rep.club || rep.clubName || '',
+            year: rep.year || '',
+            rotaryYear: rep.rotaryYear || '',
+            dates: rep.dates || ''
+          })),
+          headerImage: fallbackDetail.headerImage || `/assets/district/${districtId}.jpeg`,
+          mainClub: fallbackDetail.mainClub || '',
+          activities: fallbackDetail.activities || [],
+          mission: fallbackDetail.mission || '',
+          vision: fallbackDetail.vision || '',
+          facebookPageUrl: `https://www.facebook.com/district${districtId}rotaract`
+        };
       }
     }
   }
   
   // Fallback data for development when API is not available
-  return createFallbackDistrictDetail(districtId);
+  const fallbackDetail = getDistrictDetailFallback(districtId);
+  return {
+    id: districtId,
+    color: '#003366',
+    image: fallbackDetail.headerImage || `/assets/district/${districtId}.jpeg`,
+    summary: fallbackDetail.description,
+    title: fallbackDetail.title,
+    description: fallbackDetail.description,
+    composition: fallbackDetail.composition || [],
+    gallery: fallbackDetail.gallery || [],
+    representatives: (fallbackDetail.representatives || []).map(rep => ({
+      name: rep.name,
+      club: rep.club || rep.clubName || '',
+      year: rep.year || '',
+      rotaryYear: rep.rotaryYear || '',
+      dates: rep.dates || ''
+    })),
+    headerImage: fallbackDetail.headerImage || `/assets/district/${districtId}.jpeg`,
+    mainClub: fallbackDetail.mainClub || '',
+    activities: fallbackDetail.activities || [],
+    mission: fallbackDetail.mission || '',
+    vision: fallbackDetail.vision || '',
+    facebookPageUrl: `https://www.facebook.com/district${districtId}rotaract`
+  };
 }
 
 // Helper function to fetch complete district data from Contentful

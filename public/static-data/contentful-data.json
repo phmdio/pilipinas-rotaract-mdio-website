@@ -31,11 +31,6 @@
       "alt": "Fight Hunger - D3870 - Rotaract Club of Carmen Valley"
     },
     {
-      "title": "Inspire - D3870 - Rotaract Club of Carmen Valley",
-      "imageUrl": "https://images.ctfassets.net/dze7xj4zfu0b/6ByTMTPXCWgZr0vnZaee7w/2d210bff3ae75d2888a435d71696c8d8/Sabtang_Batanes.jpg",
-      "alt": "Inspire - D3870 - Rotaract Club of Carmen Valley"
-    },
-    {
       "title": "Learn - D3850 - Rotaract Club of Zamboanga City North",
       "imageUrl": "https://images.ctfassets.net/dze7xj4zfu0b/34gqGQhY1Lw7vFkbKVLuKk/fe4eb4f3ada507ee59e46b45e2a4c2eb/Learn_-_D3850_-_Rotaract_Club_of_Zamboanga_City_North.jpg",
       "alt": "Learn - D3850 - Rotaract Club of Zamboanga City North"
@@ -60,41 +55,13 @@
       "image": "https://images.ctfassets.net/dze7xj4zfu0b/6inPXcgt3v6RDkjKUhd7gA/15943b0e0d59b13639ac5c4b1340e226/Sabtang_Batanes.jpg",
       "summary": "Rotaract District 3770, a vital segment of Rotary International, serves the eastern and northern regions of Luzon in the Philippines.",
       "gallery": [
-        {
-          "url": "/placeholder.svg",
-          "title": "Inspire - D3870 - Rotaract Club of Carmen Valley",
-          "description": ""
-        },
-        {
-          "url": "/placeholder.svg",
-          "title": "Callao Cave, Penablanca Cagayan",
-          "description": ""
-        },
-        {
-          "url": "/placeholder.svg",
-          "title": "Barasoain Church 2023",
-          "description": ""
-        },
-        {
-          "url": "/placeholder.svg",
-          "title": "db5a750c-ac24-433b-9273-2e0cfdbca803",
-          "description": ""
-        },
-        {
-          "url": "/placeholder.svg",
-          "title": "446bb59e-0b33-4dfe-b29c-af54b5ff2dfd",
-          "description": ""
-        },
-        {
-          "url": "/placeholder.svg",
-          "title": "15b4bcd0-88bd-44f9-b5ae-72d9ca349a9e",
-          "description": ""
-        },
-        {
-          "url": "/placeholder.svg",
-          "title": "5b328058-7841-4db0-8625-04b597916a8f",
-          "description": ""
-        }
+        "https://images.ctfassets.net/dze7xj4zfu0b/6ByTMTPXCWgZr0vnZaee7w/2d210bff3ae75d2888a435d71696c8d8/Sabtang_Batanes.jpg",
+        "https://images.ctfassets.net/dze7xj4zfu0b/0G23SrP1zU9IEVglE06IS/ee8e7646099c31838106f6bdf5967a0b/Callao_Cave__Penablanca_Cagayan.jpg",
+        "https://images.ctfassets.net/dze7xj4zfu0b/4GmIggkkcyL8YYrkrS3Taj/ca3b5014a8f70c1005935f6bb9d6cb90/Barasoain_Church_2023.jpg",
+        "https://images.ctfassets.net/dze7xj4zfu0b/5ATzB3kC3THqfuqGCDEwma/c8a19c56d2436ce71aba322ac683947f/db5a750c-ac24-433b-9273-2e0cfdbca803.jpg",
+        "https://images.ctfassets.net/dze7xj4zfu0b/7lwji1GhdPcuk9R3dyjTMl/629b4571856b9bedc48f2e81050cc3e9/446bb59e-0b33-4dfe-b29c-af54b5ff2dfd.jpg",
+        "https://images.ctfassets.net/dze7xj4zfu0b/2YjlWszfQK5baG6VCQBSS5/625296233e81d9ae89e5cbd89d5ba275/15b4bcd0-88bd-44f9-b5ae-72d9ca349a9e.jpg",
+        "https://images.ctfassets.net/dze7xj4zfu0b/7y01wPKpqxDWwne8YQLZYx/f24a79d154b12511f1827fa0527ad26a/5b328058-7841-4db0-8625-04b597916a8f.jpg"
       ],
       "representatives": [
         {
@@ -259,7 +226,19 @@
           "club": "Rotaract Club of Norzagaray",
           "image": "/placeholder.svg"
         }
-      ]
+      ],
+      "headerImage": "https://images.ctfassets.net/dze7xj4zfu0b/6inPXcgt3v6RDkjKUhd7gA/15943b0e0d59b13639ac5c4b1340e226/Sabtang_Batanes.jpg",
+      "mainClub": "Metro San Miguel",
+      "mission": "To empower young professionals to create positive change in their communities and around the world through service, fellowship, and leadership.",
+      "vision": "To be a global network of young professionals committed to making a positive impact in their communities and around the world.",
+      "composition": [
+        "12 Community-Based Clubs",
+        "8 University-Based Clubs",
+        "Total Membership of over 560 Rotaractors",
+        "Served over 75 communities",
+        "Partnered with 15+ organizations"
+      ],
+      "facebookPageUrl": "https://www.facebook.com/RotaractDistrict3770"
     },
     {
       "id": "3780",
@@ -269,7 +248,11 @@
       "image": "https://images.ctfassets.net/dze7xj4zfu0b/59gyOMiRE46OaJq7On3PXG/fb763a5367cbed3884683dd71cc55e04/3780.jpeg",
       "summary": "Discover the vibrant community of Rotaract clubs in this district, where young professionals develop leadership skills and implement innovative service projects addressing local needs. Join us in making a positive impact through fellowship, professional development, and community service.",
       "gallery": [],
-      "representatives": []
+      "representatives": [],
+      "headerImage": "/assets/district/default-header.jpeg",
+      "mainClub": "Rotaract Club of District 3000",
+      "mission": "To empower young professionals to create positive change in their communities and around the world through service, fellowship, and leadership.",
+      "vision": "To be a global network of young professionals committed to making a positive impact in their communities and around the world."
     },
     {
       "id": "3790",
@@ -279,41 +262,13 @@
       "image": "https://images.ctfassets.net/dze7xj4zfu0b/2VTBqj19fXkzz0dTLY0BwI/b4ffe5f67cf089911e36908e8f589af2/dqm8q1e6jyqaxapkgqy3.jpg",
       "summary": "RID 3790 is sometimes referred to as the \"hospitable district\" since everyone there extends a warm welcome to visitors and Rotaract family members.",
       "gallery": [
-        {
-          "url": "/placeholder.svg",
-          "title": "3790",
-          "description": ""
-        },
-        {
-          "url": "/placeholder.svg",
-          "title": "Bolinao Falls ©️Jude The Tourist",
-          "description": ""
-        },
-        {
-          "url": "/placeholder.svg",
-          "title": "CALLE CRISOLOGO",
-          "description": ""
-        },
-        {
-          "url": "/placeholder.svg",
-          "title": "HUNDRED ISLAND",
-          "description": ""
-        },
-        {
-          "url": "/placeholder.svg",
-          "title": "IMG 4607",
-          "description": ""
-        },
-        {
-          "url": "/placeholder.svg",
-          "title": "469198843 883398760609214 3914454907917865970 n",
-          "description": ""
-        },
-        {
-          "url": "/placeholder.svg",
-          "title": "454952309 891878812981436 9099837916370893043 n",
-          "description": ""
-        }
+        "https://images.ctfassets.net/dze7xj4zfu0b/2VTBqj19fXkzz0dTLY0BwI/b4ffe5f67cf089911e36908e8f589af2/dqm8q1e6jyqaxapkgqy3.jpg",
+        "https://images.ctfassets.net/dze7xj4zfu0b/5I97uJmYohjXYiX64pRq0S/d79b35d7d1b6fe8e26710c3e6603891f/Bolinao_Falls_Â_ï__Jude_The_Tourist.JPG",
+        "https://images.ctfassets.net/dze7xj4zfu0b/4wLJMaOg9sPoJ1xHOqcmoP/e2ce18c298a1a05f0647051a4201ebb6/CALLE_CRISOLOGO.jpg",
+        "https://images.ctfassets.net/dze7xj4zfu0b/7uGbe3yNHYBDFifjnE3sMg/9afa74df7dbc18931976f3aa4eb4d552/HUNDRED_ISLAND.jpg",
+        "https://images.ctfassets.net/dze7xj4zfu0b/30atWLyu6egDSX5HnxBTXK/e34aa48d3190a7982bca48b1c81472be/IMG_4607.jpg",
+        "https://images.ctfassets.net/dze7xj4zfu0b/75fMmEI23fGtMF1Pjbr0vZ/c6cbb2ceea46fecd919b93a215d50388/469198843_883398760609214_3914454907917865970_n.jpg",
+        "https://images.ctfassets.net/dze7xj4zfu0b/4wOyPofqDSPuRRP6XAd8sR/cc5e2f7a16a2f9842932ea4ad53ba0dc/454952309_891878812981436_9099837916370893043_n.jpg"
       ],
       "representatives": [
         {
@@ -508,7 +463,15 @@
           "club": "Rotaract Club of",
           "image": "/placeholder.svg"
         }
-      ]
+      ],
+      "headerImage": "https://images.ctfassets.net/dze7xj4zfu0b/2VTBqj19fXkzz0dTLY0BwI/b4ffe5f67cf089911e36908e8f589af2/dqm8q1e6jyqaxapkgqy3.jpg",
+      "mainClub": "Limay",
+      "mission": "To empower young professionals to create positive change in their communities and around the world through service, fellowship, and leadership.",
+      "vision": "To be a global network of young professionals committed to making a positive impact in their communities and around the world.",
+      "composition": [
+        "Community"
+      ],
+      "facebookPageUrl": "https://www.facebook.com/racsd3790"
     },
     {
       "id": "3800",
@@ -518,51 +481,15 @@
       "image": "https://images.ctfassets.net/dze7xj4zfu0b/7mjvFFGF4IXRz3R72NDlwp/348cf413332843fe54af30faa2989793/vast-view-of-the-windmills.jpg",
       "summary": "Rotaract Clubs of RID 3800, also known for its namesake as The Resilient District, is in Metropolitan Manila, Philippines.",
       "gallery": [
-        {
-          "url": "/placeholder.svg",
-          "title": "vast-view-of-the-windmills",
-          "description": ""
-        },
-        {
-          "url": "/placeholder.svg",
-          "title": "Riverbanks",
-          "description": ""
-        },
-        {
-          "url": "/placeholder.svg",
-          "title": "Pasig Rainforest",
-          "description": ""
-        },
-        {
-          "url": "/placeholder.svg",
-          "title": "Hinulugang Taktak National Park",
-          "description": ""
-        },
-        {
-          "url": "/placeholder.svg",
-          "title": "antipolo-cathedral",
-          "description": ""
-        },
-        {
-          "url": "/placeholder.svg",
-          "title": "3 (1)",
-          "description": ""
-        },
-        {
-          "url": "/placeholder.svg",
-          "title": "2 (1)",
-          "description": ""
-        },
-        {
-          "url": "/placeholder.svg",
-          "title": "1 (1)",
-          "description": ""
-        },
-        {
-          "url": "/placeholder.svg",
-          "title": "group",
-          "description": ""
-        }
+        "https://images.ctfassets.net/dze7xj4zfu0b/7mjvFFGF4IXRz3R72NDlwp/348cf413332843fe54af30faa2989793/vast-view-of-the-windmills.jpg",
+        "https://images.ctfassets.net/dze7xj4zfu0b/3yS5KiMdImtvnvqCfqIFEw/d125106abfd827919e96ad644f2cfe2a/Riverbanks.jpg",
+        "https://images.ctfassets.net/dze7xj4zfu0b/2Ft8A7MEML6ivgOQfjwmfu/efd7b80c1cc396608f37900d7b3f03af/Pasig_Rainforest.webp",
+        "https://images.ctfassets.net/dze7xj4zfu0b/4gGJe0CvsNgJ9k2rpMqoHF/bead5ad9e543fff45710bd5ae919fac1/Hinulugang_Taktak_National_Park.jpg",
+        "https://images.ctfassets.net/dze7xj4zfu0b/22KeWVgNLd6C7EzUAWhRwK/ae49b2192ec86a55655003e0baa4de3f/antipolo-cathedral.jpeg",
+        "https://images.ctfassets.net/dze7xj4zfu0b/1XACxLuIVxdwMy7Rzb8wqB/11feeaeaa78ac9c5734ece6d306158d8/3__1_.jpg",
+        "https://images.ctfassets.net/dze7xj4zfu0b/28BjNxvmVp8CR4uw4piw2q/5b52055a04f994a1aca169d186310392/2__1_.jpg",
+        "https://images.ctfassets.net/dze7xj4zfu0b/2Fqa5IvbpKUPVFsqLcuJKf/b2c6fa10743a77cb1e4bd2f772440baa/1__1_.jpg",
+        "https://images.ctfassets.net/dze7xj4zfu0b/6b0baJvVQYGzuxKCoyqNOm/423fb895cac43970c018d83ab7955d01/group.jpg"
       ],
       "representatives": [
         {
@@ -823,7 +750,15 @@
           "club": "Rotaract Club of Marikina",
           "image": "/placeholder.svg"
         }
-      ]
+      ],
+      "headerImage": "https://images.ctfassets.net/dze7xj4zfu0b/7mjvFFGF4IXRz3R72NDlwp/348cf413332843fe54af30faa2989793/vast-view-of-the-windmills.jpg",
+      "mainClub": "San Juan East",
+      "mission": "To empower young professionals to create positive change in their communities and around the world through service, fellowship, and leadership.",
+      "vision": "To be a global network of young professionals committed to making a positive impact in their communities and around the world.",
+      "composition": [
+        "Community"
+      ],
+      "facebookPageUrl": "https://www.facebook.com/rotaractdistrict3800/"
     },
     {
       "id": "3810",
@@ -833,76 +768,20 @@
       "image": "https://images.ctfassets.net/dze7xj4zfu0b/19eg6kbGjaiYIK2vHWDBfI/cb924f8c3a2e8aeab3e796b8d5c3903e/luneta_park.jpg",
       "summary": "District 3810 stands as a beacon of innovation, collaboration, and service, fostering leaders and initiatives that inspire change across the Asia-Pacific and beyond.",
       "gallery": [
-        {
-          "url": "/placeholder.svg",
-          "title": "luneta park",
-          "description": ""
-        },
-        {
-          "url": "/placeholder.svg",
-          "title": "P3N04647",
-          "description": ""
-        },
-        {
-          "url": "/placeholder.svg",
-          "title": "462584301 1156491282725210 8306867753259908987 n",
-          "description": ""
-        },
-        {
-          "url": "/placeholder.svg",
-          "title": "461433751 8253175298105329 4692847005058421488 n",
-          "description": ""
-        },
-        {
-          "url": "/placeholder.svg",
-          "title": "460344393 3557944784495947 7332894041954951676 n",
-          "description": ""
-        },
-        {
-          "url": "/placeholder.svg",
-          "title": "454579796 1535542200691526 9000090470742822860 n",
-          "description": ""
-        },
-        {
-          "url": "/placeholder.svg",
-          "title": "451618482 1202724144373685 881200916338693969 n",
-          "description": ""
-        },
-        {
-          "url": "/placeholder.svg",
-          "title": "451211247 958959472654641 5885058336808684382 n",
-          "description": ""
-        },
-        {
-          "url": "/placeholder.svg",
-          "title": "451041827 499171016100556 5309471263800071908 n",
-          "description": ""
-        },
-        {
-          "url": "/placeholder.svg",
-          "title": "450149189 845067751015185 2354995268502331556 n",
-          "description": ""
-        },
-        {
-          "url": "/placeholder.svg",
-          "title": "449828174 1147792649809462 6478375375091382274 n",
-          "description": ""
-        },
-        {
-          "url": "/placeholder.svg",
-          "title": "449083109 1533026354280845 3479808890565200121 n",
-          "description": ""
-        },
-        {
-          "url": "/placeholder.svg",
-          "title": "448704768 1500401607575030 6499138935914318652 n",
-          "description": ""
-        },
-        {
-          "url": "/placeholder.svg",
-          "title": "434783381 1022622399256033 5998446365211706508 n",
-          "description": ""
-        }
+        "https://images.ctfassets.net/dze7xj4zfu0b/19eg6kbGjaiYIK2vHWDBfI/cb924f8c3a2e8aeab3e796b8d5c3903e/luneta_park.jpg",
+        "https://images.ctfassets.net/dze7xj4zfu0b/5EsnWPVVizokf0LtCKYInQ/c74693e9c763f57dcb321fe33083edd6/P3N04647.JPG",
+        "https://images.ctfassets.net/dze7xj4zfu0b/5ZZoDhDYO2nuKyGVR7H8VA/84a6cca3eef443d0cf39071cae36e821/462584301_1156491282725210_8306867753259908987_n.jpg",
+        "https://images.ctfassets.net/dze7xj4zfu0b/2FyRZi0UoFSx3PsRaIWEfz/0f9e5616fb1aafee8b003c4f35ac8e7c/461433751_8253175298105329_4692847005058421488_n.jpg",
+        "https://images.ctfassets.net/dze7xj4zfu0b/3ehmOfRAjPqFeNcZLHqVWe/5005ccb0f0b24b377f6f6c6ffa376e85/460344393_3557944784495947_7332894041954951676_n.jpg",
+        "https://images.ctfassets.net/dze7xj4zfu0b/kvGiIoiaklQvOR73Cc9EH/8f034c09e75df6e1117e3a6cbfc283b9/454579796_1535542200691526_9000090470742822860_n.jpg",
+        "https://images.ctfassets.net/dze7xj4zfu0b/6tWPHsAPyybqpc2V8TJExt/8d0e3e707bb8c65d81a6ff7b58467e21/451618482_1202724144373685_881200916338693969_n.jpg",
+        "https://images.ctfassets.net/dze7xj4zfu0b/21cWuPPOOEN8JgkOTrVzEs/53a10306f00d6dc4a0e03748640edf2c/451211247_958959472654641_5885058336808684382_n.jpg",
+        "https://images.ctfassets.net/dze7xj4zfu0b/56whkza0q2dFyPPIImcuc7/9fc6d83a45592e329d739aae5b40292f/451041827_499171016100556_5309471263800071908_n.jpg",
+        "https://images.ctfassets.net/dze7xj4zfu0b/76WBkXW6uu7rkW1wFlnuFe/dad6cbd0b636df939c99c0d59acb29ed/450149189_845067751015185_2354995268502331556_n.jpg",
+        "https://images.ctfassets.net/dze7xj4zfu0b/5ieTwiueFbxt2tqwRo5MB0/d97c77fafc4416a9a114e8be72944eeb/449828174_1147792649809462_6478375375091382274_n.jpg",
+        "https://images.ctfassets.net/dze7xj4zfu0b/2MLH0tO7NFdPUA8uEBLS8V/72b60e72bc9cb3a121ef30f7c2197e5a/449083109_1533026354280845_3479808890565200121_n.jpg",
+        "https://images.ctfassets.net/dze7xj4zfu0b/2z1NcLkZIAqikPt8y2bupn/ab087e1563c949c5e3fcc1d7957ac010/448704768_1500401607575030_6499138935914318652_n.jpg",
+        "https://images.ctfassets.net/dze7xj4zfu0b/61ycGO3Af8L2MDzxsSipdo/50b730d4cfe7f37ae928d526c3720491/434783381_1022622399256033_5998446365211706508_n.jpg"
       ],
       "representatives": [
         {
@@ -1205,7 +1084,15 @@
           "club": "Rotaract Club of Ermita",
           "image": "/placeholder.svg"
         }
-      ]
+      ],
+      "headerImage": "https://images.ctfassets.net/dze7xj4zfu0b/19eg6kbGjaiYIK2vHWDBfI/cb924f8c3a2e8aeab3e796b8d5c3903e/luneta_park.jpg",
+      "mainClub": "Carmona",
+      "mission": "To empower young professionals to create positive change in their communities and around the world through service, fellowship, and leadership.",
+      "vision": "To be a global network of young professionals committed to making a positive impact in their communities and around the world.",
+      "composition": [
+        "Community"
+      ],
+      "facebookPageUrl": "https://www.facebook.com/rotaract3810"
     },
     {
       "id": "3820",
@@ -1215,11 +1102,7 @@
       "image": "https://images.ctfassets.net/dze7xj4zfu0b/6WPjrQCqBCTeYkhGKXoLJ0/6e07d4b844ab5e00bcc5fdf9181bbe60/DOT_photo_of_Mayon.jpg",
       "summary": "Rotaract District 3820, widely recognized as the “Fellowship Capital of the Philippine Rotaract,” is one of the largest and most dynamic Rotaract districts in the country.",
       "gallery": [
-        {
-          "url": "/placeholder.svg",
-          "title": "DOT photo of Mayon",
-          "description": ""
-        }
+        "https://images.ctfassets.net/dze7xj4zfu0b/6WPjrQCqBCTeYkhGKXoLJ0/6e07d4b844ab5e00bcc5fdf9181bbe60/DOT_photo_of_Mayon.jpg"
       ],
       "representatives": [
         {
@@ -1438,7 +1321,15 @@
           "club": "Rotaract Club of Lucban",
           "image": "/placeholder.svg"
         }
-      ]
+      ],
+      "headerImage": "https://images.ctfassets.net/dze7xj4zfu0b/3rxAxitVQOdlgrkzE9zLXx/5e74df60e63e83e1df275f5355cbaacb/DOT_photo_of_Mayon.jpg",
+      "mainClub": "Metro Malvar",
+      "mission": "To empower young professionals to create positive change in their communities and around the world through service, fellowship, and leadership.",
+      "vision": "To be a global network of young professionals committed to making a positive impact in their communities and around the world.",
+      "composition": [
+        "Community"
+      ],
+      "facebookPageUrl": "https://www.facebook.com/rotaractdistrict3820"
     },
     {
       "id": "3830",
@@ -1448,46 +1339,14 @@
       "image": "https://images.ctfassets.net/dze7xj4zfu0b/tQMk3oWTFuBoK8aXzR9RP/1c05648b22774545211c8a3a4ad9151e/IMG_9801.JPG",
       "summary": "Through unity, passion, and unwavering commitment, the district aims to create transformative change in the lives of communities it serves, while continually upholding its motto. Distrito Trentay Otso Trenta, Sama-Sama, Nagkakaisa",
       "gallery": [
-        {
-          "url": "/placeholder.svg",
-          "title": "IMG 9801",
-          "description": ""
-        },
-        {
-          "url": "/placeholder.svg",
-          "title": "IMG 9802",
-          "description": ""
-        },
-        {
-          "url": "/placeholder.svg",
-          "title": "IMG 7869",
-          "description": ""
-        },
-        {
-          "url": "/placeholder.svg",
-          "title": "IMG 9474",
-          "description": ""
-        },
-        {
-          "url": "/placeholder.svg",
-          "title": "IMG 7349",
-          "description": ""
-        },
-        {
-          "url": "/placeholder.svg",
-          "title": "IMG 6241",
-          "description": ""
-        },
-        {
-          "url": "/placeholder.svg",
-          "title": "IMG 4728",
-          "description": ""
-        },
-        {
-          "url": "/placeholder.svg",
-          "title": "IMG 4529",
-          "description": ""
-        }
+        "https://images.ctfassets.net/dze7xj4zfu0b/tQMk3oWTFuBoK8aXzR9RP/1c05648b22774545211c8a3a4ad9151e/IMG_9801.JPG",
+        "https://images.ctfassets.net/dze7xj4zfu0b/5y7S7xg4To5ppSRY3bYrc3/7a70e5b8e2e9c428e3159242ce0e1f07/IMG_9802.JPG",
+        "https://images.ctfassets.net/dze7xj4zfu0b/7qD2cUjnaPS6cXjlKqFOsN/43cba2ebd6da8bf3b9bba8e7f89a24d7/IMG_7869.JPG",
+        "https://images.ctfassets.net/dze7xj4zfu0b/1oA4RgiISmXGBOoJyT1x8d/d744ce99a9823bc7c13705b237e2944e/IMG_9474.JPG",
+        "https://images.ctfassets.net/dze7xj4zfu0b/52F4UXh3Cpdqyb3Pkjq3m8/e6e6bce1faf200131fa9cb95aee8d04b/IMG_7349.HEIC",
+        "https://images.ctfassets.net/dze7xj4zfu0b/4DXP5Cr7AqXbW2OHW8fQc/5ff5a14c54c530d78f1d71a74e9836e7/IMG_6241.JPG",
+        "https://images.ctfassets.net/dze7xj4zfu0b/2ic5HS5nnJOPmmcWsJXQzn/b44cc2210f3397fabb74c8d8372c86e0/IMG_4669.JPG",
+        "https://images.ctfassets.net/dze7xj4zfu0b/1F9dEcc9MlH5995mT141pI/6c221247890cbead9b6cdcb9ad6534c8/IMG_4529.JPG"
       ],
       "representatives": [
         {
@@ -1598,7 +1457,15 @@
           "club": "Rotaract Club of",
           "image": "/placeholder.svg"
         }
-      ]
+      ],
+      "headerImage": "https://images.ctfassets.net/dze7xj4zfu0b/tQMk3oWTFuBoK8aXzR9RP/1c05648b22774545211c8a3a4ad9151e/IMG_9801.JPG",
+      "mainClub": "Muntinlupa City - MBD",
+      "mission": "To empower young professionals to create positive change in their communities and around the world through service, fellowship, and leadership.",
+      "vision": "To be a global network of young professionals committed to making a positive impact in their communities and around the world.",
+      "composition": [
+        "Community"
+      ],
+      "facebookPageUrl": "https://facebook.com/RotaractDistrict3830"
     },
     {
       "id": "3850",
@@ -1608,61 +1475,17 @@
       "image": "https://images.ctfassets.net/dze7xj4zfu0b/48WJuAhzpaR1UEcUlxoZvq/0c6034ef14cf1bca6a2659bdfb3d6a56/sama-bangingi-1.jpg",
       "summary": "District 3850 is home of young, vibrant, and active Rotaractors and Interactors. As the district where the first Rotaract Club was chartered, District 3850 continues to imbibe the organization’s motto “Fellowship Through Service” and commits themselves to innovative ways of learning, giving, and educating the community towards progress.",
       "gallery": [
-        {
-          "url": "/placeholder.svg",
-          "title": "3850",
-          "description": ""
-        },
-        {
-          "url": "/placeholder.svg",
-          "title": "sulu",
-          "description": ""
-        },
-        {
-          "url": "/placeholder.svg",
-          "title": "boracay",
-          "description": ""
-        },
-        {
-          "url": "/placeholder.svg",
-          "title": "Boracay, Aklan",
-          "description": ""
-        },
-        {
-          "url": "/placeholder.svg",
-          "title": "Isla Gigantes , Carles, Iloilo",
-          "description": ""
-        },
-        {
-          "url": "/placeholder.svg",
-          "title": "Dipolog Sunset Boulevard, Dipolog City",
-          "description": ""
-        },
-        {
-          "url": "/placeholder.svg",
-          "title": "Fort Pilar Shrine, Zamboanga City",
-          "description": ""
-        },
-        {
-          "url": "/placeholder.svg",
-          "title": "Garin Farm Pilgrimage, San Joaquin, Iloilo City",
-          "description": ""
-        },
-        {
-          "url": "/placeholder.svg",
-          "title": "Jaro Metropolitan Cathedral - National Shrine of Our Lade of Candles, Iloilo City (1)",
-          "description": ""
-        },
-        {
-          "url": "/placeholder.svg",
-          "title": "The Ruins, Bacolod City",
-          "description": ""
-        },
-        {
-          "url": "/placeholder.svg",
-          "title": "The Shrine of Sacred Heart of Jesus, Roxas City",
-          "description": ""
-        }
+        "https://images.ctfassets.net/dze7xj4zfu0b/48WJuAhzpaR1UEcUlxoZvq/0c6034ef14cf1bca6a2659bdfb3d6a56/sama-bangingi-1.jpg",
+        "https://images.ctfassets.net/dze7xj4zfu0b/3CA90BpaNBfeov96YhbepW/5440a688b6361383f6bacdaef7b4b441/sulu.jpg",
+        "https://images.ctfassets.net/dze7xj4zfu0b/78H6DNqmRqXa4o01suvpB1/926c8854383be764b3f04b37fb6083ee/boracay.jpg",
+        "https://images.ctfassets.net/dze7xj4zfu0b/7e3DpvOYijDFSs07tjKEqz/c79cc770c878db5be096cf212b491672/Boracay__Aklan.jpg",
+        "https://images.ctfassets.net/dze7xj4zfu0b/73hZbunyKkPV8Qtog1ANUb/0202b5a3d32d3bafc58e1ece71deb071/Isla_Gigantes___Carles__Iloilo.jpg",
+        "https://images.ctfassets.net/dze7xj4zfu0b/nSAdIuE2w2x4QXFnAsZCD/870057451c4421a6fd64f9d8ed083c21/Dipolog_Sunset_Boulevard__Dipolog_City.jpg",
+        "https://images.ctfassets.net/dze7xj4zfu0b/49d0T2r5e9UYkCKHqn5kxg/e5d5297981fe2e99343f191afe39e112/Fort_Pilar_Shrine__Zamboanga_City.jpg",
+        "https://images.ctfassets.net/dze7xj4zfu0b/1bqZX71Qlzvx7mmC18GxQS/3ce9f2ef0462a390d57dddb26a163886/Garin_Farm_Pilgrimage__San_Joaquin__Iloilo_City.jpg",
+        "https://images.ctfassets.net/dze7xj4zfu0b/6hh8u0Rwwz562fCegtuLhO/f2527674ca41ccfc990d74954a8603aa/Jaro_Metropolitan_Cathedral_-_National_Shrine_of_Our_Lade_of_Candles__Iloilo_City___1_.jpg",
+        "https://images.ctfassets.net/dze7xj4zfu0b/4xxecHXPAfiehdpktagdTB/3568016c69ad059d7bf01bc6c70b3f76/The_Ruins__Bacolod_City_.jpg",
+        "https://images.ctfassets.net/dze7xj4zfu0b/70een84lwYON0RPSben6kk/fb195a1ef2a8a32798a0eae2889637a4/The_Shrine_of_Sacred_Heart_of_Jesus__Roxas_City_.jpg"
       ],
       "representatives": [
         {
@@ -1845,7 +1668,15 @@
           "club": "Rotaract Club of Iloilo City",
           "image": "/placeholder.svg"
         }
-      ]
+      ],
+      "headerImage": "https://images.ctfassets.net/dze7xj4zfu0b/48WJuAhzpaR1UEcUlxoZvq/0c6034ef14cf1bca6a2659bdfb3d6a56/sama-bangingi-1.jpg",
+      "mainClub": "Zamboanga City West",
+      "mission": "To empower young professionals to create positive change in their communities and around the world through service, fellowship, and leadership.",
+      "vision": "To be a global network of young professionals committed to making a positive impact in their communities and around the world.",
+      "composition": [
+        "Community"
+      ],
+      "facebookPageUrl": "https://www.facebook.com/RACD3850"
     },
     {
       "id": "3860",
@@ -1855,56 +1686,16 @@
       "image": "https://images.ctfassets.net/dze7xj4zfu0b/133BdteIV3uI0X9FEO9FMt/b54684219b517c20d549d3812ba83f63/485010841_985035533731337_7435048167858166130_n.jpg",
       "summary": "Rotary International District 3860 is hailed as the most festive and culturally rich district in the Philippines. Encompassing Regions 7, 8, 11, 12, and 13, it spans a diverse and dynamic territory.",
       "gallery": [
-        {
-          "url": "/placeholder.svg",
-          "title": "485010841 985035533731337 7435048167858166130 n",
-          "description": ""
-        },
-        {
-          "url": "/placeholder.svg",
-          "title": "chocolate hlls",
-          "description": ""
-        },
-        {
-          "url": "/placeholder.svg",
-          "title": "E20 8494",
-          "description": ""
-        },
-        {
-          "url": "/placeholder.svg",
-          "title": "E20 7350",
-          "description": ""
-        },
-        {
-          "url": "/placeholder.svg",
-          "title": "E20 6627",
-          "description": ""
-        },
-        {
-          "url": "/placeholder.svg",
-          "title": "E19 4330",
-          "description": ""
-        },
-        {
-          "url": "/placeholder.svg",
-          "title": "E19 3898",
-          "description": ""
-        },
-        {
-          "url": "/placeholder.svg",
-          "title": "E19 3989",
-          "description": ""
-        },
-        {
-          "url": "/placeholder.svg",
-          "title": "E19 3830",
-          "description": ""
-        },
-        {
-          "url": "/placeholder.svg",
-          "title": "21958d4479373073bc27ff48b45399f5",
-          "description": ""
-        }
+        "https://images.ctfassets.net/dze7xj4zfu0b/133BdteIV3uI0X9FEO9FMt/b54684219b517c20d549d3812ba83f63/485010841_985035533731337_7435048167858166130_n.jpg",
+        "https://images.ctfassets.net/dze7xj4zfu0b/2OHzh0vSNubBvbrU5oKblj/e384a9e5a63f1b87ea8869b15782892f/chocolate_hlls.jpg",
+        "https://images.ctfassets.net/dze7xj4zfu0b/15nx8C7esmeilKNRUaX19b/379cc456dcecfcb7aacb2e92bb7599e2/E20_8494.jpg",
+        "https://images.ctfassets.net/dze7xj4zfu0b/1FOGc0R6mibd6dh0fm1Phg/0de9f8b62465c853853c5bc4dd7994c9/E20_7350.jpg",
+        "https://images.ctfassets.net/dze7xj4zfu0b/1TIGRasyUAUiAWFagElvOT/c522888702dbe905dbc24bdecd2fcbe4/E20_6627.jpg",
+        "https://images.ctfassets.net/dze7xj4zfu0b/VRGhYMHdumYfLDXK5X9D8/df43f6a9734a2f21133fe7efdc85a311/E19_4330.jpg",
+        "https://images.ctfassets.net/dze7xj4zfu0b/35yEhNvb5COdgIU54jqfgV/27ba0724c950a8b17932490bc7779745/E19_3898.jpg",
+        "https://images.ctfassets.net/dze7xj4zfu0b/61mRht0dBo1zS6icPqBUGS/074886be70fa715bacf5d6b3419f44cb/E19_3989.jpg",
+        "https://images.ctfassets.net/dze7xj4zfu0b/1rGpgcFNVrhN1FnfeCxCWO/f6d7d65e5be927bcf681768badd749d7/E19_3830.jpg",
+        "https://images.ctfassets.net/dze7xj4zfu0b/6sBQAnBxKaruxB7qHHyfNu/8132e08502e0e101f39606f54cd03b32/21958d4479373073bc27ff48b45399f5.jpg"
       ],
       "representatives": [
         {
@@ -2129,7 +1920,15 @@
           "club": "Rotaract Club of Cebu",
           "image": "/placeholder.svg"
         }
-      ]
+      ],
+      "headerImage": "https://images.ctfassets.net/dze7xj4zfu0b/133BdteIV3uI0X9FEO9FMt/b54684219b517c20d549d3812ba83f63/485010841_985035533731337_7435048167858166130_n.jpg",
+      "mainClub": "Panglao Island",
+      "mission": "To empower young professionals to create positive change in their communities and around the world through service, fellowship, and leadership.",
+      "vision": "To be a global network of young professionals committed to making a positive impact in their communities and around the world.",
+      "composition": [
+        "Community"
+      ],
+      "facebookPageUrl": "https://www.facebook.com/rotaractdistrict3860"
     },
     {
       "id": "3870",
@@ -2139,7 +1938,11 @@
       "image": "https://images.ctfassets.net/dze7xj4zfu0b/7KgjC4KH1EMwIvbLB9uEdA/679ee8d5dbdd869b76d5f5e22517234d/3870.jpeg",
       "summary": "Discover the vibrant community of Rotaract clubs in this district, where young professionals develop leadership skills and implement innovative service projects addressing local needs. Join us in making a positive impact through fellowship, professional development, and community service.",
       "gallery": [],
-      "representatives": []
+      "representatives": [],
+      "headerImage": "/assets/district/default-header.jpeg",
+      "mainClub": "Rotaract Club of District 3000",
+      "mission": "To empower young professionals to create positive change in their communities and around the world through service, fellowship, and leadership.",
+      "vision": "To be a global network of young professionals committed to making a positive impact in their communities and around the world."
     }
   ],
   "featuredEvents": [

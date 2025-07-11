@@ -86,17 +86,20 @@ interface District {
   color: string;
   image: string;
   summary: string;
-  gallery: Array<{
-    url: string;
-    title: string;
-    description: string;
-  }>;
+  gallery: Array<string>;
   representatives: Array<{
     name: string;
     title: string;
     club: string;
     image: string;
   }>;
+  headerImage: string;
+  mainClub: string;
+  activities?: string[];
+  mission?: string;
+  vision?: string;
+  composition?: string[];
+  facebookPageUrl?: string;
 }
 
 interface FeaturedEvent {
@@ -302,13 +305,11 @@ async function fetchDistricts(): Promise<District[]> {
     return entries.items.map((item: Entry<ContentfulFields>) => {
       const districtId = getFieldValue(item, 'id', '');
       
-      // Process gallery
+      // Process gallery - convert to array of strings to match District interface
       const gallery = Array.isArray(item.fields.gallery)
-        ? (item.fields.gallery as Entry<ContentfulFields>[]).map((galleryItem) => ({
-            url: getAssetUrl(galleryItem.fields.image) || '/placeholder.svg',
-            title: getFieldValue(galleryItem, 'title', 'Gallery Image'),
-            description: getFieldValue(galleryItem, 'description', ''),
-          }))
+        ? (item.fields.gallery as Entry<ContentfulFields>[]).map((galleryItem) => 
+            getAssetUrl(galleryItem) || '/placeholder.svg'
+          )
         : [];
 
       // Process representatives
@@ -330,6 +331,13 @@ async function fetchDistricts(): Promise<District[]> {
         summary: getFieldValue(item, 'summary', 'Discover the vibrant community of Rotaract clubs in this district, where young professionals develop leadership skills and implement innovative service projects addressing local needs. Join us in making a positive impact through fellowship, professional development, and community service.'),
         gallery,
         representatives,
+        headerImage: getAssetUrl(item.fields.headerImage) || '/assets/district/default-header.jpeg',
+        mainClub: getFieldValue(item, 'mainClub', 'Rotaract Club of District 3000'),
+        activities: Array.isArray(item.fields.activities) ? item.fields.activities as string[] : undefined,
+        mission: getFieldValue(item, 'mission', 'To empower young professionals to create positive change in their communities and around the world through service, fellowship, and leadership.'),
+        vision: getFieldValue(item, 'vision', 'To be a global network of young professionals committed to making a positive impact in their communities and around the world.'),
+        composition: Array.isArray(item.fields.composition) ? item.fields.composition as string[] : undefined,
+        facebookPageUrl: getFieldValue(item, 'facebookPageUrl', undefined),
       };
     });
   } catch (error) {

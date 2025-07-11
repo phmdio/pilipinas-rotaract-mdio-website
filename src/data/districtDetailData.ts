@@ -47,11 +47,11 @@ const districtDetails: Record<string, DistrictDetail> = {
     ],
     highlights: "A notable achievement for Rotaract District 3770 has been their robust implementation of the Rotary Focus Areas. For the Rotaract year 2023-2024, the district has organized over 30 projects focusing on the environment, community economic development, basic education and literacy. The Building Better Communities Initiative has gained regional recognition, with District 3770 Representatives participating in the Asia Pacific Rotaract Conference last year.",
     gallery: [
-      "/public/lovable-uploads/4d99be47-042e-4607-a857-b9192a721d26.png",
-      "/public/lovable-uploads/a24f0229-a045-4eb2-a9fa-a4bc8552f4d9.png",
-      "/public/lovable-uploads/4d99be47-042e-4607-a857-b9192a721d26.png",
-      "/public/lovable-uploads/a24f0229-a045-4eb2-a9fa-a4bc8552f4d9.png",
-      "/public/lovable-uploads/4d99be47-042e-4607-a857-b9192a721d26.png",
+      "/lovable-uploads/4d99be47-042e-4607-a857-b9192a721d26.png",
+      "/lovable-uploads/a24f0229-a045-4eb2-a9fa-a4bc8552f4d9.png",
+      "/lovable-uploads/4d99be47-042e-4607-a857-b9192a721d26.png",
+      "/lovable-uploads/a24f0229-a045-4eb2-a9fa-a4bc8552f4d9.png",
+      "/lovable-uploads/4d99be47-042e-4607-a857-b9192a721d26.png",
     ],
     representatives: [
       { rotaryYear: "Rotary Year 2023-2024 | Term of Office", name: "Betsy Roanne Carmel De Silva", club: "Rotaract Club of Santa Maria", year: "RY 2005-2010", dates: "July 1, 2023 - June 30, 2024" },
