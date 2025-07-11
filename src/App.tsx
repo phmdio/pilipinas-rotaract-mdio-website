@@ -45,7 +45,7 @@ const queryClient = new QueryClient({
   },
 });
 
-const isReadyToLaunch = process.env.VITE_READY_TO_LAUNCH === 'true';
+const isReadyToLaunch = import.meta.env.VITE_READY_TO_LAUNCH === 'true';
 
 const App = () => {
   // Check if we're in the browser environment
