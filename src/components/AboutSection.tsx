@@ -107,7 +107,7 @@ const AboutSection = () => {
                   <p className="text-white mb-4">
                     Meet the dedicated individuals who guide our organization and help implement our vision across Pilipinas Rotaract.
                   </p>
-                  <a href="/under-construction" className="text-white font-medium underline underline-offset-2 self-start">
+                  <a href="/our-leadership-team" className="text-white font-medium underline underline-offset-2 self-start">
                     View Team
                   </a>
                 </div>
@@ -172,7 +172,7 @@ const AboutSection = () => {
                   <p className="text-white mb-4">
                     Our quarterly newsletter connecting Rotaract clubs across the archipelago, featuring collaborative initiatives and best practices in community service.
                   </p>
-                  <Link to="/ang-balangay" className="text-white font-medium underline underline-offset-2 self-end">
+                  <Link to="/under-construction" className="text-white font-medium underline underline-offset-2 self-end">
                     Read More
                   </Link>
                 </div>
