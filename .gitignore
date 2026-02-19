@@ -28,3 +28,7 @@ dist-ssr
 .env.local
 .env.development
 .env.production
+
+# Generated static data (regenerated during build)
+public/static-data/contentful-data.json
+src/generated-routes.json
