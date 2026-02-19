@@ -66,12 +66,7 @@ const Hero = () => {
 
   return (
     <section 
-      className="relative min-h-screen flex items-center pt-16"
-      style={{
-        backgroundImage: `url('/lovable-uploads/34013148-4140-4618-9d1a-adad2f192367.png')`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-      }}
+      className="relative min-h-screen flex items-center pt-16 bg-rotaract-magenta"
     >
       {/* Content */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
