@@ -9,7 +9,7 @@
     "postbuild": "tsx scripts/simple-build.ts",
     "build:dev": "vite build --mode development",
     "build:ssg": "npm run prebuild && npm run build",
-    "prebuild": "tsx scripts/simple-build.ts",
+    "prebuild": "tsx scripts/generate-static-data.ts",
     "generate-sitemap": "tsx scripts/generate-sitemap.ts",
     "generate-static-data": "tsx scripts/generate-static-data.ts",
     "generate-contentful-types": "tsx scripts/generate-contentful-types.ts",
